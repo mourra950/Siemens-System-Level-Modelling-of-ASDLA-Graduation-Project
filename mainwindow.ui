@@ -33,11 +33,11 @@
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(240, 240, 240);
+       <string notr="true">
 border-color: rgba(255, 255, 255, 0);</string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -229,7 +229,7 @@ border-color: rgba(255, 255, 255, 0);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(222, 222, 222);</string>
+            <string notr="true"/>
            </property>
            <property name="title">
             <string>Input Type</string>
@@ -276,7 +276,7 @@ border-color: rgba(255, 255, 255, 0);</string>
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(222, 222, 222);</string>
+            <string notr="true"/>
            </property>
            <property name="title">
             <string>Convolution Type</string>
@@ -961,8 +961,11 @@ border-color: rgba(255, 255, 255, 0);</string>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="spacing">
+           <number>20</number>
+          </property>
           <property name="topMargin">
-           <number>30</number>
+           <number>0</number>
           </property>
           <item>
            <widget class="QPushButton" name="generate">
@@ -970,6 +973,9 @@ border-color: rgba(255, 255, 255, 0);</string>
              <font>
               <family>Siemens Sans</family>
              </font>
+            </property>
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generate pytorch using the parameters submitted&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
              <string>Generate Pytorch Model</string>
@@ -1023,6 +1029,7 @@ border-color: rgba(255, 255, 255, 0);</string>
      <string>Program</string>
     </property>
     <addaction name="actionReset"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuProgram"/>
   </widget>
