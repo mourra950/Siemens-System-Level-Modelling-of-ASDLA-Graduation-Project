@@ -278,8 +278,8 @@ QTabBar::tab
 QTabWidget::pane 
 {
 	background-color: red;
-	border: 1px solid #666;
-	top: 1px;
+	border: 0px solid #666;
+	top: 0px;
 
 }
 
