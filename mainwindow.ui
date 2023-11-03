@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_11">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
@@ -1013,6 +1013,37 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>inputsize</tabstop>
+  <tabstop>InputHeight</tabstop>
+  <tabstop>datacsv</tabstop>
+  <tabstop>batchSize</tabstop>
+  <tabstop>learningRate</tabstop>
+  <tabstop>numEpochs</tabstop>
+  <tabstop>comboBox_optimizer</tabstop>
+  <tabstop>comboBox_lossFunc</tabstop>
+  <tabstop>tableView_2</tabstop>
+  <tabstop>RGB</tabstop>
+  <tabstop>GrayScale</tabstop>
+  <tabstop>Winograd</tabstop>
+  <tabstop>Standard</tabstop>
+  <tabstop>submit</tabstop>
+  <tabstop>layer</tabstop>
+  <tabstop>units</tabstop>
+  <tabstop>kernelsize</tabstop>
+  <tabstop>filters</tabstop>
+  <tabstop>stride</tabstop>
+  <tabstop>yes</tabstop>
+  <tabstop>no</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>Arch</tabstop>
+  <tabstop>layerbutton</tabstop>
+  <tabstop>codeSample</tabstop>
+  <tabstop>generatedFiles</tabstop>
+  <tabstop>generate</tabstop>
+  <tabstop>train</tabstop>
+  <tabstop>systemC</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
