@@ -36,7 +36,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -68,296 +68,109 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_16">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_15">
+         <layout class="QVBoxLayout" name="Params_Layout">
           <property name="bottomMargin">
            <number>29</number>
           </property>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_13">
+             <layout class="QVBoxLayout" name="Param_Inputs">
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_15">
-                <item>
-                 <widget class="QLabel" name="label_4">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
+                <item alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="inputWidth_label">
                   <property name="text">
                    <string>Input Width</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="inputsize">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: white;</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
+                 <widget class="QLineEdit" name="inputWidth_lineEdit"/>
                 </item>
                </layout>
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_14">
-                <item>
-                 <widget class="QLabel" name="label_5">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
+                <item alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="inputHeight_label">
                   <property name="text">
                    <string>Input Height</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="InputHeight">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: white;</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
+                 <widget class="QLineEdit" name="inputHeight_lineEdit"/>
                 </item>
                </layout>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
                 <item>
-                 <widget class="QLabel" name="label_13">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                  <property name="text">
-                   <string>Data CSV Path</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="datacsv">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: white;</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_12">
-                <item>
-                 <widget class="QLabel" name="label_16">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
+                 <widget class="QLabel" name="batchSize_label">
                   <property name="text">
                    <string>Batch Size</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="batchSize">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: white;</string>
-                  </property>
-                 </widget>
+                 <widget class="QLineEdit" name="batchSize_lineEdit"/>
                 </item>
                </layout>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
                 <item>
-                 <widget class="QLabel" name="label_15">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
+                 <widget class="QLabel" name="learningRate_label">
                   <property name="text">
                    <string>Learning Rate</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="learningRate">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: white;</string>
-                  </property>
-                 </widget>
+                 <widget class="QLineEdit" name="learningRate_lineEdit"/>
                 </item>
                </layout>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
                 <item>
-                 <widget class="QLabel" name="label_14">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
+                 <widget class="QLabel" name="numberEpochs_label">
                   <property name="text">
                    <string>Number of Epochs</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="numEpochs">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: white;</string>
-                  </property>
-                 </widget>
+                 <widget class="QLineEdit" name="numberEpoch_lineEdit"/>
                 </item>
                </layout>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_10">
-                <item>
-                 <widget class="QLabel" name="label_18">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <item alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="optimizer_label">
                   <property name="text">
                    <string>Optimizer</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBox_optimizer">
-                  <property name="enabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                 </widget>
+                 <widget class="QComboBox" name="optimizer_comboBox"/>
                 </item>
                </layout>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_16">
-                <item>
-                 <widget class="QLabel" name="label_17">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <item alignment="Qt::AlignHCenter">
+                 <widget class="QLabel" name="lossFunction_label">
                   <property name="text">
                    <string>Loss Function</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBox_lossFunc">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <bold>true</bold>
-                   </font>
-                  </property>
-                 </widget>
+                 <widget class="QComboBox" name="lossFunction_comboBox"/>
                 </item>
                </layout>
               </item>
@@ -1014,14 +827,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>inputsize</tabstop>
-  <tabstop>InputHeight</tabstop>
-  <tabstop>datacsv</tabstop>
-  <tabstop>batchSize</tabstop>
-  <tabstop>learningRate</tabstop>
-  <tabstop>numEpochs</tabstop>
-  <tabstop>comboBox_optimizer</tabstop>
-  <tabstop>comboBox_lossFunc</tabstop>
   <tabstop>tableView_2</tabstop>
   <tabstop>RGB</tabstop>
   <tabstop>GrayScale</tabstop>
