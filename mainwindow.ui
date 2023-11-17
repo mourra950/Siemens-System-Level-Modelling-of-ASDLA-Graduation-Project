@@ -36,7 +36,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -75,104 +75,180 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <layout class="QVBoxLayout" name="Param_Inputs">
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_15">
-                <item alignment="Qt::AlignHCenter">
-                 <widget class="QLabel" name="inputWidth_label">
-                  <property name="text">
-                   <string>Input Width</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="inputWidth_lineEdit"/>
-                </item>
-               </layout>
+             <layout class="QFormLayout" name="formLayout">
+              <item row="0" column="0">
+               <spacer name="verticalSpacer_7">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_14">
-                <item alignment="Qt::AlignHCenter">
-                 <widget class="QLabel" name="inputHeight_label">
-                  <property name="text">
-                   <string>Input Height</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="inputHeight_lineEdit"/>
-                </item>
-               </layout>
+              <item row="1" column="0">
+               <widget class="QLabel" name="inputWidth_label">
+                <property name="text">
+                 <string>Input Width</string>
+                </property>
+               </widget>
               </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_15">
-                <item>
-                 <widget class="QLabel" name="batchSize_label">
-                  <property name="text">
-                   <string>Batch Size</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="batchSize_lineEdit"/>
-                </item>
-               </layout>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="inputWidth_lineEdit"/>
               </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_15">
-                <item>
-                 <widget class="QLabel" name="learningRate_label">
-                  <property name="text">
-                   <string>Learning Rate</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="learningRate_lineEdit"/>
-                </item>
-               </layout>
+              <item row="2" column="0">
+               <spacer name="verticalSpacer">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_15">
-                <item>
-                 <widget class="QLabel" name="numberEpochs_label">
-                  <property name="text">
-                   <string>Number of Epochs</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLineEdit" name="numberEpoch_lineEdit"/>
-                </item>
-               </layout>
+              <item row="3" column="0">
+               <widget class="QLabel" name="inputHeight_label">
+                <property name="text">
+                 <string>Input Height</string>
+                </property>
+               </widget>
               </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_15">
-                <item alignment="Qt::AlignHCenter">
-                 <widget class="QLabel" name="optimizer_label">
-                  <property name="text">
-                   <string>Optimizer</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QComboBox" name="optimizer_comboBox"/>
-                </item>
-               </layout>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="inputHeight_lineEdit"/>
               </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_15">
-                <item alignment="Qt::AlignHCenter">
-                 <widget class="QLabel" name="lossFunction_label">
-                  <property name="text">
-                   <string>Loss Function</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QComboBox" name="lossFunction_comboBox"/>
-                </item>
-               </layout>
+              <item row="4" column="0">
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="batchSize_label">
+                <property name="text">
+                 <string>Batch Size</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="batchSize_lineEdit"/>
+              </item>
+              <item row="6" column="0">
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="learningRate_label">
+                <property name="text">
+                 <string>Learning Rate</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QLineEdit" name="learningRate_lineEdit"/>
+              </item>
+              <item row="8" column="0">
+               <spacer name="verticalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="9" column="0">
+               <widget class="QLabel" name="numberEpochs_label">
+                <property name="text">
+                 <string>Number of Epochs</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QLineEdit" name="numberEpochs_lineEdit"/>
+              </item>
+              <item row="10" column="0">
+               <spacer name="verticalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="11" column="0">
+               <widget class="QLabel" name="optimizer_label">
+                <property name="text">
+                 <string>Optimizer</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="1">
+               <widget class="QComboBox" name="optimizer_lineEdit"/>
+              </item>
+              <item row="12" column="0">
+               <spacer name="verticalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="13" column="0">
+               <widget class="QLabel" name="lossFunction_label">
+                <property name="text">
+                 <string>Loss Function</string>
+                </property>
+               </widget>
+              </item>
+              <item row="13" column="1">
+               <widget class="QComboBox" name="lossFunction_comboBox"/>
+              </item>
+              <item row="14" column="0">
+               <spacer name="verticalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </item>
@@ -360,307 +436,281 @@
               <property name="title">
                <string>Layer</string>
               </property>
-              <widget class="QComboBox" name="layer">
-               <property name="geometry">
-                <rect>
-                 <x>10</x>
-                 <y>40</y>
-                 <width>171</width>
-                 <height>26</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Siemens Sans</family>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: white;</string>
-               </property>
-              </widget>
-              <widget class="QGroupBox" name="groupBox_2">
-               <property name="geometry">
-                <rect>
-                 <x>0</x>
-                 <y>190</y>
-                 <width>750</width>
-                 <height>331</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Siemens Sans</family>
-                 <bold>true</bold>
-                </font>
-               </property>
-               <property name="title">
-                <string>Parameters</string>
-               </property>
-               <widget class="QWidget" name="layoutWidget">
-                <property name="geometry">
-                 <rect>
-                  <x>10</x>
-                  <y>20</y>
-                  <width>191</width>
-                  <height>137</height>
-                 </rect>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Siemens Sans</family>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <layout class="QVBoxLayout" name="verticalLayout_13">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout">
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
                  <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_4">
+                  <layout class="QVBoxLayout" name="verticalLayout_15">
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
                    <item>
-                    <widget class="QLabel" name="label_10">
+                    <widget class="QComboBox" name="layer">
                      <property name="font">
                       <font>
                        <family>Siemens Sans</family>
                        <bold>true</bold>
                       </font>
                      </property>
-                     <property name="text">
-                      <string>No of Units</string>
+                     <property name="styleSheet">
+                      <string notr="true">background-color: white;</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label_6">
+                    <widget class="QGroupBox" name="groupBox_2">
                      <property name="font">
                       <font>
                        <family>Siemens Sans</family>
                        <bold>true</bold>
                       </font>
                      </property>
-                     <property name="text">
-                      <string>Kernel Size</string>
+                     <property name="title">
+                      <string>Parameters</string>
                      </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_2">
+                      <item>
+                       <layout class="QVBoxLayout" name="verticalLayout_18">
+                        <item>
+                         <layout class="QHBoxLayout" name="horizontalLayout_12">
+                          <item>
+                           <widget class="QLabel" name="label_10">
+                            <property name="font">
+                             <font>
+                              <family>Siemens Sans</family>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>No of Units</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="units">
+                            <property name="font">
+                             <font>
+                              <family>Siemens Sans</family>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: white;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <layout class="QHBoxLayout" name="horizontalLayout_11">
+                          <item>
+                           <widget class="QLabel" name="label_6">
+                            <property name="font">
+                             <font>
+                              <family>Siemens Sans</family>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Kernel Size</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="kernelsize">
+                            <property name="font">
+                             <font>
+                              <family>Siemens Sans</family>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: white;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <layout class="QHBoxLayout" name="horizontalLayout_9">
+                          <item>
+                           <widget class="QLabel" name="label_8">
+                            <property name="font">
+                             <font>
+                              <family>Siemens Sans</family>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>No of Filters</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="filters">
+                            <property name="font">
+                             <font>
+                              <family>Siemens Sans</family>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: white;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <layout class="QHBoxLayout" name="horizontalLayout_10">
+                          <item>
+                           <widget class="QLabel" name="label_9">
+                            <property name="font">
+                             <font>
+                              <family>Siemens Sans</family>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Stride</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLineEdit" name="stride">
+                            <property name="font">
+                             <font>
+                              <family>Siemens Sans</family>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">background-color: white;</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label_8">
+                    <widget class="QGroupBox" name="padding">
+                     <property name="maximumSize">
+                      <size>
+                       <width>200</width>
+                       <height>100</height>
+                      </size>
+                     </property>
                      <property name="font">
                       <font>
                        <family>Siemens Sans</family>
                        <bold>true</bold>
                       </font>
                      </property>
-                     <property name="text">
-                      <string>No of Filters</string>
+                     <property name="styleSheet">
+                      <string notr="true"/>
                      </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="label_9">
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <bold>true</bold>
-                      </font>
+                     <property name="title">
+                      <string>Padding</string>
                      </property>
-                     <property name="text">
-                      <string>Stride</string>
-                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_8">
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_3">
+                        <item>
+                         <widget class="QRadioButton" name="yes">
+                          <property name="font">
+                           <font>
+                            <family>Siemens Sans</family>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>Yes</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QRadioButton" name="no">
+                          <property name="font">
+                           <font>
+                            <family>Siemens Sans</family>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="text">
+                           <string>No</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                   </layout>
                  </item>
                  <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_5">
-                   <item>
-                    <widget class="QLineEdit" name="units">
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">background-color: white;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="kernelsize">
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">background-color: white;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="filters">
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">background-color: white;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="stride">
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">background-color: white;</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </widget>
-               <widget class="QGroupBox" name="padding">
-                <property name="geometry">
-                 <rect>
-                  <x>30</x>
-                  <y>180</y>
-                  <width>151</width>
-                  <height>91</height>
-                 </rect>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Siemens Sans</family>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="title">
-                 <string>Padding</string>
-                </property>
-                <widget class="QWidget" name="layoutWidget">
-                 <property name="geometry">
-                  <rect>
-                   <x>20</x>
-                   <y>30</y>
-                   <width>108</width>
-                   <height>28</height>
-                  </rect>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Siemens Sans</family>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <layout class="QHBoxLayout" name="horizontalLayout_3">
-                  <item>
-                   <widget class="QRadioButton" name="yes">
-                    <property name="font">
-                     <font>
-                      <family>Siemens Sans</family>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>Yes</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QRadioButton" name="no">
-                    <property name="font">
-                     <font>
-                      <family>Siemens Sans</family>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>No</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </widget>
-               <widget class="QWidget" name="layoutWidget">
-                <property name="geometry">
-                 <rect>
-                  <x>240</x>
-                  <y>260</y>
-                  <width>244</width>
-                  <height>31</height>
-                 </rect>
-                </property>
-                <property name="font">
-                 <font>
-                  <family>Siemens Sans</family>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                 <item>
-                  <widget class="QPushButton" name="layerbutton">
+                  <widget class="QTableView" name="tableView">
                    <property name="font">
                     <font>
                      <family>Siemens Sans</family>
-                     <bold>true</bold>
+                     <bold>false</bold>
                     </font>
                    </property>
-                   <property name="text">
-                    <string>Submit Layer</string>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: white;</string>
                    </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="Arch">
-                   <property name="font">
-                    <font>
-                     <family>Siemens Sans</family>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="text">
-                    <string>Submit Architecture</string>
+                   <property name="sizeAdjustPolicy">
+                    <enum>QAbstractScrollArea::AdjustToContents</enum>
                    </property>
                   </widget>
                  </item>
                 </layout>
-               </widget>
-              </widget>
-              <widget class="QTableView" name="tableView">
-               <property name="geometry">
-                <rect>
-                 <x>275</x>
-                 <y>31</y>
-                 <width>461</width>
-                 <height>351</height>
-                </rect>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Siemens Sans</family>
-                 <bold>false</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: white;</string>
-               </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QAbstractScrollArea::AdjustToContents</enum>
-               </property>
-              </widget>
+               </item>
+              </layout>
              </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QPushButton" name="layerbutton">
+                <property name="font">
+                 <font>
+                  <family>Siemens Sans</family>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="statusTip">
+                 <string>Press to submit dude</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Press to submit layer above</string>
+                </property>
+                <property name="text">
+                 <string>Submit Layer</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="Arch">
+                <property name="font">
+                 <font>
+                  <family>Siemens Sans</family>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Submit Architecture</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
@@ -752,7 +802,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="generate">
+           <widget class="QPushButton" name="generatePyModel_btn">
             <property name="font">
              <font>
               <family>Siemens Sans</family>
@@ -768,7 +818,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="train">
+           <widget class="QPushButton" name="trainPyModel_btn">
             <property name="font">
              <font>
               <family>Siemens Sans</family>
@@ -781,7 +831,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="systemC">
+           <widget class="QPushButton" name="systemCWrapper_btn">
             <property name="font">
              <font>
               <family>Siemens Sans</family>
@@ -833,21 +883,15 @@
   <tabstop>Winograd</tabstop>
   <tabstop>Standard</tabstop>
   <tabstop>submit</tabstop>
-  <tabstop>layer</tabstop>
-  <tabstop>units</tabstop>
-  <tabstop>kernelsize</tabstop>
-  <tabstop>filters</tabstop>
-  <tabstop>stride</tabstop>
   <tabstop>yes</tabstop>
   <tabstop>no</tabstop>
-  <tabstop>tableView</tabstop>
   <tabstop>Arch</tabstop>
   <tabstop>layerbutton</tabstop>
   <tabstop>codeSample</tabstop>
   <tabstop>generatedFiles</tabstop>
-  <tabstop>generate</tabstop>
-  <tabstop>train</tabstop>
-  <tabstop>systemC</tabstop>
+  <tabstop>generatePyModel_btn</tabstop>
+  <tabstop>trainPyModel_btn</tabstop>
+  <tabstop>systemCWrapper_btn</tabstop>
  </tabstops>
  <resources/>
  <connections/>
