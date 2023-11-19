@@ -394,20 +394,39 @@
            </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="submit">
-            <property name="font">
-             <font>
-              <family>Siemens Sans</family>
-              <bold>true</bold>
-             </font>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <property name="topMargin">
+             <number>0</number>
             </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <property name="text">
-             <string>Submit Parameters</string>
-            </property>
-           </widget>
+            <item row="0" column="0">
+             <widget class="QPushButton" name="submit">
+              <property name="maximumSize">
+               <size>
+                <width>600</width>
+                <height>1000</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Siemens Sans</family>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="statusTip">
+               <string>Submit the parameters written above</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>Submit Parameters</string>
+              </property>
+              <property name="default">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -882,7 +901,6 @@
   <tabstop>GrayScale</tabstop>
   <tabstop>Winograd</tabstop>
   <tabstop>Standard</tabstop>
-  <tabstop>submit</tabstop>
   <tabstop>yes</tabstop>
   <tabstop>no</tabstop>
   <tabstop>Arch</tabstop>
