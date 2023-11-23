@@ -1,0 +1,63 @@
+layer name,conva1
+kernel size,3
+stride,1
+input width,280
+input height,210
+input channels,3
+No of filters,32
+No of units,3
+padding,0
+layer name,maxpool2
+kernel size,2
+stride,1
+input width,278
+input height,208
+input channels,32
+No of filters,32
+No of units,3
+padding,0
+layer name,convb3
+kernel size,3
+stride,1
+input width,277
+input height,207
+input channels,32
+No of filters,64
+No of units,3
+padding,0
+layer name,conva4
+kernel size,3
+stride,1
+input width,275
+input height,205
+input channels,64
+No of filters,32
+No of units,3
+padding,0
+layer name,maxpool5
+kernel size,2
+stride,1
+input width,273
+input height,203
+input channels,32
+No of filters,32
+No of units,3
+padding,0
+layer name,FC6
+kernel size,1
+stride,1
+input width,1
+input height,1
+input channels,1758208
+No of filters,32
+No of units,32
+padding,0
+layer name,FC7
+kernel size,1
+stride,1
+input width,1
+input height,1
+input channels,32
+No of filters,3
+No of units,3
+padding,0

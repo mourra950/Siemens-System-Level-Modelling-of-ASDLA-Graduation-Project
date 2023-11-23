@@ -1,0 +1,9 @@
+Data Width,32
+Mantissa,23
+Exponent,8
+Input Width,280
+Input Height,210
+Input Type,1
+Arithmetic Type,0
+Convolution type,0
+Output files path,perl
