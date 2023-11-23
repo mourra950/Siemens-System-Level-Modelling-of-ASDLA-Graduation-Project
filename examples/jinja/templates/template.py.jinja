@@ -5,19 +5,19 @@ class CNN(nn.Module):
     def __init__(self):     
         super(CNN,self).__init__()
     {% for i in layers %}
-        {% if i.name == 'conva' %} 
+        {% if i.name == 'conva' -%} 
         self.conva=nn.Conv2d(in_channels=1,out_channels=6,kernel_size=5,padding=0,stride=1)
-        {% elif i.name == 'maxa' %} 
+        {%- elif i.name == 'maxa' -%} 
         self.maxa=nn.MaxPool2d(2,stride=2,padding=0)
-        {% elif i.name == 'convb' %} 
+        {%- elif i.name == 'convb' -%} 
         self.convb=nn.Conv2d(in_channels={{i.channels}},out_channels=25,kernel_size=5,padding=0,stride=1)
-        {% elif i.name == 'maxb' %} 
+        {%- elif i.name == 'maxb' -%} 
         self.maxb=nn.MaxPool2d(2,stride=2,padding=0)
-        {% elif i.name == 'fca' %} 
+        {%- elif i.name == 'fca' -%} 
         self.fca=nn.Linear(in_features=400*1*1,out_features=10)
-        {% elif i.name == 'relu' %} 
+        {%- elif i.name == 'relu' -%} 
         self.relu=nn.ReLU()
-        {% endif %}
+        {%- endif -%}
     {% endfor %}
     def forward(self,x):
       out=self.conva(x)
