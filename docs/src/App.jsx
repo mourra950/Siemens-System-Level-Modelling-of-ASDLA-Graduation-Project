@@ -1,10 +1,9 @@
-import { useState, CSSProperties } from "react";
+import { useState } from "react";
 import "./App.css";
-import { Content, Header } from "antd/es/layout/layout";
+import { Content } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import { Layout } from "antd";
-import React from "react";
-
+import pages from "./pages/pages";
 const style1 = {
   textAlign: "center",
   color: "#fff",
@@ -12,54 +11,25 @@ const style1 = {
   height: "100vh",
   overflow: "auto",
 };
-const style2 = {
-  textAlign: "center",
-  color: "#fff",
-  backgroundColor: "#7dbcea",
-};
-function App() {
-  const [count, setCount] = useState(0);
+// const style2 = {
+//   textAlign: "center",
+//   color: "#fff",
+//   backgroundColor: "#7dbcea",
+// };
 
+function App() {
+  const [pageContent, setPageContent] = useState("");
   return (
     <>
       <Layout>
-        <Sider 
-        breakpoint="lg"
-        style={style1}>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
-          <p>Ahmed</p>
+        <Sider breakpoint="lg" style={style1}>
+          {pages.map((page, index) => (
+            <button key={index} onClick={()=>setPageContent(page.content)}>
+              {page.name}
+            </button>
+          ))}
         </Sider>
-        <Content>
-          Hello
-        </Content>
+        <Content>{pageContent}</Content>
       </Layout>
     </>
   );
