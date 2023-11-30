@@ -18,8 +18,8 @@ TEST_SPLIT = 0.1
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = CNN()
 
-train_dataset = mnist.MNIST(root='./train', train=True, transform=ToTensor())
-test_dataset = mnist.MNIST(root='./test', train=False, transform=ToTensor())
+train_dataset = mnist.MNIST(root='./train', train=True, download=True, transform=ToTensor())
+test_dataset = mnist.MNIST(root='./test', train=False, download=True, transform=ToTensor())
 train_dataloader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 test_dataloader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 opt = optim.{{optimizer}}(model.parameters(), lr=LR) # <--
