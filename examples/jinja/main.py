@@ -14,8 +14,8 @@ template = env.get_template(template_filename)
 channel = 2
 resultfile = template.render(
     layers=[{'layer': 'Conv1d', 'params': {
-        'in_channels': '3', 'out_channels': '8'}},{'layer': 'Conv2d', 'params': {
-        'in_channels': '5', 'out_channels': '8'}}],
+        'in_channels': '3', 'out_channels': '8'}},{'layer': 'Conv1d', 'params': {
+        'in_channels': '5'}}],
     params_list=params_list
 )
 
