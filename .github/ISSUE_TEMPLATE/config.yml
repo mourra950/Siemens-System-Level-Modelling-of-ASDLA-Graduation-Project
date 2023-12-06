@@ -1,8 +1,16 @@
 blank_issues_enabled: false
 contact_links:
-  - name: GitHub Community Support
-    url: https://github.com/orgs/community/discussions
-    about: Please ask and answer questions here.
-  - name: GitHub Security Bug Bounty
-    url: https://bounty.github.com/
-    about: Please report security vulnerabilities here.
+  - name: Omar Yousef
+    url: https://www.linkedin.com/in/mourra950/
+    about: Contact Omar Yousef here
+  - name: Omar Banna
+    url: https://www.linkedin.com/in/omar-el-banna/
+    about:  Contact Omar Elbanna here
+  - name: Nada Amr
+    url: https://www.linkedin.com/in/nada-amr/
+    about: Contact Nada here
+  - name: Adham Abdelmaksoud
+    url: https://www.linkedin.com/in/adham-abdelmaksoud/
+    about:  Contact Adham Abdelmaksoud here
+  
+  
