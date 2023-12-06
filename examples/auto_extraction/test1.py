@@ -2,82 +2,110 @@ import inspect
 import torchvision.transforms as transforms
 from torchvision.datasets import CIFAR10, MNIST
 from torch.nn import Conv1d
-from PySide6.QtWidgets import QGroupBox,QVBoxLayout,QFrame,QApplication,QScrollArea, QMainWindow, QPushButton, QLabel, QFileDialog,QListWidget,QListView
+from PySide6.QtWidgets import QGroupBox, QVBoxLayout,QWidget, QFrame, QApplication, QScrollArea, QMainWindow, QPushButton, QLabel,QLineEdit, QFileDialog, QListWidget, QListView,QDialog,QHBoxLayout
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
 import os
 import sys
+import torch.nn.modules as nn
+import inspect
 from pathlib import Path
 
 basedir = os.path.dirname(__file__)
 loader = QUiLoader()
 
+
 class MainUI(QtCore.QObject):
     def __init__(self):
         super().__init__()
-        self.path=""
+        self.path = ""
         self.ui = loader.load(
-        os.path.join(basedir, "test.ui"), None
+            os.path.join(basedir, "test.ui"), None
         )
         self.ui.setWindowTitle("Testing generating scripts")
 
-        self.listWidget = self.ui.findChild(QListWidget,'listWidget')
-        self.listview = self.ui.findChild(QListView,'listView')
-        self.Area = self.ui.findChild(QScrollArea,'scrollArea')
-        self.Vbox=self.ui.findChild(QVBoxLayout,'verticalLayout_6')
+        self.Vbox = self.ui.findChild(QVBoxLayout, 'Scrollbox')
 
-        testButton=QPushButton(text="Test")
-        # test.addItem
+
+
         try:
-            for i in range(30):
-                self.listWidget.addItems(["One", "Two", "Three"])
-                button = QPushButton(f"Button {i+1}")
+            self.t = extract()
+            
+            for i in self.t:
+                button = QPushButton(i)
+                button.clicked.connect(
+                    lambda func=self.the_button_was_clicked, x=i: func(x)
+                )
                 self.Vbox.addWidget(button)
 
-        
         except:
             print('UNO')
-        try:
-            self.listview.addItems(["One", "Two", "Threee"])
-        except:
-            print('DOS')
         
-
-        # for _ in range(30):
-        #     self.Area.addItem(testButton)
-            
-        # self.pushButton1 = self.ui.findChild(QPushButton, 'pushButton1')
-        # self.pushButton2 = self.ui.findChild(QPushButton, 'pushButton2')
-        # self.label1 = self.ui.findChild(QLabel, 'label1')
-
-        # self.pushButton1.clicked.connect(self.getFile)
-        # self.pushButton2.clicked.connect(self.getDirectory)
 
 
         self.ui.show()
 
+    def the_button_was_clicked(self, x):
+        dlg = QDialog()
+        l1=QVBoxLayout()
+        for i in self.t[x]:
+            l2=QHBoxLayout()
+            la=QLabel(f'{i["name"]}')
+            lb=QLineEdit()
+            l2.addWidget(la)
+            l2.addWidget(lb)
+            l1.addLayout(l2)
 
+        
+        label=QLabel(f"{x}")
+        verti=QVBoxLayout()
+        verti.addWidget(label)
+        dlg.setLayout(l1)
+        dlg.setWindowTitle(f"{x}")
+        dlg.exec()
 
-    def getFile(self):
-        path,_ = QFileDialog.getOpenFileName(None,'Open file',basedir,"JSON Files (*.json)")
-        self.path = Path(path)
-        print(self.path)
-        self.label1.setText(str(self.path))
+def extract():
+    N = dir(nn)
 
+    annotationslist = [type(1), type('a'), type(True), type((2, 2))]
 
+    testdict = dict()
 
-    def getDirectory(self):
-        dir_name = Path(QFileDialog.getExistingDirectory(None, "Select a Directory"))
-        print(dir_name)
-        self.path = dir_name
-        self.label1.setText(str(self.path))
+    for j in N:
+        obj = getattr(nn, j)
+
+        if isinstance(obj, type) and obj is not nn.Module and issubclass(obj, nn.Module):
+
+            inspector = inspect.signature(obj).parameters
+            templist = list()
+            for i in inspector:
+                if (
+                    (inspector[i].kind ==
+                     inspect._ParameterKind.POSITIONAL_OR_KEYWORD)
+                    and
+                    (inspector[i].annotation in annotationslist)
+                ):
+                    ...
+                    templist.append(
+                        {'name': inspector[i].name, 'defaultvalue': inspector[i].default, 'type': inspector[i].annotation})
+                    # print(f'attribute name {inspector[i].name}')
+                    # print(f'attribute default value {inspector[i].default}')
+                    # print(f'attribute annotation {inspector[i].annotation}')
+            if len(templist)>0:
+                    testdict[obj.__name__] = templist
+    return testdict
+    # print('#######################')
 
 
 def main():
-  
-   app = QApplication(sys.argv)
-   window = MainUI()
-   app.exec()
+
+    app = QApplication(sys.argv)
+    
+    window = MainUI()
+    with open(os.path.join(basedir, 'skin.qss'), "r") as f:
+        _style = f.read()
+        app.setStyleSheet(_style)
+    app.exec()
 
 
 if __name__ == '__main__':
@@ -88,7 +116,7 @@ def print_dataset_arguments(dataset_class):
     print(f"{dataset_class.__name__} dataset arguments:")
     for name, parameter in inspect.getmembers(object=dataset_class):
         if name != 'self':
-            print(f"{name}: {parameter}" )
+            print(f"{name}: {parameter}")
 
 # # Example: CIFAR10
 # # print_dataset_arguments(CIFAR10)
