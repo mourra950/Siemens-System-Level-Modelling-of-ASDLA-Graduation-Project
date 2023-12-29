@@ -1,7 +1,7 @@
 from jinja2 import Environment, FileSystemLoader
 import os, traceback
 
-def convert_jinja_to_code(template_relative_path: str, output_relative_path: str, parameters: dict):
+def convertJinjaToCode(template_relative_path: str, output_relative_path: str, parameters: dict):
     # get the template path
     stack = traceback.extract_stack()
     base_dir = os.path.dirname(stack[-2].filename)
@@ -15,7 +15,6 @@ def convert_jinja_to_code(template_relative_path: str, output_relative_path: str
 
     # render the template using the defined parameters
     train_code = template.render(parameters)
-    print(train_code)
 
     # get the output path
     output_absolute_path = os.path.normpath(os.path.join(base_dir, output_relative_path))
