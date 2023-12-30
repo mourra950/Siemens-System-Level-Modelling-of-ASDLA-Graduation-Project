@@ -2,3 +2,4 @@ node_modules
 documentation
 doc
 files
+**/__pycache__/
