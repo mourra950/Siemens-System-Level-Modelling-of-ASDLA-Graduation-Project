@@ -25,24 +25,26 @@ using namespace std;
 using namespace sc_core;
 using namespace tlm;
 
-
-void setMKLThreads() {
+void setMKLThreads()
+{
     int numThreads = 4; // Set the desired number of threads
     torch::set_num_threads(numThreads);
 }
 
-int sc_main(int argc, char* argv[]) {
+int sc_main(int argc, char *argv[])
+{
+    cout << "Hello\n";
     setMKLThreads();
-    // Create instances of the initiator and target modules
+    // Create instances of the initiator and target modules and give a name to the instance
     Initiator initiator("initiator");
     Target target("target");
 
-    // Connect the sockets
+    // // Connect the sockets
     initiator.init_socket.bind(target.target_socket);
 
-    // Start simulation
+    // // Start simulation
     sc_start();
-    cout << "Omar";
+    cout << "\nOmar\n";
     system("pause");
     return 0;
 }
