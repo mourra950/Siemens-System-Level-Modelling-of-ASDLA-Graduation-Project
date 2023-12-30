@@ -16,9 +16,10 @@ include_directories( ${OpenCV_INCLUDE_DIRS} ${Torch_INCLUDE_DIRS} ${SystemCLangu
 add_executable(Final_SystemC 
 	Final_SystemC.cpp 
 	Initiator.cpp
+     InitiatorThread.cpp
 )
 
-set (CMAKE_CXX_STANDARD 17 98 ${SystemC_CXX_STANDARD} CACHE STRING
+set (CMAKE_CXX_STANDARD 17 ${SystemC_CXX_STANDARD} CACHE STRING
      "C++ standard to build all targets. Supported values are 98, 11, 14, and 17.")
 set (CMAKE_CXX_STANDARD_REQUIRED ${SystemC_CXX_STANDARD_REQUIRED} CACHE BOOL
      "The with CMAKE_CXX_STANDARD selected C++ standard is a requirement.")
