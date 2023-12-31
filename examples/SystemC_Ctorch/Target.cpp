@@ -98,7 +98,8 @@ void Target::b_transport(tlm::tlm_generic_payload &trans, sc_core::sc_time &t)
     tlm::tlm_command cmd = trans.get_command();
     my_extension *incr_cmd_extension;
     trans.get_extension(incr_cmd_extension);
-    cout << "yousef" << endl
+    cout << "\nyousef\n"
+         << endl
          << incr_cmd_extension->id;
     if (incr_cmd_extension->id)
     {

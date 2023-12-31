@@ -17,6 +17,9 @@ void Initiator::sendDataThread()
     sc_time delay;
 
     init_socket->b_transport(trans, delay);
+    incr_cmd_extension->id = 12;
+    init_socket->b_transport(trans, delay);
+
     return;
 
     // sc_time tLOCAL(SC_ZERO_TIME);
