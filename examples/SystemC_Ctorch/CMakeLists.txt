@@ -17,6 +17,10 @@ add_executable(Final_SystemC
 	Final_SystemC.cpp 
 	Initiator.cpp
      InitiatorThread.cpp
+     Target.cpp
+     extension.cpp
+
+
 )
 
 set (CMAKE_CXX_STANDARD 17 ${SystemC_CXX_STANDARD} CACHE STRING

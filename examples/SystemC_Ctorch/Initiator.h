@@ -25,14 +25,13 @@
 using namespace tlm;
 using namespace sc_core;
 
-struct Initiator : sc_module {
+struct Initiator : sc_module
+{
     tlm_utils::simple_initiator_socket<Initiator> init_socket;
 
     void sendDataThread();
 
-    SC_CTOR(Initiator) ;
-
+    SC_CTOR(Initiator);
 };
 
-#endif  // INITIATOR_H
-
+#endif // INITIATOR_H

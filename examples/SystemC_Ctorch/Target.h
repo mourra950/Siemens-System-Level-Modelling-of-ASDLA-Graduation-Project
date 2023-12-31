@@ -21,6 +21,7 @@ using namespace torch;
 using namespace std;
 using namespace sc_core;
 using namespace tlm_utils;
+#include <tlm_utils/simple_target_socket.h>
 
 struct Target : sc_module
 {
@@ -29,7 +30,7 @@ struct Target : sc_module
 
     SC_CTOR(Target);
 
-    void b_transport(tlm_generic_payload &payload, sc_time &tLOCAL);
+    void b_transport(tlm::tlm_generic_payload &trans, sc_core::sc_time &t);
 };
 
 #endif // TARGET_H
