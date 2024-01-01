@@ -26,7 +26,12 @@ set (CMAKE_CXX_STANDARD 17 ${SystemC_CXX_STANDARD} CACHE STRING
      "C++ standard to build all targets. Supported values are 98, 11, 14, and 17.")
 set (CMAKE_CXX_STANDARD_REQUIRED ${SystemC_CXX_STANDARD_REQUIRED} CACHE BOOL
      "The with CMAKE_CXX_STANDARD selected C++ standard is a requirement.")
-
+set(source_dir "${CMAKE_CURRENT_SOURCE_DIR}")
+set(destination_dir "${CMAKE_CURRENT_BINARY_DIR}")
+include_directories(${destination_dir})
+file(COPY ${source_dir}/image_samples DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${source_dir}/Pt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY ${source_dir}/mnist DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(Final_SystemC 
 PUBLIC ${OpenCV_LIBS} 
 PUBLIC "${TORCH_LIBRARIES}" 

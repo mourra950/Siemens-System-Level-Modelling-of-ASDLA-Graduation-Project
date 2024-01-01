@@ -104,13 +104,25 @@ void Target::b_transport(tlm::tlm_generic_payload &trans, sc_core::sc_time &t)
     //     SC_REPORT_INFO("Target", "Doing a WRITE transaction");
     // Set the response status
     Mat image;
-    image = imread("E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/examples/SystemC_Ctorch/img_1.jpg", cv::ImreadModes::IMREAD_GRAYSCALE);
+    image = imread("./image_samples/img_1.jpg", cv::ImreadModes::IMREAD_GRAYSCALE);
     showImage(image);
+    // auto module = torch::jit::load("../../data/Pt/model2.pt");
+    // auto sizes = {1, 1, image.rows, image.cols};
+    // auto options(at::ScalarType::Byte);
+    // auto tensor_image = torch::from_blob(image.data, {1, 1, 28, 28}, options);
+    // tensor_image = tensor_image.toType(at::kFloat);
+    // auto result = module.forward({tensor_image}).toTensor();
+
+    // auto max_result = result.max(1, true);
+
+    // auto max_index = std::get<1>(max_result).item<float>();
+
+    // std::cout << "\nprinting the image prediction " << max_index << endl;
+
     tlm::tlm_command cmd = trans.get_command();
     my_extension *incr_cmd_extension;
     trans.get_extension(incr_cmd_extension);
-    cout << "\nyousef\n"
-         << endl
+    cout << endl
          << incr_cmd_extension->id;
     if (incr_cmd_extension->id)
     {
