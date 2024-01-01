@@ -39,13 +39,10 @@ int sc_main(int argc, char *argv[])
     // Create instances of the initiator and target modules and give a name to the instance
     Initiator initiator("initiator");
     Target target("target");
-
-    // // Connect the sockets
+    //  Connect the sockets
     initiator.init_socket.bind(target.target_socket);
-
-    // // Start simulation
+    // Start simulation
     sc_start();
-    cout << "\nOmar1\n";
     system("pause");
     return 0;
 }

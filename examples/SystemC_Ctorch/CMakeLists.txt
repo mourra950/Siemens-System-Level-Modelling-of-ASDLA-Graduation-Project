@@ -1,18 +1,15 @@
 cmake_minimum_required(VERSION 3.18)
 project(Final_SystemC CXX)
 
-#to find Torch and fetch
+#Find package fetch libraries and give an error when unable to find either of this packages
 find_package(SystemCLanguage CONFIG REQUIRED)
 find_package(Torch REQUIRED)
 find_package(OpenCV REQUIRED)
 
-
-
-
 include_directories( ${OpenCV_INCLUDE_DIRS} ${Torch_INCLUDE_DIRS} ${SystemCLanguage_INCLUDE_DIRS} )
 
 
-# Add your source files
+# Add your source files and cpp files needed
 add_executable(
      Final_SystemC 
 	Final_SystemC.cpp 
@@ -29,6 +26,7 @@ set (CMAKE_CXX_STANDARD_REQUIRED ${SystemC_CXX_STANDARD_REQUIRED} CACHE BOOL
 set(source_dir "${CMAKE_CURRENT_SOURCE_DIR}")
 set(destination_dir "${CMAKE_CURRENT_BINARY_DIR}")
 include_directories(${destination_dir})
+# copies data folders needed and insert them in the destination appointed to and make it easy to reference data relative to the project
 file(COPY ${source_dir}/image_samples DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${source_dir}/Pt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 file(COPY ${source_dir}/mnist DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
