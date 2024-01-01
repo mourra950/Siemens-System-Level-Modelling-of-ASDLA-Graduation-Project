@@ -25,7 +25,7 @@ void Initiator::sendDataThread()
     // sc_time tLOCAL(SC_ZERO_TIME);
     // unsigned int addr = static_cast<unsigned int>(rand() % 0x100);
     // cout << "address: " << addr << "\n";
-    // std::string mnistpath = "E:/FinalBehairy/examples-main/cpp/mnist/build/data"; // currently working on a code to make it dynamic
+    // std::string mnistpath = " ../../data/mnist"; // currently working on a code to make it dynamic
     // auto dataset1 = torch::data::datasets::MNIST(mnistpath, torch::data::datasets::MNIST::Mode::kTest);
     // auto dataset = dataset1.map(torch::data::transforms::Stack<>());
     // // Access a specific image from the dataset

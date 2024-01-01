@@ -13,15 +13,14 @@ include_directories( ${OpenCV_INCLUDE_DIRS} ${Torch_INCLUDE_DIRS} ${SystemCLangu
 
 
 # Add your source files
-add_executable(Final_SystemC 
+add_executable(
+     Final_SystemC 
 	Final_SystemC.cpp 
 	Initiator.cpp
      InitiatorThread.cpp
      Target.cpp
      extension.cpp
-
-
-)
+     )
 
 set (CMAKE_CXX_STANDARD 17 ${SystemC_CXX_STANDARD} CACHE STRING
      "C++ standard to build all targets. Supported values are 98, 11, 14, and 17.")

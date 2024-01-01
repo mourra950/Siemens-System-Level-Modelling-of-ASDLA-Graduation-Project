@@ -15,6 +15,8 @@
 #include <torch/csrc/jit/serialization/import.h>
 #include <opencv2/opencv.hpp>
 #include <ctime>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 using namespace tlm;
 using namespace torch;

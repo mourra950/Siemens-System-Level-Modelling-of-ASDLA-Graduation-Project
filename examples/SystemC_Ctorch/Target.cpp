@@ -1,5 +1,13 @@
 #include "Target.h"
 #include "extension.cpp"
+using namespace cv;
+
+void showImage(Mat image)
+{
+    namedWindow("Display window", cv::WindowFlags::WINDOW_NORMAL); // Create a window for display.
+    imshow("Display window", image);
+    waitKey(0);
+}
 
 Target::Target(sc_core::sc_module_name name) : sc_core::sc_module(name), target_socket("target_socket")
 {
@@ -95,6 +103,9 @@ void Target::b_transport(tlm::tlm_generic_payload &trans, sc_core::sc_time &t)
     // else if (payload.is_write())
     //     SC_REPORT_INFO("Target", "Doing a WRITE transaction");
     // Set the response status
+    Mat image;
+    image = imread("E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/examples/SystemC_Ctorch/img_1.jpg", cv::ImreadModes::IMREAD_GRAYSCALE);
+    showImage(image);
     tlm::tlm_command cmd = trans.get_command();
     my_extension *incr_cmd_extension;
     trans.get_extension(incr_cmd_extension);
