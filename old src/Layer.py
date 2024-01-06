@@ -1,5 +1,16 @@
 class Layer:
-    def __init__(self, channels, filters, height, width, units, stride, padding, name, kernel_size):
+    def __init__(
+        self,
+        channels,
+        filters,
+        height,
+        width,
+        units,
+        stride,
+        padding,
+        name,
+        kernel_size,
+    ):
         self.channels = channels
         self.filters = filters
         self.height = height
@@ -9,4 +20,3 @@ class Layer:
         self.padding = padding
         self.name = name
         self.kernel_size = kernel_size
-

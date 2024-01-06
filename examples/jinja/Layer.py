@@ -9,4 +9,3 @@ class Layer:
         self.padding = padding
         self.name = name
         self.kernel_size = kernel_size
-
