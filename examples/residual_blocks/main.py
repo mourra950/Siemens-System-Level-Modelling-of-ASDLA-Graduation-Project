@@ -8,15 +8,16 @@ template_dir = "./templates"
 
 env = Environment(loader=FileSystemLoader(template_dir))
 
-template_filename = "template.py.jinja"
+template_filename = "residualBlock.py.jinja"
 template = env.get_template(template_filename)
+layers = [
+    {'name': 'conv1', 'type': 'Conv2d', 'params': {'in_channels': 64, 'out_channels': 128, 'kernel_size': 1, 'stride': 1, 'padding': 0}},
+    {'name': 'bn1', 'type': 'BatchNorm2d', 'params': {'num_features': 128}},
+    {'name':'relu1','type':'Relu'}
+]
 
-channel = 2
 result_file = template.render(
-    layers=[{'layer': 'Conv1d', 'params': {
-        'in_channels': '3', 'out_channels': '8'}}, {'layer': 'Conv1d', 'params': {
-            'in_channels': '5'}}],
-    params_list=params_list
+    layers=layers
 )
 
 # Create or overwrite a file named train.py in output file and outputs the result from the rendered jinja template
