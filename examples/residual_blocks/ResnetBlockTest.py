@@ -59,7 +59,7 @@ layers1 = [
     },
 ]
 
-convertJinjaToCode('templates/residualBlock1.py.jinja', 'output/residual.py',
+convertJinjaToCode('templates/residualBlock.py.jinja', 'output/residual.py',
     {
         'layers': layers1
     }                   
