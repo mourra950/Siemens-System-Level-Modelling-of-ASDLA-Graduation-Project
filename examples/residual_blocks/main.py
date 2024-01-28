@@ -8,10 +8,10 @@ template_dir = "./templates"
 
 env = Environment(loader=FileSystemLoader(template_dir))
 
-template_filename = "residualBlock.py.jinja"
+template_filename = "model.py.jinja"
 template = env.get_template(template_filename)
 layers = [
-    {'name': 'conv1', 'type': 'Conv2d', 'params': {'in_channels': 64, 'out_channels': 128, 'kernel_size': 1, 'stride': 1, 'padding': 0}},
+    {'name': 'block1', 'type': 'ResidualBlock', 'params': {'in_channels': 64, 'out_channels': 128}},
     {'name': 'bn1', 'type': 'BatchNorm2d', 'params': {'num_features': 128}},
     {'name':'relu1','type':'Relu'}
 ]
