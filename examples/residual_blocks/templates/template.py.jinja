@@ -1,0 +1,29 @@
+
+# import the necessary packages
+from torch import nn
+class CNN(nn.Module):
+    def __init__(self):     
+        super(CNN,self).__init__()
+        nn.Sequential(
+        {%- for i in layers %}
+            nn.{{i.layer}}(
+            {%- for j in i.params -%}
+            {%- if j in params_list %}
+                {{j}}={{i.params[j]}},
+            {%- endif -%}
+            {% endfor %}
+            ),
+        {% endfor %}
+    )
+
+
+
+
+    def forward(self,x):
+      out=self.conva(x)
+      out=self.maxa(out)
+      out=self.convb(out)
+      out=self.maxb(out)
+      out= out.view(out.shape[0], -1)
+      out=self.fca(out)
+      return out
