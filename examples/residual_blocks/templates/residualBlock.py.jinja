@@ -1,0 +1,46 @@
+import torch
+import torch.nn as nn
+class ResidualBlock(nn.Module):
+    def __init__(self, in_channels, out_channels):
+        super(ResidualBlock, self).__init__()
+        self.{{ layers[0].name }} = nn.{{ layers[0].type }}(
+            in_channels=in_channels,out_channels=out_channels, 
+            {% for param in layers[0].params -%}
+            {{ param }}={{ layers[0].params[param] }},
+            {%- endfor %}
+        )
+
+        {%- set last_conv_idx = [] -%}
+        {%- for layer in layers -%}
+        {%- if layer.type == 'Conv2d' -%}
+        {%- set temp = last_conv_idx.append(loop.index) -%}
+        {%- endif -%}
+        {%- endfor -%}
+
+        {% for layer in layers[1:] %}
+        self.{{ layer.name }} = nn.{{ layer.type }}(
+            {%- if loop.index+1 == last_conv_idx[-1] %}
+            in_channels=out_channels,out_channels=in_channels, 
+            {% elif layer.type == 'Conv2d' %}
+            in_channels=out_channels,out_channels=out_channels, 
+            {%- elif layer.type == 'BatchNorm2d' and loop.index+1 < last_conv_idx[-1] %}
+            num_features=out_channels, 
+            {%- elif layer.type == 'BatchNorm2d' and loop.index+1 > last_conv_idx[-1] %}
+            num_features=in_channels, 
+            {%- endif -%}
+
+            {% for param in layer.params -%}
+            {{ param }}={{ layer.params[param] }},
+            {%- endfor %}
+        )
+        {%- endfor %}
+
+
+    def forward(self, x):
+        identity = x
+        {% for layer in layers %}
+        x = self.{{ layer.name }}(x)
+        {% endfor %}
+        x += identity
+
+        return x

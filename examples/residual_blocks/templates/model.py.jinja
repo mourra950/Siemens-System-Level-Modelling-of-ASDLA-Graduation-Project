@@ -1,0 +1,32 @@
+
+# import the necessary packages
+from torch import nn, flatten
+from residual import ResidualBlock
+class CNN(nn.Module):
+    def __init__(self):     
+        super(CNN,self).__init__()
+        {%- for layer in layers %}
+        {%- if layer.type == 'ResidualBlock'%}
+        self.{{layer.name}} = {{layer.type}}(
+            {% for param in layer.params -%}
+            {{param}}={{layer.params[param]}},
+            {%- endfor %}
+        ),
+        {% else -%}
+        self.{{layer.name}} = nn.{{layer.type}}(
+            {% for param in layer.params -%}
+            {{param}}={{layer.params[param]}},
+            {%- endfor %}
+        ),
+        {% endif -%}
+        {% endfor %}
+
+    def forward(self, x):
+        {% for layer in layers -%}
+        {%- if layer.name == 'fcA' -%}
+        x = flatten(x, 1)
+        {% endif -%}
+
+        x = self.{{layer.name}}(x)
+        {% endfor %}
+        return x
