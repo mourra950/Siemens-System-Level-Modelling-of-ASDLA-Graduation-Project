@@ -365,12 +365,22 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchvision.datasets import mnist
 from torchvision.transforms import ToTensor
+import webbrowser
 from torch.utils.tensorboard import SummaryWriter
 import torch.nn.functional as F
 import torchvision
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
+
+
+def launchTensorBoard():
+    import os
+
+    os.system("tensorboard --logdir=./runs")
+    webbrowser.open("http://localhost:6006/")
+
+    return
 
 
 class CNN(nn.Module):
@@ -409,7 +419,11 @@ LR = 0.001  # Set your learning rate
 BATCH_SIZE = 64  # Set your batch size
 EPOCHS = 10  # Set the number of epochs
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+import threading
 
+t = threading.Thread(target=launchTensorBoard, args=([]))
+t.start()
+webbrowser.open("http://localhost:6006/")
 # Create the model, dataloaders, optimizer, and loss function
 model = CNN()
 model.to(device)
@@ -428,7 +442,6 @@ lossFn = nn.CrossEntropyLoss()
 
 # TensorBoard setup
 writer = SummaryWriter()
-
 print("Training started...")
 # Training loop
 for e in range(0, EPOCHS):
