@@ -1,0 +1,6 @@
+log/
+runs/
+train/
+test/
+output/
+util/
