@@ -1,0 +1,60 @@
+{
+  "layers": [
+    {
+      "type": "Conv2d",
+      "params": {
+        "out_channels": 128,
+        "kernel_size": 3,
+        "stride": 1,
+        "padding": 0,
+        "dilation": 1,
+        "groups": 1,
+        "bias": true,
+        "padding_mode": "zeros",
+        "in_channels": 3
+      },
+      "name": "conv2d_1"
+    },
+    {
+      "type": "ReLU",
+      "params": {
+        "inplace": false
+      },
+      "name": "relu_1"
+    },
+    {
+      "type": "Flatten",
+      "params": {
+        "start_dim": 0,
+        "end_dim": -1
+      },
+      "name": "flatten_1"
+    },
+    {
+      "type": "Linear",
+      "params": {
+        "out_features": 100,
+        "bias": true,
+        "in_features": 86528
+      },
+      "name": "linear_1"
+    },
+    {
+      "type": "Linear",
+      "params": {
+        "out_features": 4,
+        "bias": true,
+        "in_features": 100
+      },
+      "name": "linear_2"
+    }
+  ],
+  "misc_params": {
+    "width": 28,
+    "height": 28,
+    "channels": 3,
+    "batch_size": 10,
+    "learning_rate": 0.01,
+    "num_epochs": 50
+  }
+}
