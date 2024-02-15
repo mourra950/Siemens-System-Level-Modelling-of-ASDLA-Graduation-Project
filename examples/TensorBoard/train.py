@@ -374,15 +374,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-def launchTensorBoard():
-    import os
-
-    os.system("tensorboard --logdir=./runs")
-    webbrowser.open("http://localhost:6006/")
-
-    return
-
-
 class CNN(nn.Module):
     """
     Convolutional Neural Network (CNN) for MNIST Digit Classification
@@ -421,9 +412,6 @@ EPOCHS = 10  # Set the number of epochs
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 import threading
 
-t = threading.Thread(target=launchTensorBoard, args=([]))
-t.start()
-webbrowser.open("http://localhost:6006/")
 # Create the model, dataloaders, optimizer, and loss function
 model = CNN()
 model.to(device)

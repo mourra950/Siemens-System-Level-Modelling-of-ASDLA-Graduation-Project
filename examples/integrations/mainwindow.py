@@ -58,9 +58,9 @@ class MainUI(QtCore.QObject):
         dlg = LayerDialog(t=self.t, x=x)
 
         if dlg.exec():
-            print(dlg)
-            print(dlg.accepted)
-            print(dlg.a)
+            # print(dlg)
+            # print(dlg.accepted)
+            # print(dlg.a)
             print("Success!")
         else:
             print("Cancel!")
