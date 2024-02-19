@@ -1,5 +1,7 @@
 main_ui_path = 'ui/mainwindow.ui'
 delete_icon_path = 'imgs/delete.png'
+up_icon_path = 'imgs/up.png'
+down_icon_path = 'imgs/down.png'
 css_path = 'ui/skin.qss'
 
 arch_json_path = 'json_files/arch.json'

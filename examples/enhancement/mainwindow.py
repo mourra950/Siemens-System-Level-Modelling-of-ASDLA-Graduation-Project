@@ -3,8 +3,11 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import json
+import sys
+
+from config.paths import *
 from util.AutoExtraction import *
-from paths import *
+from util.FileGenerator import FileGenerator
 
 
 class MainWindow(QMainWindow):
@@ -20,7 +23,6 @@ class MainWindow(QMainWindow):
                 'channels': 1,
             }
         }
-        self.added_layers_layouts = []
 
         self.inputWidth_QLineEdit = self.findChild(QLineEdit, 'inputWidth_QLineEdit')
         self.inputHeight_QLineEdit = self.findChild(QLineEdit, 'inputHeight_QLineEdit')
@@ -31,16 +33,8 @@ class MainWindow(QMainWindow):
         self.inputType_RGB_QRadioButton = self.findChild(QRadioButton, 'inputType_RGB_QRadioButton')
         self.inputType_grayScale_QRadioButton = self.findChild(QRadioButton, 'inputType_grayScale_QRadioButton')
 
-        self.layer_QComboBox = self.findChild(QComboBox, 'layer_QComboBox')
         self.optimizer_QComboBox = self.findChild(QComboBox, 'optimizer_QComboBox')
         self.lossFunc_QComboBox = self.findChild(QComboBox, 'lossFunc_QComboBox')
-
-        self.layer_QComboBox.addItem("Convolution")
-        self.layer_QComboBox.addItem("Max Pool")
-        self.layer_QComboBox.addItem("Average Pool")
-        self.layer_QComboBox.addItem("Depthwise Convolution")
-        self.layer_QComboBox.addItem("Flatten")
-        self.layer_QComboBox.addItem("Fully Connected")
 
         self.optimizer_QComboBox.addItem('Adadelta')
         self.optimizer_QComboBox.addItem('Adagrad')
@@ -56,6 +50,7 @@ class MainWindow(QMainWindow):
 
         self.submitParams_QPushButton = self.findChild(QPushButton, 'submitParams_QPushButton')
         self.submitArch_QPushButton = self.findChild(QPushButton, 'submitArch_QPushButton')
+        self.generateModel_QPushButton = self.findChild(QPushButton, 'generateModel_QPushButton')
 
         self.torch_layers = extract_torch_layers()
         for layer in self.torch_layers:
@@ -67,6 +62,7 @@ class MainWindow(QMainWindow):
 
         self.submitParams_QPushButton.clicked.connect(self.on_submit_params_clicked)
         self.submitArch_QPushButton.clicked.connect(self.on_submit_arch_clicked)
+        self.generateModel_QPushButton.clicked.connect(self.on_generate_model_clicked)
 
 
     def on_layer_button_clicked(self, layer_name):
@@ -124,7 +120,10 @@ class MainWindow(QMainWindow):
                 try:
                     param_value = int(param_value)
                 except:
-                    pass
+                    try:
+                        param_value = float(param_value)
+                    except:
+                        pass
 
             if param_value != '':
                 layer['params'][params_names[i]] = param_value
@@ -136,45 +135,93 @@ class MainWindow(QMainWindow):
     def create_layer_node(self, layer, index):
         addedLayerRow_QHBoxLayout = QHBoxLayout()
 
+        border_QFrame = QFrame()
+        border_QFrame.setMaximumHeight(70)
+        border_QFrame.setLayout(addedLayerRow_QHBoxLayout)
+        border_QFrame.setStyleSheet('''
+            QFrame{
+                border: 1px solid black;
+            }
+            QLabel{
+                border: none;
+                font-weight: bold;
+                font-size: 15px;
+            }
+        ''')
+
         delete_QPushButton = QPushButton()
-        delete_QPushButton.setMaximumWidth(40)
+        delete_QPushButton.setMaximumWidth(30)
         delete_QPushButton.setIcon(QIcon(delete_icon_path))
         delete_QPushButton.clicked.connect(
-            lambda ch, i=addedLayerRow_QHBoxLayout : \
+            lambda ch, i=border_QFrame : \
                 self.on_delete_layer_clicked(i)
         )
+        up_QPushButton = QPushButton()
+        up_QPushButton.setMaximumWidth(28)
+        up_QPushButton.setIcon(QIcon(up_icon_path))
+        up_QPushButton.clicked.connect(
+            lambda ch, i=border_QFrame : \
+                self.on_move_up_clicked(i)
+        )
+        down_QPushButton = QPushButton()
+        down_QPushButton.setMaximumWidth(28)
+        down_QPushButton.setIcon(QIcon(down_icon_path))
+        down_QPushButton.clicked.connect(
+            lambda ch, i=border_QFrame : \
+                self.on_move_down_clicked(i)
+        )
+
+        moveableArrows_QVBoxLayout = QVBoxLayout()
+        moveableArrows_QVBoxLayout.addWidget(up_QPushButton)
+        moveableArrows_QVBoxLayout.addWidget(down_QPushButton)
+
         addedLayerRow_QHBoxLayout.addWidget(QLabel(layer['type']))
+        addedLayerRow_QHBoxLayout.addLayout(moveableArrows_QVBoxLayout)
         addedLayerRow_QHBoxLayout.addWidget(delete_QPushButton)
 
         if index == -1:
-            self.addedLayers_QVBoxLayout.addLayout(addedLayerRow_QHBoxLayout)
+            self.addedLayers_QVBoxLayout.addWidget(border_QFrame)
             self.architecture['layers'].append(layer)
-            self.added_layers_layouts.append(addedLayerRow_QHBoxLayout)
         else:
-            self.addedLayers_QVBoxLayout.insertLayout(index, addedLayerRow_QHBoxLayout)
+            self.addedLayers_QVBoxLayout.insertWidget(index, border_QFrame)
             self.architecture['layers'].insert(index, layer)
-            self.added_layers_layouts.insert(index, addedLayerRow_QHBoxLayout)
 
 
-    def on_delete_layer_clicked(self, addedLayerRow_QHBoxLayout):
-        for i in range(len(self.added_layers_layouts)):
-            if addedLayerRow_QHBoxLayout == self.added_layers_layouts[i]:
+    def on_delete_layer_clicked(self, border_QFrame):
+        for i in range(len(self.architecture['layers'])):
+            if border_QFrame == self.addedLayers_QVBoxLayout.itemAt(i).widget():
+                layer_widget = self.addedLayers_QVBoxLayout.itemAt(i).widget()
+
                 self.architecture['layers'].pop(i)
-                self.clearLayout(self.added_layers_layouts[i])
-                self.addedLayers_QVBoxLayout.removeItem(self.added_layers_layouts[i])
-                self.added_layers_layouts.pop(i)
+                layer_widget.deleteLater()
+                self.addedLayers_QVBoxLayout.removeWidget(layer_widget)
                 break
 
+    def on_move_up_clicked(self, border_QFrame):
+        for i in range(len(self.architecture['layers'])):
+            if border_QFrame == self.addedLayers_QVBoxLayout.itemAt(i).widget():
+                if i == 0:
+                    break
+                layer_widget = self.addedLayers_QVBoxLayout.itemAt(i).widget()
 
-    def clearLayout(self, layout):
-        if layout is not None:
-            while layout.count():
-                item = layout.takeAt(0)
-                widget = item.widget()
-                if widget is not None:
-                    widget.deleteLater()
-                else:
-                    self.clearLayout(item.layout())
+                layer = self.architecture['layers'].pop(i)
+                self.architecture['layers'].insert(i-1, layer)
+                
+                self.addedLayers_QVBoxLayout.removeWidget(layer_widget)
+                self.addedLayers_QVBoxLayout.insertWidget(i-1, layer_widget)
+                break
+
+    def on_move_down_clicked(self, border_QFrame):
+        for i in range(len(self.architecture['layers'])-1):
+            if border_QFrame == self.addedLayers_QVBoxLayout.itemAt(i).widget():
+                layer_widget = self.addedLayers_QVBoxLayout.itemAt(i).widget()
+
+                layer = self.architecture['layers'].pop(i)
+                self.architecture['layers'].insert(i+1, layer)
+                
+                self.addedLayers_QVBoxLayout.removeWidget(layer_widget)
+                self.addedLayers_QVBoxLayout.insertWidget(i+1, layer_widget)
+                break
 
 
     def on_submit_arch_clicked(self):
@@ -256,3 +303,23 @@ class MainWindow(QMainWindow):
         self.architecture['misc_params']['num_epochs'] = int(self.numEpochs_QLineEdit.text())
         optimizer = self.optimizer_QComboBox.currentText()
         loss_func = self.lossFunc_QComboBox.currentText()
+
+    
+    def on_generate_model_clicked(self):
+        generator = FileGenerator(arch_json_path)
+        generator.generate_model(model_jinja_path, model_py_path)
+
+
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    win = MainWindow()
+
+    win.setWindowTitle("System Level Modelling")
+    # with open(css_path, "r") as f:
+    #     _style = f.read()
+    #     app.setStyleSheet(_style)
+
+    win.show()
+    app.exec_()
