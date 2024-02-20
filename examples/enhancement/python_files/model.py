@@ -6,7 +6,7 @@ class CNN(nn.Module):
     def __init__(self):     
         super(CNN,self).__init__()
         self.conv2d_1 = nn.Conv2d( 
-            out_channels = 128,
+            out_channels = 64,
             kernel_size = 3,
             stride = 1,
             padding = 0,
@@ -21,6 +21,22 @@ class CNN(nn.Module):
             inplace = False,
         )
         
+        self.conv2d_2 = nn.Conv2d( 
+            out_channels = 128,
+            kernel_size = 3,
+            stride = 1,
+            padding = 0,
+            dilation = 1,
+            groups = 1,
+            bias = True,
+            padding_mode = "zeros",
+            in_channels = 64,
+        )
+        
+        self.relu_2 = nn.ReLU( 
+            inplace = False,
+        )
+        
         self.flatten_1 = nn.Flatten( 
             start_dim = 0,
             end_dim = -1,
@@ -29,7 +45,7 @@ class CNN(nn.Module):
         self.linear_1 = nn.Linear( 
             out_features = 100,
             bias = True,
-            in_features = 86528,
+            in_features = 73728,
         )
         
         self.linear_2 = nn.Linear( 
@@ -42,6 +58,8 @@ class CNN(nn.Module):
     def forward(self, x):
         x = self.conv2d_1(x)
         x = self.relu_1(x)
+        x = self.conv2d_2(x)
+        x = self.relu_2(x)
         x = self.flatten_1(x)
         x = self.linear_1(x)
         x = self.linear_2(x)

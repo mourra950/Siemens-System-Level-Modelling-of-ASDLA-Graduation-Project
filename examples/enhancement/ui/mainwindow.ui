@@ -14,8 +14,8 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_11">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -37,7 +37,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -64,35 +64,38 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="Params">
+      <widget class="QWidget" name="tab_2">
        <attribute name="title">
         <string>Miscellaneous Parameters</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_16">
-        <item>
-         <layout class="QVBoxLayout" name="Params_Layout">
-          <property name="bottomMargin">
-           <number>29</number>
-          </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_19">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <layout class="QHBoxLayout" name="horizontalLayout_16">
+            <property name="spacing">
+             <number>15</number>
+            </property>
             <item>
-             <layout class="QFormLayout" name="formLayout">
+             <layout class="QFormLayout" name="formLayout_2">
               <item row="0" column="0">
-               <spacer name="verticalSpacer_7">
+               <spacer name="verticalSpacer_10">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
-                  <height>40</height>
+                  <height>30</height>
                  </size>
                 </property>
                </spacer>
               </item>
               <item row="1" column="0">
-               <widget class="QLabel" name="inputWidth_label">
+               <widget class="QLabel" name="inputWidth_label_2">
                 <property name="text">
                  <string>Input Width</string>
                 </property>
@@ -102,7 +105,7 @@
                <widget class="QLineEdit" name="inputWidth_QLineEdit"/>
               </item>
               <item row="2" column="0">
-               <spacer name="verticalSpacer">
+               <spacer name="verticalSpacer_11">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -115,7 +118,7 @@
                </spacer>
               </item>
               <item row="3" column="0">
-               <widget class="QLabel" name="inputHeight_label">
+               <widget class="QLabel" name="inputHeight_label_2">
                 <property name="text">
                  <string>Input Height</string>
                 </property>
@@ -125,7 +128,7 @@
                <widget class="QLineEdit" name="inputHeight_QLineEdit"/>
               </item>
               <item row="4" column="0">
-               <spacer name="verticalSpacer_2">
+               <spacer name="verticalSpacer_12">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -137,87 +140,41 @@
                 </property>
                </spacer>
               </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="batchSize_label">
+              <item row="8" column="0">
+               <widget class="QLabel" name="batchSize_label_2">
                 <property name="text">
                  <string>Batch Size</string>
                 </property>
                </widget>
               </item>
-              <item row="5" column="1">
+              <item row="8" column="1">
                <widget class="QLineEdit" name="batchSize_QLineEdit"/>
               </item>
-              <item row="6" column="0">
-               <spacer name="verticalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="learningRate_label">
-                <property name="text">
-                 <string>Learning Rate</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
-               <widget class="QLineEdit" name="learningRate_QLineEdit"/>
-              </item>
-              <item row="8" column="0">
-               <spacer name="verticalSpacer_4">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item row="9" column="0">
-               <widget class="QLabel" name="numberEpochs_label">
+               <spacer name="verticalSpacer_13">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="10" column="0">
+               <widget class="QLabel" name="numberEpochs_label_2">
                 <property name="text">
                  <string>Number of Epochs</string>
                 </property>
                </widget>
               </item>
-              <item row="9" column="1">
+              <item row="10" column="1">
                <widget class="QLineEdit" name="numEpochs_QLineEdit"/>
               </item>
-              <item row="10" column="0">
-               <spacer name="verticalSpacer_5">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
               <item row="11" column="0">
-               <widget class="QLabel" name="optimizer_label">
-                <property name="text">
-                 <string>Optimizer</string>
-                </property>
-               </widget>
-              </item>
-              <item row="11" column="1">
-               <widget class="QComboBox" name="optimizer_QComboBox"/>
-              </item>
-              <item row="12" column="0">
-               <spacer name="verticalSpacer_6">
+               <spacer name="verticalSpacer_15">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -229,18 +186,43 @@
                 </property>
                </spacer>
               </item>
-              <item row="13" column="0">
-               <widget class="QLabel" name="lossFunction_label">
+              <item row="6" column="1">
+               <widget class="QRadioButton" name="inputType_grayScale_QRadioButton">
+                <property name="font">
+                 <font>
+                  <family>Siemens Sans</family>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
                 <property name="text">
-                 <string>Loss Function</string>
+                 <string>Gray Scale</string>
                 </property>
                </widget>
               </item>
-              <item row="13" column="1">
-               <widget class="QComboBox" name="lossFunc_QComboBox"/>
+              <item row="5" column="1">
+               <widget class="QRadioButton" name="inputType_RGB_QRadioButton">
+                <property name="font">
+                 <font>
+                  <family>Siemens Sans</family>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>RGB</string>
+                </property>
+               </widget>
               </item>
-              <item row="14" column="0">
-               <spacer name="verticalSpacer_8">
+              <item row="5" column="0">
+               <widget class="QLabel" name="inputHeight_label_3">
+                <property name="text">
+                 <string>Input Type</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <spacer name="verticalSpacer_14">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -255,159 +237,165 @@
              </layout>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_12">
+             <widget class="Line" name="line">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_13">
+              <property name="spacing">
+               <number>7</number>
+              </property>
               <item>
-               <layout class="QVBoxLayout" name="verticalLayout_14">
+               <spacer name="verticalSpacer_17">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
                 <item>
-                 <widget class="QTableView" name="tableView_2">
-                  <property name="font">
-                   <font>
-                    <family>Siemens Sans</family>
-                    <weight>50</weight>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-color: rgb(255, 255, 255);
-</string>
-                  </property>
-                  <property name="sizeAdjustPolicy">
-                   <enum>QAbstractScrollArea::AdjustToContents</enum>
+                 <widget class="QLabel" name="optimizer_label_2">
+                  <property name="text">
+                   <string>Optimizer:</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <layout class="QGridLayout" name="gridLayout">
-                  <item row="0" column="0">
-                   <widget class="QGroupBox" name="inputtype">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Siemens Sans</family>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true"/>
-                    </property>
-                    <property name="title">
-                     <string>Input Type</string>
-                    </property>
-                    <layout class="QVBoxLayout" name="verticalLayout">
-                     <item>
-                      <widget class="QRadioButton" name="inputType_RGB_QRadioButton">
-                       <property name="font">
-                        <font>
-                         <family>Siemens Sans</family>
-                         <weight>75</weight>
-                         <bold>true</bold>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>RGB</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QRadioButton" name="inputType_grayScale_QRadioButton">
-                       <property name="font">
-                        <font>
-                         <family>Siemens Sans</family>
-                         <weight>75</weight>
-                         <bold>true</bold>
-                        </font>
-                       </property>
-                       <property name="text">
-                        <string>Gray Scale</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QGroupBox" name="groupBox">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Siemens Sans</family>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true"/>
-                    </property>
-                    <property name="title">
-                     <string>Convolution Type</string>
-                    </property>
-                    <widget class="QRadioButton" name="Standard">
-                     <property name="geometry">
-                      <rect>
-                       <x>10</x>
-                       <y>50</y>
-                       <width>91</width>
-                       <height>24</height>
-                      </rect>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <weight>75</weight>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Standard </string>
-                     </property>
-                    </widget>
-                    <widget class="QRadioButton" name="Winograd">
-                     <property name="geometry">
-                      <rect>
-                       <x>10</x>
-                       <y>20</y>
-                       <width>93</width>
-                       <height>24</height>
-                      </rect>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <weight>75</weight>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="text">
-                      <string>Winograd</string>
-                     </property>
-                    </widget>
-                   </widget>
-                  </item>
-                 </layout>
+                 <widget class="QLineEdit" name="selectedOptimizer_QLineEdit">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit{
+	color: black;
+}</string>
+                  </property>
+                 </widget>
                 </item>
                </layout>
+              </item>
+              <item>
+               <widget class="QScrollArea" name="scrollArea_3">
+                <property name="widgetResizable">
+                 <bool>true</bool>
+                </property>
+                <widget class="QWidget" name="scrollwidget_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>0</y>
+                   <width>454</width>
+                   <height>175</height>
+                  </rect>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <item>
+                   <layout class="QVBoxLayout" name="optimizersList_QVBoxLayout"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_9">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QLabel" name="lossFunction_label_2">
+                  <property name="text">
+                   <string>Loss Function:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="selectedLossFunc_QLineEdit">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QLineEdit{
+	color: black;
+}</string>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QScrollArea" name="scrollArea_4">
+                <property name="widgetResizable">
+                 <bool>true</bool>
+                </property>
+                <widget class="QWidget" name="scrollwidget_4">
+                 <property name="geometry">
+                  <rect>
+                   <x>0</x>
+                   <y>0</y>
+                   <width>454</width>
+                   <height>175</height>
+                  </rect>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_6">
+                  <item>
+                   <layout class="QVBoxLayout" name="lossFuncsList_QVBoxLayout"/>
+                  </item>
+                 </layout>
+                </widget>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_16">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout_2">
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_17">
+            <item>
              <widget class="QPushButton" name="submitParams_QPushButton">
               <property name="maximumSize">
                <size>
@@ -442,323 +430,89 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="Architecture">
+      <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Architecture</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="2,1">
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_3">
-            <item>
-             <widget class="QGroupBox" name="groupBox_3">
-              <property name="font">
-               <font>
-                <family>Siemens Sans</family>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="styleSheet">
-               <string notr="true"/>
-              </property>
-              <property name="title">
-               <string>Layer</string>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_13">
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout">
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_15">
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QComboBox" name="layer_QComboBox">
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <weight>75</weight>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">background-color: white;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QGroupBox" name="groupBox_2">
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <weight>75</weight>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="title">
-                      <string>Parameters</string>
-                     </property>
-                     <layout class="QHBoxLayout" name="horizontalLayout_2">
-                      <item>
-                       <layout class="QVBoxLayout" name="verticalLayout_18">
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_12">
-                          <item>
-                           <widget class="QLabel" name="label_10">
-                            <property name="font">
-                             <font>
-                              <family>Siemens Sans</family>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text">
-                             <string>No of Units</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="units_QLineEdit">
-                            <property name="font">
-                             <font>
-                              <family>Siemens Sans</family>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">background-color: white;</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_11">
-                          <item>
-                           <widget class="QLabel" name="label_6">
-                            <property name="font">
-                             <font>
-                              <family>Siemens Sans</family>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text">
-                             <string>Kernel Size</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="kernelSize_QLineEdit">
-                            <property name="font">
-                             <font>
-                              <family>Siemens Sans</family>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">background-color: white;</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_9">
-                          <item>
-                           <widget class="QLabel" name="label_8">
-                            <property name="font">
-                             <font>
-                              <family>Siemens Sans</family>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text">
-                             <string>No of Filters</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="filtersNum_QLineEdit">
-                            <property name="font">
-                             <font>
-                              <family>Siemens Sans</family>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">background-color: white;</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                        <item>
-                         <layout class="QHBoxLayout" name="horizontalLayout_10">
-                          <item>
-                           <widget class="QLabel" name="label_9">
-                            <property name="font">
-                             <font>
-                              <family>Siemens Sans</family>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="text">
-                             <string>Stride</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QLineEdit" name="stride_QLineEdit">
-                            <property name="font">
-                             <font>
-                              <family>Siemens Sans</family>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">background-color: white;</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QGroupBox" name="padding">
-                     <property name="maximumSize">
-                      <size>
-                       <width>200</width>
-                       <height>100</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <family>Siemens Sans</family>
-                       <weight>75</weight>
-                       <bold>true</bold>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true"/>
-                     </property>
-                     <property name="title">
-                      <string>Padding</string>
-                     </property>
-                     <layout class="QHBoxLayout" name="horizontalLayout_8">
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_3">
-                        <item>
-                         <widget class="QRadioButton" name="padding_Yes_QRadioButton">
-                          <property name="font">
-                           <font>
-                            <family>Siemens Sans</family>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>Yes</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QRadioButton" name="padding_No_QRadioButton">
-                          <property name="font">
-                           <font>
-                            <family>Siemens Sans</family>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
-                          <property name="text">
-                           <string>No</string>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <widget class="QTableView" name="tableView">
-                   <property name="font">
-                    <font>
-                     <family>Siemens Sans</family>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color: white;</string>
-                   </property>
-                   <property name="sizeAdjustPolicy">
-                    <enum>QAbstractScrollArea::AdjustToContents</enum>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <widget class="QScrollArea" name="scrollArea">
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="scrollwidget">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>628</width>
+               <height>506</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
               <item>
-               <widget class="QPushButton" name="submit_layer">
-                <property name="font">
-                 <font>
-                  <family>Siemens Sans</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="statusTip">
-                 <string>Press to submit dude</string>
-                </property>
-                <property name="whatsThis">
-                 <string>Press to submit layer above</string>
-                </property>
-                <property name="text">
-                 <string>Submit Layer</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="submit_arch">
-                <property name="font">
-                 <font>
-                  <family>Siemens Sans</family>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Submit Architecture</string>
-                </property>
-               </widget>
+               <layout class="QVBoxLayout" name="layersList_QVBoxLayout"/>
               </item>
              </layout>
-            </item>
-           </layout>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QScrollArea" name="scrollArea_2">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="scrollwidget_3">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>313</width>
+               <height>506</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_17">
+              <item>
+               <layout class="QVBoxLayout" name="addedLayers_QVBoxLayout"/>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_23">
+          <property name="spacing">
+           <number>7</number>
+          </property>
+          <property name="leftMargin">
+           <number>350</number>
+          </property>
+          <property name="topMargin">
+           <number>5</number>
+          </property>
+          <property name="rightMargin">
+           <number>350</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="submitArch_QPushButton">
+            <property name="font">
+             <font>
+              <family>Siemens Sans</family>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Submit Architecture</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -850,7 +604,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="generatePyModel_btn">
+           <widget class="QPushButton" name="generateFiles_QPushButton">
             <property name="font">
              <font>
               <family>Siemens Sans</family>
@@ -862,7 +616,7 @@
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generate pytorch using the parameters submitted&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="text">
-             <string>Generate Pytorch Model</string>
+             <string>Generate Pytorch Files</string>
             </property>
            </widget>
           </item>
@@ -891,91 +645,6 @@
             </property>
             <property name="text">
              <string>SystemC wrapper</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tab">
-       <attribute name="title">
-        <string>Layer Auto Extraction</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="2,1">
-          <item>
-           <widget class="QScrollArea" name="scrollArea">
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollwidget">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>628</width>
-               <height>506</height>
-              </rect>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_4">
-              <item>
-               <layout class="QVBoxLayout" name="layersList_QVBoxLayout"/>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-          <item>
-           <widget class="QScrollArea" name="scrollArea_2">
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollwidget_3">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>313</width>
-               <height>506</height>
-              </rect>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_17">
-              <item>
-               <layout class="QVBoxLayout" name="addedLayers_QVBoxLayout"/>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_23">
-          <property name="spacing">
-           <number>7</number>
-          </property>
-          <property name="leftMargin">
-           <number>350</number>
-          </property>
-          <property name="topMargin">
-           <number>5</number>
-          </property>
-          <property name="rightMargin">
-           <number>350</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="submitArch_QPushButton">
-            <property name="font">
-             <font>
-              <family>Siemens Sans</family>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Submit Architecture</string>
             </property>
            </widget>
           </item>
@@ -1013,18 +682,9 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>tableView_2</tabstop>
-  <tabstop>inputType_RGB_QRadioButton</tabstop>
-  <tabstop>inputType_grayScale_QRadioButton</tabstop>
-  <tabstop>Winograd</tabstop>
-  <tabstop>Standard</tabstop>
-  <tabstop>padding_Yes_QRadioButton</tabstop>
-  <tabstop>padding_No_QRadioButton</tabstop>
-  <tabstop>submit_arch</tabstop>
-  <tabstop>submit_layer</tabstop>
   <tabstop>codeSample</tabstop>
   <tabstop>generatedFiles</tabstop>
-  <tabstop>generatePyModel_btn</tabstop>
+  <tabstop>generateFiles_QPushButton</tabstop>
   <tabstop>trainPyModel_btn</tabstop>
   <tabstop>systemCWrapper_btn</tabstop>
  </tabstops>

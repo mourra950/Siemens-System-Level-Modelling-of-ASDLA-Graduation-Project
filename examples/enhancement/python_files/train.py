@@ -9,9 +9,8 @@ from model import CNN
 
 
 # initiallization
-LR = None # <--
-BATCH_SIZE = None # <--
-EPOCHS = None # <--
+BATCH_SIZE = 10
+EPOCHS = 50
 TRAIN_SPLIT = 0.75
 VAL_SPLIT = 0.15
 TEST_SPLIT = 0.1
@@ -22,8 +21,19 @@ train_dataset = mnist.MNIST(root='./train', train=True, download=True, transform
 test_dataset = mnist.MNIST(root='./test', train=False, download=True, transform=ToTensor())
 train_dataloader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 test_dataloader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
-opt = optim.None(model.parameters(), lr=LR) # <--
-lossFn = nn.None() # <--
+opt = optim.Adam(
+    model.parameters(), 
+    lr = 0.001,
+    betas = [0.9, 0.999],
+    eps = 1e-08,
+    weight_decay = 0,
+    amsgrad = False,
+)
+lossFn = nn.CrossEntropyLoss( 
+    ignore_index = -100,
+    reduction = "mean",
+    label_smoothing = 0.0,
+)
 
 for e in range(0, EPOCHS):
     # set the model in training mode
