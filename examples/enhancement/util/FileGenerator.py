@@ -1,5 +1,13 @@
 from abc import ABC
 import json
+import sys
+import traceback
+import os
+
+stack = traceback.extract_stack()
+base_dir = os.path.dirname(stack[0].filename)
+absolute_path = os.path.normpath(os.path.join(base_dir, '..'))
+sys.path.append(absolute_path)
 
 from config.paths import *
 from util.TemplateRenderer import convert_jinja_to_code
@@ -30,16 +38,13 @@ class FileGenerator(ABC):
             'layers': self.layers
         })
 
-    # def generate_train(self):
-    #     convert_jinja_to_code(train_jinja_path, train_py_path, {
-    #         'learning_rate': self.learning_rate,
-    #         'batch_size': self.batch_size,
-    #         'num_epochs': self.num_epochs,
-    #         'optimizer': self.optimizer,
-    #         'loss_func': self.loss_fun
-    #     })
+    def generate_train(self, train_jinja_path, train_py_path):
+        convert_jinja_to_code(train_jinja_path, train_py_path, self.misc_params)
 
-    def BuildModel(self):
-        self.generate_model()
-        # if self.train == True:
-        #     self.generate_train()
+
+if __name__ == '__main__':
+    generator = FileGenerator('../json_files/arch.json')
+    generator.generate_train(
+        '../jinja_templates/train.py.jinja',
+        '../python_files/train.py'
+    )
