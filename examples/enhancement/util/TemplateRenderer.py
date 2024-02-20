@@ -1,11 +1,12 @@
 from jinja2 import Environment, FileSystemLoader
-import os, traceback
+import os
 
-def convert_jinja_to_code(template_relative_path: str, output_relative_path: str, parameters: dict):
+from util.PathManager import to_absolute
+
+
+def convert_jinja_to_code(template_relative_path: str, output_relative_path: str, parameters: dict) -> None:
     # get the template path
-    stack = traceback.extract_stack()
-    base_dir = os.path.dirname(stack[-2].filename)
-    template_absolute_path = os.path.normpath(os.path.join(base_dir, template_relative_path))
+    template_absolute_path = to_absolute(template_relative_path)
     template_filename = os.path.basename(template_absolute_path)
     template_dir = os.path.dirname(template_absolute_path)
 
@@ -17,7 +18,7 @@ def convert_jinja_to_code(template_relative_path: str, output_relative_path: str
     train_code = template.render(parameters)
 
     # get the output path
-    output_absolute_path = os.path.normpath(os.path.join(base_dir, output_relative_path))
+    output_absolute_path = to_absolute(output_relative_path)
 
     # save the rendered template as a .py file
     with open(output_absolute_path, 'w') as f:

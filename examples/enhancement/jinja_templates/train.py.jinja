@@ -9,9 +9,8 @@ from model import CNN
 
 
 # initiallization
-LR = {{learning_rate}} # <--
-BATCH_SIZE = {{batch_size}} # <--
-EPOCHS = {{num_epochs}} # <--
+BATCH_SIZE = {{batch_size}}
+EPOCHS = {{num_epochs}}
 TRAIN_SPLIT = 0.75
 VAL_SPLIT = 0.15
 TEST_SPLIT = 0.1
@@ -22,8 +21,23 @@ train_dataset = mnist.MNIST(root='./train', train=True, download=True, transform
 test_dataset = mnist.MNIST(root='./test', train=False, download=True, transform=ToTensor())
 train_dataloader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 test_dataloader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
-opt = optim.{{optimizer}}(model.parameters(), lr=LR) # <--
-lossFn = nn.{{loss_func}}() # <--
+opt = optim.{{optimizer.type}}(
+    model.parameters(), {% for param in optimizer.params %}
+    {%- if optimizer.params[param] is string %}
+    {{param}} = {{optimizer.params[param]|tojson}},
+    {%- else %}
+    {{param}} = {{optimizer.params[param]}},
+    {%- endif -%}
+    {%- endfor %}
+)
+lossFn = nn.{{loss_func.type}}( {% for param in loss_func.params %}
+    {%- if loss_func.params[param] is string %}
+    {{param}} = {{loss_func.params[param]|tojson}},
+    {%- else %}
+    {{param}} = {{loss_func.params[param]}},
+    {%- endif -%}
+    {%- endfor %}
+)
 
 for e in range(0, EPOCHS):
     # set the model in training mode

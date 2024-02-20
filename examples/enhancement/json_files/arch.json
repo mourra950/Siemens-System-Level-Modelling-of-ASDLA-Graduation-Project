@@ -3,7 +3,7 @@
     {
       "type": "Conv2d",
       "params": {
-        "out_channels": 128,
+        "out_channels": 64,
         "kernel_size": 3,
         "stride": 1,
         "padding": 0,
@@ -23,6 +23,28 @@
       "name": "relu_1"
     },
     {
+      "type": "Conv2d",
+      "params": {
+        "out_channels": 128,
+        "kernel_size": 3,
+        "stride": 1,
+        "padding": 0,
+        "dilation": 1,
+        "groups": 1,
+        "bias": true,
+        "padding_mode": "zeros",
+        "in_channels": 64
+      },
+      "name": "conv2d_2"
+    },
+    {
+      "type": "ReLU",
+      "params": {
+        "inplace": false
+      },
+      "name": "relu_2"
+    },
+    {
       "type": "Flatten",
       "params": {
         "start_dim": 0,
@@ -35,7 +57,7 @@
       "params": {
         "out_features": 100,
         "bias": true,
-        "in_features": 86528
+        "in_features": 73728
       },
       "name": "linear_1"
     },
@@ -54,7 +76,27 @@
     "height": 28,
     "channels": 3,
     "batch_size": 10,
-    "learning_rate": 0.01,
-    "num_epochs": 50
+    "num_epochs": 50,
+    "optimizer": {
+      "type": "Adam",
+      "params": {
+        "lr": 0.001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0,
+        "amsgrad": false
+      }
+    },
+    "loss_func": {
+      "type": "CrossEntropyLoss",
+      "params": {
+        "ignore_index": -100,
+        "reduction": "mean",
+        "label_smoothing": 0.0
+      }
+    }
   }
 }
