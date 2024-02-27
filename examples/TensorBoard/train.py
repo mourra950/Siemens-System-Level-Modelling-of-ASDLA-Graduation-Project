@@ -365,6 +365,7 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 from torchvision.datasets import mnist
 from torchvision.transforms import ToTensor
+import webbrowser
 from torch.utils.tensorboard import SummaryWriter
 import torch.nn.functional as F
 import torchvision
@@ -409,6 +410,7 @@ LR = 0.001  # Set your learning rate
 BATCH_SIZE = 64  # Set your batch size
 EPOCHS = 10  # Set the number of epochs
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+import threading
 
 # Create the model, dataloaders, optimizer, and loss function
 model = CNN()
@@ -428,7 +430,6 @@ lossFn = nn.CrossEntropyLoss()
 
 # TensorBoard setup
 writer = SummaryWriter()
-
 print("Training started...")
 # Training loop
 for e in range(0, EPOCHS):

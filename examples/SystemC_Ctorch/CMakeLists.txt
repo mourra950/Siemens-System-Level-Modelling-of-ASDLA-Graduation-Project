@@ -11,12 +11,8 @@ include_directories( ${OpenCV_INCLUDE_DIRS} ${Torch_INCLUDE_DIRS} ${SystemCLangu
 
 # Add your source files and cpp files needed
 add_executable(
-     Final_SystemC 
-	Final_SystemC.cpp 
-	Initiator.cpp
-     InitiatorThread.cpp
-     Target.cpp
-     extension.cpp
+     Final_SystemC Final_SystemC.cpp Initiator.cpp 
+     InitiatorThread.cpp Target.cpp extension.cpp
      )
 
 set (CMAKE_CXX_STANDARD 17 ${SystemC_CXX_STANDARD} CACHE STRING
@@ -35,13 +31,7 @@ PUBLIC ${OpenCV_LIBS}
 PUBLIC "${TORCH_LIBRARIES}" 
 ${SystemC_LIBRARIES}
 PRIVATE SystemC::systemc
-
 )
-
-
-
-
-
 if (MSVC)
   file(GLOB TORCH_DLLS "${TORCH_INSTALL_PREFIX}/lib/*.dll")
   add_custom_command(TARGET Final_SystemC
