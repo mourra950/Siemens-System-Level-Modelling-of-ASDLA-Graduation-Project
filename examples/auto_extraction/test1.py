@@ -29,8 +29,9 @@ class MainUI(QtCore.QObject):
 
         try:
             self.t = extract()
-
+            print(self.t)
             for i in self.t:
+                print(i)
                 button = QPushButton(i)
                 button.clicked.connect(
                     lambda func=self.the_button_was_clicked, x=i: func(x)
