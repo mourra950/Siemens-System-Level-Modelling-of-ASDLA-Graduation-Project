@@ -1,7 +1,8 @@
 {
     "cmake.sourceDirectory": "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/examples/SystemC",
-    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoImportCompletions": false,
     "python.analysis.extraPaths": [
-        "./old src"
-    ]
+        "./src/",
+    ],
+    "python.analysis.typeCheckingMode": "off"
 }

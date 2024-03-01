@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
     QDialog,
     QHBoxLayout,
 )
+from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
 import torch.nn.modules as nn
@@ -22,24 +23,13 @@ class MainUI(QtCore.QObject):
     def __init__(self):
         super().__init__()
         self.path = ""
-        self.ui = loader.load(os.path.join(basedir, "test.ui"), None)
-        self.ui.setWindowTitle("Testing generating scripts")
+        self.ui = loader.load(os.path.join(basedir, "mainwindow.ui"), None)
+        self.ui.setWindowTitle("TensorBoard test")
 
-        self.Vbox = self.ui.findChild(QVBoxLayout, "Scrollbox")
-
-        try:
-            self.t = extract()
-            print(self.t)
-            for i in self.t:
-                print(i)
-                button = QPushButton(i)
-                button.clicked.connect(
-                    lambda func=self.the_button_was_clicked, x=i: func(x)
-                )
-                self.Vbox.addWidget(button)
-
-        except:
-            print("UNO")
+        self.Vbox = self.ui.findChild(QVBoxLayout, "weblay")
+        t = QWebEngineView()
+        t.load(QtCore.QUrl("http://localhost:6006/"))
+        self.Vbox.addWidget(t)
 
         self.ui.show()
 
@@ -107,32 +97,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-def print_dataset_arguments(dataset_class):
-    print(f"{dataset_class.__name__} dataset arguments:")
-    for name, parameter in inspect.getmembers(object=dataset_class):
-        if name != "self":
-            print(f"{name}: {parameter}")
-
-
-# # Example: CIFAR10
-# # print_dataset_arguments(CIFAR10)
-# print("===================================")
-# for i in MNIST.__dict__:
-#     print(i)
-#     print(MNIST.__dict__[i])
-# print("===================================")
-
-# for name, parameter in inspect.signature(MNIST.__init__).parameters.items():
-#     print(name)
-
-# # Example: MNIST
-# # print_dataset_arguments(MNIST)
-# print("===================================")
-
-# print(MNIST.__dict__['__parameters__'])
-# # Example: Convulation
-
-# # print_dataset_arguments(Conv1d)
-# print("===================================")
