@@ -10,12 +10,11 @@ from PySide6.QtWidgets import (
     QCheckBox,
 )
 import inspect
-import types
 
 
 class LayerDialog(QDialog):
     def __init__(self, parent=None, layers=None, x=None):
-        super().__init__(parent)
+        # super().__init__(parent)
         self.d = {}
         self.setWindowTitle(x)
         self.a = 6
@@ -70,3 +69,13 @@ class LayerDialog(QDialog):
             else:
                 print("default")
         super().accept()
+    def get_widget_data(self, widget):
+        if isinstance(widget, QCheckBox):
+            param_value = widget.isChecked()
+        else:
+            param_value = widget.text().strip()
+            try:
+                param_value = eval(param_value)
+            except:
+                pass
+        return param_value
