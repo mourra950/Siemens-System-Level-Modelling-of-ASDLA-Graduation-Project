@@ -2,7 +2,7 @@ import inspect
 import torch.nn.modules as nn
 import torch.optim as optim
 import types
-
+import residual
 
 unnecessary_layer_params = [
     'in_channels',
@@ -13,6 +13,20 @@ unnecessary_optimizer_params = [
     'params'
 ]
 
+def extract_res_block():
+    res_params = [{
+        'name': "in_channels",
+        'defaultvalue': 0,
+        'type': int
+    },
+    {
+        'name': "out_channels",
+        'defaultvalue': 0,
+        'type': int
+    }
+    ]
+    res_block_dict = {"Residual Block":res_params}
+    return res_block_dict
 
 def extract_torch_layers():
     torch_layers_names = dir(nn)
@@ -55,6 +69,7 @@ def extract_torch_layers():
                 torch_layers_dict[obj.__name__] = params_list
 
     return torch_layers_dict
+
 
 
 def extract_torch_lossfunctions():

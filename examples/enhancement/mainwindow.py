@@ -9,6 +9,7 @@ from config.paths import *
 from util.PathManager import to_absolute
 from util.AutoExtraction import *
 from util.FileGenerator import FileGenerator
+from resbuild import ResBuildWindow
 
 
 class MainWindow(QMainWindow):
@@ -26,6 +27,8 @@ class MainWindow(QMainWindow):
         }
         self.selected_optimizer = dict()
         self.selected_lossfunc = dict()
+        
+        self.res_first_time = True
 
         self.inputWidth_QLineEdit = self.findChild(QLineEdit, 'inputWidth_QLineEdit')
         self.inputHeight_QLineEdit = self.findChild(QLineEdit, 'inputHeight_QLineEdit')
@@ -48,6 +51,7 @@ class MainWindow(QMainWindow):
         self.generateFiles_QPushButton = self.findChild(QPushButton, 'generateFiles_QPushButton')
 
         self.torch_layers = extract_torch_layers()
+        self.torch_layers.update(extract_res_block())
         self.torch_optimizers = extract_torch_optimizers()
         self.torch_lossfuncs = extract_torch_lossfunctions()
 
@@ -79,43 +83,50 @@ class MainWindow(QMainWindow):
 
 
     def on_torch_func_clicked(self, func_name, torch_funcs, on_submit_func):
-        paramsWindow_QDialog = QDialog()
-        paramsWindow_QDialog.setMinimumWidth(330)
-        allParamsColumn_QVBoxLayout = QVBoxLayout()
-        params_value_widgets = []
-        params_names = []
+        if func_name == "Residual Block" and self.res_first_time:
+            print(func_name)
+            print("First Time")
+            resBuild_QWindow = ResBuildWindow()
+            resBuild_QWindow.show()
+            self.res_first_time = False
+        else:
+            paramsWindow_QDialog = QDialog()
+            paramsWindow_QDialog.setMinimumWidth(330)
+            allParamsColumn_QVBoxLayout = QVBoxLayout()
+            params_value_widgets = []
+            params_names = []
 
-        for param in torch_funcs[func_name]:
-            if type(param['defaultvalue']) == bool:
-                paramValue_QWidget = QCheckBox()
-                paramValue_QWidget.setChecked(param['defaultvalue'])
-            else:
-                paramValue_QWidget = QLineEdit()
-                if (
-                    param['defaultvalue'] != inspect._empty
-                    and
-                    param['defaultvalue'] != None
-                ):
-                    paramValue_QWidget.setText(str(param['defaultvalue']))
+            for param in torch_funcs[func_name]:
+                if type(param['defaultvalue']) == bool:
+                    paramValue_QWidget = QCheckBox()
+                    paramValue_QWidget.setChecked(param['defaultvalue'])
+                else:
+                    paramValue_QWidget = QLineEdit()
+                    if (
+                        param['defaultvalue'] != inspect._empty
+                        and
+                        param['defaultvalue'] != None
+                    ):
+                        paramValue_QWidget.setText(str(param['defaultvalue']))
 
-            params_names.append(param['name'])
-            params_value_widgets.append(paramValue_QWidget)
+                params_names.append(param['name'])
+                params_value_widgets.append(paramValue_QWidget)
 
-            paramRow_QHBoxLayout = QHBoxLayout()
-            paramRow_QHBoxLayout.addWidget(QLabel(f'{param["name"]}'))
-            paramRow_QHBoxLayout.addWidget(paramValue_QWidget)
-            allParamsColumn_QVBoxLayout.addLayout(paramRow_QHBoxLayout)
+                paramRow_QHBoxLayout = QHBoxLayout()
+                paramRow_QHBoxLayout.addWidget(QLabel(f'{param["name"]}'))
+                paramRow_QHBoxLayout.addWidget(paramValue_QWidget)
+                allParamsColumn_QVBoxLayout.addLayout(paramRow_QHBoxLayout)
 
-        allParamsColumn_QVBoxLayout.addWidget(QLabel())
-        submitLayer_QPushButton = QPushButton('Submit Layer')
-        submitLayer_QPushButton.clicked.connect(
-            lambda ch, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog \
-                : on_submit_func(i,j,k,l)
-        )
-        allParamsColumn_QVBoxLayout.addWidget(submitLayer_QPushButton)
-        paramsWindow_QDialog.setLayout(allParamsColumn_QVBoxLayout)
-        paramsWindow_QDialog.setWindowTitle(f"{func_name}")
-        paramsWindow_QDialog.exec()
+            allParamsColumn_QVBoxLayout.addWidget(QLabel())
+            submitLayer_QPushButton = QPushButton('Submit Layer')
+            submitLayer_QPushButton.clicked.connect(
+                lambda ch, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog \
+                    : on_submit_func(i,j,k,l)
+            )
+            allParamsColumn_QVBoxLayout.addWidget(submitLayer_QPushButton)
+            paramsWindow_QDialog.setLayout(allParamsColumn_QVBoxLayout)
+            paramsWindow_QDialog.setWindowTitle(f"{func_name}")
+            paramsWindow_QDialog.exec()
 
 
     def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog):
