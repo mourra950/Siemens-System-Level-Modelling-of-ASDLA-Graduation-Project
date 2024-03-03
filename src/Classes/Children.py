@@ -12,7 +12,9 @@ from PySide6 import QtCore
 import inspect
 
 
-class Children:
+class Childreen:
+    def __init__(self) -> None:
+        pass
     def find_children(self):
         self.qt_layers_scroll_box = self.ui.findChild(QVBoxLayout, "Scrollbox")
         self.qt_layersList_QVBoxLayout = self.ui.findChild(

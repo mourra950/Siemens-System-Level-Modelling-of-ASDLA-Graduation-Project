@@ -8,8 +8,9 @@ from PySide6.QtUiTools import QUiLoader
 #import classes and different files here
 from Qt.dialogue import LayerDialog
 from Classes.Initializer import Initializer
-from Classes.SystemEnviroment import SysEnv
 from utils.AutoExtraction import AutoExtraction
+from paths.SystemPaths import SystemPaths
+
 
 loader = QUiLoader()
 
@@ -22,13 +23,13 @@ def main():
     #     app.setStyleSheet(_style)
     app.exec()
     
-class MainUI(QtCore.QObject,SysEnv,Initializer,AutoExtraction):
+class MainUI(QtCore.QObject,SystemPaths,Initializer,AutoExtraction):
     def __init__(self):
         self.loader = loader
         # LayerDialog.__init__(self)
         QtCore.QObject.__init__(self)
         AutoExtraction.__init__(self)
-        SysEnv.__init__(self)
+        SystemPaths.__init__(self)
         Initializer.__init__(self)
         self.ui.show()
         

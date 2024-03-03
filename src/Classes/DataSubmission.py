@@ -1,6 +1,7 @@
 import json
 
 
+
 class DataSubmission:
     def on_submit_params_clicked(self):
         self.architecture['misc_params']['width'] = int(
@@ -19,10 +20,10 @@ class DataSubmission:
         self.architecture['misc_params']['optimizer'] = self.selected_optimizer
         self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
 
-        with open(to_absolute(self.arch_json_path), 'w') as f:
+        with open(self.arch_json_path, 'w') as f:
             f.write(json.dumps(self.architecture, indent=2))
 
     def on_submit_arch_clicked(self):
         self.validate_and_correct_layers(self.architecture)
-        with open(to_absolute(self.arch_json_path), 'w') as f:
+        with open(self.arch_json_path, 'w') as f:
             f.write(json.dumps(self.architecture, indent=2))

@@ -4,7 +4,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QLineEdit,
     QHBoxLayout, QLabel, QCheckBox, QDialog,
-    QFrame, QStyle
+    QFrame
 )
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
@@ -30,24 +30,24 @@ class LayerNodeManager:
 
         delete_QPushButton = QPushButton()
         delete_QPushButton.setMaximumWidth(30)
-        delete_QPushButton.setIcon(QStyle(to_absolute(self.delete_icon_path)))
+        delete_QPushButton.setIcon(QIcon(self.delete_icon_path))
         delete_QPushButton.clicked.connect(
-            lambda ch, i=border_QFrame:
-            self.on_delete_layer_clicked(i)
+            lambda func=self.on_delete_layer_clicked, i=border_QFrame:
+            func(i)
         )
         up_QPushButton = QPushButton()
         up_QPushButton.setMaximumWidth(28)
-        up_QPushButton.setIcon(QIcon(to_absolute(self.up_icon_path)))
+        up_QPushButton.setIcon(QIcon(self.up_icon_path))
         up_QPushButton.clicked.connect(
-            lambda ch, i=border_QFrame:
-            self.on_move_buttons_clicked(i, 'up')
+            lambda func=self.on_move_buttons_clicked, i=border_QFrame:
+            func(i, 'up')
         )
         down_QPushButton = QPushButton()
         down_QPushButton.setMaximumWidth(28)
-        down_QPushButton.setIcon(QIcon(to_absolute(self.down_icon_path)))
+        down_QPushButton.setIcon(QIcon(self.down_icon_path))
         down_QPushButton.clicked.connect(
-            lambda ch, i=border_QFrame:
-            self.on_move_buttons_clicked(i, 'down')
+            lambda  func=self.on_move_buttons_clicked,  i=border_QFrame:
+            func(i, 'down')
         )
 
         moveableArrows_QVBoxLayout = QVBoxLayout()

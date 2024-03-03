@@ -10,14 +10,17 @@ from PySide6.QtWidgets import (
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
 import inspect
+from Classes.Children import Childreen
+from Classes.DataSubmission import DataSubmission
+from Classes.Filling import FillingQt
+from Classes.Validator import Validator
+sys.path.append("./")
 
-
-class Initializer:
+class Initializer(Childreen,DataSubmission,FillingQt,Validator):
     def __init__(self) -> None:
         print("Initializer")
 
-        self.ui = self.loader.load(os.path.normpath(
-            os.path.join(self.publicdir, "./GUI/mainwindow.ui")), None)
+        self.ui = self.loader.load(self.GUI_path, None)
         self.ui.setWindowTitle("The Awesome Project")
 
         # search for qt elements
@@ -82,7 +85,7 @@ class Initializer:
                 paramValue_QWidget = QCheckBox()
                 paramValue_QWidget.setChecked(param['defaultvalue'])
             elif type(param['defaultvalue']) == int:
-                paramValue_QWidget = QSpinBox(min=-1000, maximum=1000)
+                paramValue_QWidget = QSpinBox( maximum=1000)
                 paramValue_QWidget.setValue(0)
             else:
                 paramValue_QWidget = QLineEdit()
