@@ -14,23 +14,30 @@ from Classes.Children import Childreen
 from Classes.DataSubmission import DataSubmission
 from Classes.Filling import FillingQt
 from Classes.Validator import Validator
+from Classes.LayerNodeManager import LayerNodeManager
+from utils.FileGenerator import FileGenerator
+from Classes.Conn import Connections
+from Classes.Controller import Controller
+
+
 sys.path.append("./")
 
-class Initializer(Childreen,DataSubmission,FillingQt,Validator):
+class Initializer(Childreen,DataSubmission,FillingQt,Validator,LayerNodeManager,FileGenerator,Controller,Connections):
     def __init__(self) -> None:
         print("Initializer")
-
+        LayerNodeManager.__init__(self)
         self.ui = self.loader.load(self.GUI_path, None)
         self.ui.setWindowTitle("The Awesome Project")
 
-        # search for qt elements
         self.find_children()
-        # using extracted data start filling element with necessary information
+        
         self.fill_placeholders()
+        Connections.__init__(self)
 
         self.ui.show()
 
     def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog):
+        print("Submit layer")
         layer = {
             'type': layer_type,
             'params': dict()
@@ -118,6 +125,8 @@ class Initializer(Childreen,DataSubmission,FillingQt,Validator):
     def get_widget_data(self, widget):
         if isinstance(widget, QCheckBox):
             param_value = widget.isChecked()
+        if isinstance(widget, QSpinBox):
+            param_value = widget.value()
         else:
             param_value = widget.text().strip()
             try:

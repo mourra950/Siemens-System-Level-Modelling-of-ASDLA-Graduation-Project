@@ -12,6 +12,15 @@ from PySide6.QtGui import QIcon
 
 
 class LayerNodeManager:
+    def __init__(self) -> None:
+        self.architecture = {
+            'layers': [],
+            'misc_params': {
+                'width': 1,
+                'height': 1,
+                'channels': 1,
+            }
+        }
     def create_layer_node(self, layer, index):
         addedLayerRow_QHBoxLayout = QHBoxLayout()
         border_QFrame = QFrame()
@@ -59,26 +68,26 @@ class LayerNodeManager:
         addedLayerRow_QHBoxLayout.addWidget(delete_QPushButton)
 
         if index == -1:
-            self.addedLayers_QVBoxLayout.addWidget(border_QFrame)
+            self.qt_addedLayers_QVBoxLayout.addWidget(border_QFrame)
             self.architecture['layers'].append(layer)
         else:
-            self.addedLayers_QVBoxLayout.insertWidget(index, border_QFrame)
+            self.qt_addedLayers_QVBoxLayout.insertWidget(index, border_QFrame)
             self.architecture['layers'].insert(index, layer)
 
     def on_delete_layer_clicked(self, border_QFrame):
         for i in range(len(self.architecture['layers'])):
-            if border_QFrame == self.addedLayers_QVBoxLayout.itemAt(i).widget():
-                layer_widget = self.addedLayers_QVBoxLayout.itemAt(i).widget()
+            if border_QFrame == self.qt_addedLayers_QVBoxLayout.itemAt(i).widget():
+                layer_widget = self.qt_addedLayers_QVBoxLayout.itemAt(i).widget()
 
                 self.architecture['layers'].pop(i)
                 layer_widget.deleteLater()
-                self.addedLayers_QVBoxLayout.removeWidget(layer_widget)
+                self.qt_addedLayers_QVBoxLayout.removeWidget(layer_widget)
                 break
 
     def on_move_buttons_clicked(self, border_QFrame, direction):
         size = len(self.architecture['layers'])
         for i in range(size):
-            if border_QFrame == self.addedLayers_QVBoxLayout.itemAt(i).widget():
+            if border_QFrame == self.qt_addedLayers_QVBoxLayout.itemAt(i).widget():
                 if (
                     (i == 0 and direction == 'up')
                     or
@@ -86,7 +95,7 @@ class LayerNodeManager:
                 ):
                     break
 
-                layer_widget = self.addedLayers_QVBoxLayout.itemAt(i).widget()
+                layer_widget = self.qt_addedLayers_QVBoxLayout.itemAt(i).widget()
                 if direction == 'up':
                     new_idx = i-1
                 elif direction == 'down':
@@ -95,7 +104,7 @@ class LayerNodeManager:
                 layer = self.architecture['layers'].pop(i)
                 self.architecture['layers'].insert(new_idx, layer)
 
-                self.addedLayers_QVBoxLayout.removeWidget(layer_widget)
-                self.addedLayers_QVBoxLayout.insertWidget(
+                self.qt_addedLayers_QVBoxLayout.removeWidget(layer_widget)
+                self.qt_addedLayers_QVBoxLayout.insertWidget(
                     new_idx, layer_widget)
                 break
