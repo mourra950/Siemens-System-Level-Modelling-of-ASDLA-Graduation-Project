@@ -36,7 +36,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -399,7 +399,7 @@
              <number>0</number>
             </property>
             <item row="0" column="0">
-             <widget class="QPushButton" name="submit">
+             <widget class="QPushButton" name="submitParams_QPushButton">
               <property name="maximumSize">
                <size>
                 <width>600</width>
@@ -520,7 +520,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QPushButton" name="Arch">
+               <widget class="QPushButton" name="submitArch_QPushButton">
                 <property name="font">
                  <font>
                   <family>Siemens Sans</family>
@@ -624,7 +624,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="generatePyModel_btn">
+           <widget class="QPushButton" name="generateFiles_QPushButton">
             <property name="font">
              <font>
               <family>Siemens Sans</family>
@@ -699,10 +699,10 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>Arch</tabstop>
+  <tabstop>submitArch_QPushButton</tabstop>
   <tabstop>codeSample</tabstop>
   <tabstop>generatedFiles</tabstop>
-  <tabstop>generatePyModel_btn</tabstop>
+  <tabstop>generateFiles_QPushButton</tabstop>
   <tabstop>trainPyModel_btn</tabstop>
   <tabstop>systemCWrapper_btn</tabstop>
  </tabstops>
