@@ -36,7 +36,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -666,6 +666,19 @@
            </widget>
           </item>
          </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Tensorboard">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tensorboard&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <attribute name="title">
+        <string>Tensorboard</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_17">
+        <item>
+         <layout class="QVBoxLayout" name="TensorView"/>
         </item>
        </layout>
       </widget>
