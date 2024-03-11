@@ -195,6 +195,7 @@ class ResBuildWindow(QMainWindow):
         # self.validate_and_correct_layers()
         with open(to_absolute(res_block_json_path), 'w') as f:
             f.write(json.dumps(self.architecture, indent=2))
+        self.close()
 
 
     # def validate_and_correct_layers(self):
