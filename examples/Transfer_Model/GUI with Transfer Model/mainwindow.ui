@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>745</width>
-    <height>488</height>
+    <width>1143</width>
+    <height>756</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,6 +26,7 @@
       <property name="font">
        <font>
         <family>Siemens Sans</family>
+        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -49,6 +50,7 @@
            <font>
             <family>Siemens Sans</family>
             <pointsize>14</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -293,8 +295,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>338</width>
-                       <height>83</height>
+                       <width>98</width>
+                       <height>28</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -357,8 +359,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>338</width>
-                       <height>82</height>
+                       <width>98</width>
+                       <height>28</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -399,7 +401,7 @@
              <number>0</number>
             </property>
             <item row="0" column="0">
-             <widget class="QPushButton" name="submitParams_QPushButton">
+             <widget class="QPushButton" name="submit">
               <property name="maximumSize">
                <size>
                 <width>600</width>
@@ -409,6 +411,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -446,6 +449,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -476,8 +480,8 @@
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>332</width>
-                        <height>307</height>
+                        <width>531</width>
+                        <height>558</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -500,8 +504,8 @@
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>333</width>
-                      <height>309</height>
+                      <width>532</width>
+                      <height>560</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -520,10 +524,11 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QPushButton" name="submitArch_QPushButton">
+               <widget class="QPushButton" name="Arch">
                 <property name="font">
                  <font>
                   <family>Siemens Sans</family>
+                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
@@ -560,6 +565,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -590,6 +596,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -624,10 +631,11 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QPushButton" name="generateFiles_QPushButton">
+           <widget class="QPushButton" name="generatePyModel_btn">
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -644,6 +652,7 @@
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -657,6 +666,7 @@
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -669,18 +679,145 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="Tensorboard">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tensorboard&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
+      <widget class="QWidget" name="TransferModel">
        <attribute name="title">
-        <string>Tensorboard</string>
+        <string>Transfer Model</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_17">
-        <item>
-         <layout class="QVBoxLayout" name="TensorView"/>
-        </item>
-       </layout>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>1097</width>
+          <height>600</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Siemens Sans</family>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="title">
+         <string>Layers</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_17">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_18">
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QScrollArea" name="scrollArea_3">
+               <property name="widgetResizable">
+                <bool>true</bool>
+               </property>
+               <widget class="QWidget" name="scrollAreaWidgetContents_3">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>531</width>
+                  <height>524</height>
+                 </rect>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_19">
+                 <item>
+                  <layout class="QVBoxLayout" name="layersList_QVBoxLayout_2"/>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QScrollArea" name="scrollArea_4">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_4">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>532</width>
+                <height>526</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_23">
+               <item>
+                <layout class="QVBoxLayout" name="addedLayers_QVBoxLayout_2"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="Arch_2">
+           <property name="font">
+            <font>
+             <family>Siemens Sans</family>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Submit Architecture</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QLabel" name="inputModelLabel_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>91</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Input Model</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="inputModelComboBox_1">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>0</y>
+          <width>411</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>-1</y>
+          <width>1101</width>
+          <height>651</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -692,8 +829,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>745</width>
-     <height>22</height>
+     <width>1143</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuProgram">
@@ -712,10 +849,10 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>submitArch_QPushButton</tabstop>
+  <tabstop>Arch</tabstop>
   <tabstop>codeSample</tabstop>
   <tabstop>generatedFiles</tabstop>
-  <tabstop>generateFiles_QPushButton</tabstop>
+  <tabstop>generatePyModel_btn</tabstop>
   <tabstop>trainPyModel_btn</tabstop>
   <tabstop>systemCWrapper_btn</tabstop>
  </tabstops>
