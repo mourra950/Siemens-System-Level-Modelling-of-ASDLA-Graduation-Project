@@ -19,10 +19,11 @@ from utils.FileGenerator import FileGenerator
 from Classes.Conn import Connections
 from Classes.Controller import Controller
 from Classes.Tensorboard import TensorView
+from Classes.ResNet.resbuild import ResBuildWindow
 
 sys.path.append("./")
 
-class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,FileGenerator,Controller,Connections,TensorView):
+class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,FileGenerator,Controller,Connections,TensorView,ResBuildWindow):
     def __init__(self) -> None:
         print("Initializer")
         LayerNodeManager.__init__(self)
@@ -32,10 +33,12 @@ class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,F
         self.find_children()
         
         self.fill_placeholders()
+        ResBuildWindow.__init__(self)
+        
         Connections.__init__(self)
         TensorView.__init__(self)
-
-        self.ui.show()
+        self.ResCreation.show()
+        # self.ui.show()
 
     def get_widget_data(self, widget):
         if isinstance(widget, QCheckBox):
