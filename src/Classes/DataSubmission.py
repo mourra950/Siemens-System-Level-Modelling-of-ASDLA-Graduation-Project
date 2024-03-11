@@ -31,3 +31,17 @@ class DataSubmission:
         #et2aked eno beycareate
         with open(self.arch_json_path, 'w') as f:
             f.write(json.dumps(self.architecture, indent=2))
+    def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog):
+        print("Submit layer")
+        layer = {
+            'type': layer_type,
+            'params': dict()
+        }
+        for i in range(len(params_value_widgets)):
+            param_value = self.get_widget_data(params_value_widgets[i])
+
+            if param_value != '':
+                layer['params'][params_names[i]] = param_value
+
+        self.create_layer_node(layer, -1)
+        paramsWindow_QDialog.close()
