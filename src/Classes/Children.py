@@ -12,7 +12,7 @@ from PySide6 import QtCore
 import inspect
 
 
-class Childreen:
+class Children:
     def __init__(self) -> None:
         pass
     def find_children(self):
