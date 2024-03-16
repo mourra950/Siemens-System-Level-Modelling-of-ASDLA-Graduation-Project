@@ -1,25 +1,18 @@
 {
   "layers": [
     {
+      "type": "AdaptiveMaxPool2d",
+      "params": {
+        "output_size": 50
+      },
+      "name": "adaptivemaxpool2d_1"
+    },
+    {
       "type": "AdaptiveAvgPool2d",
       "params": {
-        "output_size": 1
+        "output_size": 5
       },
       "name": "adaptiveavgpool2d_1"
-    },
-    {
-      "type": "AlphaDropout",
-      "params": {
-        "p": 0.5
-      },
-      "name": "alphadropout_1"
-    },
-    {
-      "type": "AdaptiveAvgPool2d",
-      "params": {
-        "output_size": 1
-      },
-      "name": "adaptiveavgpool2d_2"
     }
   ],
   "misc_params": {

@@ -3,6 +3,7 @@ import inspect
 import torch.nn.modules as nn
 import torch.optim as optim
 import types
+import copy
 
 class AutoExtraction:
 
@@ -34,7 +35,10 @@ class AutoExtraction:
         ]
         res_block_dict = {"Residual Block":res_params}
         self.LAYERS.update(res_block_dict)
-
+        self.LAYERS_WITHOUT_RES = copy.deepcopy(self.LAYERS)
+        self.LAYERS_WITHOUT_RES.pop("Residual Block")
+        
+        
     def extract_torch_layers(self) -> dict:
         torch_layers_names = dir(nn)
         torch_layers_dict = dict()
@@ -70,6 +74,8 @@ class AutoExtraction:
                     torch_layers_dict[obj.__name__] = params_list
 
         self.LAYERS = torch_layers_dict
+        #for Residual blocks
+        
 
     def extract_torch_lossfunctions(self):
         torch_layers_names = dir(nn)

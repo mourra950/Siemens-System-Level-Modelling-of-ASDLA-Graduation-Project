@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
 
 class DataSubmission:
     def on_submit_params_clicked(self):
-        print("ana weselt")
+
         self.architecture['misc_params']['width'] = int(
             self.inputWidth_QLineEdit.text())
         self.architecture['misc_params']['height'] = int(
@@ -33,15 +33,14 @@ class DataSubmission:
         #et2aked eno beycareate
         with open(self.arch_json_path, 'w') as f:
             f.write(json.dumps(self.architecture, indent=2))
-    def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog):
+
+    def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog,qt_layout):
+        #Initialize message error box
         dlg = QMessageBox()
         dlg.setWindowTitle("error!")
         dlg.setStandardButtons(QMessageBox.Yes)
         dlg.setIcon(QMessageBox.Critical)
        
-
-        
-        print("Submit layer")
         tempstring=f"torch.nn.{layer_type}("
         layer = {
             'type': layer_type,
@@ -62,7 +61,7 @@ class DataSubmission:
             print("error",e)
             dlg.setText(str(e))
             dlg.exec()
-        self.create_layer_node(layer, -1)
+        self.create_layer_node(layer, -1,qt_layout )
         paramsWindow_QDialog.close()
             
         
