@@ -10,25 +10,31 @@ from PySide6.QtWidgets import (
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
 import inspect
+
+
 class Controller:
 
     def on_generate_files_clicked(self):
         generator = self.file_read_json()
         self.generate_model()
         self.generate_train()
+
     def on_torch_func_clicked(self, func_name, torch_funcs, on_submit_func):
         paramsWindow_QDialog = QDialog()
         paramsWindow_QDialog.setMinimumWidth(330)
         allParamsColumn_QVBoxLayout = QVBoxLayout()
         params_value_widgets = []
         params_names = []
-
+        print("hamada")
         for param in torch_funcs[func_name]:
-            if type(param['defaultvalue']) == bool:
+            # for j in param["type"].__args__:
+            #     print(int == j)
+            # print(param["type"](4))
+            if bool in param["type"].__args__:
                 paramValue_QWidget = QCheckBox()
                 paramValue_QWidget.setChecked(param['defaultvalue'])
-            elif type(param['defaultvalue']) == int:
-                paramValue_QWidget = QSpinBox( maximum=1000)
+            elif int in param["type"].__args__:
+                paramValue_QWidget = QSpinBox(minimum=1, maximum=1000)
                 paramValue_QWidget.setValue(0)
             else:
                 paramValue_QWidget = QLineEdit()
@@ -57,6 +63,7 @@ class Controller:
         paramsWindow_QDialog.setLayout(allParamsColumn_QVBoxLayout)
         paramsWindow_QDialog.setWindowTitle(f"{func_name}")
         paramsWindow_QDialog.exec()
+
     def on_select_lossfunc_clicked(self, lossfunc_type, params_names, params_value_widgets, paramsWindow_QDialog):
         self.selected_lossfunc = {
             'type': lossfunc_type,

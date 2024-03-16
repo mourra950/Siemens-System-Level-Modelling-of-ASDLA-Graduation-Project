@@ -21,6 +21,7 @@ class LayerNodeManager:
                 'channels': 1,
             }
         }
+
     def create_layer_node(self, layer, index):
         addedLayerRow_QHBoxLayout = QHBoxLayout()
         border_QFrame = QFrame()
@@ -55,7 +56,7 @@ class LayerNodeManager:
         down_QPushButton.setMaximumWidth(28)
         down_QPushButton.setIcon(QIcon(self.down_icon_path))
         down_QPushButton.clicked.connect(
-            lambda  func=self.on_move_buttons_clicked,  i=border_QFrame:
+            lambda func=self.on_move_buttons_clicked,  i=border_QFrame:
             func(i, 'down')
         )
 
@@ -77,7 +78,8 @@ class LayerNodeManager:
     def on_delete_layer_clicked(self, border_QFrame):
         for i in range(len(self.architecture['layers'])):
             if border_QFrame == self.qt_addedLayers_QVBoxLayout.itemAt(i).widget():
-                layer_widget = self.qt_addedLayers_QVBoxLayout.itemAt(i).widget()
+                layer_widget = self.qt_addedLayers_QVBoxLayout.itemAt(
+                    i).widget()
 
                 self.architecture['layers'].pop(i)
                 layer_widget.deleteLater()
@@ -95,7 +97,8 @@ class LayerNodeManager:
                 ):
                     break
 
-                layer_widget = self.qt_addedLayers_QVBoxLayout.itemAt(i).widget()
+                layer_widget = self.qt_addedLayers_QVBoxLayout.itemAt(
+                    i).widget()
                 if direction == 'up':
                     new_idx = i-1
                 elif direction == 'down':

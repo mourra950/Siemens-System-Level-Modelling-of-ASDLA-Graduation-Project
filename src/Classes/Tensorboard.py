@@ -14,5 +14,5 @@ class TensorView:
         self.tensorWeb = QWebEngineView()
         self.tensorWeb.load(QtCore.QUrl("http://localhost:5173/"))
         self.tensorQt.addWidget(self.tensorWeb)
-        subprocess.run("dir",shell=True) 
+        # subprocess.run("dir",shell=True) 
         
