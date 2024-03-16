@@ -1,12 +1,11 @@
 {
   "layers": [
     {
-      "type": "BatchNorm2d",
+      "type": "AvgPool2d",
       "params": {
-        "eps": 1e-05,
-        "momentum": 0.1,
-        "affine": true,
-        "track_running_stats": true
+        "padding": 0,
+        "ceil_mode": false,
+        "count_include_pad": true
       }
     }
   ]

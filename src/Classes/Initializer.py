@@ -34,7 +34,7 @@ class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,F
         
         self.fill_placeholders()
         ResBuildWindow.__init__(self)
-        
+        Controller.__init__(self)
         Connections.__init__(self)
         TensorView.__init__(self)
         # self.ResCreation.show()

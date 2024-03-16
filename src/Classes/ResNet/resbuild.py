@@ -30,9 +30,9 @@ class ResBuildWindow():
         self.res_addedLayers_QVBoxLayout = self.ResCreation.findChild(QVBoxLayout, 'res_addedLayers_QVBoxLayout')
 
         self.submitRes_QPushButton = self.ResCreation.findChild(QPushButton, 'submitRes_QPushButton')
-
-
-        for layer in self.LAYERS:
+        self.LAYERS_WITHOUT_RES = self.LAYERS.copy()
+        self.LAYERS_WITHOUT_RES.pop("Residual Block")
+        for layer in self.LAYERS_WITHOUT_RES:
             selectLayer_QPushButton = QPushButton(layer)
             selectLayer_QPushButton.clicked.connect(
                 lambda func=self.res_on_torch_func_clicked, i=layer, j=self.LAYERS, k=self.res_on_submit_layer_clicked: func(
@@ -42,7 +42,6 @@ class ResBuildWindow():
         
         
 
-    
         self.submitRes_QPushButton.clicked.connect(self.res_on_submit_residual_block_clicked)
 
 

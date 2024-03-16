@@ -10,12 +10,22 @@ from PySide6.QtWidgets import (
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
 import inspect
-class Controller:
 
+class Controller:
+    def __init__(self) -> None:
+        self.res_block_built = False
     def on_generate_files_clicked(self):
         generator = self.file_read_json()
         self.generate_model()
         self.generate_train()
+
+    def on_res_block_clicked(self, func_name, torch_funcs, on_submit_func):
+        if(self.res_block_built):
+            self.on_torch_func_clicked(func_name, torch_funcs, on_submit_func)
+        else:
+            self.res_block_built = True
+            self.ResCreation.show()
+
     def on_torch_func_clicked(self, func_name, torch_funcs, on_submit_func):
         paramsWindow_QDialog = QDialog()
         paramsWindow_QDialog.setMinimumWidth(330)

@@ -42,9 +42,15 @@ class FillingQt:
     def fill_layers(self):
         for layer in self.LAYERS:
             selectLayer_QPushButton = QPushButton(layer)
-            selectLayer_QPushButton.clicked.connect(
-                lambda func=self.on_torch_func_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked: func(
+            if(layer == "Residual Block"):
+                selectLayer_QPushButton.clicked.connect(
+                lambda func=self.on_res_block_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked: func(
                     i, j, k)
             )
+            else:    
+                selectLayer_QPushButton.clicked.connect(
+                    lambda func=self.on_torch_func_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked: func(
+                        i, j, k)
+                )
             self.qt_layersList_QVBoxLayout.addWidget(
                 selectLayer_QPushButton)

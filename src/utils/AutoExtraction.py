@@ -15,8 +15,25 @@ class AutoExtraction:
         ]
 
         self.extract_torch_layers()
+        self.extract_res_block()
         self.extract_torch_lossfunctions()
         self.extract_torch_optimizers()
+
+
+    def extract_res_block(self):
+        res_params = [{
+            'name': "in_channels",
+            'defaultvalue': 0,
+            'type': int
+        },
+        {
+            'name': "out_channels",
+            'defaultvalue': 0,
+            'type': int
+        }
+        ]
+        res_block_dict = {"Residual Block":res_params}
+        self.LAYERS.update(res_block_dict)
 
     def extract_torch_layers(self) -> dict:
         torch_layers_names = dir(nn)
