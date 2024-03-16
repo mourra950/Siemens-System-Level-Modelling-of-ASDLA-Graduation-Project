@@ -1,6 +1,8 @@
 import json
-
-
+import torch
+from PySide6.QtWidgets import (
+   QDialog,QMessageBox
+)
 
 class DataSubmission:
     def on_submit_params_clicked(self):
@@ -32,16 +34,35 @@ class DataSubmission:
         with open(self.arch_json_path, 'w') as f:
             f.write(json.dumps(self.architecture, indent=2))
     def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog):
+        dlg = QMessageBox()
+        dlg.setWindowTitle("error!")
+        dlg.setStandardButtons(QMessageBox.Yes)
+        dlg.setIcon(QMessageBox.Critical)
+       
+
+        
         print("Submit layer")
+        tempstring=f"torch.nn.{layer_type}("
         layer = {
             'type': layer_type,
             'params': dict()
         }
+        
         for i in range(len(params_value_widgets)):
             param_value = self.get_widget_data(params_value_widgets[i])
-
             if param_value != '':
+                tempstring+=f"{params_names[i]}={param_value},"
+                # print(layer['params'],params_names[i],param_value,layer_type)
                 layer['params'][params_names[i]] = param_value
-
+        tempstring+=")"
+        try:
+            exec(tempstring)
+        except Exception as e:
+            # print(type(str(e)))
+            print("error",e)
+            dlg.setText(str(e))
+            dlg.exec()
         self.create_layer_node(layer, -1)
         paramsWindow_QDialog.close()
+            
+        

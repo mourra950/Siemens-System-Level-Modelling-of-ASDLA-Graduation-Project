@@ -37,7 +37,7 @@ class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,F
         
         Connections.__init__(self)
         TensorView.__init__(self)
-        self.ResCreation.show()
+        # self.ResCreation.show()
         # self.ui.show()
 
     def get_widget_data(self, widget):

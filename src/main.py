@@ -31,7 +31,7 @@ class MainUI(QtCore.QObject,SystemPaths,Initializer,AutoExtraction):
         AutoExtraction.__init__(self)
         SystemPaths.__init__(self)
         Initializer.__init__(self)
-        # self.ui.show()
+        self.ui.show()
         
     def the_button_was_clicked(self, x):
         dlg = LayerDialog(layers=self.LAYERS, x=x)
