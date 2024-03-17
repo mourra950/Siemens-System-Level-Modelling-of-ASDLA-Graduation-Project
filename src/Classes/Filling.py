@@ -1,21 +1,22 @@
-import os
-import sys
-from PySide6.QtUiTools import QUiLoader
+
 from PySide6.QtWidgets import (
-    QVBoxLayout,
     QPushButton,
-    QLineEdit,
-    QHBoxLayout, QLabel, QCheckBox, QDialog
 )
 from PySide6.QtUiTools import QUiLoader
-from PySide6 import QtCore
-import inspect
 
 
 class FillingQt:
+    def __init__(self) -> None:
+        self.fill_placeholders(
+            self.qt_layersList_QVBoxLayout, self.LAYERS, self.qt_addedLayers_QVBoxLayout )
+        self.fill_layers(self.res_layersList_QVBoxLayout,
+                         self.LAYERS_WITHOUT_RES, self.res_addedLayers_QVBoxLayout)
+        for index, layer in enumerate(self.LAYERS):
+            if layer == "Residual Block":
+                print("moura henaaaaaaaa", index)
 
-    def fill_placeholders(self):
-        self.fill_layers()
+    def fill_placeholders(self, qt_layout, layers, q2_lay):
+        self.fill_layers(qt_layout, layers, q2_lay)
         self.fill_optimizers()
         self.fill_lossfunctions()
 
@@ -39,12 +40,22 @@ class FillingQt:
             self.qt_lossFuncsList_QVBoxLayout.addWidget(
                 selectLossFunc_QPushButton)
 
-    def fill_layers(self):
-        for layer in self.LAYERS:
+    def fill_layers(self, qt_layout, layers, q2_layout):
+        for layer in layers:
             selectLayer_QPushButton = QPushButton(layer)
-            selectLayer_QPushButton.clicked.connect(
-                lambda func=self.on_torch_func_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked: func(
-                    i, j, k)
-            )
-            self.qt_layersList_QVBoxLayout.addWidget(
-                selectLayer_QPushButton)
+            if (layer == "Residual Block"):
+                selectLayer_QPushButton.clicked.connect(
+                    lambda func=self.on_res_block_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: func(
+                        i, j, k, q_layout)
+                )
+                print(layer)
+                qt_layout.addWidget(
+                    selectLayer_QPushButton)
+            else:
+                selectLayer_QPushButton.clicked.connect(
+                    lambda func=self.on_torch_func_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: func(
+                        i, j, k, q_layout)
+                )
+                print(layer)
+                qt_layout.addWidget(
+                    selectLayer_QPushButton)

@@ -1,27 +1,40 @@
-import os
-import sys
-from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import (
     QVBoxLayout,
     QPushButton,
     QLineEdit,
-    QHBoxLayout, QLabel, QCheckBox, QDialog, QSpinBox, QRadioButton
+    QHBoxLayout, QLabel, QCheckBox, QDialog, QSpinBox
 )
-from PySide6.QtUiTools import QUiLoader
-from PySide6 import QtCore
-import inspect
-class Controller:
 
+import inspect
+
+class Controller:
+    def __init__(self) -> None:
+        self.res_block_built = False
+        
+        
     def on_generate_files_clicked(self):
         generator = self.file_read_json()
         self.generate_model()
         self.generate_train()
-    def on_torch_func_clicked(self, func_name, torch_funcs, on_submit_func):
+
+    def on_res_block_clicked(self, func_name, torch_funcs, on_submit_func,qt_layout):
+        if(self.res_block_built):
+            self.on_torch_func_clicked(func_name, torch_funcs, on_submit_func,qt_layout)
+        else:
+            self.res_block_built = True
+            self.ResCreation.show()
+            
+
+    def on_torch_func_clicked(self, func_name, torch_funcs, on_submit_func,qt_layout):
+        
+        #initialize QDialog and lists
         paramsWindow_QDialog = QDialog()
         paramsWindow_QDialog.setMinimumWidth(330)
         allParamsColumn_QVBoxLayout = QVBoxLayout()
         params_value_widgets = []
         params_names = []
+
+
 
         for param in torch_funcs[func_name]:
             if type(param['defaultvalue']) == bool:
@@ -47,16 +60,27 @@ class Controller:
             paramRow_QHBoxLayout.addWidget(paramValue_QWidget)
             allParamsColumn_QVBoxLayout.addLayout(paramRow_QHBoxLayout)
 
+        ################################
+
         allParamsColumn_QVBoxLayout.addWidget(QLabel())
         submitLayer_QPushButton = QPushButton('Submit Layer')
+        
+        ##############################
         submitLayer_QPushButton.clicked.connect(
-            lambda i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog: on_submit_func(
-                i, j, k, l)
+            lambda submit_func =on_submit_func ,i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog,q_layout=qt_layout: submit_func(
+                i, j, k, l,q_layout)
         )
+        
+        
+        
+        
         allParamsColumn_QVBoxLayout.addWidget(submitLayer_QPushButton)
         paramsWindow_QDialog.setLayout(allParamsColumn_QVBoxLayout)
         paramsWindow_QDialog.setWindowTitle(f"{func_name}")
         paramsWindow_QDialog.exec()
+        
+        
+        
     def on_select_lossfunc_clicked(self, lossfunc_type, params_names, params_value_widgets, paramsWindow_QDialog):
         self.selected_lossfunc = {
             'type': lossfunc_type,
