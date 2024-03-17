@@ -12,7 +12,9 @@ class Children:
         self.ui = self.loader.load(self.GUI_path, None)
         self.find_children()
 
-    def find_children(self):
+    def find_children(self) -> None:
+        """Locate all qt elements
+        """
         self.qt_layers_scroll_box = self.ui.findChild(QVBoxLayout, "Scrollbox")
         self.qt_layersList_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, 'layersList_QVBoxLayout')

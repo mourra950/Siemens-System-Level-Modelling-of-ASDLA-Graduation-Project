@@ -20,10 +20,14 @@ from Classes.Conn import Connections
 from Classes.Controller import Controller
 from Classes.Tensorboard import TensorView
 from Classes.ResNet.resbuild import ResBuildWindow
+from Qt.Buttons import QTButtons
+from Qt.Dialogue import LayerDialog
+
+
 
 sys.path.append("./")
 
-class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,FileGenerator,Controller,Connections,TensorView,ResBuildWindow):
+class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,FileGenerator,Controller,Connections,TensorView,ResBuildWindow,QTButtons,LayerDialog):
     def __init__(self) -> None:
         print("Initializer")
         Children.__init__(self)

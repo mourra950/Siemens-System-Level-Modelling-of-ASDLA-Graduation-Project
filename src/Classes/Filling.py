@@ -1,4 +1,3 @@
-
 from PySide6.QtWidgets import (
     QPushButton,
 )
@@ -8,12 +7,9 @@ from PySide6.QtUiTools import QUiLoader
 class FillingQt:
     def __init__(self) -> None:
         self.fill_placeholders(
-            self.qt_layersList_QVBoxLayout, self.LAYERS, self.qt_addedLayers_QVBoxLayout )
+            self.qt_layersList_QVBoxLayout, self.LAYERS, self.qt_addedLayers_QVBoxLayout)
         self.fill_layers(self.res_layersList_QVBoxLayout,
                          self.LAYERS_WITHOUT_RES, self.res_addedLayers_QVBoxLayout)
-        for index, layer in enumerate(self.LAYERS):
-            if layer == "Residual Block":
-                print("moura henaaaaaaaa", index)
 
     def fill_placeholders(self, qt_layout, layers, q2_lay):
         self.fill_layers(qt_layout, layers, q2_lay)
@@ -48,7 +44,6 @@ class FillingQt:
                     lambda func=self.on_res_block_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: func(
                         i, j, k, q_layout)
                 )
-                print(layer)
                 qt_layout.addWidget(
                     selectLayer_QPushButton)
             else:
@@ -56,6 +51,5 @@ class FillingQt:
                     lambda func=self.on_torch_func_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: func(
                         i, j, k, q_layout)
                 )
-                print(layer)
                 qt_layout.addWidget(
                     selectLayer_QPushButton)
