@@ -11,71 +11,50 @@ from PySide6.QtWidgets import (
 )
 import inspect
 
+import types
+from typing import Generic, TypeVar, Union
 
-class LayerDialog(QDialog):
-    def __init__(self, parent=None, layers=None, x=None):
-        # super().__init__(parent)
-        self.d = {}
-        self.setWindowTitle(x)
-        self.a = 6
-        self.layout = QVBoxLayout()
-        for i in layers[x]:
-            de = True
-            if i["defaultvalue"] == inspect._empty:
-                de = False
-            print(i["defaultvalue"])
-            l2 = QHBoxLayout()
-            la = QLabel(f'{i["name"]}')
-            if i["type"] == type(1):
-                lb = QSpinBox(parent=parent, maximum=1000)
-                if de:
-                    lb.setValue(int(i["defaultvalue"]))
-            elif i["type"] == type(True):
-                lb = QCheckBox()
-                if de:
-                    lb.setChecked(i["defaultvalue"])
 
-            else:
-                lb = QLineEdit()
-                lb.setText(str(i["defaultvalue"]))
-            self.d[i["name"]] = {"name": i["name"], "function": lb, "type": i["type"]}
-            l2.addWidget(la)
-            l2.addWidget(lb)
-            self.layout.addLayout(l2)
+class LayerDialog():
 
-        # adds buttons at the bottom of the dialogue one for Ok and other to cancel
-        buttons = QDialogButtonBox.Ok | QDialogButtonBox.Cancel
-        self.buttonBox = QDialogButtonBox(buttons)
-        self.buttonBox.accepted.connect(self.re)
-        self.buttonBox.rejected.connect(self.reject)
-        self.layout.addWidget(self.buttonBox)
-        self.setLayout(self.layout)
+    def create_dialogue_controller(self, torch_funcs, func_name, params_names, params_value_widgets, allParamsColumn_QVBoxLayout):
 
-    def re(self):
-        for i in self.d:
-            if int == self.d[i]["type"]:
-                print(
-                    self.d[i]["name"], "int", self.d[i]["function"].value()
-                )  # self.d[i]
-            elif str == self.d[i]["type"]:
-                print("ahmed", self.d[i]["function"].text())
-                if self.d[i]["function"].text() == "":
-                    print("empty")
-            elif bool == self.d[i]["type"]:
-                if self.d[i]["function"].isChecked():
-                    print("True")
-                else:
-                    print("False")
-            else:
-                print("default")
-        super().accept()
-    def get_widget_data(self, widget):
-        if isinstance(widget, QCheckBox):
-            param_value = widget.isChecked()
-        else:
-            param_value = widget.text().strip()
+        for param in torch_funcs[func_name]:
             try:
-                param_value = eval(param_value)
+                if bool in param["type"].__args__:
+                    paramValue_QWidget = QCheckBox()
+                    paramValue_QWidget.setChecked(param['defaultvalue'])
+                elif int in param["type"].__args__:
+                    paramValue_QWidget = QSpinBox(minimum=1, maximum=1000)
+                    paramValue_QWidget.setValue(0)
+                else:
+                    paramValue_QWidget = QLineEdit()
+                    if (
+                        param['defaultvalue'] != inspect._empty
+                        and
+                        param['defaultvalue'] != None
+                    ):
+                        paramValue_QWidget.setText(str(param['defaultvalue']))
             except:
-                pass
-        return param_value
+                if bool == param["type"]:
+                    paramValue_QWidget = QCheckBox()
+                    paramValue_QWidget.setChecked(param['defaultvalue'])
+                elif int == param["type"]:
+                    paramValue_QWidget = QSpinBox(minimum=1, maximum=1000)
+                    paramValue_QWidget.setValue(0)
+                else:
+                    paramValue_QWidget = QLineEdit()
+                    if (
+                        param['defaultvalue'] != inspect._empty
+                        and
+                        param['defaultvalue'] != None
+                    ):
+                        paramValue_QWidget.setText(str(param['defaultvalue']))
+
+            params_names.append(param['name'])
+            params_value_widgets.append(paramValue_QWidget)
+
+            paramRow_QHBoxLayout = QHBoxLayout()
+            paramRow_QHBoxLayout.addWidget(QLabel(f'{param["name"]}'))
+            paramRow_QHBoxLayout.addWidget(paramValue_QWidget)
+            allParamsColumn_QVBoxLayout.addLayout(paramRow_QHBoxLayout)

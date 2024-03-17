@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import (
     QVBoxLayout,
     QPushButton,
-    QHBoxLayout, 
+    QHBoxLayout,
     QLabel,
     QFrame
 )
@@ -18,6 +18,7 @@ class LayerNodeManager:
                 'channels': 1,
             }
         }
+
     def create_layer_node(self, layer, index, qt_layout):
         addedLayerRow_QHBoxLayout = QHBoxLayout()
         border_QFrame = QFrame()
@@ -33,28 +34,12 @@ class LayerNodeManager:
                 font-size: 15px;
             }
         ''')
-
-        delete_QPushButton = QPushButton()
-        delete_QPushButton.setMaximumWidth(30)
-        delete_QPushButton.setIcon(QIcon(self.delete_icon_path))
-        delete_QPushButton.clicked.connect(
-            lambda func=self.on_delete_layer_clicked, i=border_QFrame,q_layout=qt_layout:
-            func(i,q_layout)
-        )
-        up_QPushButton = QPushButton()
-        up_QPushButton.setMaximumWidth(28)
-        up_QPushButton.setIcon(QIcon(self.up_icon_path))
-        up_QPushButton.clicked.connect(
-            lambda func=self.on_move_buttons_clicked, i=border_QFrame,q_layout=qt_layout:
-            func(i, 'up',q_layout)
-        )
-        down_QPushButton = QPushButton()
-        down_QPushButton.setMaximumWidth(28)
-        down_QPushButton.setIcon(QIcon(self.down_icon_path))
-        down_QPushButton.clicked.connect(
-            lambda  func=self.on_move_buttons_clicked,  i=border_QFrame,q_layout=qt_layout:
-            func(i, 'down',q_layout)
-        )
+        delete_QPushButton = self.qbutton_layer_manager(
+            self.delete_icon_path, qt_layout, border_QFrame, self.on_delete_layer_clicked)
+        up_QPushButton = self.qbutton_layer_manager(
+            self.up_icon_path, qt_layout, border_QFrame, self.on_move_buttons_clicked, "up")
+        down_QPushButton = self.qbutton_layer_manager(
+            self.down_icon_path, qt_layout, border_QFrame, self.on_move_buttons_clicked,"down")
 
         moveableArrows_QVBoxLayout = QVBoxLayout()
         moveableArrows_QVBoxLayout.addWidget(up_QPushButton)
@@ -71,7 +56,7 @@ class LayerNodeManager:
             qt_layout.insertWidget(index, border_QFrame)
             self.architecture['layers'].insert(index, layer)
 
-    def on_delete_layer_clicked(self, border_QFrame,qt_layout):
+    def on_delete_layer_clicked(self, border_QFrame, qt_layout,*args):
         for i in range(len(self.architecture['layers'])):
             if border_QFrame == qt_layout.itemAt(i).widget():
                 layer_widget = qt_layout.itemAt(i).widget()
@@ -81,14 +66,16 @@ class LayerNodeManager:
                 qt_layout.removeWidget(layer_widget)
                 break
 
-    def on_move_buttons_clicked(self, border_QFrame, direction,qt_layout):
+    def on_move_buttons_clicked(self, border_QFrame,  qt_layout, direction):
+        
         size = len(self.architecture['layers'])
+        print(size, "Size",direction)
         for i in range(size):
             if border_QFrame == qt_layout.itemAt(i).widget():
                 if (
                     (i == 0 and direction == 'up')
                     or
-                    (i == size and direction == 'down')
+                    (i == size-1 and direction == 'down')
                 ):
                     break
 
