@@ -26,19 +26,16 @@ sys.path.append("./")
 class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,FileGenerator,Controller,Connections,TensorView,ResBuildWindow):
     def __init__(self) -> None:
         print("Initializer")
+        Children.__init__(self)
+        Controller.__init__(self)
+        FillingQt.__init__(self)
         LayerNodeManager.__init__(self)
-        self.ui = self.loader.load(self.GUI_path, None)
-        self.ui.setWindowTitle("The Awesome Project")
-
-        self.find_children()
-        
-        self.fill_placeholders()
         ResBuildWindow.__init__(self)
-        
         Connections.__init__(self)
         TensorView.__init__(self)
-        # self.ResCreation.show()
-        # self.ui.show()
+        self.ui.setWindowTitle("The Awesome Project")
+        
+        
 
     def get_widget_data(self, widget):
         if isinstance(widget, QCheckBox):

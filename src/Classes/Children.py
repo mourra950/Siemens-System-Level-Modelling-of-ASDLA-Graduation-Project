@@ -1,21 +1,18 @@
-import os
-import sys
-from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import (
     QVBoxLayout,
     QPushButton,
     QLineEdit,
-    QHBoxLayout, QLabel, QCheckBox, QDialog, QRadioButton
+    QRadioButton
 )
-from PySide6.QtUiTools import QUiLoader
-from PySide6 import QtCore
-import inspect
 
 
 class Children:
     def __init__(self) -> None:
-        pass
-    def find_children(self)->None:
+        self.ResCreation = self.loader.load(self.res_build_ui_path, None)
+        self.ui = self.loader.load(self.GUI_path, None)
+        self.find_children()
+
+    def find_children(self) -> None:
         """Locate all qt elements
         """
         self.qt_layers_scroll_box = self.ui.findChild(QVBoxLayout, "Scrollbox")
@@ -51,3 +48,11 @@ class Children:
             QPushButton, 'submitArch_QPushButton')
         self.qt_generateFiles_QPushButton = self.ui.findChild(
             QPushButton, 'generateFiles_QPushButton')
+
+        ####################################################
+        self.res_layersList_QVBoxLayout = self.ResCreation.findChild(
+            QVBoxLayout, 'res_layersList_QVBoxLayout')
+        self.res_addedLayers_QVBoxLayout = self.ResCreation.findChild(
+            QVBoxLayout, 'res_addedLayers_QVBoxLayout')
+        self.submitRes_QPushButton = self.ResCreation.findChild(
+            QPushButton, 'submitRes_QPushButton')
