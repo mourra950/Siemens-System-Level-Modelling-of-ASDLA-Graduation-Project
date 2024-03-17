@@ -1,13 +1,10 @@
-from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import (
     QVBoxLayout,
     QPushButton,
-    QLineEdit,
-    QHBoxLayout, QLabel, QCheckBox, QDialog,
+    QHBoxLayout, 
+    QLabel,
     QFrame
 )
-from PySide6.QtUiTools import QUiLoader
-from PySide6 import QtCore
 from PySide6.QtGui import QIcon
 
 
