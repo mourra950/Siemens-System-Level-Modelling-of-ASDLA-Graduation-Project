@@ -7,9 +7,10 @@ from PySide6.QtUiTools import QUiLoader
 
 # import classes and different files here
 from Classes.Initializer import Initializer
+
 from utils.AutoExtraction import AutoExtraction
 from paths.SystemPaths import SystemPaths
-
+import subprocess
 
 loader = QUiLoader()
 
@@ -17,12 +18,12 @@ loader = QUiLoader()
 
 
 def main():
+    tensoboardproccess = subprocess.Popen(
+        ["tensorboard", "--logdir", "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/tensorboardlogs"])
     app = QApplication(sys.argv)
     window = MainUI()
-    # with open(os.path.join(publicdir, "./GUI/skin.qss"), "r") as f:
-    #     _style = f.read()
-    #     app.setStyleSheet(_style)
     app.exec()
+    tensoboardproccess.kill()
 
 
 class MainUI(QtCore.QObject, SystemPaths, Initializer, AutoExtraction):
