@@ -18,12 +18,15 @@ loader = QUiLoader()
 
 
 def main():
-    tensoboardproccess = subprocess.Popen(
-        ["tensorboard", "--logdir", "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/tensorboardlogs"])
+    # tensoboardproccess = subprocess.Popen(
+    #     ["tensorboard", "--logdir", "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/tensorboardlogs"])
     app = QApplication(sys.argv)
     window = MainUI()
     app.exec()
-    tensoboardproccess.kill()
+    # tensoboardproccess.kill()
+    # while True:
+    #     if tensoboardproccess.wait()!= None:
+    #         break
 
 
 class MainUI(QtCore.QObject, SystemPaths, Initializer, AutoExtraction):

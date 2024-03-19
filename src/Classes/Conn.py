@@ -8,4 +8,9 @@ class Connections:
             self.on_generate_files_clicked)
         self.submitRes_QPushButton.clicked.connect(
             self.res_on_submit_residual_block_clicked)
-        
+        # TO DO
+        self.Create_transfer_learning_model_QPushButton.clicked.connect(
+            self.testCreate)
+
+    def testCreate(self):
+        print("YES WE CREATE")
