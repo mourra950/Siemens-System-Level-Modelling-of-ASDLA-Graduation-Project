@@ -1,3 +1,10 @@
 {
-  "layers": []
+  "layers": [
+    {
+      "type": "CELU",
+      "params": {
+        "alpha": 1.0
+      }
+    }
+  ]
 }

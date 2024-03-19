@@ -25,7 +25,7 @@ class Controller:
             self.res_block_built = True
             self.ResCreation.show()
 
-    def on_torch_func_clicked(self, func_name, torch_funcs, on_submit_func, qt_layout):
+    def on_torch_func_clicked(self, func_name, torch_funcs, on_submit_func, qt_layout,arch_dict):
 
         # initialize QDialog and lists
         paramsWindow_QDialog = QDialog()
@@ -44,8 +44,8 @@ class Controller:
 
         ##############################
         submitLayer_QPushButton.clicked.connect(
-            lambda submit_func=on_submit_func, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog, q_layout=qt_layout: submit_func(
-                i, j, k, l, q_layout)
+            lambda submit_func=on_submit_func, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog, q_layout=qt_layout, arch = arch_dict: submit_func(
+                i, j, k, l, q_layout,arch_dict)
         )
 
         allParamsColumn_QVBoxLayout.addWidget(submitLayer_QPushButton)
