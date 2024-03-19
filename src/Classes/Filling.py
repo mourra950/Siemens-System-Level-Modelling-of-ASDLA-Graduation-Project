@@ -9,10 +9,10 @@ class FillingQt:
         self.fill_placeholders(
             self.qt_layersList_QVBoxLayout, self.LAYERS, self.qt_addedLayers_QVBoxLayout)
         self.fill_layers(self.res_layersList_QVBoxLayout,
-                         self.LAYERS_WITHOUT_RES, self.res_addedLayers_QVBoxLayout)
+                         self.LAYERS_WITHOUT_RES, self.res_addedLayers_QVBoxLayout,self.Resarchitecture)
 
     def fill_placeholders(self, qt_layout, layers, q2_lay):
-        self.fill_layers(qt_layout, layers, q2_lay)
+        self.fill_layers(qt_layout, layers, q2_lay,self.architecture)
         self.fill_optimizers()
         self.fill_lossfunctions()
         self.fill_pretrained_model()
@@ -37,20 +37,20 @@ class FillingQt:
             self.qt_lossFuncsList_QVBoxLayout.addWidget(
                 selectLossFunc_QPushButton)
 
-    def fill_layers(self, qt_layout, layers, q2_layout):
+    def fill_layers(self, qt_layout, layers, q2_layout, arch_dict):
         for layer in layers:
             selectLayer_QPushButton = QPushButton(layer)
             if (layer == "Residual Block"):
                 selectLayer_QPushButton.clicked.connect(
-                    lambda func=self.on_res_block_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: func(
-                        i, j, k, q_layout)
+                    lambda func=self.on_res_block_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: 
+                    func(i, j, k, q_layout)
                 )
                 qt_layout.addWidget(
                     selectLayer_QPushButton)
             else:
                 selectLayer_QPushButton.clicked.connect(
-                    lambda func=self.on_torch_func_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: func(
-                        i, j, k, q_layout)
+                    lambda func=self.on_torch_func_clicked, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout, dic = arch_dict: func(
+                        i, j, k, q_layout,arch_dict)
                 )
                 qt_layout.addWidget(
                     selectLayer_QPushButton)

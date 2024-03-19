@@ -1,37 +1,11 @@
 {
   "layers": [
     {
-      "type": "AdaptiveMaxPool2d",
-      "params": {
-        "output_size": 1
-      },
-      "name": "adaptivemaxpool2d_1"
-    },
-    {
       "type": "AdaptiveAvgPool2d",
       "params": {
         "output_size": 1
       },
       "name": "adaptiveavgpool2d_1"
-    },
-    {
-      "type": "AvgPool2d",
-      "params": {
-        "kernel_size": 4,
-        "stride": 5,
-        "padding": 3,
-        "divisor_override": 3
-      },
-      "name": "avgpool2d_1"
-    },
-    {
-      "type": "Bilinear",
-      "params": {
-        "in1_features": 1,
-        "in2_features": 1,
-        "out_features": 1
-      },
-      "name": "bilinear_1"
     }
   ],
   "misc_params": {

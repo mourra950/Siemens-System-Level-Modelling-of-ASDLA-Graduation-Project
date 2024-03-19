@@ -14,10 +14,7 @@ import sys
 
 class ResBuildWindow():
     def __init__(self) -> None:
-        self.Resarchitecture = {
-            'layers': []
-        }
-
+        ...
 
     def res_on_submit_residual_block_clicked(self):
         # self.validate_and_correct_layers()
