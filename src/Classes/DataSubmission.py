@@ -1,16 +1,18 @@
 import json
 import torch
 from PySide6.QtWidgets import (
-   QDialog,QMessageBox
+   QDialog,QMessageBox,QLineEdit
 )
 
 class DataSubmission:
     def on_submit_params_clicked(self):
-
+        print("ana weselt params")
+        # t=QLineEdit()
+        # t.text
         self.architecture['misc_params']['width'] = int(
-            self.inputWidth_QLineEdit.text())
+            self.qt_inputWidth_QLineEdit.text())
         self.architecture['misc_params']['height'] = int(
-            self.inputHeight_QLineEdit.text())
+            self.qt_inputHeight_QLineEdit.text())
         # mourra law sama7t kamel le3b fee el zarayer dih
         # if self.inputType_RGB_QRadioButton.isChecked():
         #     self.architecture['misc_params']['channels'] = 3
@@ -18,9 +20,9 @@ class DataSubmission:
         #     self.architecture['misc_params']['channels'] = 1
 
         self.architecture['misc_params']['batch_size'] = int(
-            self.batchSize_QLineEdit.text())
+            self.qt_batchSize_QLineEdit.text())
         self.architecture['misc_params']['num_epochs'] = int(
-            self.numEpochs_QLineEdit.text())
+            self.qt_numEpochs_QLineEdit.text())
         self.architecture['misc_params']['optimizer'] = self.selected_optimizer
         self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
 
@@ -28,7 +30,7 @@ class DataSubmission:
             f.write(json.dumps(self.architecture, indent=2))
 
     def on_submit_arch_clicked(self):
-        print("ana weselt")
+        print("ana weselt arch")
         self.validate_and_correct_layers(self.architecture)
         #et2aked eno beycareate
         with open(self.arch_json_path, 'w') as f:

@@ -21,7 +21,7 @@ class FillingQt:
             selectOptimizer_QPushButton = QPushButton(optimizer)
             selectOptimizer_QPushButton.clicked.connect(
                 lambda func=self.on_torch_func_clicked, i=optimizer, j=self.OPTIMIZERS, k=self.on_select_optimizer_clicked: func(
-                    i, j, k)
+                    i, j, k,None,None)
             )
             self.qt_optimizersList_QVBoxLayout.addWidget(
                 selectOptimizer_QPushButton)
@@ -31,7 +31,7 @@ class FillingQt:
             selectLossFunc_QPushButton = QPushButton(lossfunc)
             selectLossFunc_QPushButton.clicked.connect(
                 lambda func=self.on_torch_func_clicked, i=lossfunc, j=self.LOSSFUNC, k=self.on_select_lossfunc_clicked: func(
-                    i, j, k)
+                    i, j, k,None,None)
             )
             self.qt_lossFuncsList_QVBoxLayout.addWidget(
                 selectLossFunc_QPushButton)
