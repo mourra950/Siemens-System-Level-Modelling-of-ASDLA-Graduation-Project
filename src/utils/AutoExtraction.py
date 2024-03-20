@@ -5,6 +5,7 @@ import torch.optim as optim
 import types
 import copy
 
+
 class AutoExtraction:
 
     def __init__(self) -> None:
@@ -19,7 +20,7 @@ class AutoExtraction:
         self.extract_res_block()
         self.extract_torch_lossfunctions()
         self.extract_torch_optimizers()
-
+        self.extract_pretrained_models()
 
     def extract_res_block(self):
         res_params = [{
@@ -27,18 +28,17 @@ class AutoExtraction:
             'defaultvalue': 0,
             'type': int
         },
-        {
+            {
             'name': "out_channels",
             'defaultvalue': 0,
             'type': int
         }
         ]
-        res_block_dict = {"Residual Block":res_params}
+        res_block_dict = {"Residual Block": res_params}
         self.LAYERS.update(res_block_dict)
         self.LAYERS_WITHOUT_RES = copy.deepcopy(self.LAYERS)
         self.LAYERS_WITHOUT_RES.pop("Residual Block")
-        
-        
+
     def extract_torch_layers(self) -> dict:
         torch_layers_names = dir(nn)
         torch_layers_dict = dict()
@@ -74,8 +74,7 @@ class AutoExtraction:
                     torch_layers_dict[obj.__name__] = params_list
 
         self.LAYERS = torch_layers_dict
-        #for Residual blocks
-        
+        # for Residual blocks
 
     def extract_torch_lossfunctions(self):
         torch_layers_names = dir(nn)
@@ -95,9 +94,9 @@ class AutoExtraction:
 
                 for i in inspector:
                     if (
-                    inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
-                    and not
-                    isinstance(inspector[i].default, types.FunctionType)   
+                        inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
+                        and not
+                        isinstance(inspector[i].default, types.FunctionType)
                     ):
                         params_list.append(
                             {
@@ -125,11 +124,11 @@ class AutoExtraction:
 
                 for i in inspector:
                     if (
-                    inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
-                    and
-                    inspector[i].name not in self.unnecessary_optimizer_params
-                    and not
-                    isinstance(inspector[i].default, types.FunctionType)
+                        inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
+                        and
+                        inspector[i].name not in self.unnecessary_optimizer_params
+                        and not
+                        isinstance(inspector[i].default, types.FunctionType)
                     ):
                         params_list.append(
                             {
@@ -143,3 +142,7 @@ class AutoExtraction:
                     torch_optimizers_dict[obj.__name__] = params_list
 
         self.OPTIMIZERS = torch_optimizers_dict
+
+    def extract_pretrained_models(self):
+        # TO DO
+        self.PRETRAINED_MODELS = ["resnet", "hamada"]

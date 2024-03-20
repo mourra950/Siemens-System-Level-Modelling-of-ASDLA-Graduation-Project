@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>745</width>
-    <height>488</height>
+    <width>871</width>
+    <height>483</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -293,8 +293,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>338</width>
-                       <height>83</height>
+                       <width>401</width>
+                       <height>80</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -357,8 +357,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>338</width>
-                       <height>82</height>
+                       <width>401</width>
+                       <height>80</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -476,8 +476,8 @@
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>332</width>
-                        <height>307</height>
+                        <width>395</width>
+                        <height>302</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -500,8 +500,8 @@
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>333</width>
-                      <height>309</height>
+                      <width>396</width>
+                      <height>304</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -682,6 +682,34 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="TransferLearning">
+       <attribute name="title">
+        <string>Transfer Learning</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Pretrained Model&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="Pretrained_model_ComboBox"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="Create_transfer_Model_QPushButton">
+          <property name="text">
+           <string>Create Transfer Learning Model</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -692,7 +720,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>745</width>
+     <width>871</width>
      <height>22</height>
     </rect>
    </property>

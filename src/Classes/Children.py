@@ -2,7 +2,9 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QPushButton,
     QLineEdit,
-    QRadioButton
+    QRadioButton,
+    QComboBox
+
 )
 
 
@@ -57,3 +59,8 @@ class Children:
             QVBoxLayout, 'res_addedLayers_QVBoxLayout')
         self.submitRes_QPushButton = self.ResCreation.findChild(
             QPushButton, 'submitRes_QPushButton')
+        ##########################################################
+        self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
+            QPushButton, 'Create_transfer_Model_QPushButton')
+        self.Pretrained_model_ComboBox = self.ui.findChild(
+            QComboBox, 'Pretrained_model_ComboBox')

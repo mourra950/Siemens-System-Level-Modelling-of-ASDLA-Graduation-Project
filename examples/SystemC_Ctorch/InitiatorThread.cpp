@@ -10,9 +10,12 @@ void Initiator::sendDataThread()
 {
     // Create a generic payload and using custom extension made in extension.cpp
     tlm::tlm_generic_payload trans;
+    cout << "Ahmed" << endl;
     my_extension *test_extension_transaction = new my_extension;
     // changing the attribute `id` from 0 to 5
     test_extension_transaction->id = 5;
+    cout << "Ahmed" << endl;
+
     // setting the extension
     trans.set_extension(test_extension_transaction);
     // setting the command

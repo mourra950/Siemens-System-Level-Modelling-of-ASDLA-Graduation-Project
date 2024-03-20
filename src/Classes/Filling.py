@@ -15,6 +15,7 @@ class FillingQt:
         self.fill_layers(qt_layout, layers, q2_lay,self.architecture)
         self.fill_optimizers()
         self.fill_lossfunctions()
+        self.fill_pretrained_model()
 
     def fill_optimizers(self):
         for optimizer in self.OPTIMIZERS:
@@ -53,3 +54,7 @@ class FillingQt:
                 )
                 qt_layout.addWidget(
                     selectLayer_QPushButton)
+    def fill_pretrained_model(self):
+        #TO DO
+        for i in self.PRETRAINED_MODELS:
+            self.Pretrained_model_ComboBox.addItem(i)

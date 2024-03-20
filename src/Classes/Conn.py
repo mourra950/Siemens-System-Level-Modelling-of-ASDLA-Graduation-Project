@@ -1,3 +1,9 @@
+import subprocess
+import threading
+from PySide6.QtWidgets import (
+    QMessageBox
+)
+message =""
 class Connections:
     def __init__(self) -> None:
         self.qt_submitParams_QPushButton.clicked.connect(
@@ -8,4 +14,24 @@ class Connections:
             self.on_generate_files_clicked)
         self.submitRes_QPushButton.clicked.connect(
             self.res_on_submit_residual_block_clicked)
+        # TO DO
+        self.Create_transfer_learning_model_QPushButton.clicked.connect(
+            self.testCreate)
+
+    def testCreate(self):
+        global message
+        t=threading.Thread(
+            target=self.run_systemc
+        )
+        t.start()
+        t.join()
+        q=QMessageBox(text=f"{message}")
+        q.exec()
         
+        
+    def run_systemc(self):
+        global message
+        # subprocess.run(["cmake","--build",r"E:\Github\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\examples\SystemC_Ctorch\build2","--clean-first"])
+        t=subprocess.run(["Final_SystemC.exe"],shell=True,cwd=r"E:\Github\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\examples\SystemC_Ctorch\build2\Debug\ ")
+        message=t
+        # print(t)
