@@ -22,6 +22,7 @@ class Children:
             QVBoxLayout, 'layersList_QVBoxLayout')
         self.qt_inputWidth_QLineEdit = self.ui.findChild(
             QLineEdit, 'inputWidth_QLineEdit')
+        print(self.qt_inputWidth_QLineEdit)
         self.qt_inputHeight_QLineEdit = self.ui.findChild(
             QLineEdit, 'inputHeight_QLineEdit')
         self.qt_batchSize_QLineEdit = self.ui.findChild(
@@ -29,7 +30,7 @@ class Children:
         self.qt_learningRate_QLineEdit = self.ui.findChild(
             QLineEdit, 'learningRate_QLineEdit')
         self.qt_numEpochs_QLineEdit = self.ui.findChild(
-            QLineEdit, 'numEpochs_QLineEdit')
+            QLineEdit, 'numberEpochs_QLineEdit')
         self.qt_selectedOptimizer_QLineEdit = self.ui.findChild(
             QLineEdit, 'selectedOptimizer_QLineEdit')
         self.qt_selectedLossFunc_QLineEdit = self.ui.findChild(
