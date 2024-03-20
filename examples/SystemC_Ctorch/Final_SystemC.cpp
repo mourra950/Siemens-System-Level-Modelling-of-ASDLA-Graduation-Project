@@ -33,7 +33,7 @@ void setMKLThreads()
 
 int sc_main(int argc, char *argv[])
 {
-    cout << "\nOmar1\n";
+  //  cout << "\nOmar1\n";
 
     setMKLThreads();
     // Create instances of the initiator and target modules and give a name to the instance
@@ -43,6 +43,6 @@ int sc_main(int argc, char *argv[])
     initiator.init_socket.bind(target.target_socket);
     // Start simulation
     sc_start();
-    system("pause");
+    // system("pause");
     return 0;
 }
