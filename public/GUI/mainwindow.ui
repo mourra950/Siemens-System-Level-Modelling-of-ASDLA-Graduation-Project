@@ -97,7 +97,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLineEdit" name="inputWidth_lineEdit"/>
+               <widget class="QLineEdit" name="inputWidth_QLineEdit"/>
               </item>
               <item row="2" column="0">
                <spacer name="verticalSpacer_9">
@@ -143,7 +143,7 @@
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QLineEdit" name="inputHeight_lineEdit"/>
+               <widget class="QLineEdit" name="inputHeight_QLineEdit"/>
               </item>
               <item row="6" column="0">
                <spacer name="verticalSpacer_2">
@@ -169,7 +169,7 @@
                </widget>
               </item>
               <item row="8" column="1">
-               <widget class="QLineEdit" name="batchSize_lineEdit"/>
+               <widget class="QLineEdit" name="batchSize_QLineEdit"/>
               </item>
               <item row="9" column="0">
                <spacer name="verticalSpacer_3">
@@ -192,7 +192,7 @@
                </widget>
               </item>
               <item row="10" column="1">
-               <widget class="QLineEdit" name="learningRate_lineEdit"/>
+               <widget class="QLineEdit" name="learningRate_QLineEdit"/>
               </item>
               <item row="12" column="0">
                <widget class="QLabel" name="numberEpochs_label">
@@ -202,7 +202,7 @@
                </widget>
               </item>
               <item row="12" column="1">
-               <widget class="QLineEdit" name="numberEpochs_lineEdit"/>
+               <widget class="QLineEdit" name="numberEpochs_QLineEdit"/>
               </item>
               <item row="11" column="0">
                <spacer name="verticalSpacer_4">
