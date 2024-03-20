@@ -56,6 +56,7 @@ class DataSubmission:
                 # print(layer['params'],params_names[i],param_value,layer_type)
                 layer['params'][params_names[i]] = param_value
         tempstring+=")"
+        print(tempstring)
         try:
             exec(tempstring)
         except Exception as e:

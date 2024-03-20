@@ -62,5 +62,9 @@ class Children:
         ##########################################################
         self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
             QPushButton, 'Create_transfer_Model_QPushButton')
+        # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
+        #     QPushButton, 'Train_transfer_Model_QPushButton')
+        # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
+        #     QPushButton, 'Run_transfer_Model_QPushButton')
         self.Pretrained_model_ComboBox = self.ui.findChild(
             QComboBox, 'Pretrained_model_ComboBox')

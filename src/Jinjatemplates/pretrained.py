@@ -17,6 +17,7 @@ VAL_SPLIT = 0.15
 TEST_SPLIT = 0.1
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = models.resnet18(weights='DEFAULT')
+
 for name, param in model.named_parameters():
     # print(param[0])
     print(param.shape)
@@ -35,9 +36,9 @@ for name, param in model.named_parameters():
 
 for param in model.parameters():
     param.requires_grad = False
-print(height,width)
+print(height, width)
 transform = transforms.Compose([
-    v2.Resize((height, width)),
+    v2.Resize((224, 224)),
     v2.Grayscale(num_output_channels=channels),  # Convert images to RGB format
     # Convert images to PyTorch tensors
     v2.ToImage(), v2.ToDtype(torch.float32, scale=True)
@@ -52,9 +53,7 @@ test_dataloader = DataLoader(
     test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 loss_fn = nn.CrossEntropyLoss()
 class_names = train_dataset.classes
-model = models.resnet18(weights='DEFAULT')
-for param in model.parameters():
-    param.requires_grad = False
+
 
 num_ftrs = model.fc.in_features
 # Here the size of each output sample is set to 2.
@@ -87,7 +86,7 @@ for e in range(0, EPOCHS):
     valCorrect = 0
     # loop over the training set
     for (x, y) in train_dataloader:
-        print("hamada")
+        # print("hamada")
         # send the input to the device
         (x, y) = (x.to(device), y.to(device))
         # perform a forward pass and calculate the training loss
@@ -128,5 +127,5 @@ testAccuracy = testCorrect / len(test_dataloader.dataset)
 print("Train Accuracy:", trainAccuracy)
 print("Test Accuracy:", testAccuracy)
 tensors = torch.jit.script(model)
-tensors.save("E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/result/model2.pt")
-
+tensors.save(
+    "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/result/model3.pt")

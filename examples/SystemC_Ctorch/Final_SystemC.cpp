@@ -33,7 +33,7 @@ void setMKLThreads()
 
 int sc_main(int argc, char *argv[])
 {
-  //  cout << "\nOmar1\n";
+  //  cout << "\nOmar\n";
 
     setMKLThreads();
     // Create instances of the initiator and target modules and give a name to the instance

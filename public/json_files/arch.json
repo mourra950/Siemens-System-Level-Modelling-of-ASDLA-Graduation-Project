@@ -1,33 +1,36 @@
 {
   "layers": [
     {
+      "type": "AdaptiveAvgPool2d",
+      "params": {
+        "output_size": 10
+      },
+      "name": "adaptiveavgpool2d_1"
+    },
+    {
+      "type": "AvgPool2d",
+      "params": {
+        "kernel_size": 0,
+        "stride": 1,
+        "padding": 0,
+        "divisor_override": 0
+      },
+      "name": "avgpool2d_1"
+    },
+    {
       "type": "AdaptiveMaxPool2d",
       "params": {
-        "output_size": 1
+        "output_size": 0
       },
       "name": "adaptivemaxpool2d_1"
-    },
-    {
-      "type": "AdaptiveMaxPool2d",
-      "params": {
-        "output_size": 1
-      },
-      "name": "adaptivemaxpool2d_2"
-    },
-    {
-      "type": "AdaptiveMaxPool2d",
-      "params": {
-        "output_size": 1
-      },
-      "name": "adaptivemaxpool2d_3"
     }
   ],
   "misc_params": {
-    "width": 56,
-    "height": 56,
+    "width": 10,
+    "height": 10,
     "channels": 1,
-    "batch_size": 8,
-    "num_epochs": 100,
+    "batch_size": 65,
+    "num_epochs": 122121,
     "optimizer": {
       "type": "ASGD",
       "params": {
@@ -39,9 +42,12 @@
       }
     },
     "loss_func": {
-      "type": "BCELoss",
+      "type": "AdaptiveLogSoftmaxWithLoss",
       "params": {
-        "reduction": "mean"
+        "in_features": 1,
+        "n_classes": 1,
+        "cutoffs": 0,
+        "div_value": 4.0
       }
     }
   }
