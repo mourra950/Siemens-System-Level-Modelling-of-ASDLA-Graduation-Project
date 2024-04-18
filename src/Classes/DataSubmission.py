@@ -8,21 +8,12 @@ from PySide6.QtWidgets import (
 class DataSubmission:
 
     def on_submit_params_clicked(self):
-        print("ana weselt params")
-        print("aywa")
-        self.fetch_data_params("dada",self.qt_inputWidth_QSpinBox)
-        self.architecture['misc_params']['width'] = self.qt_inputWidth_QSpinBox.value(
-        )
-        self.architecture['misc_params']['height'] = self.qt_inputHeight_QSpinBox.value(
-        )
-        self.architecture['misc_params']['channels'] = self.qt_inputType_QSpinBox.value(
-        )
-
-        self.architecture['misc_params']['batch_size'] = self.qt_batchSize_QSpinBox.value(
-        )
-
-        self.architecture['misc_params']['num_epochs'] = self.qt_numEpochs_QSpinBox.value(
-        )
+        self.fetch_data_params('width', self.qt_inputWidth_QSpinBox)
+        self.fetch_data_params('height', self.qt_inputHeight_QSpinBox)
+        self.fetch_data_params('channels',  self.qt_inputType_QSpinBox)
+        self.fetch_data_params('batch_size', self.qt_batchSize_QSpinBox)
+        self.fetch_data_params('num_epochs', self.qt_numEpochs_QSpinBox)
+        self.fetch_data_params('width', self.qt_inputWidth_QSpinBox)
         self.architecture['misc_params']['optimizer'] = self.selected_optimizer
         self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
 
@@ -31,11 +22,12 @@ class DataSubmission:
 
     def fetch_data_params(self, param_name, widget):
         try:
-            print("lalala")
-            # self.architecture['misc_params'][param_name]
-            print(type(widget)==QSpinBox,type(widget)==QSpinBox)
+            if (type(widget) == QSpinBox):
+                self.architecture['misc_params'][param_name] = widget.value()
+            elif (type(widget) == QLineEdit):
+                self.architecture['misc_params'][param_name] = widget.text()
         except:
-            ...
+            print(f"error in {param_name}")
         ...
 
     def on_submit_arch_clicked(self):
