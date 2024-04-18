@@ -1,36 +1,11 @@
 {
-  "layers": [
-    {
-      "type": "AdaptiveAvgPool2d",
-      "params": {
-        "output_size": 10
-      },
-      "name": "adaptiveavgpool2d_1"
-    },
-    {
-      "type": "AvgPool2d",
-      "params": {
-        "kernel_size": 0,
-        "stride": 1,
-        "padding": 0,
-        "divisor_override": 0
-      },
-      "name": "avgpool2d_1"
-    },
-    {
-      "type": "AdaptiveMaxPool2d",
-      "params": {
-        "output_size": 0
-      },
-      "name": "adaptivemaxpool2d_1"
-    }
-  ],
+  "layers": [],
   "misc_params": {
-    "width": 10,
-    "height": 10,
+    "width": 1,
+    "height": 1,
     "channels": 1,
-    "batch_size": 65,
-    "num_epochs": 122121,
+    "batch_size": 0,
+    "num_epochs": 1,
     "optimizer": {
       "type": "ASGD",
       "params": {
