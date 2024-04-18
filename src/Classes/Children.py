@@ -3,7 +3,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QLineEdit,
     QRadioButton,
-    QComboBox
+    QComboBox, QSpinBox
 
 )
 
@@ -20,25 +20,25 @@ class Children:
         self.qt_layers_scroll_box = self.ui.findChild(QVBoxLayout, "Scrollbox")
         self.qt_layersList_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, 'layersList_QVBoxLayout')
-        self.qt_inputWidth_QLineEdit = self.ui.findChild(
-            QLineEdit, 'inputWidth_QLineEdit')
-        print(self.qt_inputWidth_QLineEdit)
-        self.qt_inputHeight_QLineEdit = self.ui.findChild(
-            QLineEdit, 'inputHeight_QLineEdit')
-        self.qt_batchSize_QLineEdit = self.ui.findChild(
-            QLineEdit, 'batchSize_QLineEdit')
+        self.qt_inputWidth_QSpinBox = self.ui.findChild(
+            QSpinBox, 'inputWidth_QSpinBox')
+        # print(self.qt_inputWidth_QLineEdit)
+        self.qt_inputHeight_QSpinBox = self.ui.findChild(
+            QSpinBox, 'inputHeight_QSpinBox')
+        self.qt_batchSize_QSpinBox = self.ui.findChild(
+            QSpinBox, 'batchSize_QSpinBox')
         self.qt_learningRate_QLineEdit = self.ui.findChild(
             QLineEdit, 'learningRate_QLineEdit')
-        self.qt_numEpochs_QLineEdit = self.ui.findChild(
-            QLineEdit, 'numberEpochs_QLineEdit')
+        self.qt_numEpochs_QSpinBox = self.ui.findChild(
+            QSpinBox, 'numberEpochs_QSpinBox')
         self.qt_selectedOptimizer_QLineEdit = self.ui.findChild(
             QLineEdit, 'selectedOptimizer_QLineEdit')
         self.qt_selectedLossFunc_QLineEdit = self.ui.findChild(
             QLineEdit, 'selectedLossFunc_QLineEdit')
-        self.qt_inputType_RGB_QRadioButton = self.ui.findChild(
-            QRadioButton, 'inputType_RGB_QRadioButton')
-        self.qt_inputType_grayScale_QRadioButton = self.ui.findChild(
-            QRadioButton, 'inputType_grayScale_QRadioButton')
+        # replacment
+        self.qt_inputType_QSpinBox = self.ui.findChild(
+            QSpinBox, 'inputChannelsSpinBox')
+
         self.qt_addedLayers_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, 'addedLayers_QVBoxLayout')
         self.qt_optimizersList_QVBoxLayout = self.ui.findChild(
