@@ -10,13 +10,13 @@ from torch.optim import lr_scheduler
 
 
 # initiallization
-BATCH_SIZE = 64
-EPOCHS = 1
+BATCH_SIZE = 256
+EPOCHS = 50
 TRAIN_SPLIT = 0.75
 VAL_SPLIT = 0.15
 TEST_SPLIT = 0.1
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = models.resnet18(weights='DEFAULT')
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+model = models.googlenet(weights='DEFAULT')
 
 for name, param in model.named_parameters():
     # print(param[0])
@@ -28,17 +28,12 @@ for name, param in model.named_parameters():
 
     # print(batch)
     break
-# print(model.named_parameters()[0])
-# Get the input size of the model
-# print(model.__init__)
-# input_size = tuple(model.children().__next__().weight.size()[2:])
-# channels = model.children().__next__().weight.size()[1]
 
 for param in model.parameters():
     param.requires_grad = False
 print(height, width)
 transform = transforms.Compose([
-    v2.Resize((224, 224)),
+    v2.Resize((28, 28)),
     v2.Grayscale(num_output_channels=channels),  # Convert images to RGB format
     # Convert images to PyTorch tensors
     v2.ToImage(), v2.ToDtype(torch.float32, scale=True)
@@ -48,14 +43,15 @@ train_dataset = mnist.MNIST(root='E:/Github/Siemens-System-Level-Modelling-of-AS
 test_dataset = mnist.MNIST(root='E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/MNIST/test',
                            train=False, download=True, transform=transform)
 train_dataloader = DataLoader(
-    train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+    train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True)
 test_dataloader = DataLoader(
-    test_dataset, batch_size=BATCH_SIZE, shuffle=False)
+    test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True)
 loss_fn = nn.CrossEntropyLoss()
 class_names = train_dataset.classes
 
 
 num_ftrs = model.fc.in_features
+print(num_ftrs)
 # Here the size of each output sample is set to 2.
 # Alternatively, it can be generalized to ``nn.Linear(num_ftrs, len(class_names))``.
 model.fc = nn.Linear(num_ftrs, len(class_names))
@@ -128,4 +124,4 @@ print("Train Accuracy:", trainAccuracy)
 print("Test Accuracy:", testAccuracy)
 tensors = torch.jit.script(model)
 tensors.save(
-    "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/result/model3.pt")
+    "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/result/model6.pt")

@@ -7,3 +7,4 @@ build
 data
 examples/SystemC_Ctorch/Pt/model2.pt
 *.pt
+public/json_files/arch.json
