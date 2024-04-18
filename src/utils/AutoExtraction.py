@@ -1,6 +1,9 @@
 from ast import List
 import inspect
 import torch.nn.modules as nn
+import torchvision.models as models
+
+
 import torch.optim as optim
 import types
 import copy
@@ -144,5 +147,10 @@ class AutoExtraction:
         self.OPTIMIZERS = torch_optimizers_dict
 
     def extract_pretrained_models(self):
-        # TO DO
-        self.PRETRAINED_MODELS = ["resnet", "hamada"]
+
+        # Get a list of all available pre-trained models
+        pretrained_models = dir(models)
+
+        # Filter out the models that start with "__" (internal attributes) and those that end with "_"
+        self.PRETRAINED_MODELS = [model for model in pretrained_models if not model.startswith(
+            "__") and not model.endswith("_") and model[0].islower()]

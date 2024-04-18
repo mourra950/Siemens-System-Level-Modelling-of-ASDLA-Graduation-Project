@@ -21,7 +21,7 @@ class LayerDialog():
                     paramValue_QWidget = QCheckBox()
                     paramValue_QWidget.setChecked(param['defaultvalue'])
                 elif int in param["type"].__args__:
-                    paramValue_QWidget = QSpinBox(minimum=1, maximum=1000)
+                    paramValue_QWidget = QSpinBox(minimum=-1000, maximum=1000)
                     paramValue_QWidget.setValue(0)
                 else:
                     paramValue_QWidget = QLineEdit()

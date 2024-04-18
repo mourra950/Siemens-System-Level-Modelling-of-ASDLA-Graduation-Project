@@ -1,5 +1,6 @@
 from jinja2 import Environment, PackageLoader, select_autoescape, FileSystemLoader
 import os
+import json
 
 params_list = [
     "out_channels",
@@ -72,12 +73,11 @@ env = Environment(loader=FileSystemLoader(template_dir))
 template_filename = "template.py.jinja"
 template = env.get_template(template_filename)
 
+with open("./test.json", "r") as json_file:
+    data = json.load(json_file)
 channel = 2
 result_file = template.render(
-    layers=[
-        {"layer": "Conv1d", "params": {"in_channels": "3", "out_channels": "8"}},
-        {"layer": "Conv1d", "params": {"in_channels": "5"}},
-    ],
+    layers=data,
     params_list=params_list,
 )
 

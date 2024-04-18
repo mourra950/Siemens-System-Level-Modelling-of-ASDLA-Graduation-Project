@@ -1,33 +1,11 @@
 {
-  "layers": [
-    {
-      "type": "AdaptiveMaxPool2d",
-      "params": {
-        "output_size": 1
-      },
-      "name": "adaptivemaxpool2d_1"
-    },
-    {
-      "type": "AdaptiveMaxPool2d",
-      "params": {
-        "output_size": 1
-      },
-      "name": "adaptivemaxpool2d_2"
-    },
-    {
-      "type": "AdaptiveMaxPool2d",
-      "params": {
-        "output_size": 1
-      },
-      "name": "adaptivemaxpool2d_3"
-    }
-  ],
+  "layers": [],
   "misc_params": {
-    "width": 56,
-    "height": 56,
+    "width": 1,
+    "height": 1,
     "channels": 1,
-    "batch_size": 8,
-    "num_epochs": 100,
+    "batch_size": 0,
+    "num_epochs": 1,
     "optimizer": {
       "type": "ASGD",
       "params": {
@@ -39,9 +17,12 @@
       }
     },
     "loss_func": {
-      "type": "BCELoss",
+      "type": "AdaptiveLogSoftmaxWithLoss",
       "params": {
-        "reduction": "mean"
+        "in_features": 1,
+        "n_classes": 1,
+        "cutoffs": 0,
+        "div_value": 4.0
       }
     }
   }

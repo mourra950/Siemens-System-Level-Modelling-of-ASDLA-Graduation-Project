@@ -3,7 +3,9 @@ import threading
 from PySide6.QtWidgets import (
     QMessageBox
 )
-message =""
+message = ""
+
+
 class Connections:
     def __init__(self) -> None:
         self.qt_submitParams_QPushButton.clicked.connect(
@@ -20,18 +22,25 @@ class Connections:
 
     def testCreate(self):
         global message
-        t=threading.Thread(
+        print("hamada")
+        t = threading.Thread(
             target=self.run_systemc
         )
         t.start()
         t.join()
-        q=QMessageBox(text=f"{message}")
+        q = QMessageBox(text=f"{message}")
         q.exec()
-        
-        
+
     def run_systemc(self):
         global message
-        # subprocess.run(["cmake","--build",r"E:\Github\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\examples\SystemC_Ctorch\build2","--clean-first"])
-        t=subprocess.run(["Final_SystemC.exe"],shell=True,cwd=r"E:\Github\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\examples\SystemC_Ctorch\build2\Debug\ ")
-        message=t
+        subprocess.run(["cmake","--build",r"E:\Github\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\examples\SystemC_Ctorch\build2","--clean-first"])
+        result = subprocess.run(["Final_SystemC.exe"], shell=True,
+                                cwd=r"E:\Github\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\examples\SystemC_Ctorch\build2\Debug\ ", stdout=subprocess.PIPE, text=True)
+        print(result.stdout)
+        if result.returncode == 0:
+            output = result.stdout
+            message = output
+        else:
+            print(result.stderr)
+
         # print(t)
