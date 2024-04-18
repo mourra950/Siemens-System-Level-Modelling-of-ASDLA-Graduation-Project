@@ -10,16 +10,15 @@ from torch.optim import lr_scheduler
 
 
 # initiallization
-BATCH_SIZE = 256
-EPOCHS = 50
+BATCH_SIZE = {{data.batch_size}}
+EPOCHS = {{data.num_epochs}}
 TRAIN_SPLIT = 0.75
 VAL_SPLIT = 0.15
 TEST_SPLIT = 0.1
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-model = models.googlenet(weights='DEFAULT')
+model = models.{{data.pretrained_model_name}}(weights='DEFAULT')
 
 for name, param in model.named_parameters():
-    # print(param[0])
     print(param.shape)
     batch = param.shape[0]
     channels = param.shape[1]
@@ -31,9 +30,8 @@ for name, param in model.named_parameters():
 
 for param in model.parameters():
     param.requires_grad = False
-print(height, width)
 transform = transforms.Compose([
-    v2.Resize((28, 28)),
+    v2.Resize((height, width)),
     v2.Grayscale(num_output_channels=channels),  # Convert images to RGB format
     # Convert images to PyTorch tensors
     v2.ToImage(), v2.ToDtype(torch.float32, scale=True)
@@ -52,14 +50,11 @@ class_names = train_dataset.classes
 
 num_ftrs = model.fc.in_features
 print(num_ftrs)
-# Here the size of each output sample is set to 2.
-# Alternatively, it can be generalized to ``nn.Linear(num_ftrs, len(class_names))``.
 model.fc = nn.Linear(num_ftrs, len(class_names))
-
 model = model.to(device)
 
 # Observe that all parameters are being optimized
-optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+optimizer = optim.{{data.optimizer.type}}(model.parameters(), lr={{data.optimizer.lr}}, momentum=0.9)
 
 # Decay LR by a factor of 0.1 every 7 epochs
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
