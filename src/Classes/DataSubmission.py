@@ -2,8 +2,10 @@ import json
 from PySide6.QtWidgets import (
     QMessageBox,
     QLineEdit,
-    QSpinBox
+    QSpinBox,
+    QFileDialog
 )
+
 
 class DataSubmission:
 
@@ -16,9 +18,13 @@ class DataSubmission:
         self.fetch_data_params('width', self.qt_inputWidth_QSpinBox)
         self.architecture['misc_params']['optimizer'] = self.selected_optimizer
         self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
-
-        with open(self.arch_json_path, 'w') as f:
-            f.write(json.dumps(self.architecture, indent=2))
+        path, _ = QFileDialog.getSaveFileName(
+            None, "Save JSON File", self.basedir, "JSON Files (*.json)")
+        if path:
+            # Example JSON data to save
+            with open(path, 'w') as f:
+                f.write(json.dumps(self.architecture, indent=2))
+            print("JSON file saved successfully.")
 
     def fetch_data_params(self, param_name, widget):
         try:

@@ -39,7 +39,8 @@ class MainUI(QtCore.QObject):
         self.label1.setText(str(self.path))
 
     def getDirectory(self):
-        dir_name = Path(QFileDialog.getExistingDirectory(None, "Select a Directory"))
+        dir_name = Path(QFileDialog.getExistingDirectory(
+            None, "Select a Directory"))
         print(dir_name)
         self.path = dir_name
         self.label1.setText(str(self.path))
