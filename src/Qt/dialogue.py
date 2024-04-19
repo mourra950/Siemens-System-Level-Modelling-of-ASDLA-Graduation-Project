@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
     QComboBox
 )
 import inspect
+import typing
 
 statics = {
     "device": [{"text": "cpu", "data": "'cpu'"}, {"text": "cuda", "data": "'cuda'"}, ],
@@ -37,7 +38,10 @@ class LayerDialog():
                 try:
                     if bool in param["type"].__args__:
                         paramValue_QWidget = QCheckBox()
-                        paramValue_QWidget.setChecked(param['defaultvalue'])
+                        try:
+                            paramValue_QWidget.setChecked(param['defaultvalue'])
+                        except:
+                            pass
                     elif int in param["type"].__args__:
                         paramValue_QWidget = QSpinBox(
                             minimum=-1000, maximum=1000)
@@ -52,7 +56,7 @@ class LayerDialog():
                             paramValue_QWidget.setText(
                                 str(param['defaultvalue']))
                 except:
-                    if bool == param["type"]:
+                    if (bool == param["type"]) or (typing.Optional[bool] == param["type"]):
                         paramValue_QWidget = QCheckBox()
                         paramValue_QWidget.setChecked(param['defaultvalue'])
                     elif int == param["type"]:
@@ -64,6 +68,7 @@ class LayerDialog():
                         paramValue_QWidget.setSingleStep(0.00000001)
                         paramValue_QWidget.setDecimals(8)
                         paramValue_QWidget.setValue(0.00)
+
                     else:
                         paramValue_QWidget = QLineEdit()
                         if (

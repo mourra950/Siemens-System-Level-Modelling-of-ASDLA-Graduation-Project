@@ -38,7 +38,7 @@ class Controller:
         ################################
 
         allParamsColumn_QVBoxLayout.addWidget(QLabel())
-        submitLayer_QPushButton = QPushButton('Submit Layer2')
+        submitLayer_QPushButton = QPushButton('Submit Layer')
 
         ##############################
         submitLayer_QPushButton.clicked.connect(

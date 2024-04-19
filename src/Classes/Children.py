@@ -3,7 +3,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QLineEdit,
     QRadioButton,
-    QComboBox, 
+    QComboBox,
     QSpinBox
 )
 
@@ -22,7 +22,6 @@ class Children:
             QVBoxLayout, 'layersList_QVBoxLayout')
         self.qt_inputWidth_QSpinBox = self.ui.findChild(
             QSpinBox, 'inputWidth_QSpinBox')
-        # print(self.qt_inputWidth_QLineEdit)
         self.qt_inputHeight_QSpinBox = self.ui.findChild(
             QSpinBox, 'inputHeight_QSpinBox')
         self.qt_batchSize_QSpinBox = self.ui.findChild(
@@ -33,10 +32,11 @@ class Children:
             QLineEdit, 'selectedOptimizer_QLineEdit')
         self.qt_selectedLossFunc_QLineEdit = self.ui.findChild(
             QLineEdit, 'selectedLossFunc_QLineEdit')
+
         # replacment
+
         self.qt_inputType_QSpinBox = self.ui.findChild(
             QSpinBox, 'inputChannelsSpinBox')
-
         self.qt_addedLayers_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, 'addedLayers_QVBoxLayout')
         self.qt_optimizersList_QVBoxLayout = self.ui.findChild(
@@ -60,6 +60,7 @@ class Children:
         ##########################################################
         self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
             QPushButton, 'Create_transfer_Model_QPushButton')
+
         # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
         #     QPushButton, 'Train_transfer_Model_QPushButton')
         # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(

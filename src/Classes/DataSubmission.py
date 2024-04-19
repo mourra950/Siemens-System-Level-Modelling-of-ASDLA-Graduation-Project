@@ -28,12 +28,9 @@ class DataSubmission:
                 self.architecture['misc_params'][param_name] = widget.text()
         except:
             print(f"error in {param_name}")
-        ...
 
     def on_submit_arch_clicked(self):
-        print("ana weselt arch")
         self.validate_and_correct_layers(self.architecture)
-        # et2aked eno beycareate
         self.save_json()
 
     def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog, qt_layout, arch_dict):
@@ -60,7 +57,6 @@ class DataSubmission:
         try:
             exec(tempstring)
         except Exception as e:
-            # print(type(str(e)))
             print("error", e)
             dlg.setText(str(e))
             dlg.exec()
@@ -71,7 +67,6 @@ class DataSubmission:
         path, _ = QFileDialog.getSaveFileName(
             None, "Save JSON File", self.basedir, "JSON Files (*.json)")
         if path:
-            # Example JSON data to save
             with open(path, 'w') as f:
                 f.write(json.dumps(self.architecture, indent=2))
             print("JSON file saved successfully.")

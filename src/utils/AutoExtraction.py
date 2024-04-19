@@ -71,6 +71,7 @@ class AutoExtraction:
                         inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
                         and inspector[i].name not in self.unnecessary_params
                     ):
+                        
                         params_list.append(
                             {
                                 "name": inspector[i].name,
