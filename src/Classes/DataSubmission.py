@@ -18,13 +18,7 @@ class DataSubmission:
         self.fetch_data_params('width', self.qt_inputWidth_QSpinBox)
         self.architecture['misc_params']['optimizer'] = self.selected_optimizer
         self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
-        path, _ = QFileDialog.getSaveFileName(
-            None, "Save JSON File", self.basedir, "JSON Files (*.json)")
-        if path:
-            # Example JSON data to save
-            with open(path, 'w') as f:
-                f.write(json.dumps(self.architecture, indent=2))
-            print("JSON file saved successfully.")
+        self.save_json()
 
     def fetch_data_params(self, param_name, widget):
         try:
@@ -40,8 +34,7 @@ class DataSubmission:
         print("ana weselt arch")
         self.validate_and_correct_layers(self.architecture)
         # et2aked eno beycareate
-        with open(self.arch_json_path, 'w') as f:
-            f.write(json.dumps(self.architecture, indent=2))
+        self.save_json()
 
     def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog, qt_layout, arch_dict):
         # Initialize message error box
@@ -73,3 +66,12 @@ class DataSubmission:
             dlg.exec()
         self.create_layer_node(layer, -1, qt_layout, arch_dict)
         paramsWindow_QDialog.close()
+
+    def save_json(self):
+        path, _ = QFileDialog.getSaveFileName(
+            None, "Save JSON File", self.basedir, "JSON Files (*.json)")
+        if path:
+            # Example JSON data to save
+            with open(path, 'w') as f:
+                f.write(json.dumps(self.architecture, indent=2))
+            print("JSON file saved successfully.")

@@ -70,7 +70,7 @@
         <item>
          <layout class="QVBoxLayout" name="Params_Layout">
           <property name="bottomMargin">
-           <number>29</number>
+           <number>0</number>
           </property>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -309,7 +309,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>388</width>
-                       <height>80</height>
+                       <height>94</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -373,7 +373,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>388</width>
-                       <height>79</height>
+                       <height>93</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -417,7 +417,7 @@
              <widget class="QPushButton" name="submitParams_QPushButton">
               <property name="maximumSize">
                <size>
-                <width>600</width>
+                <width>2000</width>
                 <height>1000</height>
                </size>
               </property>
