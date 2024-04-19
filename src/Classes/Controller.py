@@ -40,12 +40,12 @@ class Controller:
         ################################
 
         allParamsColumn_QVBoxLayout.addWidget(QLabel())
-        submitLayer_QPushButton = QPushButton('Submit Layer')
+        submitLayer_QPushButton = QPushButton('Submit Layer2')
 
         ##############################
         submitLayer_QPushButton.clicked.connect(
-            lambda submit_func=on_submit_func, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog, q_layout=args[0], arch = args[1]: submit_func(
-                i, j, k, l, q_layout,arch)
+            lambda submit_func=on_submit_func, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog, q_layout=args[0], arch=args[1]: submit_func(
+                i, j, k, l, q_layout, arch)
         )
 
         allParamsColumn_QVBoxLayout.addWidget(submitLayer_QPushButton)
@@ -53,7 +53,7 @@ class Controller:
         paramsWindow_QDialog.setWindowTitle(f"{func_name}")
         paramsWindow_QDialog.exec()
 
-    def on_select_lossfunc_clicked(self, lossfunc_type, params_names, params_value_widgets, paramsWindow_QDialog,*args):
+    def on_select_lossfunc_clicked(self, lossfunc_type, params_names, params_value_widgets, paramsWindow_QDialog, *args):
         self.selected_lossfunc = {
             'type': lossfunc_type,
             'params': dict()

@@ -2,10 +2,10 @@ import os
 import sys
 from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import (
-    QVBoxLayout,
-    QPushButton,
-    QLineEdit,
-    QHBoxLayout, QLabel, QCheckBox, QDialog, QSpinBox, QRadioButton
+    QCheckBox,
+    QSpinBox,
+    QDoubleSpinBox,
+    QComboBox
 )
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
@@ -24,10 +24,10 @@ from Qt.Buttons import QTButtons
 from Qt.Dialogue import LayerDialog
 
 
-
 sys.path.append("./")
 
-class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,FileGenerator,Controller,Connections,TensorView,ResBuildWindow,QTButtons,LayerDialog):
+
+class Initializer(Children, DataSubmission, FillingQt, Validator, LayerNodeManager, FileGenerator, Controller, Connections, TensorView, ResBuildWindow, QTButtons, LayerDialog):
     def __init__(self) -> None:
         print("Initializer")
         Children.__init__(self)
@@ -38,14 +38,16 @@ class Initializer(Children,DataSubmission,FillingQt,Validator,LayerNodeManager,F
         Connections.__init__(self)
         TensorView.__init__(self)
         self.ui.setWindowTitle("The Awesome Project")
-        
-        
 
     def get_widget_data(self, widget):
         if isinstance(widget, QCheckBox):
             param_value = widget.isChecked()
-        if isinstance(widget, QSpinBox):
+        elif isinstance(widget, QSpinBox):
             param_value = widget.value()
+        elif isinstance(widget, QDoubleSpinBox):
+            param_value = widget.value()
+        elif isinstance(widget, QComboBox):
+            param_value = widget.currentData()
         else:
             param_value = widget.text().strip()
             try:

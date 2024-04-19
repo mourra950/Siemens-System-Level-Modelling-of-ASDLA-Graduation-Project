@@ -21,7 +21,6 @@ def main():
     # tensoboardproccess = subprocess.Popen(
     #     ["tensorboard", "--logdir", "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/tensorboardlogs"])
     app = QApplication(sys.argv)
-    print("hamada")
     window = MainUI()
     app.exec()
     # tensoboardproccess.kill()

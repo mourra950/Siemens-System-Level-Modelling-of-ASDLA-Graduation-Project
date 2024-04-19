@@ -8,6 +8,12 @@ import torch.optim as optim
 import types
 import copy
 
+statics = [{
+    "name": "device", "options": ["cpu", "cuda"],
+    "name": "dtype", "options": ["torch.float32"],
+    "name": "padding_mode", "options": ['zeros', 'reflect', 'replicate', 'circular'],
+}]
+
 
 class AutoExtraction:
 
@@ -117,7 +123,7 @@ class AutoExtraction:
     def extract_torch_optimizers(self):
         torch_optimizers_names = dir(optim)
         torch_optimizers_dict = dict()
-
+        # print(torch_optimizers_names)
         for optimizer_name in torch_optimizers_names:
             obj = getattr(optim, optimizer_name)
 
@@ -126,6 +132,7 @@ class AutoExtraction:
                 params_list = list()
 
                 for i in inspector:
+
                     if (
                         inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
                         and
@@ -133,11 +140,19 @@ class AutoExtraction:
                         and not
                         isinstance(inspector[i].default, types.FunctionType)
                     ):
+                        # print(inspector[i].annotation,
+                        #       type(inspector[i].default))
+                        params = None
+                        if (inspector[i].annotation == inspect._empty):
+                            params = type(inspector[i].default)
+                        else:
+                            params = inspector[i].annotation
+
                         params_list.append(
                             {
                                 "name": inspector[i].name,
                                 "defaultvalue": inspector[i].default,
-                                "type": inspector[i].annotation,
+                                "type": params,
                             }
                         )
 
