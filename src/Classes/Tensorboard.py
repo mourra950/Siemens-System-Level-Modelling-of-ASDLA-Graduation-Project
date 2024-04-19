@@ -3,6 +3,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6 import QtCore
+from PySide6.QtCore import QUrl
 
 
 class TensorView:
@@ -12,4 +13,4 @@ class TensorView:
         # create and add the webview object qt
         self.tensorWeb = QWebEngineView()
         self.tensorQt.addWidget(self.tensorWeb)
-        self.tensorWeb.load(QtCore.QUrl("http://localhost:6006/"))
+        self.tensorWeb.setUrl(QUrl("http://localhost:6006/"))

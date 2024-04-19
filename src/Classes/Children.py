@@ -2,9 +2,8 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QPushButton,
     QLineEdit,
-    QRadioButton,
-    QComboBox, QSpinBox
-
+    QComboBox, 
+    QSpinBox
 )
 
 

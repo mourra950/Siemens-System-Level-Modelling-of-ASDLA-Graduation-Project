@@ -1,6 +1,5 @@
 from PySide6.QtWidgets import (
     QPushButton,
-    QComboBox
 )
 from PySide6.QtUiTools import QUiLoader
 

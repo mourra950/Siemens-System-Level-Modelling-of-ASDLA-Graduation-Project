@@ -1,9 +1,9 @@
 import json
-import torch
 from PySide6.QtWidgets import (
-    QDialog, QMessageBox, QLineEdit, QSpinBox
+    QMessageBox,
+    QLineEdit,
+    QSpinBox
 )
-
 
 class DataSubmission:
 

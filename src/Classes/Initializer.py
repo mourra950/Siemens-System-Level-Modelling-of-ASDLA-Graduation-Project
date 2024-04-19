@@ -1,15 +1,11 @@
 import os
 import sys
-from PySide6.QtUiTools import QUiLoader
 from PySide6.QtWidgets import (
     QCheckBox,
     QSpinBox,
     QDoubleSpinBox,
     QComboBox
 )
-from PySide6.QtUiTools import QUiLoader
-from PySide6 import QtCore
-import inspect
 from Classes.Children import Children
 from Classes.DataSubmission import DataSubmission
 from Classes.Filling import FillingQt
