@@ -2,6 +2,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QPushButton,
     QLineEdit,
+    QRadioButton,
     QComboBox, 
     QSpinBox
 )
@@ -26,8 +27,6 @@ class Children:
             QSpinBox, 'inputHeight_QSpinBox')
         self.qt_batchSize_QSpinBox = self.ui.findChild(
             QSpinBox, 'batchSize_QSpinBox')
-        self.qt_learningRate_QLineEdit = self.ui.findChild(
-            QLineEdit, 'learningRate_QLineEdit')
         self.qt_numEpochs_QSpinBox = self.ui.findChild(
             QSpinBox, 'numberEpochs_QSpinBox')
         self.qt_selectedOptimizer_QLineEdit = self.ui.findChild(

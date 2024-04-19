@@ -9,8 +9,6 @@ from PySide6.QtWidgets import (
 )
 import inspect
 
-import types
-from typing import Generic, TypeVar, Union
 statics = {
     "device": [{"text": "cpu", "data": "'cpu'"}, {"text": "cuda", "data": "'cuda'"}, ],
     "dtype": [{"text": "float32", "data": "torch.float32"}],
