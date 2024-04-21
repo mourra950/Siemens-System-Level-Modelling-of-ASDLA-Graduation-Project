@@ -10,8 +10,8 @@ from torch.optim import lr_scheduler
 
 
 # initiallization
-BATCH_SIZE = {{data.batch_size}}
-EPOCHS = {{data.num_epochs}}
+BATCH_SIZE = {{misc_params.batch_size}}
+EPOCHS = {{misc_params.num_epochs}}
 TRAIN_SPLIT = 0.75
 VAL_SPLIT = 0.15
 TEST_SPLIT = 0.1
@@ -52,7 +52,13 @@ model.fc = nn.Linear(num_ftrs, len(class_names))
 model = model.to(device)
 
 # Observe that all parameters are being optimized
-optimizer = optim.{{data.optimizer.type}}(model.parameters(), lr={{data.optimizer.lr}}, momentum=0.9)
+# optimizer = optim.{{data.optimizer.type}}(model.parameters(), lr={{data.optimizer.lr}}, momentum=0.9)
+# Create the chosen optimizer with parameters from the data dictionary
+optimizer = optim.{{misc_params.optimizer.type}}(
+    model.parameters(),
+    **{{misc_params.optimizer.params}}
+)
+
 
 # Decay LR by a factor of 0.1 every 7 epochs
 exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
