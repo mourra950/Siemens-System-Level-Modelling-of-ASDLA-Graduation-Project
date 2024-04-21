@@ -2,16 +2,6 @@ import os
 from PySide6.QtWidgets import QPushButton, QFileDialog, QComboBox
 from pathlib import Path
 from PySide6.QtUiTools import QUiLoader
-
-
-from PySide6.QtUiTools import QUiLoader
-from PySide6 import QtCore
-from pathlib import Path
-
-import os
-import sys
-from PySide6.QtWidgets import QPushButton, QFileDialog, QComboBox
-
 from jinja2 import Environment, FileSystemLoader
 import json
 
@@ -29,6 +19,12 @@ class DataOfTransfer:
             QComboBox, "Pretrained_model_ComboBox"
         )
         self.selected_pretrained_model = None
+        self.pretrained_model_combobox.currentIndexChanged.connect(
+            self.on_combobox_change
+        )
+
+    def on_combobox_change(self):
+        # Save the selected value in a variable
         self.selected_pretrained_model = self.pretrained_model_combobox.currentText()
 
         # choose Json File
@@ -63,13 +59,10 @@ class DataOfTransfer:
 
     json_file_path = getFile()
 
-    params_list = []
-
     if json_file_path:
 
         with open(json_file_path, "r") as json_file:
             data = json.load(json_file)
         result_file = template.render(
-            layers=data,
-            params_list=params_list,
+            layers=data["layers"], misc_params=data["misc_params"]
         )
