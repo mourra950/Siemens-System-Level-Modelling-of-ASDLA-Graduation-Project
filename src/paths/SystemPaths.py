@@ -1,5 +1,6 @@
 import os
 
+
 class SystemPaths:
     def __init__(self) -> None:
         print("System paths Class")
@@ -35,6 +36,10 @@ class SystemPaths:
             os.path.join(self.publicdir, "json_files/res.json"))
         self.arch_json_path = os.path.normpath(
             os.path.join(self.publicdir, "json_files/arch.json"))
+
+        # Template paths
+        self.jinja_templates = os.path.normpath(
+            os.path.join(self.publicdir, "jinja_templates"))
 
         # to work on later
         self.css_path = 'ui/skin.qss'
