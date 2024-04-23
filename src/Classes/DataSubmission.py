@@ -8,7 +8,21 @@ from PySide6.QtWidgets import (
 
 
 class DataSubmission:
-
+    # def __init__(self) -> None:
+    #     self.set_data_onChange('width', self.qt_inputWidth_QSpinBox)
+    #     self.set_data_onChange('height', self.qt_inputHeight_QSpinBox)
+    #     self.set_data_onChange('channels',  self.qt_inputType_QSpinBox)
+    #     self.set_data_onChange('batch_size', self.qt_batchSize_QSpinBox)
+    #     self.set_data_onChange('num_epochs', self.qt_numEpochs_QSpinBox)
+    #     self.set_data_onChange('width', self.qt_inputWidth_QSpinBox)
+    #     self.architecture['misc_params']['optimizer'] = self.selected_optimizer
+    #     self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
+    #     self.save_json()
+    # def set_data_onChange( param_name, widget):
+    #     t=QSpinBox()
+    #     t.connect.
+    #     widget.on
+        
     def on_submit_params_clicked(self):
         self.fetch_data_params('width', self.qt_inputWidth_QSpinBox)
         self.fetch_data_params('height', self.qt_inputHeight_QSpinBox)

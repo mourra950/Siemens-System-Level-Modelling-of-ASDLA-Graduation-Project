@@ -22,8 +22,13 @@ statics = {
         {"text": "replicate", "data": "'replicate'"},
         {"text": "circular", "data": "'circular'"},
     ],
+    "reduction":[
+        {"text": "none", "data": "'none'"},
+        {"text": "mean", "data": "'mean'"},
+        {"text": "sum", "data": "'sum'"},
+    ]
 }
-find = ["device", "dtype", "padding_mode"]
+find = ["device", "dtype", "padding_mode","reduction"]
 
 
 class LayerDialog:

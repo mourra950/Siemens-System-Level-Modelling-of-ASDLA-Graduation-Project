@@ -8,12 +8,6 @@ import torch.optim as optim
 import types
 import copy
 
-statics = [{
-    "name": "device", "options": ["cpu", "cuda"],
-    "name": "dtype", "options": ["torch.float32"],
-    "name": "padding_mode", "options": ['zeros', 'reflect', 'replicate', 'circular'],
-}]
-
 
 class AutoExtraction:
 
@@ -23,6 +17,9 @@ class AutoExtraction:
             "in_channels", "num_features", "in_features"]
         self.unnecessary_optimizer_params = [
             'params'
+        ]
+        self.unnecessary_loss_params = [
+            'reduce', 'size_average'
         ]
 
         self.extract_torch_layers()
@@ -71,7 +68,7 @@ class AutoExtraction:
                         inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
                         and inspector[i].name not in self.unnecessary_params
                     ):
-                        
+
                         params_list.append(
                             {
                                 "name": inspector[i].name,
@@ -107,6 +104,8 @@ class AutoExtraction:
                         inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
                         and not
                         isinstance(inspector[i].default, types.FunctionType)
+                        and
+                        inspector[i].name not in self.unnecessary_loss_params
                     ):
                         params_list.append(
                             {

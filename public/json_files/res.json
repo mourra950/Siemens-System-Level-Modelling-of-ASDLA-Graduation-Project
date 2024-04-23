@@ -1,9 +1,25 @@
 {
   "layers": [
     {
-      "type": "CELU",
+      "type": "AvgPool2d",
       "params": {
-        "alpha": 5.0
+        "kernel_size": 0,
+        "stride": 0,
+        "padding": 0,
+        "ceil_mode": false,
+        "count_include_pad": true,
+        "divisor_override": 0
+      }
+    },
+    {
+      "type": "Bilinear",
+      "params": {
+        "in1_features": 1,
+        "in2_features": 1,
+        "out_features": 1,
+        "bias": true,
+        "device": "'cpu'",
+        "dtype": "torch.float32"
       }
     }
   ]
