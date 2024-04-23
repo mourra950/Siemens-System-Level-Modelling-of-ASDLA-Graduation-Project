@@ -18,7 +18,7 @@ class Connections:
         self.pretrained_model_combobox.currentIndexChanged.connect(
             self.on_combobox_change
         )
-        self.Create_transfer_Model_QPushButton.clicked.connect(self.getFile)
+        self.Create_transfer_Model_QPushButton.clicked.connect(self.save_json_transfer)
         # TO DO
         # self.Create_transfer_learning_model_QPushButton.clicked.connect(
         #     self.testCreate)

@@ -16,27 +16,27 @@ class DataOfTransfer:
 
         # Read chosen model
 
-        self.selected_pretrained_model = None
+        self.selected_pretrained_model = self.pretrained_model_combobox.currentText()
 
     def on_combobox_change(self):
         # Save the selected value in a variable
         self.selected_pretrained_model = self.pretrained_model_combobox.currentText()
-
         # choose Json File
-        self.path = ""
         # self.ui = loader.load(os.path.join(basedir, "MainWindow.ui"), None)
         # self.ui.setWindowTitle("Testing File Picker")
 
         # self.ui.show()
 
-    def getFile(self):
-        path, _ = QFileDialog.getOpenFileName(
-            None, "Open file", basedir, "JSON Files (*.json)"
+    def save_json_transfer(self):
+        path, _ = QFileDialog.getSaveFileName(
+            None, "Save JSON file", basedir, "JSON Files (*.json)"
         )
-        self.path = Path(path)
-        # If a file was selected, save the file path
+        print(self.selected_pretrained_model)
+        self.architecture["transfer_model"] = self.selected_pretrained_model
         if path:
-            return path
+            with open(path, 'w') as f:
+                f.write(json.dumps(self.architecture, indent=2))
+            print("JSON file saved successfully.")
 
     # Render Json File Data
     def test_t(self):
@@ -54,5 +54,5 @@ class DataOfTransfer:
             with open(json_file_path, "r") as json_file:
                 data = json.load(json_file)
             result_file = template.render(
-                layers=data["layers"], misc_params=data["misc_params"]
+                layers=data["layers"], misc_params=data["misc_params"],transfer_model=data["transfer_model"]
             )
