@@ -20,13 +20,11 @@ class Children:
         self.qt_layersList_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, "layersList_QVBoxLayout"
         )
-        self.qt_inputWidth_QSpinBox = self.ui.findChild(
-            QSpinBox, "inputWidth_QSpinBox")
+        self.qt_inputWidth_QSpinBox = self.ui.findChild(QSpinBox, "inputWidth_QSpinBox")
         self.qt_inputHeight_QSpinBox = self.ui.findChild(
             QSpinBox, "inputHeight_QSpinBox"
         )
-        self.qt_batchSize_QSpinBox = self.ui.findChild(
-            QSpinBox, "batchSize_QSpinBox")
+        self.qt_batchSize_QSpinBox = self.ui.findChild(QSpinBox, "batchSize_QSpinBox")
         self.qt_numEpochs_QSpinBox = self.ui.findChild(
             QSpinBox, "numberEpochs_QSpinBox"
         )
@@ -39,8 +37,7 @@ class Children:
 
         # replacment
 
-        self.qt_inputType_QSpinBox = self.ui.findChild(
-            QSpinBox, "inputChannelsSpinBox")
+        self.qt_inputType_QSpinBox = self.ui.findChild(QSpinBox, "inputChannelsSpinBox")
         self.qt_addedLayers_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, "addedLayers_QVBoxLayout"
         )
@@ -74,6 +71,9 @@ class Children:
         # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
         #     QPushButton, "Create_transfer_Model_QPushButton"
         # )
+        self.Create_transfer_Model_QPushButton = self.ui.findChild(
+            QPushButton, "Create_transfer_Model_QPushButton"
+        )
 
         # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
         #     QPushButton, 'Train_transfer_Model_QPushButton')
@@ -83,10 +83,4 @@ class Children:
         #     QComboBox, 'Pretrained_model_ComboBox')
         self.pretrained_model_combobox = self.ui.findChild(
             QComboBox, "Pretrained_model_ComboBox"
-        )
-        self.Create_transfer_Model_QPushButton = self.ui.findChild(
-            QPushButton, "Create_transfer_Model_QPushButton"
-        )
-        self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
-            QPushButton, "Train_transfer_Model_QPushButton"
         )
