@@ -19,6 +19,7 @@ class Connections:
             self.on_combobox_change
         )
         self.Create_transfer_Model_QPushButton.clicked.connect(self.save_json_transfer)
+        self.Create_transfer_learning_model_QPushButton.clicked.connect(self.getFile)
         # TO DO
         # self.Create_transfer_learning_model_QPushButton.clicked.connect(
         #     self.testCreate)
