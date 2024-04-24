@@ -64,7 +64,7 @@ class LayerDialog:
                             paramValue_QWidget.setValue(0)
                         elif float in param["type"].__args__:
                             paramValue_QWidget = QDoubleSpinBox(minimum=0, maximum=1000)
-                            paramValue_QWidget.setSingleStep(0.00000001)
+                            paramValue_QWidget.setSingleStep(0.000000001)
                             paramValue_QWidget.setDecimals(8)
                             paramValue_QWidget.setValue(param["defaultvalue"])
                         else:
@@ -86,7 +86,7 @@ class LayerDialog:
                             paramValue_QWidget.setValue(param["defaultvalue"])
                         elif float == param["type"]:
                             paramValue_QWidget = QDoubleSpinBox(minimum=0, maximum=1000)
-                            paramValue_QWidget.setSingleStep(0.00000001)
+                            paramValue_QWidget.setSingleStep(0.000000001)
                             paramValue_QWidget.setDecimals(8)
                             paramValue_QWidget.setValue(param["defaultvalue"])
                         elif (torch.Tensor == param["type"]) or(typing.Optional[torch.Tensor] == param["type"]) :

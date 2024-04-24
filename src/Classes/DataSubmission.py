@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
     QSpinBox,
     QFileDialog
 )
+import torch
 
 
 class DataSubmission:
@@ -67,12 +68,13 @@ class DataSubmission:
         print(tempstring)
         try:
             exec(tempstring)
+            self.create_layer_node(layer, -1, qt_layout, arch_dict)
+            paramsWindow_QDialog.close()
         except Exception as e:
             print("error", e)
             dlg.setText(str(e))
             dlg.exec()
-        self.create_layer_node(layer, -1, qt_layout, arch_dict)
-        paramsWindow_QDialog.close()
+        
 
     def save_json(self):
         path, _ = QFileDialog.getSaveFileName(

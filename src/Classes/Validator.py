@@ -36,8 +36,7 @@ class Validator:
                         }
                     }
                     if i > 0 and architecture['layers'][i-1]['type'] == 'Flatten':
-                        architecture['layers'][i -
-                                               1]['params'] = flatten['params']
+                        architecture['layers'][i -1]['params'] = flatten['params']
                     else:
                         self.create_layer_node(flatten, i)
                         self.add_layer_name(flatten, layer_freqs)
