@@ -12,10 +12,6 @@ loader = QUiLoader()
 
 class DataOfTransfer:
     def __init__(self):
-        super().__init__()
-
-        # Read chosen model
-
         self.selected_pretrained_model = self.pretrained_model_combobox.currentText()
 
     def on_combobox_change(self):

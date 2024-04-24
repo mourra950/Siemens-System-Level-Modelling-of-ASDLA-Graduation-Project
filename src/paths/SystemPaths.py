@@ -43,9 +43,6 @@ class SystemPaths:
 
         # to work on later
         self.css_path = 'ui/skin.qss'
-
-        print(self.arch_json_path)
-
         self.model_py_path = 'python_files/model.py'
         self.train_py_path = 'python_files/train.py'
         self.model_jinja_path = 'jinja_templates/model.py.jinja'

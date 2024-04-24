@@ -32,10 +32,9 @@ def main():
 class MainUI(QtCore.QObject, SystemPaths, Initializer, AutoExtraction):
     def __init__(self):
         self.loader = loader
-        # LayerDialog.__init__(self)
-        QtCore.QObject.__init__(self)
-        AutoExtraction.__init__(self)
+        # QtCore.QObject.__init__(self)
         SystemPaths.__init__(self)
+        AutoExtraction.__init__(self)
         Initializer.__init__(self)
         self.ui.show()
 
