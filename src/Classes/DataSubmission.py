@@ -8,38 +8,35 @@ from PySide6.QtWidgets import (
 
 
 class DataSubmission:
-    # def __init__(self) -> None:
-    #     self.set_data_onChange('width', self.qt_inputWidth_QSpinBox)
-    #     self.set_data_onChange('height', self.qt_inputHeight_QSpinBox)
-    #     self.set_data_onChange('channels',  self.qt_inputType_QSpinBox)
-    #     self.set_data_onChange('batch_size', self.qt_batchSize_QSpinBox)
-    #     self.set_data_onChange('num_epochs', self.qt_numEpochs_QSpinBox)
-    #     self.set_data_onChange('width', self.qt_inputWidth_QSpinBox)
-    #     self.architecture['misc_params']['optimizer'] = self.selected_optimizer
-    #     self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
-    #     self.save_json()
-    # def set_data_onChange( param_name, widget):
-    #     t=QSpinBox()
+    def __init__(self) -> None:
+        self.set_data_onChange('width', self.qt_inputWidth_QSpinBox)
+        self.set_data_onChange('height', self.qt_inputHeight_QSpinBox)
+        self.set_data_onChange('channels',  self.qt_inputType_QSpinBox)
+        self.set_data_onChange('batch_size', self.qt_batchSize_QSpinBox)
+        self.set_data_onChange('num_epochs', self.qt_numEpochs_QSpinBox)
+
+    def set_data_onChange(self, param_name, widget):
+        if (type(widget) == QSpinBox):
+            widget.valueChanged.connect(
+                lambda: self.fetch_data_params(param_name, widget))
+        elif (type(widget) == QLineEdit):
+            widget.textChanged.connect(
+                lambda: self.fetch_data_params(param_name, widget))
+
     #     t.connect.
     #     widget.on
-        
+
     def on_submit_params_clicked(self):
-        self.fetch_data_params('width', self.qt_inputWidth_QSpinBox)
-        self.fetch_data_params('height', self.qt_inputHeight_QSpinBox)
-        self.fetch_data_params('channels',  self.qt_inputType_QSpinBox)
-        self.fetch_data_params('batch_size', self.qt_batchSize_QSpinBox)
-        self.fetch_data_params('num_epochs', self.qt_numEpochs_QSpinBox)
-        self.fetch_data_params('width', self.qt_inputWidth_QSpinBox)
-        self.architecture['misc_params']['optimizer'] = self.selected_optimizer
-        self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
         self.save_json()
 
     def fetch_data_params(self, param_name, widget):
         try:
             if (type(widget) == QSpinBox):
                 self.architecture['misc_params'][param_name] = widget.value()
+                print(widget.value(), param_name)
             elif (type(widget) == QLineEdit):
                 self.architecture['misc_params'][param_name] = widget.text()
+                print(widget.text(), param_name)
         except:
             print(f"error in {param_name}")
 

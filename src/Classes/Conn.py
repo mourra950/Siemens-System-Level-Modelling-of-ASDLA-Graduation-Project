@@ -1,6 +1,6 @@
 import subprocess
 import threading
-from PySide6.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QMessageBox,QSpinBox
 
 message = ""
 
@@ -20,6 +20,7 @@ class Connections:
         )
         self.Create_transfer_Model_QPushButton.clicked.connect(self.save_json_transfer)
         self.Create_transfer_learning_model_QPushButton.clicked.connect(self.render_transfer_learning)
+        # self.qt_inputWidth_QSpinBox.
         # TO DO
         # self.Create_transfer_learning_model_QPushButton.clicked.connect(
         #     self.testCreate)

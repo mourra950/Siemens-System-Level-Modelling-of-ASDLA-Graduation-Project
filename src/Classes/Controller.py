@@ -61,6 +61,7 @@ class Controller:
 
             if param_value != '':
                 self.selected_lossfunc['params'][params_names[i]] = param_value
+        self.architecture['misc_params']['loss_func'] = self.selected_lossfunc
 
         self.qt_selectedLossFunc_QLineEdit.setText(lossfunc_type)
         paramsWindow_QDialog.close()
@@ -78,4 +79,6 @@ class Controller:
                                                   ] = param_value
 
             self.qt_selectedOptimizer_QLineEdit.setText(optimizer_type)
+        self.architecture['misc_params']['optimizer'] = self.selected_optimizer
+            
         paramsWindow_QDialog.close()

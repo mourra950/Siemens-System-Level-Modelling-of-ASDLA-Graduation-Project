@@ -44,7 +44,7 @@ class Initializer(
         DataOfTransfer.__init__(self)
         Connections.__init__(self)
         TensorView.__init__(self)
-
+        DataSubmission.__init__(self)
         self.ui.setWindowTitle("The Awesome Project")
 
     def get_widget_data(self, widget):
