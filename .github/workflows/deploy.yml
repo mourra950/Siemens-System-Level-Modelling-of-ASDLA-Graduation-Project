@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          package-lock: docs/package-lock.json
+          cache-dependency-path: docs/package-lock.json
       - name: Install dependencies
         run: |
           cd docs
