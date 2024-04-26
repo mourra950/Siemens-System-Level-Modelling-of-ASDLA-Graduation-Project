@@ -40,9 +40,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: docs/package-lock.json
       - name: Install dependencies
-        run: |
-          cd docs
-          npm ci
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Setup Pages
