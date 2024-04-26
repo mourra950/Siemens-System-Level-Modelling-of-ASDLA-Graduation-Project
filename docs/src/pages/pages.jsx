@@ -3,8 +3,170 @@ import page2 from "./page2";
 
 const pages = [
   {
-    name: "page1",
+    name: "Who are We",
     content: page1()
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
+  },{
+    name: "page2",
+    content: page2() 
   },{
     name: "page2",
     content: page2() 
