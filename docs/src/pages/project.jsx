@@ -12,6 +12,10 @@ import {
 const { Content } = Layout;
 const { Paragraph } = Typography;
 import imgurl from "/siemens.png";
+import imgurl2 from "/sitting.png";
+import imgurl3 from "/tip.png";
+
+
 export default function project() {
   return (
     <>
@@ -19,6 +23,7 @@ export default function project() {
         Project Title System Level Modelling of Application Specific Deep
         Learning Accelerators{" "}
       </h1>
+      <Image style={{ padding: "20px 0 20px 0" }} src={imgurl2} />
       <h1 style={{ marginBottom: "32px", fontSize: "1.5vmax" }}>
         Project Description
       </h1>
@@ -46,6 +51,8 @@ export default function project() {
           </Col>
         </Row>
       </Paragraph>
+      <Image src={imgurl3} />
+
     </>
   );
 }
