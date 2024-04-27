@@ -32,7 +32,7 @@ const omar = [
     link: "https://mourra950.github.io/Portofolio/",
     name: "Portfolio",
     text: "Awsome Portfolio",
-  },
+  }
 ];
 const banna = [
   {

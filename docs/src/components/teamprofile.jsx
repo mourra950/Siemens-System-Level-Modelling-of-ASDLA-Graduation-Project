@@ -13,6 +13,7 @@ const { Content } = Layout;
 import { Grid } from "antd";
 const { Paragraph } = Typography;
 import imgomar from "/faces/omar2.png";
+import CV from "/CV.pdf";
 function Teamprofile({ name, linkat, ima }) {
   return (
     <>
@@ -29,6 +30,21 @@ function Teamprofile({ name, linkat, ima }) {
                   {link.name}: <a href={link.href}>{link.text}</a>
                 </li>
               ))}
+              {name == "Omar Yousef" ? (
+                <li>
+                  CV:{" "}
+                  <a
+                    href={CV}
+                    download="Example-PDF-document"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Download
+                  </a>
+                </li>
+              ) : (
+                <></>
+              )}
             </ul>
           </Col>
         </Row>

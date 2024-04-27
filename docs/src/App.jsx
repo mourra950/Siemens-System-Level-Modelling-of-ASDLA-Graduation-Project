@@ -8,11 +8,11 @@ import { Drawer, Button } from "antd";
 const style1 = {
   textAlign: "center",
   color: "#fff",
-  backgroundColor: "#7dbcea",
+  backgroundColor: "#e9e9e9",
   height: "100vh",
   overflow: "auto",
 };
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuOutlined } from "@ant-design/icons";
 // const style2 = {
 //   textAlign: "center",
 //   color: "#fff",
@@ -50,7 +50,7 @@ function App() {
               }}
             >
               <Button onClick={showDrawer} style={{ border: "none" }}>
-              <MenuOutlined />
+                <MenuOutlined />
               </Button>
             </Sider>
           </>
