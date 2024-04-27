@@ -43,7 +43,7 @@ function App() {
                 alignItems: "center",
               }}
               breakpoint="lg"
-              width={70}
+              width={10}
               onBreakpoint={(b) => {
                 setbrokenpage(b);
                 console.log(b);
@@ -58,6 +58,7 @@ function App() {
           <Sider
             breakpoint="lg"
             style={style1}
+            width={10}
             onBreakpoint={(b) => {
               setbrokenpage(b);
               console.log(b);
@@ -77,7 +78,13 @@ function App() {
           placement="left"
         >
           {pages.map((page, index) => (
-            <button key={index} onClick={() => setPageContent(page.content)}>
+            <button
+              key={index}
+              onClick={() => {
+                setPageContent(page.content);
+                setOpen(false);
+              }}
+            >
               {page.name}
             </button>
           ))}

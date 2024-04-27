@@ -15,7 +15,6 @@ import imgurl from "/siemens.png";
 import imgurl2 from "/sitting.png";
 import imgurl3 from "/tip.png";
 
-
 export default function project() {
   return (
     <>
@@ -52,7 +51,6 @@ export default function project() {
         </Row>
       </Paragraph>
       <Image src={imgurl3} />
-
     </>
   );
 }
