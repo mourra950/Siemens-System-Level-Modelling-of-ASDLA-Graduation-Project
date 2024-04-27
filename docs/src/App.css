@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Reddd;
+  src: url("./fonts/KGRedHands.ttf");
+}
 #root {
   height: 100vh;
   margin: 0px;
@@ -6,24 +10,92 @@
 body {
   margin: 0px;
   padding: 0px;
+  overflow-y: hidden;
 }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #ffffff;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(24, 58, 28);
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #ffffff;
-  }
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(24, 58, 28);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+* {
+  /* text-align: center; */
+  font-size: 1.5vmax;
+  line-height: 3;
+  font-family: Reddd;
+
+}
+
+.ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+main.Content {
+  overflow-y: auto;
+  height: 100vh;
+}
+div .SE {
+  font-family: Reddd;
+  font-size: 1.5vmax;
+  padding-left: 4vmax;
+  padding-right: 4vmax;
+}
+.t {
+  font-family: Reddd;
+  font-size: x-large;
+  text-align: center;
+}
+.s {
+  font-family: Reddd;
+  font-size: x-large;
+  text-align: center;
+}
+
+.side-nav {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+h1 {
+  font-size: 2.5vmax;
+  line-height: 2;
+  padding-left: 4vmax;
+  padding-right: 4vmax;
+}
+p {
+  line-height: 4;
+  color: black;
+}
+.quote {
+  font-style: italic;
+  text-shadow: 0.1vmax 0.1vmax 3vmax;
+}
+button {
+  background: transparent;
+  border: none;
+}
+.centerme {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

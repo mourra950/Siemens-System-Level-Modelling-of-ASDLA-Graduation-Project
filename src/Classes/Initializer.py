@@ -12,6 +12,8 @@ from Classes.Controller import Controller
 from Classes.Tensorboard import TensorView
 from Classes.ResNet.resbuild import ResBuildWindow
 from Classes.TransferLearning import DataOfTransfer
+from Classes.LayerTesting import LayerTesting
+
 from Qt.Buttons import QTButtons
 from Qt.Dialogue import LayerDialog
 
@@ -33,6 +35,7 @@ class Initializer(
     QTButtons,
     LayerDialog,
     DataOfTransfer,
+    LayerTesting
 ):
     def __init__(self) -> None:
         print("Initializer")
@@ -45,6 +48,7 @@ class Initializer(
         Connections.__init__(self)
         TensorView.__init__(self)
         DataSubmission.__init__(self)
+        LayerTesting.__init__(self)
         self.ui.setWindowTitle("The Awesome Project")
 
     def get_widget_data(self, widget):

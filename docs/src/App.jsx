@@ -29,7 +29,7 @@ function App() {
             </button>
           ))}
         </Sider>
-        <Content>{pageContent}</Content>
+        <Content className="Content">{pageContent}</Content>
       </Layout>
     </>
   );

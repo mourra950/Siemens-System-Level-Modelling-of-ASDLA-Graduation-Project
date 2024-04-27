@@ -52,7 +52,6 @@ class DataSubmission:
         dlg.setStandardButtons(QMessageBox.Yes)
         dlg.setIcon(QMessageBox.Critical)
 
-        tempstring = f"torch.nn.{layer_type}("
         layer = {
             'type': layer_type,
             'params': dict()
@@ -61,19 +60,11 @@ class DataSubmission:
         for i in range(len(params_value_widgets)):
             param_value = self.get_widget_data(params_value_widgets[i])
             if param_value != '':
-                tempstring += f"{params_names[i]}={param_value},"
-                # print(layer['params'],params_names[i],param_value,layer_type)
                 layer['params'][params_names[i]] = param_value
-        tempstring += ")"
-        print(tempstring)
-        try:
-            exec(tempstring)
+        cond=self.test_layer(layer_type, params_names, params_value_widgets)
+        if cond:
             self.create_layer_node(layer, -1, qt_layout, arch_dict)
             paramsWindow_QDialog.close()
-        except Exception as e:
-            print("error", e)
-            dlg.setText(str(e))
-            dlg.exec()
         
 
     def save_json(self):
