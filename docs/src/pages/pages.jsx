@@ -3,25 +3,27 @@ import page1 from "./page1";
 import page2 from "./page2";
 import features from "./features";
 import team from "./team";
-
-
+import project from "./project"
 
 const pages = [
   {
-    name: "Who are We",
-    content: page1()
-  },{
-    name: "Features",
-    content: features() 
-  },{
+    name: "Know the Team",
+    content: team(),
+  },
+  {
     name: "Team",
-    content: team() 
+    content: team(),
+  },
+  {
+    name: "Who are We",
+    content: page1(),
+  },
+  {
+    name: "Features",
+    content: features(),
   },{
-    name: "page2",
-    content: page2() 
-  },{
-    name: "page2",
-    content: page2() 
-  }
+    name: "Project",
+    content: project(),
+  },
 ];
 export default pages;

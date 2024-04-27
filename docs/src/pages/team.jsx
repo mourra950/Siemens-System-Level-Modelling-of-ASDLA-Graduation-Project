@@ -81,9 +81,9 @@ export default function team() {
         skills.
       </Paragraph>
       <Teamprofile name={"Omar Yousef"} linkat={omar} ima={imgomar} />
-      <Teamprofile name={"Omar Elbanna"} linkat={omar} ima={imgbanna} />
-      <Teamprofile name={"Nada Amr"} linkat={omar} ima={imgnada} />
-      <Teamprofile name={"Adham Abdelmaksoud"} linkat={omar} ima={imgadham} />
+      <Teamprofile name={"Omar Elbanna"} linkat={banna} ima={imgbanna} />
+      <Teamprofile name={"Nada Amr"} linkat={nada} ima={imgnada} />
+      <Teamprofile name={"Adham Abdelmaksoud"} linkat={adham} ima={imgadham} />
     </>
   );
 }
