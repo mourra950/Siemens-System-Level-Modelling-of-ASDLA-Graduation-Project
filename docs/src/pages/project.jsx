@@ -50,7 +50,7 @@ export default function project() {
           </Col>
         </Row>
       </Paragraph>
-      <Image src={imgurl3} />
+      {/* <Image src={imgurl3} /> */}
     </>
   );
 }

@@ -1,6 +1,6 @@
 export default function features() {
     return(
-    <div>
+    <div className="SE">
         <h1>Features</h1>
         <ul>
             <li>Enables users to generate Deep Learning Models, particularly CNNs, in PyTorch.</li>

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./App.css";
-import { Content } from "antd/es/layout/layout";
-import Sider from "antd/es/layout/Sider";
 import { Layout } from "antd";
+const { Header, Sider, Content } = Layout;
 import pages from "./pages/pages";
-import { Drawer, Button } from "antd";
+import { Drawer, Button, Image } from "antd";
+import imgurl3 from "/tip.png";
+
 const style1 = {
   textAlign: "center",
   color: "#fff",
@@ -22,7 +23,6 @@ import { MenuOutlined } from "@ant-design/icons";
 function App() {
   const [open, setOpen] = useState(false);
   const [pageContent, setPageContent] = useState(pages[0].content);
-  const [brokenpage, setbrokenpage] = useState(true);
   const showDrawer = () => {
     setOpen(true);
   };
@@ -32,45 +32,20 @@ function App() {
   return (
     <>
       <Layout>
-        {brokenpage ? (
-          <>
-            <Sider
-              className="Drawer"
-              style={{
-                backgroundColor: "white",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-              breakpoint="lg"
-              width={10}
-              onBreakpoint={(b) => {
-                setbrokenpage(b);
-                console.log(b);
-              }}
-            >
-              <Button onClick={showDrawer} style={{ border: "none" }}>
-                <MenuOutlined />
-              </Button>
-            </Sider>
-          </>
-        ) : (
-          <Sider
-            breakpoint="lg"
-            style={style1}
-            width={10}
-            onBreakpoint={(b) => {
-              setbrokenpage(b);
-              console.log(b);
-            }}
-          >
-            {pages.map((page, index) => (
-              <button key={index} onClick={() => setPageContent(page.content)}>
-                {page.name}
-              </button>
-            ))}
-          </Sider>
-        )}
+        <Header
+          className="Drawer"
+          style={{
+            backgroundColor: "white",
+            display: "flex",
+            alignItems: "flex-end",
+          }}
+          width={10}
+        >
+          <Button onClick={showDrawer} style={{ border: "none" }}>
+            <MenuOutlined />
+          </Button>
+        </Header>
+
         <Drawer
           title="Documentation"
           onClose={onClose}
@@ -91,6 +66,7 @@ function App() {
         </Drawer>
         <Content style={{ backgroundColor: "white" }} className="Content">
           {pageContent}
+          <Image src={imgurl3} />
         </Content>
       </Layout>
     </>
