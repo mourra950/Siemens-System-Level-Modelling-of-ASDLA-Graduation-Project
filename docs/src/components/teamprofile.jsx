@@ -27,7 +27,7 @@ function Teamprofile({ name, linkat, ima }) {
             <ul>
               {linkat.map((link, index) => (
                 <li key={index} style={{ listStyleType: "none" }}>
-                  {link.name}: <a href={link.href}>{link.text}</a>
+                  {link.name}: <a href={`${link.href}`}>{link.text}</a>
                 </li>
               ))}
               {name == "Omar Yousef" ? (

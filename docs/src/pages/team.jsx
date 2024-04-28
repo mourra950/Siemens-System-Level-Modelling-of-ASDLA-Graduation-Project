@@ -19,29 +19,29 @@ import imgnada from "/faces/nada.png";
 import { Teamprofile } from "../components/teamprofile.jsx";
 const omar = [
   {
-    link: "https://github.com/mourra950",
+    href: "https://github.com/mourra950",
     name: "Github",
     text: "mourra950",
   },
   {
-    link: "https://www.linkedin.com/in/mourra950/",
+    href: "https://www.linkedin.com/in/mourra950/",
     name: "Linkdin",
     text: "in/mourra950",
   },
   {
-    link: "https://mourra950.github.io/Portofolio/",
+    href: "https://mourra950.github.io/Portofolio/",
     name: "Portfolio",
     text: "Awsome Portfolio",
   }
 ];
 const banna = [
   {
-    link: "https://github.com/OmarElbanna",
+    href: "https://github.com/OmarElbanna",
     name: "Github",
     text: "OmarElbanna",
   },
   {
-    link: "https://www.linkedin.com/in/omar-el-banna/",
+    href: "https://www.linkedin.com/in/omar-el-banna/",
     name: "Linkdin",
     text: "in/omar-el-banna",
   },
@@ -49,24 +49,24 @@ const banna = [
 
 const nada = [
   {
-    link: "https://github.com/Nada119",
+    href: "https://github.com/Nada119",
     name: "Github",
     text: "Nada119",
   },
   {
-    link: "https://www.linkedin.com/in/nada-amr/",
+    href: "https://www.linkedin.com/in/nada-amr/",
     name: "Linkdin",
     text: "in/nada-amr",
   },
 ];
 const adham = [
   {
-    link: "https://github.com/Adham-Abdelmaksoud",
+    href: "https://github.com/Adham-Abdelmaksoud",
     name: "Github",
     text: "Adham-Abdelmaksoud",
   },
   {
-    link: "https://www.linkedin.com/in/adham-abdelmaksoud/",
+    href: "https://www.linkedin.com/in/adham-abdelmaksoud/",
     name: "Linkdin",
     text: "in/adham-abdelmaksoud",
   },
