@@ -22,7 +22,11 @@ export default function project() {
         Project Title System Level Modelling of Application Specific Deep
         Learning Accelerators{" "}
       </h1>
-      <Image style={{ padding: "20px 0 20px 0" }} src={imgurl2} />
+      <Image
+        style={{ padding: "20px 0 20px 0" }}
+        preview={false}
+        src={imgurl2}
+      />
       <h1 style={{ marginBottom: "32px", fontSize: "1.5vmax" }}>
         Project Description
       </h1>
@@ -39,7 +43,11 @@ export default function project() {
       <Paragraph className="SE">
         <Row>
           <Col className="centerme" md={24} lg={12}>
-            <Image style={{ padding: "20px 0 20px 0" }} src={imgurl} />
+            <Image
+              style={{ padding: "20px 0 20px 0" }}
+              preview={false}
+              src={imgurl}
+            />
           </Col>
           <Col className="centerme" md={24} lg={12}>
             <p>

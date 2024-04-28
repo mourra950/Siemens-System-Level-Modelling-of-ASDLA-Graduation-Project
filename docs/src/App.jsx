@@ -6,6 +6,7 @@ import pages from "./pages/pages";
 import { Drawer, Button, Image } from "antd";
 import imgurl3 from "/tip.png";
 
+
 const style1 = {
   textAlign: "center",
   color: "#fff",
@@ -66,7 +67,7 @@ function App() {
         </Drawer>
         <Content style={{ backgroundColor: "white" }} className="Content">
           {pageContent}
-          <Image src={imgurl3} />
+          <Image preview={false} src={imgurl3} />
         </Content>
       </Layout>
     </>
