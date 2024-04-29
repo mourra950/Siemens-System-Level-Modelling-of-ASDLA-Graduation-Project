@@ -22,52 +22,28 @@ export default function project() {
       <Paragraph className="SE">
         <Row>
           <Col flex="auto" className="centerme" md={6}>
-            <Image
-              placeholder
-              style={{ padding: "20px 0 20px 0" }}
-              src={github}
-            />
+            <Image style={{ padding: "20px 0 20px 0" }} src={github} />
           </Col>
           <Col flex="auto" className="centerme" md={6}>
-            <Image
-              placeholder
-              style={{ padding: "20px 0 20px 0" }}
-              src={jinja}
-            />
+            <Image style={{ padding: "20px 0 20px 0" }} src={jinja} />
           </Col>
           <Col flex="auto" className="centerme" md={6}>
-            <Image
-              placeholder
-              style={{ padding: "20px 0 20px 0" }}
-              src={python}
-            />
+            <Image style={{ padding: "20px 0 20px 0" }} src={python} />
           </Col>
           <Col flex="auto" className="centerme" md={6}>
-            <Image
-              placeholder
-              style={{ padding: "20px 0 20px 0" }}
-              src={pytorch}
-            />
+            <Image style={{ padding: "20px 0 20px 0" }} src={pytorch} />
           </Col>
           <Col flex="auto" className="centerme" md={6}>
-            <Image
-              placeholder
-              style={{ padding: "20px 0 20px 0" }}
-              src={react}
-            />
+            <Image style={{ padding: "20px 0 20px 0" }} src={react} />
           </Col>
           <Col flex="auto" className="centerme" md={6}>
-            <Image
-              placeholder
-              style={{ padding: "20px 0 20px 0" }}
-              src={systemc}
-            />
+            <Image style={{ padding: "20px 0 20px 0" }} src={systemc} />
           </Col>
           <Col flex="auto" className="centerme" md={6}>
-            <Image placeholder style={{ padding: "20px 0 20px 0" }} src={cpp} />
+            <Image style={{ padding: "20px 0 20px 0" }} src={cpp} />
           </Col>
           <Col flex="auto" className="centerme" md={6}>
-            <Image placeholder style={{ padding: "20px 0 20px 0" }} src={qt} />
+            <Image style={{ padding: "20px 0 20px 0" }} src={qt} />
           </Col>
         </Row>
       </Paragraph>
