@@ -12,10 +12,10 @@ import {
 const { Content } = Layout;
 import { Grid } from "antd";
 const { Paragraph } = Typography;
-import imgomar from "/faces/omar2.png";
-import imgbanna from "/faces/banna.jpg";
-import imgadham from "/faces/adham.jpg";
-import imgnada from "/faces/nada.png";
+import imgomar from "/Images/faces/omar2.png";
+import imgbanna from "/Images/faces/banna.jpg";
+import imgadham from "/Images/faces/adham.jpg";
+import imgnada from "/Images/faces/nada.png";
 import { Teamprofile } from "../components/teamprofile.jsx";
 const omar = [
   {

@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { Layout, Typography, Row, Col, Divider, Image } from "antd";
 const { Paragraph } = Typography;
-import github from "/tech/Github.png";
-import jinja from "/tech/Jinja.png";
-import python from "/tech/python.png";
-import pytorch from "/tech/pytorch.png";
-import react from "/tech/react.png";
-import systemc from "/tech/systemc.png";
-import cpp from "/tech/cpp.png";
-import qt from "/tech/Qt.png";
+
+import github from "/Images/tech/Github.png";
+import jinja from "/Images/tech/Jinja.png";
+import python from "/Images/tech/python.png";
+import pytorch from "/Images/tech/pytorch.png";
+import react from "/Images/tech/react.png";
+import systemc from "/Images/tech/systemc.png";
+import cpp from "/Images/tech/cpp.png";
+import qt from "/Images/tech/Qt.png";
 
 export default function project() {
   return (

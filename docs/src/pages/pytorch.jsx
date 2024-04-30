@@ -1,18 +1,9 @@
 /* eslint-disable no-unused-vars */
-import {
-  Button,
-  Layout,
-  Typography,
-  Row,
-  Col,
-  Card,
-  Divider,
-  Image,
-} from "antd";
+import { Layout, Typography, Row, Col, Divider, Image } from "antd";
 const { Content } = Layout;
 const { Paragraph } = Typography;
-import imgurl from "/siemens.png";
-export default function project() {
+import imgurl from "/Images/sponsor/siemens.png";
+export default function Pytorch() {
   return (
     <>
       <h1>

@@ -11,9 +11,8 @@ import {
 } from "antd";
 const { Content } = Layout;
 const { Paragraph } = Typography;
-import imgurl from "/siemens.png";
-import imgurl2 from "/sitting.png";
-import imgurl3 from "/tip.png";
+import imgurl from "/Images/sponsor/siemens.png";
+import imgurl2 from "/Images/lego/sitting.png";
 
 export default function project() {
   return (
@@ -58,6 +57,8 @@ export default function project() {
           </Col>
         </Row>
       </Paragraph>
+      <Divider />
+
       {/* <Image src={imgurl3} /> */}
     </>
   );

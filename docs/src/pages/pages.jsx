@@ -4,6 +4,7 @@ import features from "./features";
 import team from "./team";
 import project from "./project";
 import technologies from "./Technologies";
+import Pytorch from "./pytorch.jsx";
 
 const pages = [
   {
@@ -21,6 +22,10 @@ const pages = [
   {
     name: "Know the Team",
     content: team(),
+  },
+  {
+    name: "Pytorch",
+    content: Pytorch(),
   },
 ];
 export default pages;
