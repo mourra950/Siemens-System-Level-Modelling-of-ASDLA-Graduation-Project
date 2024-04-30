@@ -4,7 +4,7 @@ import { Layout } from "antd";
 const { Header, Sider, Content } = Layout;
 import pages from "./pages/pages";
 import { Drawer, Button, Image } from "antd";
-import imgurl3 from "/tip.png";
+import imgurl3 from "/Images/lego/tip.png";
 
 
 const style1 = {

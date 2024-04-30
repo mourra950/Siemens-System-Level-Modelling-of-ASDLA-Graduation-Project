@@ -11,7 +11,7 @@ import {
 } from "antd";
 const { Content } = Layout;
 const { Paragraph } = Typography;
-import imgurl from "/celeste.jpg";
+import imgurl from "/Images/sponsor/siemens.png";
 export default function page1() {
   return (
     <>
@@ -24,7 +24,7 @@ export default function page1() {
         <Image style={{ padding: "20px 0 20px 0" }} src={imgurl} />
         asdasdasdqwdq
       </Paragraph>
-      
+
     </>
   );
 }
