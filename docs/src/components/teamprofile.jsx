@@ -12,8 +12,8 @@ import {
 const { Content } = Layout;
 import { Grid } from "antd";
 const { Paragraph } = Typography;
-import imgomar from "/faces/omar2.png";
-import CV from "/CV.pdf";
+// import imgomar from "/faces/omar2.png"; OMAR
+import CV from "/CVs/Omar_CV.pdf";
 function Teamprofile({ name, linkat, ima }) {
   return (
     <div>
