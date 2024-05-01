@@ -120,5 +120,4 @@ testAccuracy = testCorrect / len(test_dataloader.dataset)
 print("Train Accuracy:", trainAccuracy)
 print("Test Accuracy:", testAccuracy)
 tensors = torch.jit.script(model)
-tensors.save(
-    "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/result/model7.pt")
+tensors.save("./")

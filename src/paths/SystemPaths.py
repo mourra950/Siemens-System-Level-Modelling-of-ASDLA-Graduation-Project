@@ -40,6 +40,10 @@ class SystemPaths:
         # Template paths
         self.jinja_templates = os.path.normpath(
             os.path.join(self.publicdir, "jinja_templates"))
+        self.transfer_template_dir=os.path.normpath(
+            os.path.join(self.publicdir, "./Cookiecutter/Pretrained"))
+        self.transfer_cookie_json=os.path.normpath(
+            os.path.join(self.publicdir, "./Cookiecutter/Pretrained/cookiecutter.json"))
 
         # to work on later
         self.css_path = 'ui/skin.qss'

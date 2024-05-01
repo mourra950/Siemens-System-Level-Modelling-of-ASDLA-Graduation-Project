@@ -19,7 +19,7 @@ class AutoExtraction:
             'params'
         ]
         self.unnecessary_loss_params = [
-            'reduce', 'size_average'
+            'reduce', 'size_average',"weight"
         ]
 
         self.extract_torch_layers()

@@ -1,11 +1,13 @@
 import os
 from PySide6.QtWidgets import QPushButton, QFileDialog, QComboBox
-from pathlib import Path
+from PySide6.QtCore import QProcess
 from PySide6.QtUiTools import QUiLoader
+import cookiecutter.main
+import cookiecutter.prompt
 from jinja2 import Environment, FileSystemLoader
 import json
-
-
+import collections
+from cookiecutter.main import cookiecutter
 basedir = os.path.dirname(__file__)
 loader = QUiLoader()
 
@@ -27,35 +29,97 @@ class DataOfTransfer:
                 f.write(json.dumps(self.architecture, indent=2))
             print("JSON file saved successfully.")
 
-
     # Render Json File Data
+
     def render_transfer_learning(self):
         env = Environment(loader=FileSystemLoader(self.jinja_templates))
 
         template_filename = "pretrained.py.jinja"
         template = env.get_template(template_filename)
 
-        path, _ = QFileDialog.getOpenFileName(
+        path_json, _ = QFileDialog.getOpenFileName(
             None, "Save JSON file", basedir, "JSON Files (*.json)"
         )
 
-        if path:
-            data=None
-            with open(path, "r") as json_file:
+        if path_json:
+            data = None
+            with open(path_json, "r") as json_file:
                 data = json.load(json_file)
-                print(data)
-                print(type(data))
-                
-            result_file = template.render(
-                layers=data["layers"],
-                misc_params=data["misc_params"],
-                transfer_model=data["transfer_model"],
+            path_output = QFileDialog.getExistingDirectory(
+                None, "Pick a folder to save the output", basedir
             )
+            data = self.cookicutterpreproccess_pretrained(data)
+            self.generate_project(
+                self.transfer_template_dir, path_output, data)
 
-        # Create or overwrite a file named train.py in output file and outputs the result from the rendered jinja template
-        save_path = QFileDialog.getExistingDirectory(
-            None, "Pick a folder to save the output", basedir
+            self.Pretrained_Process = QProcess()
+            self.Pretrained_Process.readyReadStandardOutput.connect(
+                self.handle_stdout)
+            self.Pretrained_Process.readyReadStandardError.connect(
+                self.handle_stderr)
+            self.Pretrained_Process.start(
+                "python", [path_output+"/Pretrained_Output/main.py"])
+
+    # def train_transfer_model(self):
+        # path, _ = QFileDialog.getOpenFileName(
+        #     None, "Save JSON file", basedir, "JSON Files (*.json)"
+        # )
+        # data = None
+
+        # if path:
+        #     with open(path, "r") as json_file:
+        #         data = json.load(json_file)
+        # # path, _ = QFileDialog.getOpenFileName(
+        # #     None, "Run File", basedir, "Python (main.py)"
+        # # )
+        # # env = Environment(loader=FileSystemLoader(self.jinja_templates))
+
+        # # template_filename = "cookiecutter.json.jinja"
+        # # template = env.get_template(template_filename)
+        # # with open("C:/Users/mourr/OneDrive/Desktop/TestJson/First Test/Test.json", "r") as json_file:
+        # #     data = json.load(json_file)
+        # # data = self.remove_empty_arrays(data)
+        # # result_file = template.render(
+        # #     my_dict=json.dumps(data, indent=4)
+        # # )
+        # # print(result_file)
+        # # with open("E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/public/Cookiecutter/Pretrained/cookiecutter.json", "w") as json_file:
+        # #     json_file.write(str(result_file))
+        # self.generate_project("E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/public/Cookiecutter/Pretrained/",
+        #                       "E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/public/Cookiecutter/build", data)
+        # # self.test = QProcess()
+        # # self.test.readyReadStandardOutput.connect(self.handle_stdout)
+        # # self.test.readyReadStandardError.connect(self.handle_stderr)
+        # # self.test.start("python", [
+        # #                 "e:\Github\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\src\main.py"])
+
+    def handle_stderr(self):
+        result = bytes(
+            self.Pretrained_Process.readAllStandardError()).decode("utf8")
+        print(result)
+
+    def handle_stdout(self):
+        result = bytes(
+            self.Pretrained_Process.readAllStandardOutput()).decode("utf8")
+        print(result)
+
+    def remove_empty_arrays(self, d):
+        return {k: v for k, v in d.items() if v != []}
+
+    def generate_project(self, template_path, output_path, data):
+        cookiecutter(template_path, output_dir=output_path,
+                     no_input=True,  overwrite_if_exists=True, extra_context=data)
+
+    def cookicutterpreproccess_pretrained(self, data,):
+        env = Environment(loader=FileSystemLoader(self.jinja_templates))
+
+        template_filename = "cookiecutter.json.jinja"
+        template = env.get_template(template_filename)
+
+        data = self.remove_empty_arrays(data)
+        result_file = template.render(
+            my_dict=json.dumps(data, indent=4)
         )
-        print(save_path)
-        with open(save_path+"/Test.py", "w+") as Output:
-            Output.write(result_file)
+        with open(self.transfer_cookie_json, "w") as json_file:
+            json_file.write(str(result_file))
+        return data

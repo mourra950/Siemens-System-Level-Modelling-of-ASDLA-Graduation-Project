@@ -90,3 +90,6 @@ class Children:
         self.Create_transfer_Model_QPushButton = self.ui.findChild(
             QPushButton, "Create_transfer_Model_QPushButton"
         )
+        self.Run_transfer_Model_QPushButton = self.ui.findChild(
+            QPushButton, "Run_transfer_Model_QPushButton"
+        )
