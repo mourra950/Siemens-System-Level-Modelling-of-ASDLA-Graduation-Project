@@ -3,13 +3,13 @@ import page1 from "./page1";
 import features from "./features";
 import team from "./team";
 import project from "./project";
-import technologies from "./Technologies";
-import Pytorch from "./pytorch.jsx";
-import Jinja from "./jinja.jsx";
-import CMake from "./CMake.jsx";
-import SystemC from "./systemc.jsx";
-import TensorBoard from "./tensorboard.jsx";
-import GitHub from "./github.jsx";
+import technologies from "./Technologies/Technologies.jsx";
+import Pytorch from "./Technologies/pytorch.jsx";
+import Jinja from "./Technologies/jinja.jsx";
+import CMake from "./Technologies/cmake.jsx";
+import SystemC from "./Technologies/systemc.jsx";
+import TensorBoard from "./Technologies/tensorboard.jsx";
+import GitHub from "./Technologies/github.jsx";
 
 const pages = [
   {
