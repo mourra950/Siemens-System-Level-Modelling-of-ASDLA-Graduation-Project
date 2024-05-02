@@ -19,7 +19,7 @@ class AutoExtraction:
             'params'
         ]
         self.unnecessary_loss_params = [
-            'reduce', 'size_average',"weight"
+            'reduce', 'size_average', "weight"
         ]
 
         self.extract_torch_layers()
@@ -162,10 +162,4 @@ class AutoExtraction:
         self.OPTIMIZERS = torch_optimizers_dict
 
     def extract_pretrained_models(self):
-
-        # Get a list of all available pre-trained models
-        pretrained_models = dir(models)
-
-        # Filter out the models that start with "__" (internal attributes) and those that end with "_"
-        self.PRETRAINED_MODELS = [model for model in pretrained_models if not model.startswith(
-            "__") and not model.endswith("_") and model[0].islower()]
+        self.PRETRAINED_MODELS = models.list_models()

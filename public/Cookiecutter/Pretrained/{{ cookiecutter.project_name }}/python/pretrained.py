@@ -26,19 +26,14 @@ def test_c():
     with open(test_output, "w+") as Output:
         Output.write("ahmed")
 
+
 exec_globals = {'torch': torch, 'torchvision': torchvision}
 
+
 def get_min_size():
-    torch_layers_names = dir(torchvision.models.{{cookiecutter.transfer_model}})
-    for layer_name in torch_layers_names:
-        obj = getattr(torchvision.models.{{cookiecutter.transfer_model}}, layer_name)
-        match = re.search(r'~torchvision\.models\.(\w+)', str(obj))
-        if match:
-            extracted_part = match.group(1)
-            print(extracted_part)
-            exec(f"t=torchvision.models.{extracted_part}.DEFAULT.meta['min_size']",exec_globals)
-            print("minimum size", exec_globals['t'])
-            return exec_globals['t']
+
+    min_size = torchvision.models.get_model_weights(models.{{cookiecutter.transfer_model}}).DEFAULT.meta['min_size']
+    return min_size
 
 
 def train():
@@ -84,12 +79,24 @@ def train():
     class_names = train_dataset.classes
 
     # num_ftrs = model.named_children()[-1].in_features
-    
+    try:
+        model.aux.logits = False
+    except:
+        pass
     # model.fc.in_features
     (name, layer) = list(model.named_children())[-1]
     exec_d = {'torch': torch, 'torchvision': torchvision,
-              'model': model, 'a': layer.in_features, 'nn': nn}
-    exec(f"model.{name}=nn.Linear(a, {len(class_names)}) ", exec_d)
+              'model': model, 'nn': nn}
+    if type(layer) == type(nn.Sequential()):
+        for i, j in list(layer.named_children()):
+            if type(j) == type(nn.Linear(in_features=15, out_features=15)):
+                exec_d['a'] = j.in_features
+                exec(f"model.{name}=nn.Linear(a, {len(class_names)}) ", exec_d)
+
+    else:
+        exec_d['a'] = layer.in_features
+        exec(f"model.{name}=nn.Linear(a, {len(class_names)}) ", exec_d)
+
     model = model.to(device)
 
     # Create the chosen optimizer with parameters from the data dictionary
