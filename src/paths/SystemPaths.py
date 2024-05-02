@@ -44,6 +44,9 @@ class SystemPaths:
             os.path.join(self.publicdir, "./Cookiecutter/Pretrained"))
         self.transfer_cookie_json=os.path.normpath(
             os.path.join(self.publicdir, "./Cookiecutter/Pretrained/cookiecutter.json"))
+        # Dataset paths
+        self.mnist_path=os.path.normpath(
+            os.path.join(self.datadir, "./mnist"))
 
         # to work on later
         self.css_path = 'ui/skin.qss'

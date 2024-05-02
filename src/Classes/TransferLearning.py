@@ -24,6 +24,8 @@ class DataOfTransfer:
             None, "Save JSON file", basedir, "JSON Files (*.json)"
         )
         self.architecture["transfer_model"] = self.selected_pretrained_model
+        self.architecture["mnist_path"] = self.self.mnist_path
+        
         if path:
             with open(path, 'w') as f:
                 f.write(json.dumps(self.architecture, indent=2))

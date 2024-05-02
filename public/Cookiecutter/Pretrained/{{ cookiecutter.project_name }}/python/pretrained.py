@@ -65,22 +65,22 @@ def train():
         # Convert images to RGB format
         v2.Grayscale(num_output_channels=channels),
         # Convert images to PyTorch tensors
-        v2.ToImage(), 
+        v2.ToImage(),
         v2.ToDtype(torch.float32, scale=True),
         v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
-    train_dataset = mnist.MNIST(root='E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/MNIST/train',
+    train_dataset = mnist.MNIST(root="{{cookiecutter.mnist_path}}",
                                 train=True, download=True, transform=transform)
-    test_dataset = mnist.MNIST(root='E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/MNIST/test',
+    test_dataset = mnist.MNIST(root="{{cookiecutter.mnist_path}}",
                                train=False, download=True, transform=transform)
     train_dataloader = DataLoader(
         train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True)
     test_dataloader = DataLoader(
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True)
     loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
+        { % for key, value in cookiecutter.misc_params.loss_func.params|dictsort % }
         {{key}}={{value}},
-        {% endfor %}
+        { % endfor % }
     )
     class_names = train_dataset.classes
 
@@ -108,9 +108,9 @@ def train():
     # Create the chosen optimizer with parameters from the data dictionary
     optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
         model.parameters(),
-        {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+        { % for key, value in cookiecutter.misc_params.optimizer.params|dictsort % }
         {{key}}={{value}},
-        {% endfor %}
+        { % endfor % }
     )
 
     # Decay LR by a factor of 0.1 every 7 epochs
