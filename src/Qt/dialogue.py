@@ -25,7 +25,6 @@ statics = {
         {"text": "circular", "data": "'circular'"},
     ],
     "reduction": [
-        {"text": "none", "data": "'none'"},
         {"text": "mean", "data": "'mean'"},
         {"text": "sum", "data": "'sum'"},
     ],
@@ -34,7 +33,7 @@ statics = {
         {"text": "relu", "data": "'relu'"},
     ]
 }
-find = ["device", "dtype", "padding_mode", "reduction","nonlinearity"]
+find = ["device", "dtype", "padding_mode", "reduction", "nonlinearity"]
 
 
 class LayerDialog:

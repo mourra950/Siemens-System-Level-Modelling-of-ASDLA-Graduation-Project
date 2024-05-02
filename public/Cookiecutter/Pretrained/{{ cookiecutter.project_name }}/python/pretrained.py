@@ -65,7 +65,9 @@ def train():
         # Convert images to RGB format
         v2.Grayscale(num_output_channels=channels),
         # Convert images to PyTorch tensors
-        v2.ToImage(), v2.ToDtype(torch.float32, scale=True)
+        v2.ToImage(), 
+        v2.ToDtype(torch.float32, scale=True),
+        v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
     train_dataset = mnist.MNIST(root='E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/MNIST/train',
                                 train=True, download=True, transform=transform)
@@ -75,7 +77,11 @@ def train():
         train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True)
     test_dataloader = DataLoader(
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True)
-    loss_fn = nn.CrossEntropyLoss()
+    loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
+        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
+        {{key}}={{value}},
+        {% endfor %}
+    )
     class_names = train_dataset.classes
 
     # num_ftrs = model.named_children()[-1].in_features
