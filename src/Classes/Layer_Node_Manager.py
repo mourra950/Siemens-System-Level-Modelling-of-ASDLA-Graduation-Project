@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
     QFrame
 )
 
+
 class LayerNodeManager:
     def __init__(self) -> None:
         self.architecture = {

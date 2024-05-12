@@ -2,60 +2,49 @@
   "test_num": 5,
   "project_name": "Pretrained_Output",
   
-    "layers": [
-        {
-            "type": "Conv2d",
-            "params": {
-                "out_channels": 1,
-                "kernel_size": 0,
-                "stride": 0,
-                "padding": 0,
-                "dilation": 0,
-                "groups": 1,
-                "bias": true,
-                "padding_mode": "'zeros'",
-                "device": "'cpu'",
-                "dtype": "torch.float32",
-                "in_channels": 3
+    "layers": {
+        "list": [
+            {
+                "type": "Conv2d",
+                "params": {
+                    "out_channels": 1,
+                    "kernel_size": 0,
+                    "stride": 0,
+                    "padding": 0,
+                    "dilation": 0,
+                    "groups": 1,
+                    "bias": true,
+                    "padding_mode": "'zeros'",
+                    "device": "'cpu'",
+                    "dtype": "torch.float32",
+                    "in_channels": 3
+                },
+                "name": "conv2d_1"
             },
-            "name": "conv2d_1"
-        },
-        {
-            "type": "Conv2d",
-            "params": {
-                "out_channels": 1,
-                "kernel_size": 0,
-                "stride": 0,
-                "padding": 0,
-                "dilation": 0,
-                "groups": 1,
-                "bias": true,
-                "padding_mode": "'zeros'",
-                "device": "'cpu'",
-                "dtype": "torch.float32"
+            {
+                "type": "Conv2d",
+                "params": {
+                    "out_channels": 1,
+                    "kernel_size": 0,
+                    "stride": 0,
+                    "padding": 0,
+                    "dilation": 0,
+                    "groups": 1,
+                    "bias": true,
+                    "padding_mode": "'zeros'",
+                    "device": "'cpu'",
+                    "dtype": "torch.float32"
+                },
+                "name": "conv2d_1"
             }
-        },
-        {
-            "type": "Conv2d",
-            "params": {
-                "out_channels": 1,
-                "kernel_size": 0,
-                "stride": 0,
-                "padding": 0,
-                "dilation": 0,
-                "groups": 1,
-                "bias": true,
-                "padding_mode": "'zeros'",
-                "device": "'cpu'",
-                "dtype": "torch.float32"
-            }
-        }
-    ],
+        ]
+    },
     "misc_params": {
-        "width": 18,
-        "height": 18,
+        "width": 12,
+        "height": 12,
         "channels": 3,
-        "batch_size": 64,
+        "batch_size": 321,
+        "num_epochs": 12,
         "optimizer": {
             "type": "ASGD",
             "params": {

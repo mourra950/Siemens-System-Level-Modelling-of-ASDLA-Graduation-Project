@@ -113,7 +113,7 @@ class DataOfTransfer:
 
     def generate_project(self, template_path, output_path, data):
         cookiecutter(template_path, output_dir=output_path,
-                     no_input=True,  overwrite_if_exists=True, extra_context=data)
+                     no_input=True,  overwrite_if_exists=True)
 
     def cookicutterpreproccess(self, data,path):
         env = Environment(loader=FileSystemLoader(self.jinja_templates))

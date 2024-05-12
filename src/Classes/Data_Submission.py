@@ -50,10 +50,12 @@ class DataSubmission:
         dlg.setWindowTitle("error!")
         dlg.setStandardButtons(QMessageBox.Yes)
         dlg.setIcon(QMessageBox.Critical)
-
+        #mourra look at that
+        self.count+=1
         layer = {
             'type': layer_type,
-            'params': dict()
+            'params': dict(),
+            'name':self.count
         }
 
         for i in range(len(params_value_widgets)):
@@ -72,6 +74,7 @@ class DataSubmission:
         if path:
             self.architecture["mnist_path"] = self.mnist_path
             self.architecture["log_dir"] = self.log_path
+            self.architecture["layers"]={"list":self.architecture["layers"]}
             with open(path, 'w') as f:
                 f.write(json.dumps(self.architecture, indent=2))
             print("JSON file saved successfully.")
