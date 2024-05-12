@@ -149,6 +149,8 @@ def train():
             totalTrainLoss += loss
             trainCorrect += (pred.argmax(1) == y).type(
                 torch.float).sum().item()
+        writer.add_scalar("Train/Accuracy", trainAccuracy, e)
+        writer.add_scalar("Train/Loss", totalTrainLoss, e)
         model.eval()
         print(trainCorrect)
 
