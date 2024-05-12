@@ -23,12 +23,15 @@ class DataOfTransfer:
         path, _ = QFileDialog.getSaveFileName(
             None, "Save JSON file", basedir, "JSON Files (*.json)"
         )
+        print("tata")
         self.architecture["transfer_model"] = self.selected_pretrained_model
-        self.architecture["mnist_path"] = self.self.mnist_path
+        self.architecture["mnist_path"] = self.mnist_path
+        self.architecture["log_dir"] = self.log_path
+        
         
         if path:
             with open(path, 'w') as f:
-                f.write(json.dumps(self.architecture, indent=2))
+                f.write(json.dumps(self.architecture, indent=4))
             print("JSON file saved successfully.")
 
     # Render Json File Data

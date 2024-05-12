@@ -3,8 +3,8 @@
   "project_name": "Pretrained_Output",
   
     "misc_params": {
-        "width": 25,
-        "height": 25,
+        "width": 18,
+        "height": 18,
         "channels": 3,
         "batch_size": 64,
         "num_epochs": 1,
@@ -25,11 +25,13 @@
             "type": "CrossEntropyLoss",
             "params": {
                 "ignore_index": 1,
-                "reduction": "'none'",
+                "reduction": "'mean'",
                 "label_smoothing": 0.0
             }
         }
     },
-    "transfer_model": "efficientnet_b0"
+    "transfer_model": "resnet18",
+    "mnist_path": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
+    "log_dir": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 
 }

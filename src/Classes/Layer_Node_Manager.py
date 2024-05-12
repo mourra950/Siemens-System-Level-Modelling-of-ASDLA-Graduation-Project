@@ -4,8 +4,6 @@ from PySide6.QtWidgets import (
     QLabel,
     QFrame
 )
-from PySide6.QtGui import QIcon
-
 
 class LayerNodeManager:
     def __init__(self) -> None:

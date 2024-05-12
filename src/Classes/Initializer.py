@@ -1,18 +1,17 @@
-import os
 import sys
 from PySide6.QtWidgets import QCheckBox, QSpinBox, QDoubleSpinBox, QComboBox
 from Classes.Children import Children
-from Classes.DataSubmission import DataSubmission
+from Classes.Data_Submission import DataSubmission
 from Classes.Filling import FillingQt
 from Classes.Validator import Validator
-from Classes.LayerNodeManager import LayerNodeManager
+from Classes.Layer_Node_Manager import LayerNodeManager
 from utils.FileGenerator import FileGenerator
-from Classes.Conn import Connections
+from Classes.Connections import Connections
 from Classes.Controller import Controller
 from Classes.Tensorboard import TensorView
 from Classes.ResNet.resbuild import ResBuildWindow
-from Classes.TransferLearning import DataOfTransfer
-from Classes.LayerTesting import LayerTesting
+from Classes.Transfer_Learning import DataOfTransfer
+from Tests.Layer_Testing import LayerTesting
 
 from Qt.Buttons import QTButtons
 from Qt.Dialogue import LayerDialog

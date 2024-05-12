@@ -1,8 +1,6 @@
 from PySide6.QtWidgets import (
     QPushButton,
 )
-from PySide6.QtUiTools import QUiLoader
-
 
 class FillingQt:
     def __init__(self) -> None:
@@ -30,7 +28,8 @@ class FillingQt:
                     i, j, k, None, None
                 )
             )
-            self.qt_optimizersList_QVBoxLayout.addWidget(selectOptimizer_QPushButton)
+            self.qt_optimizersList_QVBoxLayout.addWidget(
+                selectOptimizer_QPushButton)
 
     def fill_lossfunctions(self):
         for lossfunc in self.LOSSFUNC:
@@ -40,7 +39,8 @@ class FillingQt:
                     i, j, k, None, None
                 )
             )
-            self.qt_lossFuncsList_QVBoxLayout.addWidget(selectLossFunc_QPushButton)
+            self.qt_lossFuncsList_QVBoxLayout.addWidget(
+                selectLossFunc_QPushButton)
 
     def fill_layers(self, qt_layout, layers, q2_layout, arch_dict):
         for layer in layers:
@@ -61,6 +61,5 @@ class FillingQt:
                 qt_layout.addWidget(selectLayer_QPushButton)
 
     def fill_pretrained_model(self):
-        # TO DO
         for i in self.PRETRAINED_MODELS:
             self.pretrained_model_combobox.addItem(i)

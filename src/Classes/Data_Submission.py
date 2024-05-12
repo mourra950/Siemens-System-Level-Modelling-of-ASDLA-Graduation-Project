@@ -5,7 +5,6 @@ from PySide6.QtWidgets import (
     QSpinBox,
     QFileDialog
 )
-import torch
 
 
 class DataSubmission:
@@ -24,8 +23,6 @@ class DataSubmission:
             widget.textChanged.connect(
                 lambda: self.fetch_data_params(param_name, widget))
 
-    #     t.connect.
-    #     widget.on
 
     def on_submit_params_clicked(self):
         self.save_json()
