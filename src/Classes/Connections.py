@@ -24,12 +24,15 @@ class Connections:
             self.save_json_transfer)
         self.Create_transfer_learning_model_QPushButton.clicked.connect(
             self.render_transfer_learning)
+        
+        
         # self.Run_transfer_Model_QPushButton.clicked.connect(self.train_transfer_model)
         # self.qt_inputWidth_QSpinBox.
         # TO DO
         # self.Create_transfer_learning_model_QPushButton.clicked.connect(
         #     self.testCreate)
-
+    
+        
     def testCreate(self):
         global message
         print("hamada")

@@ -93,3 +93,6 @@ class Children:
         self.Run_transfer_Model_QPushButton = self.ui.findChild(
             QPushButton, "Run_transfer_Model_QPushButton"
         )
+        ######### testing generating manual
+        self.qt_manual_generate = self.ui.findChild(
+            QPushButton, "Generate_manual_QPushButton")

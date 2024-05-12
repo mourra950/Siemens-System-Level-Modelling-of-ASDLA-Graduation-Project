@@ -42,8 +42,12 @@ class SystemPaths:
             os.path.join(self.publicdir, "jinja_templates"))
         self.transfer_template_dir = os.path.normpath(
             os.path.join(self.publicdir, "./Cookiecutter/Pretrained"))
+        self.manual_template_dir = os.path.normpath(
+            os.path.join(self.publicdir, "./Cookiecutter/Manual"))
         self.transfer_cookie_json = os.path.normpath(
             os.path.join(self.publicdir, "./Cookiecutter/Pretrained/cookiecutter.json"))
+        self.manual_cookie_json = os.path.normpath(
+            os.path.join(self.publicdir, "./Cookiecutter/Manual/cookiecutter.json"))
         # Dataset paths
         self.mnist_path = os.path.normpath(
             os.path.join(self.datadir, "./mnist"))

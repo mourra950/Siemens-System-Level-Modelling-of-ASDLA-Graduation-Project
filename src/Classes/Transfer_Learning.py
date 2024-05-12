@@ -53,7 +53,7 @@ class DataOfTransfer:
             path_output = QFileDialog.getExistingDirectory(
                 None, "Pick a folder to save the output", basedir
             )
-            data = self.cookicutterpreproccess_pretrained(data)
+            data = self.cookicutterpreproccess(data,self.transfer_cookie_json)
             self.generate_project(
                 self.transfer_template_dir, path_output, data)
 
@@ -115,7 +115,7 @@ class DataOfTransfer:
         cookiecutter(template_path, output_dir=output_path,
                      no_input=True,  overwrite_if_exists=True, extra_context=data)
 
-    def cookicutterpreproccess_pretrained(self, data,):
+    def cookicutterpreproccess(self, data,path):
         env = Environment(loader=FileSystemLoader(self.jinja_templates))
 
         template_filename = "cookiecutter.json.jinja"
@@ -125,6 +125,29 @@ class DataOfTransfer:
         result_file = template.render(
             my_dict=json.dumps(data, indent=4)
         )
-        with open(self.transfer_cookie_json, "w") as json_file:
+        with open(path, "w") as json_file:
             json_file.write(str(result_file))
         return data
+    def manual_generate(self):
+        path_json, _ = QFileDialog.getOpenFileName(
+            None, "Save JSON file", basedir, "JSON Files (*.json)"
+        )
+
+        if path_json:
+            data = None
+            with open(path_json, "r") as json_file:
+                data = json.load(json_file)
+            path_output = QFileDialog.getExistingDirectory(
+                None, "Pick a folder to save the output", basedir
+            )
+            data = self.cookicutterpreproccess(data,self.manual_cookie_json)
+            self.generate_project(
+                self.manual_template_dir, path_output, data)
+
+            self.Pretrained_Process = QProcess()
+            self.Pretrained_Process.readyReadStandardOutput.connect(
+                self.handle_stdout)
+            self.Pretrained_Process.readyReadStandardError.connect(
+                self.handle_stderr)
+            # self.Pretrained_Process.start(
+            #     "python", [path_output+"/Pretrained_Output/main.py"])

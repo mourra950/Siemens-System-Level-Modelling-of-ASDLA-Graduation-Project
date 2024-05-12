@@ -14,6 +14,8 @@ class DataSubmission:
         self.set_data_onChange('channels',  self.qt_inputType_QSpinBox)
         self.set_data_onChange('batch_size', self.qt_batchSize_QSpinBox)
         self.set_data_onChange('num_epochs', self.qt_numEpochs_QSpinBox)
+        self.qt_manual_generate.clicked.connect(self.manual_generate)
+        
 
     def set_data_onChange(self, param_name, widget):
         if (type(widget) == QSpinBox):
@@ -68,6 +70,8 @@ class DataSubmission:
         path, _ = QFileDialog.getSaveFileName(
             None, "Save JSON File", self.basedir, "JSON Files (*.json)")
         if path:
+            self.architecture["mnist_path"] = self.mnist_path
+            self.architecture["log_dir"] = self.log_path
             with open(path, 'w') as f:
                 f.write(json.dumps(self.architecture, indent=2))
             print("JSON file saved successfully.")

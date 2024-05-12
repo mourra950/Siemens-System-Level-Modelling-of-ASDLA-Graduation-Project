@@ -36,7 +36,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -525,8 +525,8 @@
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>98</width>
-                        <height>28</height>
+                        <width>438</width>
+                        <height>497</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -549,8 +549,8 @@
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>98</width>
-                      <height>28</height>
+                      <width>439</width>
+                      <height>499</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -577,7 +577,14 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Submit Architecture</string>
+                 <string>Create manual Model Config file</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="Generate_manual_QPushButton">
+                <property name="text">
+                 <string>Generate manual model</string>
                 </property>
                </widget>
               </item>
@@ -832,7 +839,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>submitArch_QPushButton</tabstop>
   <tabstop>codeSample</tabstop>
   <tabstop>generatedFiles</tabstop>
   <tabstop>generateFiles_QPushButton</tabstop>
