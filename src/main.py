@@ -31,6 +31,7 @@ def main():
 class MainUI(QtCore.QObject, SystemPaths, Initializer, AutoExtraction):
     def __init__(self):
         self.loader = loader
+        self.debug = True
         # QtCore.QObject.__init__(self)
         SystemPaths.__init__(self)
         AutoExtraction.__init__(self)

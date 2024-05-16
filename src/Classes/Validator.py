@@ -3,6 +3,9 @@ class Validator:
         width = architecture['misc_params']['width']
         height = architecture['misc_params']['height']
         channels = architecture['misc_params']['channels']
+        if self.debug:
+            print(
+                f'width: {width}, height: {height}, channels: {channels},architecture: {architecture}')
         features_after_1st_FC = None
         flattened = False
         layer_freqs = dict()
@@ -36,7 +39,8 @@ class Validator:
                         }
                     }
                     if i > 0 and architecture['layers'][i-1]['type'] == 'Flatten':
-                        architecture['layers'][i -1]['params'] = flatten['params']
+                        architecture['layers'][i -
+                                               1]['params'] = flatten['params']
                     else:
                         self.create_layer_node(flatten, i)
                         self.add_layer_name(flatten, layer_freqs)
