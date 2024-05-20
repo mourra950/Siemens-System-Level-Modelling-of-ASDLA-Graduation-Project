@@ -67,17 +67,17 @@ class DataSubmission:
             self.create_layer_node(layer, -1, qt_layout, arch_dict)
             paramsWindow_QDialog.close()
         
-
+    #save json for manual arch
     def save_json(self):
         path, _ = QFileDialog.getSaveFileName(
             None, "Save JSON File", self.basedir, "JSON Files (*.json)")
         if path:
             self.architecture["mnist_path"] = self.mnist_path
             self.architecture["log_dir"] = self.log_path
-
+            #test for deep and shallow to avoid errors
             architecture = self.architecture.copy()
             architecture["layers"]={"list":self.architecture["layers"]}
-
+            
             with open(path, 'w') as f:
                 f.write(json.dumps(architecture, indent=4))
             print("JSON file saved successfully.")

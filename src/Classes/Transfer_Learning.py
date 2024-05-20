@@ -37,11 +37,6 @@ class DataOfTransfer:
     # Render Json File Data
 
     def render_transfer_learning(self):
-        env = Environment(loader=FileSystemLoader(self.jinja_templates))
-
-        template_filename = "pretrained.py.jinja"
-        template = env.get_template(template_filename)
-
         path_json, _ = QFileDialog.getOpenFileName(
             None, "Save JSON file", basedir, "JSON Files (*.json)"
         )

@@ -30,8 +30,8 @@
             }
         }
     },
-    "transfer_model": "resnet18",
     "mnist_path": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
-    "log_dir": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+    "log_dir": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
+    "transfer_model": "resnet18"
 
 }
