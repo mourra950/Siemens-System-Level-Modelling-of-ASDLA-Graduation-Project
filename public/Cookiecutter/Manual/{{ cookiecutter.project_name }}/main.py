@@ -1,4 +1,4 @@
-from python.pretrained import train, test_c
+from python.manual import train
 import os
 import sys
 import shutil

@@ -59,6 +59,9 @@ class Children:
         self.qt_generateFiles_QPushButton = self.ui.findChild(
             QPushButton, "generateFiles_QPushButton"
         )
+        self.qt_trainModel_QPushButton = self.ui.findChild(
+            QPushButton, 'trainPyModel_btn'
+        )
 
         ####################################################
         self.res_layersList_QVBoxLayout = self.ResCreation.findChild(
