@@ -40,6 +40,8 @@ class SystemPaths:
         # Template paths
         self.jinja_templates = os.path.normpath(
             os.path.join(self.publicdir, "jinja_templates"))
+        self.manual_cookie_jinja_template = os.path.normpath(
+            os.path.join(self.publicdir, "jinja_templates/Manual"))
         self.transfer_template_dir = os.path.normpath(
             os.path.join(self.publicdir, "./Cookiecutter/Pretrained"))
         self.manual_template_dir = os.path.normpath(

@@ -123,6 +123,8 @@ class DataOfTransfer:
         with open(path, "w") as json_file:
             json_file.write(str(result_file))
         return data
+    
+    
     def manual_generate(self):
         path_json, _ = QFileDialog.getOpenFileName(
             None, "Save JSON file", basedir, "JSON Files (*.json)"

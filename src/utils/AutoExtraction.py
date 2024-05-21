@@ -14,7 +14,9 @@ class AutoExtraction:
     def __init__(self) -> None:
         print("Auto Extraction")
         self.unnecessary_params = [
-            "in_channels", "num_features", "in_features"]
+            "in_channels", "num_features", "in_features",
+            'dilation'
+        ]
         self.unnecessary_optimizer_params = [
             'params'
         ]
