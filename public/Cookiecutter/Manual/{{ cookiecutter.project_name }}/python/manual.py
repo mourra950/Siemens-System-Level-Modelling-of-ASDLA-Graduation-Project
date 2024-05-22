@@ -52,7 +52,11 @@ def train():
     optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
         model.parameters(),
         {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+        {%- if value is sequence and value is not string -%}
+        {{key}}=({{value|join(', ')}}),
+        {%- else -%}
         {{key}}={{value}},
+        {%- endif %}
         {% endfor %}
     )
 
@@ -80,6 +84,11 @@ def train():
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
         model.eval()
         print(trainCorrect)
+    scripted = torch.jit.script(model)
+    try:
+        torch.jit.save(scripted, model_output)
+    except e:
+        print(e)
     
 
 if __name__ == '__main__':

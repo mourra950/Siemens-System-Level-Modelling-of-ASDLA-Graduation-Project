@@ -42,7 +42,7 @@ class Controller:
 
         ##############################
         submitLayer_QPushButton.clicked.connect(
-            lambda ch, submit_func=on_submit_func, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog, q_layout=args[0], arch=args[1]: \
+            lambda  submit_func=on_submit_func, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog, q_layout=args[0], arch=args[1]: \
                 submit_func(
                     i, j, k, l, q_layout, arch
                 )

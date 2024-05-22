@@ -24,9 +24,13 @@ class Validator:
                 height = (height - params['kernel_size'] +
                           2*params['padding']) // params['stride'] + 1
                 channels = params['out_channels']
+
             elif layer_type == 'MaxPool2d' or layer_type == 'AvgPool2d':
-                width = (width - params['kernel_size']) // params['stride'] + 1
-                height = (height - params['kernel_size']) // params['stride'] + 1
+                width = (width - params['kernel_size'] + 2 *
+                         params['padding']) // params['stride'] + 1
+                height = (height - params['kernel_size']+ 2 *
+                         params['padding']) // params['stride'] + 1
+
             elif layer_type == 'Linear':
                 if not flattened:
                     flattened = True

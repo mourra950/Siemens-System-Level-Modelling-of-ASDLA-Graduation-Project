@@ -14,7 +14,7 @@ from Classes.Transfer_Learning import DataOfTransfer
 from Tests.Layer_Testing import LayerTesting
 
 from Qt.Buttons import QTButtons
-from Qt.Dialogue import LayerDialog
+from Qt.dialogue import LayerDialog
 
 
 sys.path.append("./")

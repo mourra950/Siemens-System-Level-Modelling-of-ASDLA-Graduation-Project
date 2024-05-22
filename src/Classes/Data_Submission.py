@@ -103,7 +103,7 @@ class DataSubmission:
         self.Manual_Process.readyReadStandardError.connect(
             self.handle_stderr)
         self.Manual_Process.start(
-                ".venv/Scripts/python.exe", [path_output+"/Manual_Output/main.py"])
+                "python", [path_output+"/Manual_Output/main.py"])
 
 
     def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog, qt_layout, arch_dict):
