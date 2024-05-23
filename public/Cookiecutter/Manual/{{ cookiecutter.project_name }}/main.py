@@ -29,7 +29,7 @@ class MainUI(QMainWindow):
 
         self.window = loader.load(os.path.join(basedir, "wrapper.ui"), None)
 
-        self.window.setWindowTitle("Security")
+        self.window.setWindowTitle("Train & Wrap")
         self.train_btn = self.window.findChild(QPushButton, "Train")
         self.wrap_btn = self.window.findChild(QPushButton, "Wrap")
         self.wrap_btn.setEnabled(False)

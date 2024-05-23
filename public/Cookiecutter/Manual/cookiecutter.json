@@ -7,7 +7,7 @@
             {
                 "type": "Conv2d",
                 "params": {
-                    "out_channels": 8,
+                    "out_channels": 64,
                     "kernel_size": 3,
                     "stride": 1,
                     "padding": 1,
@@ -21,6 +21,104 @@
                 "name": "conv2d_1"
             },
             {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_1"
+            },
+            {
+                "type": "Conv2d",
+                "params": {
+                    "out_channels": 64,
+                    "kernel_size": 3,
+                    "stride": 1,
+                    "padding": 1,
+                    "groups": 1,
+                    "bias": true,
+                    "padding_mode": "'zeros'",
+                    "device": "'cpu'",
+                    "dtype": "torch.float32",
+                    "in_channels": 64
+                },
+                "name": "conv2d_2"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_2"
+            },
+            {
+                "type": "MaxPool2d",
+                "params": {
+                    "kernel_size": 2,
+                    "stride": 2,
+                    "padding": 0,
+                    "return_indices": false,
+                    "ceil_mode": false
+                },
+                "name": "maxpool2d_1"
+            },
+            {
+                "type": "Conv2d",
+                "params": {
+                    "out_channels": 128,
+                    "kernel_size": 3,
+                    "stride": 1,
+                    "padding": 1,
+                    "groups": 1,
+                    "bias": true,
+                    "padding_mode": "'zeros'",
+                    "device": "'cpu'",
+                    "dtype": "torch.float32",
+                    "in_channels": 64
+                },
+                "name": "conv2d_3"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_3"
+            },
+            {
+                "type": "Conv2d",
+                "params": {
+                    "out_channels": 128,
+                    "kernel_size": 3,
+                    "stride": 1,
+                    "padding": 1,
+                    "groups": 1,
+                    "bias": true,
+                    "padding_mode": "'zeros'",
+                    "device": "'cpu'",
+                    "dtype": "torch.float32",
+                    "in_channels": 128
+                },
+                "name": "conv2d_4"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_4"
+            },
+            {
+                "type": "MaxPool2d",
+                "params": {
+                    "kernel_size": 2,
+                    "stride": 2,
+                    "padding": 0,
+                    "return_indices": false,
+                    "ceil_mode": false
+                },
+                "name": "maxpool2d_2"
+            },
+            {
                 "type": "Flatten",
                 "params": {
                     "start_dim": 1,
@@ -31,13 +129,24 @@
             {
                 "type": "Linear",
                 "params": {
-                    "out_features": 10,
+                    "out_features": 100,
                     "bias": true,
                     "device": "'cpu'",
                     "dtype": "torch.float32",
                     "in_features": 6272
                 },
                 "name": "linear_1"
+            },
+            {
+                "type": "Linear",
+                "params": {
+                    "out_features": 10,
+                    "bias": true,
+                    "device": "'cpu'",
+                    "dtype": "torch.float32",
+                    "in_features": 100
+                },
+                "name": "linear_2"
             }
         ]
     },
@@ -48,13 +157,16 @@
         "num_epochs": 1,
         "batch_size": 1,
         "optimizer": {
-            "type": "Adadelta",
+            "type": "Adam",
             "params": {
-                "lr": 1.0,
-                "rho": 0.9,
-                "eps": 1e-06,
+                "lr": 0.001,
+                "betas": [
+                    0.9,
+                    0.999
+                ],
+                "eps": 1e-08,
                 "weight_decay": 1,
-                "foreach": false
+                "amsgrad": false
             }
         },
         "loss_func": {
@@ -66,7 +178,7 @@
             }
         }
     },
-    "mnist_path": "d:\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
-    "log_dir": "d:\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+    "mnist_path": "d:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
+    "log_dir": "d:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 
 }

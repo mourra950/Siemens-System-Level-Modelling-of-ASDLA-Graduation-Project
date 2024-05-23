@@ -24,7 +24,7 @@ class FillingQt:
         for optimizer in self.OPTIMIZERS:
             selectOptimizer_QPushButton = QPushButton(optimizer)
             selectOptimizer_QPushButton.clicked.connect(
-                lambda ch, i=optimizer, j=self.OPTIMIZERS, k=self.on_select_optimizer_clicked: \
+                lambda i=optimizer, j=self.OPTIMIZERS, k=self.on_select_optimizer_clicked: \
                     self.on_torch_func_clicked(
                         i, j, k, None, None
                     )
@@ -36,7 +36,7 @@ class FillingQt:
         for lossfunc in self.LOSSFUNC:
             selectLossFunc_QPushButton = QPushButton(lossfunc)
             selectLossFunc_QPushButton.clicked.connect(
-                lambda ch, i=lossfunc, j=self.LOSSFUNC, k=self.on_select_lossfunc_clicked: \
+                lambda  i=lossfunc, j=self.LOSSFUNC, k=self.on_select_lossfunc_clicked: \
                     self.on_torch_func_clicked(
                         i, j, k, None, None
                     )
@@ -49,7 +49,7 @@ class FillingQt:
             selectLayer_QPushButton = QPushButton(layer)
             if layer == "Residual Block":
                 selectLayer_QPushButton.clicked.connect(
-                    lambda ch, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: \
+                    lambda i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout: \
                         self.on_res_block_clicked(
                             i, j, k, q_layout
                         )
@@ -57,7 +57,7 @@ class FillingQt:
                 qt_layout.addWidget(selectLayer_QPushButton)
             else:
                 selectLayer_QPushButton.clicked.connect(
-                    lambda ch, i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout, dic=arch_dict: \
+                    lambda  i=layer, j=self.LAYERS, k=self.on_submit_layer_clicked, q_layout=q2_layout, dic=arch_dict: \
                         self.on_torch_func_clicked(
                             i, j, k, q_layout, dic
                         )
