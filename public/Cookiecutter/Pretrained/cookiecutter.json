@@ -3,11 +3,11 @@
   "project_name": "Pretrained_Output",
   
     "misc_params": {
-        "width": 18,
-        "height": 18,
+        "width": 28,
+        "height": 28,
         "channels": 3,
+        "num_epochs": 20,
         "batch_size": 64,
-        "num_epochs": 1,
         "optimizer": {
             "type": "ASGD",
             "params": {
@@ -32,6 +32,6 @@
     },
     "mnist_path": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
     "log_dir": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
-    "transfer_model": "resnet18"
+    "transfer_model": "resnet152"
 
 }
