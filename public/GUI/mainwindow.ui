@@ -582,6 +582,13 @@
                </widget>
               </item>
               <item>
+               <widget class="QPushButton" name="omar_generate_btn">
+                <property name="text">
+                 <string>Omar Generate</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="Generate_manual_QPushButton">
                 <property name="text">
                  <string>Generate manual model</string>

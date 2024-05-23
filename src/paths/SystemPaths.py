@@ -56,6 +56,7 @@ class SystemPaths:
         # Log Path
         self.log_path = os.path.normpath(
             os.path.join(self.datadir, "./tensorboardlogs"))
+        print(self.log_path)
 
         # to work on later
         self.css_path = 'ui/skin.qss'

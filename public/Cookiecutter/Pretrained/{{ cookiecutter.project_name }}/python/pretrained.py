@@ -10,7 +10,7 @@ from torch.optim import lr_scheduler
 from torch.utils.tensorboard import SummaryWriter
 import torchvision
 import re
-
+import datetime
 import os
 
 basedir = os.path.dirname(__file__)
@@ -39,7 +39,11 @@ def get_min_size():
 
 def train():
     # initiallization
-    writer = SummaryWriter(log_dir=r'{{cookiecutter.log_dir}}')
+    unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    base_log_dir = r'{{cookiecutter.log_dir}}'
+    log_dir = os.path.join(base_log_dir, unique_name)
+
+    writer = SummaryWriter(log_dir=log_dir)
     HEIGHT = {{cookiecutter.misc_params.height}}
     WIDTH = {{cookiecutter.misc_params.width}}
     BATCH_SIZE = {{cookiecutter.misc_params.batch_size}}
@@ -81,7 +85,7 @@ def train():
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True)
     loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
         {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
-            {{key}}={{value}},
+        {{key}}={{value}},
         {% endfor %}
     )
     class_names = train_dataset.classes
@@ -140,7 +144,7 @@ def train():
             pred = model(x)
             loss = loss_fn(pred, y)
             writer.add_scalar("Loss/train", loss, e)
-            
+
             # zero out the gradients, perform the backpropagation step, and update the weights
             optimizer.zero_grad()
             loss.backward()

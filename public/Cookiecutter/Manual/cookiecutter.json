@@ -178,7 +178,7 @@
             }
         }
     },
-    "mnist_path": "d:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
-    "log_dir": "d:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+    "mnist_path": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
+    "log_dir": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 
 }

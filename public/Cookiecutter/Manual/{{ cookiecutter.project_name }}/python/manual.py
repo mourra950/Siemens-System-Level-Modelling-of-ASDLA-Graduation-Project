@@ -12,7 +12,7 @@ from torchvision import datasets, transforms
 
 from .model import CNN
 from tqdm import tqdm
-
+import datetime
 import os
 
 basedir = os.path.dirname(__file__)
@@ -24,8 +24,11 @@ exec_globals = {'torch': torch, 'torchvision': torchvision}
 
 
 def train():
-    # initiallization
-    writer = SummaryWriter(log_dir=r'{{cookiecutter.log_dir}}')
+    unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    base_log_dir = r'{{cookiecutter.log_dir}}'
+    log_dir = os.path.join(base_log_dir, unique_name)
+
+    writer = SummaryWriter(log_dir=log_dir)
     HEIGHT = {{cookiecutter.misc_params.height}}
     WIDTH = {{cookiecutter.misc_params.width}}
     BATCH_SIZE = {{cookiecutter.misc_params.batch_size}}

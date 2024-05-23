@@ -21,7 +21,6 @@ class DataSubmission:
         self.set_data_onChange('batch_size', self.qt_batchSize_QSpinBox)
         self.set_data_onChange('num_epochs', self.qt_numEpochs_QSpinBox)
         # self.qt_manual_generate.clicked.connect(self.manual_generate)
-        
 
     def set_data_onChange(self, param_name, widget):
         if (type(widget) == QSpinBox):
@@ -30,7 +29,6 @@ class DataSubmission:
         elif (type(widget) == QLineEdit):
             widget.textChanged.connect(
                 lambda: self.fetch_data_params(param_name, widget))
-
 
     def on_submit_params_clicked(self):
         self.save_json()
@@ -47,10 +45,18 @@ class DataSubmission:
             print(f"error in {param_name}")
 
     def on_submit_arch_clicked(self):
-        self.validate_and_correct_layers(self.qt_addedLayers_QVBoxLayout, self.architecture)
+        self.validate_and_correct_layers(
+            self.qt_addedLayers_QVBoxLayout, self.architecture)
         arch_json_file_path = self.save_json()
         self.generate_manual_project(arch_json_file_path)
 
+    def generate_arch(self):
+        # self.validate_and_correct_layers(self.qt_addedLayers_QVBoxLayout, self.architecture)
+        # arch_json_file_path = self.save_json()
+        arch_json_file_path, _ = QFileDialog.getOpenFileName(
+            None, "Save JSON file", basedir, "JSON Files (*.json)"
+        )
+        self.generate_manual_project(arch_json_file_path)
 
     def handle_stderr(self):
         result = bytes(
@@ -63,7 +69,8 @@ class DataSubmission:
         print(result)
 
     def cookiecutter_preprocess(self, data, manual_cookie_json_path):
-        env = Environment(loader=FileSystemLoader(self.manual_cookie_jinja_template))
+        env = Environment(loader=FileSystemLoader(
+            self.manual_cookie_jinja_template))
 
         template_filename = "cookiecutter.json.jinja"
         template = env.get_template(template_filename)
@@ -75,10 +82,10 @@ class DataSubmission:
         with open(manual_cookie_json_path, "w") as f:
             f.write(str(result_file))
         return data
-    
+
     def remove_empty_arrays(self, d):
         return {k: v for k, v in d.items() if v != []}
-    
+
     def generate_project(self, template_path, output_path):
         cookiecutter(template_path, output_dir=output_path,
                      no_input=True, overwrite_if_exists=True)
@@ -103,8 +110,7 @@ class DataSubmission:
         self.Manual_Process.readyReadStandardError.connect(
             self.handle_stderr)
         self.Manual_Process.start(
-                "python", [path_output+"/Manual_Output/main.py"])
-
+            "python", [path_output+"/Manual_Output/main.py"])
 
     def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog, qt_layout, arch_dict):
         # Initialize message error box
@@ -112,7 +118,7 @@ class DataSubmission:
         dlg.setWindowTitle("error!")
         dlg.setStandardButtons(QMessageBox.Yes)
         dlg.setIcon(QMessageBox.Critical)
-        #mourra look at that
+        # mourra look at that
         # self.count+=1
         layer = {
             'type': layer_type,
@@ -129,18 +135,18 @@ class DataSubmission:
         if cond:
             self.create_layer_node(layer, -1, qt_layout, arch_dict)
             paramsWindow_QDialog.close()
-        
-    #save json for manual arch
+
+    # save json for manual arch
     def save_json(self):
         path, _ = QFileDialog.getSaveFileName(
             None, "Save JSON File", self.basedir, "JSON Files (*.json)")
         if path:
             self.architecture["mnist_path"] = self.mnist_path
             self.architecture["log_dir"] = self.log_path
-            #test for deep and shallow to avoid errors
+            # test for deep and shallow to avoid errors
             architecture = self.architecture.copy()
-            architecture["layers"]={"list":self.architecture["layers"]}
-            
+            architecture["layers"] = {"list": self.architecture["layers"]}
+
             with open(path, 'w') as f:
                 f.write(json.dumps(architecture, indent=4))
             print("JSON file saved successfully.")
