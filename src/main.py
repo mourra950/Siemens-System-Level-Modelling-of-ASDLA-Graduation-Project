@@ -7,9 +7,6 @@ import sys
 from PySide6.QtWidgets import QApplication
 
 
-# import classes and different files here
-
-
 def main():
 
     app = QApplication(sys.argv)
