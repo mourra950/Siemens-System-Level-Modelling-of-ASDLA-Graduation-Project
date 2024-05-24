@@ -102,12 +102,11 @@ def train():
     if type(layer) == type(nn.Sequential()):
         for i, j in list(layer.named_children()):
             if type(j) == type(nn.Linear(in_features=15, out_features=15)):
-                exec_d['a'] = j.in_features
-                exec(f"model.{name}=nn.Linear(a, {len(class_names)}) ", exec_d)
-
+                model.__dict__[name] = nn.Linear(
+                    j.in_features, len(class_names))
     else:
-        exec_d['a'] = layer.in_features
-        exec(f"model.{name}=nn.Linear(a, {len(class_names)}) ", exec_d)
+        model.__dict__[name] = nn.Linear(layer.in_features, len(class_names))
+
 
     model = model.to(device)
 
