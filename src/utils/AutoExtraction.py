@@ -2,14 +2,14 @@ from ast import List
 import inspect
 import torch.nn.modules as nn
 import torchvision.models as models
-
+from utils.Singleton import Singleton
 
 import torch.optim as optim
 import types
 import copy
 
 
-class AutoExtraction:
+class AutoExtraction(metaclass=Singleton):
 
     def __init__(self) -> None:
         print("Auto Extraction")
