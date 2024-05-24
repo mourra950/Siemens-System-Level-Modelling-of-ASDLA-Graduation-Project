@@ -90,27 +90,18 @@ class DataSubmission:
         cookiecutter(template_path, output_dir=output_path,
                      no_input=True, overwrite_if_exists=True)
 
-    def generate_manual_project(self, arch_json_file_path):
-        arch_json_file_data = None
-        with open(arch_json_file_path, "r") as f:
-            arch_json_file_data = json.load(f)
-        path_output = QFileDialog.getExistingDirectory(
-            None, "Pick a folder to save the output", basedir
+    def generate_manual_project(self):
+        path_output = self.Cookiecutter.render_cookiecutter_template(
+            self.manual_jinja_json,  self.manual_cookie_json, self.manual_template_dir
         )
-        arch_json_file_data = self.cookiecutter_preprocess(
-            arch_json_file_data, self.manual_cookie_json
-        )
-        self.generate_project(
-            self.manual_template_dir, path_output
-        )
-
-        self.Manual_Process = QProcess()
-        self.Manual_Process.readyReadStandardOutput.connect(
-            self.handle_stdout)
-        self.Manual_Process.readyReadStandardError.connect(
-            self.handle_stderr)
-        self.Manual_Process.start(
-            "python", [path_output+"/Manual_Output/main.py"])
+        if path_output:
+            self.Manual_Process = QProcess()
+            self.Manual_Process.readyReadStandardOutput.connect(
+                self.handle_stdout)
+            self.Manual_Process.readyReadStandardError.connect(
+                self.handle_stderr)
+            self.Manual_Process.start(
+                "python", [path_output+"/Manual_Output/main.py"])
 
     def on_submit_layer_clicked(self, layer_type, params_names, params_value_widgets, paramsWindow_QDialog, qt_layout, arch_dict):
         # Initialize message error box

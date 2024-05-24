@@ -10,7 +10,7 @@ from torch.utils.tensorboard import SummaryWriter
 import torchvision
 from torchvision import datasets, transforms
 
-from .model import CNN
+from python.model import CNN
 from tqdm import tqdm
 import datetime
 import os

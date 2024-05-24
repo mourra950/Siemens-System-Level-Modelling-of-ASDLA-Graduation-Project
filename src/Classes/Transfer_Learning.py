@@ -1,3 +1,4 @@
+from utils.Cookiecutter import Cookiecutter
 import os
 from PySide6.QtWidgets import QPushButton, QFileDialog, QComboBox
 from PySide6.QtCore import QProcess
@@ -36,21 +37,11 @@ class DataOfTransfer:
     # Render Json File Data
 
     def render_transfer_learning(self):
-        path_json, _ = QFileDialog.getOpenFileName(
-            None, "Save JSON file", basedir, "JSON Files (*.json)"
+        path_output = self.Cookiecutter.render_cookiecutter_template(
+            self.transfer_jinja_json, self.transfer_cookie_json, self.transfer_template_dir
         )
 
-        if path_json:
-            data = None
-            with open(path_json, "r") as json_file:
-                data = json.load(json_file)
-            path_output = QFileDialog.getExistingDirectory(
-                None, "Pick a folder to save the output", basedir
-            )
-            data = self.cookicutterpreproccess(data, self.transfer_cookie_json)
-            self.generate_project_Pretrained(
-                self.transfer_template_dir, path_output)
-
+        if path_output:
             self.Pretrained_Process = QProcess()
             self.Pretrained_Process.readyReadStandardOutput.connect(
                 self.handle_stdout_transfer_learning)

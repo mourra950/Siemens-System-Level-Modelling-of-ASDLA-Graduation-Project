@@ -16,6 +16,7 @@ from Tests.Layer_Testing import LayerTesting
 from Qt.Buttons import QTButtons
 from Qt.Dialogue import LayerDialog
 
+from utils.Cookiecutter import Cookiecutter
 
 sys.path.append("./")
 
@@ -38,6 +39,7 @@ class Initializer(
 ):
     def __init__(self) -> None:
         print("Initializer")
+        self.Cookiecutter = Cookiecutter(self.jinja_templates)
         Children.__init__(self)
         Controller.__init__(self)
         LayerNodeManager.__init__(self)

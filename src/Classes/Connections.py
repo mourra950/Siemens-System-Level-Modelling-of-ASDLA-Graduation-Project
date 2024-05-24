@@ -12,7 +12,7 @@ class Connections:
         # self.qt_submitArch_QPushButton.clicked.connect(
         #     self.on_submit_arch_clicked)
         self.omar_generate_btn.clicked.connect(
-            self.generate_arch
+            self.generate_manual_project
         )
         self.qt_manual_generate.clicked.connect(
             self.on_submit_arch_clicked
