@@ -30,6 +30,9 @@ class AutoExtraction(metaclass=Singleton):
         self.extract_torch_optimizers()
         self.extract_pretrained_models()
 
+    def extracted_data(self):
+        return self.LAYERS, self.LOSSFUNC, self.OPTIMIZERS, self.PRETRAINED_MODELS, self.LAYERS_WITHOUT_RES
+
     def extract_res_block(self):
         res_params = [{
             'name': "in_channels",

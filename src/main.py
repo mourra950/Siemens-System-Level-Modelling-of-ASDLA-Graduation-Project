@@ -17,12 +17,13 @@ def main():
     app.exec()
 
 
-class MainUI(QtCore.QObject, SystemPaths, Initializer, AutoExtraction):
+class MainUI(QtCore.QObject, SystemPaths, Initializer):
     def __init__(self):
+        self.AutoExtraction = AutoExtraction()
         self.loader = QUiLoader()
         self.debug = True
+        self.LAYERS, self.LOSSFUNC, self.OPTIMIZERS, self.PRETRAINED_MODELS, self.LAYERS_WITHOUT_RES = self.AutoExtraction.extracted_data()
         SystemPaths.__init__(self)
-        AutoExtraction.__init__(self)
         Initializer.__init__(self)
         self.ui.show()
 
