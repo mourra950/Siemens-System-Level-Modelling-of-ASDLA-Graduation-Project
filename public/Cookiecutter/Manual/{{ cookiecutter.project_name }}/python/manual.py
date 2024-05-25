@@ -11,7 +11,6 @@ import torchvision
 from torchvision import datasets, transforms
 
 from python.model import CNN
-from tqdm import tqdm
 import datetime
 import os
 
@@ -23,7 +22,7 @@ test_output = os.path.normpath(os.path.join(basedir, '../test.txt'))
 exec_globals = {'torch': torch, 'torchvision': torchvision}
 
 
-def train():
+def train(callback):
     unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     base_log_dir = r'{{cookiecutter.log_dir}}'
     log_dir = os.path.join(base_log_dir, unique_name)
@@ -62,14 +61,14 @@ def train():
         {%- endif %}
         {% endfor %}
     )
-
+    train_size = len(train_dataset)
     for e in range(0, EPOCHS):
         model.train()
 
         totalTrainLoss = 0
         trainCorrect = 0
 
-        for (x, y) in tqdm(train_dataloader):
+        for i, (x, y) in enumerate(train_dataloader):
             (x, y) = (x.to(device), y.to(device))
 
             pred = model(x)
@@ -83,6 +82,9 @@ def train():
             totalTrainLoss += loss
             trainCorrect += (pred.argmax(1) == y).type(
                 torch.float).sum().item()
+            
+            progress = ((e*train_size + i) / (EPOCHS*train_size)) *100
+            callback(progress)
         writer.add_scalar("Train/Accuracy", trainCorrect, e)
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
         model.eval()

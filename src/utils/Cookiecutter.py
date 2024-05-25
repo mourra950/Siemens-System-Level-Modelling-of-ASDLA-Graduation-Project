@@ -20,7 +20,7 @@ class Cookiecutter(metaclass=Singleton):
 
     def render_cookiecutter_template(self, src_cookie_json_path, output_cookie_json_path, template_dir):
         path_json, _ = QFileDialog.getOpenFileName(
-            None, "Save JSON file", basedir, "JSON Files (*.json)"
+            None, "Load JSON file", basedir, "JSON Files (*.json)"
         )
         path_output = None
         if path_json:
