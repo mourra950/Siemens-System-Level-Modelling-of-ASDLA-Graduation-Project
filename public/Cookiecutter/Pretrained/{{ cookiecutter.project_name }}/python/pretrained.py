@@ -71,7 +71,7 @@ def train():
         # Convert images to RGB format
         v2.Grayscale(num_output_channels=channels),
         # Convert images to PyTorch tensors
-        v2.ToImage(),
+        v2.ToTensor(),
         v2.ToDtype(torch.float32, scale=True),
         v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
@@ -84,9 +84,9 @@ def train():
     test_dataloader = DataLoader(
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True)
     loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
+        { % for key, value in cookiecutter.misc_params.loss_func.params|dictsort % }
         {{key}}={{value}},
-        {% endfor %}
+        { % endfor % }
     )
     class_names = train_dataset.classes
 
@@ -107,27 +107,28 @@ def train():
     else:
         model.__dict__[name] = nn.Linear(layer.in_features, len(class_names))
 
-
     model = model.to(device)
 
     # Create the chosen optimizer with parameters from the data dictionary
     optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
         model.parameters(),
         {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+        {%- if value is sequence and value is not string -%}
+        {{key}}=({{value|join(', ')}}),
+        {%- else -%}
         {{key}}={{value}},
+        {%- endif %}
         {% endfor %}
     )
+    
+    train_size = len(train_dataset)
 
     # Decay LR by a factor of 0.1 every 7 epochs
     exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
 
-    # Parameters of newly constructed modules have requires_grad=True by default
-
-    # optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
 
     for e in range(0, EPOCHS):
-        # print(EPOCHS)
-        # set the model in training mode
+        
         model.train()
         # initialize the total training and validation loss
         totalTrainLoss = 0
