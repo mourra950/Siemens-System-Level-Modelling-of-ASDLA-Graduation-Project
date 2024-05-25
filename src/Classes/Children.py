@@ -61,9 +61,9 @@ class Children:
         self.qt_trainModel_QPushButton = self.ui.findChild(
             QPushButton, 'trainPyModel_btn'
         )
-        self.omar_generate_btn = self.ui.findChild(
-            QPushButton, 'omar_generate_btn'
-        )
+        # self.omar_generate_btn = self.ui.findChild(
+        #     QPushButton, 'omar_generate_btn'
+        # )
 
         ####################################################
         self.res_layersList_QVBoxLayout = self.ResCreation.findChild(

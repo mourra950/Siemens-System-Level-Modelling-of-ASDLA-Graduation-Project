@@ -26,6 +26,7 @@
       <property name="font">
        <font>
         <family>Siemens Sans</family>
+        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -49,6 +50,7 @@
            <font>
             <family>Siemens Sans</family>
             <pointsize>14</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -343,7 +345,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>444</width>
-                       <height>192</height>
+                       <height>181</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -407,7 +409,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>444</width>
-                       <height>191</height>
+                       <height>181</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -458,6 +460,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -495,6 +498,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -526,7 +530,7 @@
                         <x>0</x>
                         <y>0</y>
                         <width>438</width>
-                        <height>497</height>
+                        <height>480</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -550,7 +554,7 @@
                       <x>0</x>
                       <y>0</y>
                       <width>439</width>
-                      <height>499</height>
+                      <height>482</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -573,25 +577,19 @@
                 <property name="font">
                  <font>
                   <family>Siemens Sans</family>
+                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
                 <property name="text">
-                 <string>Create manual Model Config file</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="omar_generate_btn">
-                <property name="text">
-                 <string>Load Config</string>
+                 <string>Submit Architecture</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="Generate_manual_QPushButton">
                 <property name="text">
-                 <string>Generate manual model</string>
+                 <string>Load Architecture and Generate Project</string>
                 </property>
                </widget>
               </item>
@@ -623,6 +621,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -653,6 +652,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -691,6 +691,7 @@
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -707,6 +708,7 @@
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -720,6 +722,7 @@
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -795,7 +798,7 @@
      <x>0</x>
      <y>0</y>
      <width>957</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuProgram">

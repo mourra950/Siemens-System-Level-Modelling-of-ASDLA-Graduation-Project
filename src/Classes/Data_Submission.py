@@ -48,16 +48,13 @@ class DataSubmission:
         self.validate_and_correct_layers(
             self.qt_addedLayers_QVBoxLayout, self.architecture)
         arch_json_file_path = self.save_json()
-        if arch_json_file_path:
-            self.generate_manual_project(arch_json_file_path)
+
 
     def generate_arch(self):
-        # self.validate_and_correct_layers(self.qt_addedLayers_QVBoxLayout, self.architecture)
-        # arch_json_file_path = self.save_json()
         arch_json_file_path, _ = QFileDialog.getOpenFileName(
             None, "Save JSON file", basedir, "JSON Files (*.json)"
         )
-        self.generate_manual_project(arch_json_file_path)
+        self.generate_manual_project()
 
     def handle_stderr(self):
         result = bytes(
