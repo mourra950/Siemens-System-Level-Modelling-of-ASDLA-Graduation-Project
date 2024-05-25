@@ -48,7 +48,8 @@ class DataSubmission:
         self.validate_and_correct_layers(
             self.qt_addedLayers_QVBoxLayout, self.architecture)
         arch_json_file_path = self.save_json()
-        self.generate_manual_project(arch_json_file_path)
+        if arch_json_file_path:
+            self.generate_manual_project(arch_json_file_path)
 
     def generate_arch(self):
         # self.validate_and_correct_layers(self.qt_addedLayers_QVBoxLayout, self.architecture)
@@ -67,28 +68,6 @@ class DataSubmission:
         result = bytes(
             self.Manual_Process.readAllStandardOutput()).decode("utf8")
         print(result)
-
-    def cookiecutter_preprocess(self, data, manual_cookie_json_path):
-        env = Environment(loader=FileSystemLoader(
-            self.manual_cookie_jinja_template))
-
-        template_filename = "cookiecutter.json.jinja"
-        template = env.get_template(template_filename)
-
-        data = self.remove_empty_arrays(data)
-        result_file = template.render(
-            my_dict=json.dumps(data, indent=4)
-        )
-        with open(manual_cookie_json_path, "w") as f:
-            f.write(str(result_file))
-        return data
-
-    def remove_empty_arrays(self, d):
-        return {k: v for k, v in d.items() if v != []}
-
-    def generate_project(self, template_path, output_path):
-        cookiecutter(template_path, output_dir=output_path,
-                     no_input=True, overwrite_if_exists=True)
 
     def generate_manual_project(self):
         path_output = self.Cookiecutter.render_cookiecutter_template(

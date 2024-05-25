@@ -22,7 +22,7 @@ class Cookiecutter(metaclass=Singleton):
         path_json, _ = QFileDialog.getOpenFileName(
             None, "Save JSON file", basedir, "JSON Files (*.json)"
         )
-
+        path_output = None
         if path_json:
             data = None
             with open(path_json, "r") as json_file:
