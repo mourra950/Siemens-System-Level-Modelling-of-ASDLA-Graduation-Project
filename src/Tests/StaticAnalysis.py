@@ -2,6 +2,7 @@ import json
 
 from utils.Singleton import Singleton
 
+
 class StaticAnalysis(metaclass=Singleton):
     def __init__(self, rules_path, debug) -> None:
         self.debug = debug
@@ -30,7 +31,6 @@ class StaticAnalysis(metaclass=Singleton):
             '<-->': self.between_comes
         }
 
-
     def test_rule(self, rule_func, layer_idx, rule_tokens, violations_list):
         return_val = rule_func(layer_idx, rule_tokens)
         if return_val == False:
@@ -39,17 +39,17 @@ class StaticAnalysis(metaclass=Singleton):
             )
         return return_val
 
-
     # Layer1 -> Layer2
+
     def after_comes_directly(self, layer_idx, rule_tokens) -> bool:
         if self.layers[layer_idx]['type'] != rule_tokens[0]:
             return True
         if layer_idx >= len(self.layers)-1:
-            return True    
+            return True
         if self.layers[layer_idx+1]['type'] == rule_tokens[2]:
             return True
         return False
-    
+
     # Layer1 ->x Layer2
     def after_comes_not_directly(self, layer_idx, rule_tokens) -> bool:
         if self.layers[layer_idx]['type'] != rule_tokens[0]:
@@ -59,7 +59,7 @@ class StaticAnalysis(metaclass=Singleton):
         if self.layers[layer_idx+1]['type'] != rule_tokens[2]:
             return True
         return False
-    
+
     # Layer1 --> Layer2
     def after_comes(self, layer_idx, rule_tokens) -> bool:
         if self.layers[layer_idx]['type'] != rule_tokens[0]:
@@ -70,7 +70,7 @@ class StaticAnalysis(metaclass=Singleton):
             if self.layers[i]['type'] == rule_tokens[2]:
                 return True
         return False
-    
+
     # Layer1 -->x Layer2
     def after_comes_not(self, layer_idx, rule_tokens) -> bool:
         if self.layers[layer_idx]['type'] != rule_tokens[0]:
@@ -81,17 +81,17 @@ class StaticAnalysis(metaclass=Singleton):
             if self.layers[i]['type'] == rule_tokens[2]:
                 return False
         return True
-        
+
     # Layer1 <- Layer2
     def before_comes_directly(self, layer_idx, rule_tokens) -> bool:
         if self.layers[layer_idx]['type'] != rule_tokens[0]:
             return True
         if layer_idx <= 0:
-            return True 
+            return True
         if self.layers[layer_idx-1]['type'] == rule_tokens[2]:
             return True
         return False
-    
+
     # Layer1 <-x Layer2
     def before_comes_not_directly(self, layer_idx, rule_tokens) -> bool:
         if self.layers[layer_idx]['type'] != rule_tokens[0]:
@@ -101,7 +101,7 @@ class StaticAnalysis(metaclass=Singleton):
         if self.layers[layer_idx-1]['type'] != rule_tokens[2]:
             return True
         return False
-       
+
     # Layer1 <-- Layer2
     def before_comes(self, layer_idx, rule_tokens) -> bool:
         if self.layers[layer_idx]['type'] != rule_tokens[0]:
@@ -112,7 +112,7 @@ class StaticAnalysis(metaclass=Singleton):
             if self.layers[i]['type'] == rule_tokens[2]:
                 return True
         return False
-    
+
     # Layer1 <--x Layer2
     def before_comes_not(self, layer_idx, rule_tokens) -> bool:
         if self.layers[layer_idx]['type'] != rule_tokens[0]:
@@ -123,9 +123,9 @@ class StaticAnalysis(metaclass=Singleton):
             if self.layers[i]['type'] == rule_tokens[2]:
                 return False
         return True
-    
 
     # (Layer1,Layer2) <--> Layer3
+
     def between_comes(self, layer_idx, rule_tokens):
         layer_1, layer_2 = rule_tokens[0][1:-1].split(',')
         if self.layers[layer_idx]['type'] != layer_1:
@@ -138,11 +138,10 @@ class StaticAnalysis(metaclass=Singleton):
             if self.layers[i]['type'] == rule_tokens[2]:
                 return True
         return True
-        
 
-    def analyze(self, arch_json_path):
-        with open(arch_json_path, 'r') as f:
-            self.layers = json.loads(f.read())['layers']['list']
+    def analyze(self, layers):
+        self.layers = layers
+
         violations_list = []
         for layer_idx in range(len(self.layers)):
             for rule in self.rules:
@@ -166,5 +165,5 @@ class StaticAnalysis(metaclass=Singleton):
 if __name__ == "__main__":
     analyzer = StaticAnalysis(
         'public/Rules/warning_rules.txt',
-    )   
+    )
     analyzer.analyze('TESTS/Banna.json')

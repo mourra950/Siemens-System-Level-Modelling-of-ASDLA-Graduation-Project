@@ -5,6 +5,7 @@ from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
 import sys
 from PySide6.QtWidgets import QApplication
+from Tests.StaticAnalysis import StaticAnalysis
 
 
 def main():
@@ -16,11 +17,16 @@ def main():
 
 class MainUI(QtCore.QObject, SystemPaths, Initializer):
     def __init__(self):
-        self.AutoExtraction = AutoExtraction()
-        self.loader = QUiLoader()
         self.debug = True
-        self.LAYERS, self.LOSSFUNC, self.OPTIMIZERS, self.PRETRAINED_MODELS, self.LAYERS_WITHOUT_RES = self.AutoExtraction.extracted_data()
         SystemPaths.__init__(self)
+
+        self.AutoExtraction = AutoExtraction()
+        self.StaticAnalysis = StaticAnalysis(
+            self.warning_rules_path, self.debug)
+        
+        self.loader = QUiLoader()
+        self.LAYERS, self.LOSSFUNC, self.OPTIMIZERS, self.PRETRAINED_MODELS, self.LAYERS_WITHOUT_RES = self.AutoExtraction.extracted_data()
+
         Initializer.__init__(self)
         self.ui.show()
 

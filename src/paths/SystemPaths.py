@@ -62,7 +62,9 @@ class SystemPaths:
         self.log_path = os.path.normpath(
             os.path.join(self.datadir, "./tensorboardlogs"))
         print(self.log_path)
-
+        # Rules Static Analysis
+        self.warning_rules_path = os.path.normpath(
+            os.path.join(self.publicdir, "./Rules/warning_rules.txt"))
         # to work on later
         self.css_path = 'ui/skin.qss'
         self.model_py_path = 'python_files/model.py'

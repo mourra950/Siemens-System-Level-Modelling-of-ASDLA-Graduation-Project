@@ -19,17 +19,6 @@ model_output = os.path.normpath(
 test_output = os.path.normpath(os.path.join(basedir, '../test.txt'))
 
 
-def main():
-    ...
-
-
-def test_c():
-    with open(test_output, "w+") as Output:
-        Output.write("ahmed")
-
-
-exec_globals = {'torch': torch, 'torchvision': torchvision}
-
 
 def get_min_size():
 
@@ -37,7 +26,7 @@ def get_min_size():
     return min_size
 
 
-def train():
+def train(callback):
     # initiallization
     unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     base_log_dir = r'{{cookiecutter.log_dir}}'
@@ -71,7 +60,7 @@ def train():
         # Convert images to RGB format
         v2.Grayscale(num_output_channels=channels),
         # Convert images to PyTorch tensors
-        v2.ToTensor(),
+        v2.ToImage(),
         v2.ToDtype(torch.float32, scale=True),
         v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
@@ -84,9 +73,9 @@ def train():
     test_dataloader = DataLoader(
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True)
     loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-        { % for key, value in cookiecutter.misc_params.loss_func.params|dictsort % }
+        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
         {{key}}={{value}},
-        { % endfor % }
+        {% endfor %}
     )
     class_names = train_dataset.classes
 
@@ -137,7 +126,7 @@ def train():
         trainCorrect = 0
         valCorrect = 0
         # loop over the training set
-        for (x, y) in train_dataloader:
+        for i,(x, y) in enumerate(train_dataloader):
             # send the input to the device
             (x, y) = (x.to(device), y.to(device))
             # perform a forward pass and calculate the training loss
@@ -153,6 +142,8 @@ def train():
             totalTrainLoss += loss
             trainCorrect += (pred.argmax(1) == y).type(
                 torch.float).sum().item()
+            progress = ((e*train_size + i) / (EPOCHS*train_size)) * 100
+            callback(progress)
         writer.add_scalar("Train/Accuracy", trainCorrect, e)
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
         model.eval()

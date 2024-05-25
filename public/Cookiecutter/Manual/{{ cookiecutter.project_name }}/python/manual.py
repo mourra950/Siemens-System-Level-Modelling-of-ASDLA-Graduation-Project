@@ -20,8 +20,6 @@ model_output = os.path.normpath(
     os.path.join(basedir, '../SystemC/Pt/model.pt'))
 test_output = os.path.normpath(os.path.join(basedir, '../test.txt'))
 
-exec_globals = {'torch': torch, 'torchvision': torchvision}
-
 
 def train(callback):
     unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -41,22 +39,24 @@ def train(callback):
     model = CNN()
     model = model.to(device)
 
-    transform = v2.ToTensor()
+    transform = v2.Compose(
+        [v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
 
     train_dataset = datasets.MNIST(root=r"{{cookiecutter.mnist_path}}",
-                                train=True, download=True, transform=transform)
-    
-    train_dataloader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+                                   train=True, download=True, transform=transform)
+
+    train_dataloader = DataLoader(
+        train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
         {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
-            {{key}}={{value}},
+        {{key}}={{value}},
         {% endfor %}
     )
     optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
         model.parameters(),
         {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
         {%- if value is sequence and value is not string -%}
-        {{key}}=({{value|join(', ')}}),
+        {{key}}=({{value | join(', ')}}),
         {%- else -%}
         {{key}}={{value}},
         {%- endif %}
@@ -75,7 +75,7 @@ def train(callback):
             pred = model(x)
             loss = loss_fn(pred, y)
             writer.add_scalar("Loss/train", loss, e)
-            
+
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
@@ -83,8 +83,8 @@ def train(callback):
             totalTrainLoss += loss
             trainCorrect += (pred.argmax(1) == y).type(
                 torch.float).sum().item()
-            
-            progress = ((e*train_size + i) / (EPOCHS*train_size)) *100
+
+            progress = ((e*train_size + i) / (EPOCHS*train_size)) * 100
             callback(progress)
         writer.add_scalar("Train/Accuracy", trainCorrect, e)
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
@@ -95,7 +95,7 @@ def train(callback):
         torch.jit.save(scripted, model_output)
     except e:
         print(e)
-    
+
 
 if __name__ == '__main__':
     train()

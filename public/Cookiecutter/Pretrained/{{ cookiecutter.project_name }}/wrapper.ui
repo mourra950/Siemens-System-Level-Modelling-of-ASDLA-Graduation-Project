@@ -25,6 +25,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="Wrap">
         <property name="text">
          <string>Wrap in SystemC</string>
@@ -41,7 +48,7 @@
      <x>0</x>
      <y>0</y>
      <width>829</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

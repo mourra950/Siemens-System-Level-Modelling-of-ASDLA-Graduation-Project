@@ -100,7 +100,7 @@ class DataSubmission:
         # cond=self.test_layer(layer_type, params_names, params_value_widgets)
         cond = True
         if cond:
-            self.create_layer_node(layer, -1, qt_layout, arch_dict)
+            self.create_layer_node(layer, -1, qt_layout, arch_dict)    
             paramsWindow_QDialog.close()
 
     # save json for manual arch
@@ -112,6 +112,7 @@ class DataSubmission:
             self.architecture["log_dir"] = self.log_path
             # test for deep and shallow to avoid errors
             architecture = self.architecture.copy()
+            self.StaticAnalysis.analyze(self.architecture["layers"])
             architecture["layers"] = {"list": self.architecture["layers"]}
 
             with open(path, 'w') as f:

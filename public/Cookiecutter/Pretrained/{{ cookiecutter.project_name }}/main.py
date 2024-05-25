@@ -1,4 +1,4 @@
-from python.pretrained import train, test_c
+from python.pretrained import train
 import os
 import sys
 import shutil
@@ -8,9 +8,10 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QApplication,
     QPushButton,
+    QProgressBar
 )
 from PySide6.QtWidgets import QFileDialog
-from PySide6.QtCore import QProcess
+from PySide6.QtCore import QProcess,QThread,Signal
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
 
@@ -22,6 +23,17 @@ source_output = os.path.normpath(os.path.join(basedir, './SystemC'))
 
 loader = QUiLoader()
 
+class Worker(QThread):
+ 
+    progressChanged = Signal(int)
+    
+    def run(self):
+        train(callback=self.update_progress)
+
+    def update_progress(self, value):
+        self.progressChanged.emit(value)
+
+
 
 class MainUI(QMainWindow):
     def __init__(self):
@@ -29,20 +41,30 @@ class MainUI(QMainWindow):
 
         self.window = loader.load(os.path.join(basedir, "wrapper.ui"), None)
 
-        self.window.setWindowTitle("Security")
+        self.window.setWindowTitle("Train & Wrap")
         self.train_btn = self.window.findChild(QPushButton, "Train")
         self.wrap_btn = self.window.findChild(QPushButton, "Wrap")
+        self.progress_bar = self.window.findChild(QProgressBar, "progressBar")
+        
         self.wrap_btn.setEnabled(False)
         self.train_btn.clicked.connect(self.train)
-
         self.wrap_btn.clicked.connect(self.cmake_wrap)
-        self.window.show()
         
+        self.worker = Worker()
+        self.worker.progressChanged.connect(self.update_progress)
+        self.worker.finished.connect(self.on_train_finished)
+
+        self.window.show()
+    def update_progress(self, value):
+        self.progress_bar.setValue(value)
+
+    def on_train_finished(self):
+        self.progress_bar.setValue(100)
+        self.wrap_btn.setEnabled(True)   
 
     def train(self):
         try:
-            train()
-            self.wrap_btn.setEnabled(True)
+            self.worker.start()
         except:
             pass
 
