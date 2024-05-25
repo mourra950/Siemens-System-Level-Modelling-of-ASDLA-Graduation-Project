@@ -48,13 +48,9 @@ class DataSubmission:
         self.validate_and_correct_layers(
             self.qt_addedLayers_QVBoxLayout, self.architecture)
         arch_json_file_path = self.save_json()
+        self.StaticAnalysis.analyze(self.architecture["layers"])
 
 
-    def generate_arch(self):
-        arch_json_file_path, _ = QFileDialog.getOpenFileName(
-            None, "Save JSON file", basedir, "JSON Files (*.json)"
-        )
-        self.generate_manual_project()
 
     def handle_stderr(self):
         result = bytes(
@@ -112,7 +108,6 @@ class DataSubmission:
             self.architecture["log_dir"] = self.log_path
             # test for deep and shallow to avoid errors
             architecture = self.architecture.copy()
-            self.StaticAnalysis.analyze(self.architecture["layers"])
             architecture["layers"] = {"list": self.architecture["layers"]}
 
             with open(path, 'w') as f:
