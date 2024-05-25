@@ -8,6 +8,7 @@ from torchvision import models, transforms
 from torch.optim import lr_scheduler
 from torch.utils.tensorboard import SummaryWriter
 import torchvision
+from torchvision.transforms import v2
 from torchvision import datasets, transforms
 
 from python.model import CNN
@@ -40,7 +41,7 @@ def train(callback):
     model = CNN()
     model = model.to(device)
 
-    transform = transforms.ToTensor()
+    transform = v2.ToTensor()
 
     train_dataset = datasets.MNIST(root=r"{{cookiecutter.mnist_path}}",
                                 train=True, download=True, transform=transform)
