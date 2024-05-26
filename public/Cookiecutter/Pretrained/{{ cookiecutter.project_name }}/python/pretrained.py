@@ -92,9 +92,9 @@ def train(callback):
         for i, j in list(layer.named_children()):
             if type(j) == type(nn.Linear(in_features=15, out_features=15)):
                 model.__dict__[name] = nn.Linear(
-                    j.in_features, len(class_names))
+                    j.in_features, len(class_names),device=device)
     else:
-        model.__dict__[name] = nn.Linear(layer.in_features, len(class_names))
+        model.__dict__[name] = nn.Linear(layer.in_features, len(class_names),device=device)
 
     model = model.to(device)
 

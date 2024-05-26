@@ -34,7 +34,6 @@ class Controller:
 
         self.create_dialogue_controller(
             torch_funcs, func_name, params_names, params_value_widgets, allParamsColumn_QVBoxLayout)
-
         ################################
 
         allParamsColumn_QVBoxLayout.addWidget(QLabel())
