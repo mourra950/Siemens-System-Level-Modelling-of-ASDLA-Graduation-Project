@@ -40,11 +40,31 @@ class SystemPaths:
         # Template paths
         self.jinja_templates = os.path.normpath(
             os.path.join(self.publicdir, "jinja_templates"))
-        self.transfer_template_dir=os.path.normpath(
+
+        self.manual_jinja_json = os.path.normpath(
+            os.path.join(self.publicdir, "jinja_templates/Manual"))
+        self.manual_template_dir = os.path.normpath(
+            os.path.join(self.publicdir, "./Cookiecutter/Manual"))
+        self.manual_cookie_json = os.path.normpath(
+            os.path.join(self.publicdir, "./Cookiecutter/Manual/cookiecutter.json"))
+
+        self.transfer_jinja_json = os.path.normpath(
+            os.path.join(self.publicdir, "jinja_templates/Transfer"))
+        self.transfer_template_dir = os.path.normpath(
             os.path.join(self.publicdir, "./Cookiecutter/Pretrained"))
-        self.transfer_cookie_json=os.path.normpath(
+        self.transfer_cookie_json = os.path.normpath(
             os.path.join(self.publicdir, "./Cookiecutter/Pretrained/cookiecutter.json"))
 
+        # Dataset paths
+        self.mnist_path = os.path.normpath(
+            os.path.join(self.datadir, "./mnist"))
+        # Log Path
+        self.log_path = os.path.normpath(
+            os.path.join(self.datadir, "./tensorboardlogs"))
+        print(self.log_path)
+        # Rules Static Analysis
+        self.warning_rules_path = os.path.normpath(
+            os.path.join(self.publicdir, "./Rules/warning_rules.txt"))
         # to work on later
         self.css_path = 'ui/skin.qss'
         self.model_py_path = 'python_files/model.py'

@@ -1,8 +1,11 @@
 class Validator:
-    def validate_and_correct_layers(self, architecture):
+    def validate_and_correct_layers(self, qt_layout, architecture):
         width = architecture['misc_params']['width']
         height = architecture['misc_params']['height']
         channels = architecture['misc_params']['channels']
+        if self.debug:
+            print(
+                f'width: {width}, height: {height}, channels: {channels},architecture: {architecture}')
         features_after_1st_FC = None
         flattened = False
         layer_freqs = dict()
@@ -21,24 +24,27 @@ class Validator:
                 height = (height - params['kernel_size'] +
                           2*params['padding']) // params['stride'] + 1
                 channels = params['out_channels']
+
             elif layer_type == 'MaxPool2d' or layer_type == 'AvgPool2d':
-                width = (width - params['kernel_size']) // params['stride'] + 1
-                height = (height - params['kernel_size']
-                          ) // params['stride'] + 1
+                width = (width - params['kernel_size'] + 2 *
+                         params['padding']) // params['stride'] + 1
+                height = (height - params['kernel_size']+ 2 *
+                         params['padding']) // params['stride'] + 1
+
             elif layer_type == 'Linear':
                 if not flattened:
                     flattened = True
                     flatten = {
                         'type': 'Flatten',
                         'params': {
-                            'start_dim': 0,
+                            'start_dim': 1,
                             'end_dim': -1
                         }
                     }
                     if i > 0 and architecture['layers'][i-1]['type'] == 'Flatten':
-                        architecture['layers'][i -1]['params'] = flatten['params']
+                        architecture['layers'][i-1]['params'] = flatten['params']
                     else:
-                        self.create_layer_node(flatten, i)
+                        self.create_layer_node(flatten, i, qt_layout, architecture)
                         self.add_layer_name(flatten, layer_freqs)
                         i += 1
                 if features_after_1st_FC is not None:

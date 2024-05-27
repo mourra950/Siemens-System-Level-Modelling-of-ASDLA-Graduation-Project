@@ -4,7 +4,6 @@ from PySide6.QtWidgets import (
     QLabel,
     QFrame
 )
-from PySide6.QtGui import QIcon
 
 
 class LayerNodeManager:
@@ -15,6 +14,8 @@ class LayerNodeManager:
                 'width': 1,
                 'height': 1,
                 'channels': 1,
+                'num_epochs': 1,
+                'batch_size': 0
             }
         }
         self.Resarchitecture = {

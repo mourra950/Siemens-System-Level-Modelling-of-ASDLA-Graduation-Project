@@ -1,22 +1,23 @@
-import os
 import sys
 from PySide6.QtWidgets import QCheckBox, QSpinBox, QDoubleSpinBox, QComboBox
 from Classes.Children import Children
-from Classes.DataSubmission import DataSubmission
+from Classes.Data_Submission import DataSubmission
 from Classes.Filling import FillingQt
 from Classes.Validator import Validator
-from Classes.LayerNodeManager import LayerNodeManager
+from Classes.Layer_Node_Manager import LayerNodeManager
 from utils.FileGenerator import FileGenerator
-from Classes.Conn import Connections
+from Classes.Connections import Connections
 from Classes.Controller import Controller
 from Classes.Tensorboard import TensorView
 from Classes.ResNet.resbuild import ResBuildWindow
-from Classes.TransferLearning import DataOfTransfer
-from Classes.LayerTesting import LayerTesting
+from Classes.Transfer_Learning import DataOfTransfer
+from Tests.Layer_Testing import LayerTesting
+from Classes.Generated_Files_Viewer import GeneratedFilesViewer
 
 from Qt.Buttons import QTButtons
 from Qt.Dialogue import LayerDialog
 
+from utils.Cookiecutter import Cookiecutter
 
 sys.path.append("./")
 
@@ -35,10 +36,13 @@ class Initializer(
     QTButtons,
     LayerDialog,
     DataOfTransfer,
-    LayerTesting
+    LayerTesting,
+    GeneratedFilesViewer
+
 ):
     def __init__(self) -> None:
         print("Initializer")
+        self.Cookiecutter = Cookiecutter(self.jinja_templates, self.debug)
         Children.__init__(self)
         Controller.__init__(self)
         LayerNodeManager.__init__(self)
@@ -49,6 +53,7 @@ class Initializer(
         TensorView.__init__(self)
         DataSubmission.__init__(self)
         LayerTesting.__init__(self)
+        GeneratedFilesViewer.__init__(self)        
         self.ui.setWindowTitle("The Awesome Project")
 
     def get_widget_data(self, widget):

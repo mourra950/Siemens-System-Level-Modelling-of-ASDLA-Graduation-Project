@@ -34,7 +34,6 @@ class Controller:
 
         self.create_dialogue_controller(
             torch_funcs, func_name, params_names, params_value_widgets, allParamsColumn_QVBoxLayout)
-
         ################################
 
         allParamsColumn_QVBoxLayout.addWidget(QLabel())
@@ -42,8 +41,10 @@ class Controller:
 
         ##############################
         submitLayer_QPushButton.clicked.connect(
-            lambda submit_func=on_submit_func, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog, q_layout=args[0], arch=args[1]: submit_func(
-                i, j, k, l, q_layout, arch)
+            lambda  submit_func=on_submit_func, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog, q_layout=args[0], arch=args[1]: \
+                submit_func(
+                    i, j, k, l, q_layout, arch
+                )
         )
 
         allParamsColumn_QVBoxLayout.addWidget(submitLayer_QPushButton)

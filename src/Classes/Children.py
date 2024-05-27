@@ -2,9 +2,10 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QPushButton,
     QLineEdit,
-    QRadioButton,
     QComboBox,
     QSpinBox,
+    QTreeWidget,
+    QTextBrowser
 )
 
 
@@ -59,6 +60,12 @@ class Children:
         self.qt_generateFiles_QPushButton = self.ui.findChild(
             QPushButton, "generateFiles_QPushButton"
         )
+        self.qt_trainModel_QPushButton = self.ui.findChild(
+            QPushButton, 'trainPyModel_btn'
+        )
+        # self.omar_generate_btn = self.ui.findChild(
+        #     QPushButton, 'omar_generate_btn'
+        # )
 
         ####################################################
         self.res_layersList_QVBoxLayout = self.ResCreation.findChild(
@@ -93,3 +100,12 @@ class Children:
         self.Run_transfer_Model_QPushButton = self.ui.findChild(
             QPushButton, "Run_transfer_Model_QPushButton"
         )
+        # testing generating manual
+        self.qt_manual_generate = self.ui.findChild(
+            QPushButton, "Generate_manual_QPushButton")
+        
+        self.qt_output_tree_viewer = self.ui.findChild(
+            QTreeWidget, "files_tree")
+        
+        self.qt_output_file_viewer = self.ui.findChild(
+            QTextBrowser, "codeSample")

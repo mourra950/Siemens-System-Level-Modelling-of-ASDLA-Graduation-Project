@@ -15,7 +15,7 @@ class QTButtons:
         Button.setMaximumWidth(30)
         Button.setIcon(QIcon(icon_path))
         Button.clicked.connect(
-            lambda func=function, i=border_QFrame, q_layout=qt_layout:
+            lambda  func=function, i=border_QFrame, q_layout=qt_layout:
                 func(i, q_layout, *args)
         )
 

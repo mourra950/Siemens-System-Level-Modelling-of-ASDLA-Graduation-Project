@@ -2,24 +2,26 @@ from ast import List
 import inspect
 import torch.nn.modules as nn
 import torchvision.models as models
-
+from utils.Singleton import Singleton
 
 import torch.optim as optim
 import types
 import copy
 
 
-class AutoExtraction:
+class AutoExtraction(metaclass=Singleton):
 
     def __init__(self) -> None:
         print("Auto Extraction")
         self.unnecessary_params = [
-            "in_channels", "num_features", "in_features"]
+            "in_channels", "num_features", "in_features",
+            'dilation'
+        ]
         self.unnecessary_optimizer_params = [
             'params'
         ]
         self.unnecessary_loss_params = [
-            'reduce', 'size_average',"weight"
+            'reduce', 'size_average', "weight"
         ]
 
         self.extract_torch_layers()
@@ -27,6 +29,9 @@ class AutoExtraction:
         self.extract_torch_lossfunctions()
         self.extract_torch_optimizers()
         self.extract_pretrained_models()
+
+    def extracted_data(self):
+        return self.LAYERS, self.LOSSFUNC, self.OPTIMIZERS, self.PRETRAINED_MODELS, self.LAYERS_WITHOUT_RES
 
     def extract_res_block(self):
         res_params = [{
@@ -162,10 +167,4 @@ class AutoExtraction:
         self.OPTIMIZERS = torch_optimizers_dict
 
     def extract_pretrained_models(self):
-
-        # Get a list of all available pre-trained models
-        pretrained_models = dir(models)
-
-        # Filter out the models that start with "__" (internal attributes) and those that end with "_"
-        self.PRETRAINED_MODELS = [model for model in pretrained_models if not model.startswith(
-            "__") and not model.endswith("_") and model[0].islower()]
+        self.PRETRAINED_MODELS = models.list_models()

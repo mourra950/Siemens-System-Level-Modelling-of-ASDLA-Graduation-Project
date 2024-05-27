@@ -26,6 +26,7 @@
       <property name="font">
        <font>
         <family>Siemens Sans</family>
+        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -36,7 +37,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -49,6 +50,7 @@
            <font>
             <family>Siemens Sans</family>
             <pointsize>14</pointsize>
+            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -179,21 +181,21 @@
               <item row="6" column="0">
                <layout class="QGridLayout" name="gridLayout"/>
               </item>
-              <item row="7" column="0">
+              <item row="8" column="0">
                <widget class="QLabel" name="batchSize_label">
                 <property name="text">
                  <string>Batch Size</string>
                 </property>
                </widget>
               </item>
-              <item row="7" column="1">
+              <item row="8" column="1">
                <widget class="QSpinBox" name="batchSize_QSpinBox">
                 <property name="maximum">
                  <number>999999999</number>
                 </property>
                </widget>
               </item>
-              <item row="8" column="0">
+              <item row="9" column="0">
                <spacer name="verticalSpacer_4">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -206,14 +208,14 @@
                 </property>
                </spacer>
               </item>
-              <item row="9" column="0">
+              <item row="10" column="0">
                <widget class="QLabel" name="numberEpochs_label">
                 <property name="text">
                  <string>Number of Epochs</string>
                 </property>
                </widget>
               </item>
-              <item row="9" column="1">
+              <item row="10" column="1">
                <widget class="QSpinBox" name="numberEpochs_QSpinBox">
                 <property name="minimum">
                  <number>1</number>
@@ -223,7 +225,7 @@
                 </property>
                </widget>
               </item>
-              <item row="10" column="0">
+              <item row="11" column="0">
                <spacer name="verticalSpacer_5">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -236,14 +238,14 @@
                 </property>
                </spacer>
               </item>
-              <item row="11" column="0">
+              <item row="12" column="0">
                <widget class="QLabel" name="inputChannelsLabel">
                 <property name="text">
                  <string>Input Channels</string>
                 </property>
                </widget>
               </item>
-              <item row="11" column="1">
+              <item row="12" column="1">
                <widget class="QSpinBox" name="inputChannelsSpinBox">
                 <property name="minimum">
                  <number>1</number>
@@ -253,8 +255,21 @@
                 </property>
                </widget>
               </item>
-              <item row="12" column="0">
+              <item row="13" column="0">
                <spacer name="verticalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="7" column="0">
+               <spacer name="verticalSpacer_2">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
@@ -330,7 +345,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>444</width>
-                       <height>192</height>
+                       <height>181</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -394,7 +409,7 @@
                        <x>0</x>
                        <y>0</y>
                        <width>444</width>
-                       <height>191</height>
+                       <height>181</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -445,6 +460,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -482,6 +498,7 @@
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -513,7 +530,7 @@
                         <x>0</x>
                         <y>0</y>
                         <width>438</width>
-                        <height>497</height>
+                        <height>480</height>
                        </rect>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -537,7 +554,7 @@
                       <x>0</x>
                       <y>0</y>
                       <width>439</width>
-                      <height>499</height>
+                      <height>482</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -560,11 +577,19 @@
                 <property name="font">
                  <font>
                   <family>Siemens Sans</family>
+                  <weight>75</weight>
                   <bold>true</bold>
                  </font>
                 </property>
                 <property name="text">
                  <string>Submit Architecture</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="Generate_manual_QPushButton">
+                <property name="text">
+                 <string>Load Architecture and Generate Project</string>
                 </property>
                </widget>
               </item>
@@ -592,10 +617,45 @@
              <number>0</number>
             </property>
             <item>
+             <widget class="QLabel" name="code_txt">
+              <property name="font">
+               <font>
+                <family>Siemens Sans</family>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Generated Files</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTreeWidget" name="files_tree">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="headerHidden">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_9">
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <item>
              <widget class="QLabel" name="Lcode">
               <property name="font">
                <font>
                 <family>Siemens Sans</family>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -616,39 +676,6 @@
             </item>
            </layout>
           </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_9">
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="Lgenerated">
-              <property name="font">
-               <font>
-                <family>Siemens Sans</family>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Generated Files</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QListWidget" name="generatedFiles">
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 255);</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
          </layout>
         </item>
         <item>
@@ -664,6 +691,7 @@
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -680,6 +708,7 @@
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -693,6 +722,7 @@
             <property name="font">
              <font>
               <family>Siemens Sans</family>
+              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -753,38 +783,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="Run_transfer_Model_QPushButton">
-            <property name="text">
-             <string>Train Model</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="SystemC">
-       <attribute name="title">
-        <string>Page</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_19">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_18">
-          <item>
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>Wrap SystemC</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
        </layout>
@@ -800,7 +798,7 @@
      <x>0</x>
      <y>0</y>
      <width>957</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuProgram">
@@ -819,9 +817,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>submitArch_QPushButton</tabstop>
-  <tabstop>codeSample</tabstop>
-  <tabstop>generatedFiles</tabstop>
   <tabstop>generateFiles_QPushButton</tabstop>
   <tabstop>trainPyModel_btn</tabstop>
   <tabstop>systemCWrapper_btn</tabstop>

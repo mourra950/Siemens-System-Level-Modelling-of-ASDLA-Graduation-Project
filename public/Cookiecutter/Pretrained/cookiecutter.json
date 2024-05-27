@@ -1,13 +1,12 @@
 {
-  "test_num": 5,
-  "project_name": "Pretrained_Output",
-  
+    "test_num": 5,
+    "project_name": "Pretrained_Output",
     "misc_params": {
-        "width": 18,
-        "height": 18,
+        "width": 28,
+        "height": 28,
         "channels": 3,
+        "num_epochs": 20,
         "batch_size": 64,
-        "num_epochs": 1,
         "optimizer": {
             "type": "ASGD",
             "params": {
@@ -25,11 +24,9 @@
             "type": "CrossEntropyLoss",
             "params": {
                 "ignore_index": 1,
-                "reduction": "'none'",
+                "reduction": "'mean'",
                 "label_smoothing": 0.0
             }
         }
-    },
-    "transfer_model": "mobilenet"
-
+    }
 }

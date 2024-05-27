@@ -1,0 +1,72 @@
+{
+  "test_num": 5,
+  "project_name": "Manual_Output",
+  
+    "layers": {
+        "list": [
+            {
+                "type": "Conv2d",
+                "params": {
+                    "out_channels": 8,
+                    "kernel_size": 3,
+                    "stride": 1,
+                    "padding": 1,
+                    "groups": 1,
+                    "bias": true,
+                    "padding_mode": "'zeros'",
+                    "device": "'cpu'",
+                    "dtype": "torch.float32",
+                    "in_channels": 1
+                },
+                "name": "conv2d_1"
+            },
+            {
+                "type": "Conv2d",
+                "params": {
+                    "out_channels": 8,
+                    "kernel_size": 3,
+                    "stride": 1,
+                    "padding": 1,
+                    "groups": 1,
+                    "bias": true,
+                    "padding_mode": "'zeros'",
+                    "device": "'cpu'",
+                    "dtype": "torch.float32",
+                    "in_channels": 8
+                },
+                "name": "conv2d_2"
+            }
+        ]
+    },
+    "misc_params": {
+        "width": 28,
+        "height": 28,
+        "channels": 1,
+        "num_epochs": 1,
+        "batch_size": 1,
+        "optimizer": {
+            "type": "Adam",
+            "params": {
+                "lr": 0.001,
+                "betas": [
+                    0.9,
+                    0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 1,
+                "amsgrad": false
+            }
+        },
+        "loss_func": {
+            "type": "CrossEntropyLoss",
+            "params": {
+                "ignore_index": 1,
+                "reduction": "'mean'",
+                "label_smoothing": 0.0
+            }
+        }
+    },
+    "mnist_path": "d:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
+    "log_dir": "d:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+
+}

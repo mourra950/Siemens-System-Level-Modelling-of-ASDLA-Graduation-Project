@@ -25,7 +25,6 @@ statics = {
         {"text": "circular", "data": "'circular'"},
     ],
     "reduction": [
-        {"text": "none", "data": "'none'"},
         {"text": "mean", "data": "'mean'"},
         {"text": "sum", "data": "'sum'"},
     ],
