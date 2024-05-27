@@ -4,6 +4,8 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QComboBox,
     QSpinBox,
+    QTreeWidget,
+    QTextBrowser
 )
 
 
@@ -101,3 +103,9 @@ class Children:
         # testing generating manual
         self.qt_manual_generate = self.ui.findChild(
             QPushButton, "Generate_manual_QPushButton")
+        
+        self.qt_output_tree_viewer = self.ui.findChild(
+            QTreeWidget, "files_tree")
+        
+        self.qt_output_file_viewer = self.ui.findChild(
+            QTextBrowser, "codeSample")
