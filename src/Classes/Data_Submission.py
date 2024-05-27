@@ -66,7 +66,12 @@ class DataSubmission:
         path_output = self.Cookiecutter.render_cookiecutter_template(
             self.manual_jinja_json,  self.manual_cookie_json, self.manual_template_dir
         )
+        
         if path_output:
+            try:
+                self.show_files(path_output)
+            except:
+                print("ERRORRRRR")
             self.Manual_Process = QProcess()
             self.Manual_Process.readyReadStandardOutput.connect(
                 self.handle_stdout)
