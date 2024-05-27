@@ -37,7 +37,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -617,6 +617,40 @@
              <number>0</number>
             </property>
             <item>
+             <widget class="QLabel" name="code_txt">
+              <property name="font">
+               <font>
+                <family>Siemens Sans</family>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Generated Files</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTreeWidget" name="files_tree">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="headerHidden">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_9">
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <item>
              <widget class="QLabel" name="Lcode">
               <property name="font">
                <font>
@@ -637,40 +671,6 @@
              <widget class="QTextBrowser" name="codeSample">
               <property name="styleSheet">
                <string notr="true">background-color: white;</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_9">
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="Lgenerated">
-              <property name="font">
-               <font>
-                <family>Siemens Sans</family>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="text">
-               <string>Generated Files</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QListWidget" name="generatedFiles">
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 255);</string>
               </property>
              </widget>
             </item>
@@ -817,8 +817,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>codeSample</tabstop>
-  <tabstop>generatedFiles</tabstop>
   <tabstop>generateFiles_QPushButton</tabstop>
   <tabstop>trainPyModel_btn</tabstop>
   <tabstop>systemCWrapper_btn</tabstop>

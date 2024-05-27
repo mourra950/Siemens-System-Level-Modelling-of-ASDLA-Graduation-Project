@@ -12,6 +12,7 @@ from Classes.Tensorboard import TensorView
 from Classes.ResNet.resbuild import ResBuildWindow
 from Classes.Transfer_Learning import DataOfTransfer
 from Tests.Layer_Testing import LayerTesting
+from Classes.Generated_Files_Viewer import GeneratedFilesViewer
 
 from Qt.Buttons import QTButtons
 from Qt.Dialogue import LayerDialog
@@ -35,7 +36,9 @@ class Initializer(
     QTButtons,
     LayerDialog,
     DataOfTransfer,
-    LayerTesting
+    LayerTesting,
+    GeneratedFilesViewer
+
 ):
     def __init__(self) -> None:
         print("Initializer")
@@ -50,6 +53,7 @@ class Initializer(
         TensorView.__init__(self)
         DataSubmission.__init__(self)
         LayerTesting.__init__(self)
+        GeneratedFilesViewer.__init__(self)        
         self.ui.setWindowTitle("The Awesome Project")
 
     def get_widget_data(self, widget):
