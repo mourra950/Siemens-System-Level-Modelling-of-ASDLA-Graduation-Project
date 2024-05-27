@@ -30,6 +30,6 @@
             }
         }
     },
-    "transfer_model": "resnet18"
+    "transfer_model": "mobilenet"
 
 }

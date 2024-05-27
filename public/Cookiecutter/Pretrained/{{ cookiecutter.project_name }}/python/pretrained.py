@@ -72,9 +72,9 @@ def train():
         # Convert images to PyTorch tensors
         v2.ToImage(), v2.ToDtype(torch.float32, scale=True)
     ])
-    train_dataset = mnist.MNIST(root='E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/MNIST/train',
+    train_dataset = mnist.MNIST(root='C:/Users/DELL/Desktop/Project',
                                 train=True, download=True, transform=transform)
-    test_dataset = mnist.MNIST(root='E:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/data/MNIST/test',
+    test_dataset = mnist.MNIST(root='C:/Users/DELL/Desktop/Project',
                                train=False, download=True, transform=transform)
     train_dataloader = DataLoader(
         train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True)
