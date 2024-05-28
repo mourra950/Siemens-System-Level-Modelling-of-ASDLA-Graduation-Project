@@ -1,7 +1,6 @@
 {
-  "test_num": 5,
-  "project_name": "Pretrained_Output",
-  
+    "test_num": 5,
+    "project_name": "Pretrained_Output",
     "misc_params": {
         "width": 28,
         "height": 28,
@@ -29,9 +28,5 @@
                 "label_smoothing": 0.0
             }
         }
-    },
-    "mnist_path": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
-    "log_dir": "e:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
-    "transfer_model": "resnet152"
-
+    }
 }

@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
     QDoubleSpinBox,
     QCheckBox,
     QComboBox,
-    QMessageBox
+    QMessageBox,
 )
 import inspect
 import typing
@@ -31,7 +31,7 @@ statics = {
     "nonlinearity": [
         {"text": "tanh", "data": "'tanh'"},
         {"text": "relu", "data": "'relu'"},
-    ]
+    ],
 }
 find = ["device", "dtype", "padding_mode", "reduction", "nonlinearity"]
 
@@ -60,17 +60,14 @@ class LayerDialog:
                         if bool in param["type"].__args__:
                             paramValue_QWidget = QCheckBox()
                             try:
-                                paramValue_QWidget.setChecked(
-                                    param["defaultvalue"])
+                                paramValue_QWidget.setChecked(param["defaultvalue"])
                             except:
                                 pass
                         elif int in param["type"].__args__:
-                            paramValue_QWidget = QSpinBox(
-                                minimum=-1000, maximum=1000)
+                            paramValue_QWidget = QSpinBox(minimum=-1000, maximum=1000)
                             paramValue_QWidget.setValue(0)
                         elif float in param["type"].__args__:
-                            paramValue_QWidget = QDoubleSpinBox(
-                                minimum=0, maximum=1000)
+                            paramValue_QWidget = QDoubleSpinBox(minimum=0, maximum=1000)
                             paramValue_QWidget.setSingleStep(0.000000001)
                             paramValue_QWidget.setDecimals(8)
                             paramValue_QWidget.setValue(param["defaultvalue"])
@@ -81,26 +78,24 @@ class LayerDialog:
                                 param["defaultvalue"] != inspect._empty
                                 and param["defaultvalue"] != None
                             ):
-                                paramValue_QWidget.setText(
-                                    str(param["defaultvalue"]))
+                                paramValue_QWidget.setText(str(param["defaultvalue"]))
                     except:
                         if (bool == param["type"]) or (
                             typing.Optional[bool] == param["type"]
                         ):
                             paramValue_QWidget = QCheckBox()
-                            paramValue_QWidget.setChecked(
-                                param["defaultvalue"])
+                            paramValue_QWidget.setChecked(param["defaultvalue"])
                         elif int == param["type"]:
-                            paramValue_QWidget = QSpinBox(
-                                minimum=1, maximum=1000)
+                            paramValue_QWidget = QSpinBox(minimum=1, maximum=1000)
                             paramValue_QWidget.setValue(param["defaultvalue"])
                         elif float == param["type"]:
-                            paramValue_QWidget = QDoubleSpinBox(
-                                minimum=0, maximum=1000)
+                            paramValue_QWidget = QDoubleSpinBox(minimum=0, maximum=1000)
                             paramValue_QWidget.setSingleStep(0.000000001)
                             paramValue_QWidget.setDecimals(8)
                             paramValue_QWidget.setValue(param["defaultvalue"])
-                        elif (torch.Tensor == param["type"]) or (typing.Optional[torch.Tensor] == param["type"]):
+                        elif (torch.Tensor == param["type"]) or (
+                            typing.Optional[torch.Tensor] == param["type"]
+                        ):
                             break
                         else:
                             print(param["type"])
@@ -109,8 +104,7 @@ class LayerDialog:
                                 param["defaultvalue"] != inspect._empty
                                 and param["defaultvalue"] != None
                             ):
-                                paramValue_QWidget.setText(
-                                    str(param["defaultvalue"]))
+                                paramValue_QWidget.setText(str(param["defaultvalue"]))
                 except:
                     pass
             params_names.append(param["name"])
