@@ -21,11 +21,16 @@ class MainUI(QtCore.QObject, SystemPaths, Initializer):
         SystemPaths.__init__(self)
 
         self.AutoExtraction = AutoExtraction()
-        self.StaticAnalysis = StaticAnalysis(
-            self.warning_rules_path, self.debug)
-        
+        self.StaticAnalysis = StaticAnalysis(self.warning_rules_path, self.debug)
+
         self.loader = QUiLoader()
-        self.LAYERS, self.LOSSFUNC, self.OPTIMIZERS, self.PRETRAINED_MODELS, self.LAYERS_WITHOUT_RES = self.AutoExtraction.extracted_data()
+        (
+            self.LAYERS,
+            self.LOSSFUNC,
+            self.OPTIMIZERS,
+            self.PRETRAINED_MODELS,
+            self.LAYERS_WITHOUT_RES,
+        ) = self.AutoExtraction.extracted_data()
 
         Initializer.__init__(self)
         self.ui.show()

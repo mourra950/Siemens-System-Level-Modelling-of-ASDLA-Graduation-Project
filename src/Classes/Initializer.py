@@ -37,8 +37,7 @@ class Initializer(
     LayerDialog,
     DataOfTransfer,
     LayerTesting,
-    GeneratedFilesViewer
-
+    GeneratedFilesViewer,
 ):
     def __init__(self) -> None:
         print("Initializer")
@@ -53,7 +52,7 @@ class Initializer(
         TensorView.__init__(self)
         DataSubmission.__init__(self)
         LayerTesting.__init__(self)
-        GeneratedFilesViewer.__init__(self)        
+        GeneratedFilesViewer.__init__(self)
         self.ui.setWindowTitle("The Awesome Project")
 
     def get_widget_data(self, widget):
