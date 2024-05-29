@@ -15,7 +15,9 @@ EPOCHS = {{misc_params.num_epochs}}
 TRAIN_SPLIT = 0.75
 VAL_SPLIT = 0.15
 TEST_SPLIT = 0.1
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+# Read device from JSON config
+device_name = "{{misc_params.Device}}"
+device = torch.device(device_name)
 model = models.{{data.pretrained_model_name}}(weights='DEFAULT')
 
 for name, param in model.named_parameters():
@@ -60,8 +62,21 @@ optimizer = optim.{{misc_params.optimizer.type}}(
 )
 
 
-# Decay LR by a factor of 0.1 every 7 epochs
-exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+# Read lr_scheduler type and params from JSON config
+lr_scheduler_type = {{misc_params.lr_scheduler.type}}
+lr_scheduler_params = {{misc_params.lr_scheduler.params}}
+
+# Split the constructor path to get module and class names
+module_name, class_name = lr_scheduler_type.rsplit(".", 1)
+
+# Dynamically import the module containing the constructor
+scheduler_module = __import__(module_name, fromlist=[class_name])
+# Retrieve the constructor function
+scheduler_constructor = getattr(scheduler_module, class_name)
+
+# Create lr_scheduler dynamically based on type and params
+exp_lr_scheduler = scheduler_constructor(optimizer, **lr_scheduler_params)
+
 
 # Parameters of newly constructed modules have requires_grad=True by default
 
@@ -93,6 +108,9 @@ for e in range(0, EPOCHS):
         totalTrainLoss += loss
         trainCorrect += (pred.argmax(1) == y).type(
             torch.float).sum().item()
+    
+    # Update the learning rate scheduler
+    exp_lr_scheduler.step()  
     model.eval()
     print(trainCorrect)
 

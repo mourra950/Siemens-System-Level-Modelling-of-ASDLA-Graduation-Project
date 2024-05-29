@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
     QComboBox,
     QSpinBox,
     QTreeWidget,
-    QTextBrowser
+    QTextBrowser,
 )
 
 
@@ -21,13 +21,11 @@ class Children:
         self.qt_layersList_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, "layersList_QVBoxLayout"
         )
-        self.qt_inputWidth_QSpinBox = self.ui.findChild(
-            QSpinBox, "inputWidth_QSpinBox")
+        self.qt_inputWidth_QSpinBox = self.ui.findChild(QSpinBox, "inputWidth_QSpinBox")
         self.qt_inputHeight_QSpinBox = self.ui.findChild(
             QSpinBox, "inputHeight_QSpinBox"
         )
-        self.qt_batchSize_QSpinBox = self.ui.findChild(
-            QSpinBox, "batchSize_QSpinBox")
+        self.qt_batchSize_QSpinBox = self.ui.findChild(QSpinBox, "batchSize_QSpinBox")
         self.qt_numEpochs_QSpinBox = self.ui.findChild(
             QSpinBox, "numberEpochs_QSpinBox"
         )
@@ -37,11 +35,13 @@ class Children:
         self.qt_selectedLossFunc_QLineEdit = self.ui.findChild(
             QLineEdit, "selectedLossFunc_QLineEdit"
         )
+        self.qt_selectedDevice_QComboBox = self.ui.findChild(
+            QComboBox, "deviceComboBox"
+        )
 
         # replacment
 
-        self.qt_inputType_QSpinBox = self.ui.findChild(
-            QSpinBox, "inputChannelsSpinBox")
+        self.qt_inputType_QSpinBox = self.ui.findChild(QSpinBox, "inputChannelsSpinBox")
         self.qt_addedLayers_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, "addedLayers_QVBoxLayout"
         )
@@ -61,7 +61,7 @@ class Children:
             QPushButton, "generateFiles_QPushButton"
         )
         self.qt_trainModel_QPushButton = self.ui.findChild(
-            QPushButton, 'trainPyModel_btn'
+            QPushButton, "trainPyModel_btn"
         )
         # self.omar_generate_btn = self.ui.findChild(
         #     QPushButton, 'omar_generate_btn'
@@ -102,10 +102,9 @@ class Children:
         )
         # testing generating manual
         self.qt_manual_generate = self.ui.findChild(
-            QPushButton, "Generate_manual_QPushButton")
-        
-        self.qt_output_tree_viewer = self.ui.findChild(
-            QTreeWidget, "files_tree")
-        
-        self.qt_output_file_viewer = self.ui.findChild(
-            QTextBrowser, "codeSample")
+            QPushButton, "Generate_manual_QPushButton"
+        )
+
+        self.qt_output_tree_viewer = self.ui.findChild(QTreeWidget, "files_tree")
+
+        self.qt_output_file_viewer = self.ui.findChild(QTextBrowser, "codeSample")
