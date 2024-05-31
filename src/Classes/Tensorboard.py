@@ -19,7 +19,6 @@
 
 from PySide6.QtWidgets import QVBoxLayout, QProgressBar
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6 import QtCore
 from PySide6.QtCore import QUrl, QProcess, QTimer
 
 
@@ -44,10 +43,23 @@ class TensorView:
         self.progress_bar = QProgressBar()
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(0)
+        self.progress_bar.setStyleSheet(
+            """
+            QProgressBar {
+                border: 2px solid grey;
+                border-radius: 5px;
+                text-align: center;
+            }
+
+            QProgressBar::chunk {
+                background-color: orange;
+                width: 20px;
+            }
+        """
+        )
         self.tensorQt.addWidget(self.progress_bar)
 
     def setup_timer(self):
-        # self.reload_timer = QTimer(self)
         self.reload_timer.setSingleShot(True)  # Set the timer to single-shot mode
         self.reload_timer.timeout.connect(self.first_reload)
         self.reload_timer.start(

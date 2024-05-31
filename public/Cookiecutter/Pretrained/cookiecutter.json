@@ -1,23 +1,24 @@
 {
-    "test_num": 5,
-    "project_name": "Pretrained_Output",
+  "test_num": 5,
+  "project_name": "Pretrained_Output",
+  
     "misc_params": {
-        "width": 28,
-        "height": 28,
-        "channels": 3,
-        "num_epochs": 20,
-        "batch_size": 64,
+        "width": 1,
+        "height": 1,
+        "channels": 1,
+        "num_epochs": 1,
+        "batch_size": 32,
         "optimizer": {
-            "type": "ASGD",
+            "type": "Adam",
             "params": {
-                "lr": 0.01,
-                "lambd": 0.0001,
-                "alpha": 0.75,
-                "t0": 1000.0,
-                "weight_decay": 1,
-                "foreach": false,
-                "maximize": false,
-                "differentiable": false
+                "lr": 0.001,
+                "betas": [
+                    0.9,
+                    0.999
+                ],
+                "eps": 1e-08,
+                "weight_decay": 0.0,
+                "amsgrad": false
             }
         },
         "loss_func": {
@@ -28,5 +29,9 @@
                 "label_smoothing": 0.0
             }
         }
-    }
+    },
+    "transfer_model": "resnet18",
+    "mnist_path": "d:\\nada\\nada\\GP\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
+    "log_dir": "d:\\nada\\nada\\GP\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+
 }

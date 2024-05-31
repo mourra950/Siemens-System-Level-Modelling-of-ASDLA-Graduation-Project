@@ -32,8 +32,40 @@ statics = {
         {"text": "tanh", "data": "'tanh'"},
         {"text": "relu", "data": "'relu'"},
     ],
+    "mode": [
+        {"text": "min", "data": "'min'"},
+        {"text": "max", "data": "'max'"},
+    ],
+    "mode_CyclicLR": [
+        {"text": "triangular", "data": "'triangular'"},
+        {"text": "triangular2", "data": "'triangular2'"},
+        {"text": "exp_range", "data": "'exp_range'"},
+    ],
+    "threshold_mode": [
+        {"text": "rel", "data": "'rel'"},
+        {"text": "abs", "data": "'abs'"},
+    ],
+    "scale_mode": [
+        {"text": "cycle", "data": "'cycle'"},
+        {"text": "iterations", "data": "'iterations'"},
+    ],
+    "anneal_strategy": [
+        {"text": "cos", "data": "'cos'"},
+        {"text": "linear", "data": "'linear'"},
+    ],
 }
-find = ["device", "dtype", "padding_mode", "reduction", "nonlinearity"]
+find = [
+    "device",
+    "dtype",
+    "padding_mode",
+    "reduction",
+    "nonlinearity",
+    "mode",
+    "mode_CyclicLR",
+    "threshold_mode",
+    "scale_mode",
+    "anneal_strategy",
+]
 
 
 class LayerDialog:

@@ -5,6 +5,7 @@ import torchvision.models as models
 from utils.Singleton import Singleton
 
 import torch.optim as optim
+import torch.optim.lr_scheduler as lr_scheduler
 import types
 import copy
 
@@ -14,36 +15,44 @@ class AutoExtraction(metaclass=Singleton):
     def __init__(self) -> None:
         print("Auto Extraction")
         self.unnecessary_params = [
-            "in_channels", "num_features", "in_features",
-            'dilation'
+            "in_channels",
+            "num_features",
+            "in_features",
+            "dilation",
         ]
-        self.unnecessary_optimizer_params = [
-            'params'
+        self.unnecessary_optimizer_params = ["params"]
+        self.unnecessary_loss_params = ["reduce", "size_average", "weight"]
+        self.unnecessary_schedulers_params = [
+            "optimizer",
+            "lr_lambda",
+            "milestones",
+            "schedulers",
+            "verbose",
+            "scale_fn",
         ]
-        self.unnecessary_loss_params = [
-            'reduce', 'size_average', "weight"
-        ]
+        # verbose SO2AL
 
         self.extract_torch_layers()
         self.extract_res_block()
         self.extract_torch_lossfunctions()
         self.extract_torch_optimizers()
+        self.extract_scheduler_learning()
         self.extract_pretrained_models()
 
     def extracted_data(self):
-        return self.LAYERS, self.LOSSFUNC, self.OPTIMIZERS, self.PRETRAINED_MODELS, self.LAYERS_WITHOUT_RES
+        return (
+            self.LAYERS,
+            self.LOSSFUNC,
+            self.OPTIMIZERS,
+            self.SCHEDULERS,
+            self.PRETRAINED_MODELS,
+            self.LAYERS_WITHOUT_RES,
+        )
 
     def extract_res_block(self):
-        res_params = [{
-            'name': "in_channels",
-            'defaultvalue': 0,
-            'type': int
-        },
-            {
-            'name': "out_channels",
-            'defaultvalue': 0,
-            'type': int
-        }
+        res_params = [
+            {"name": "in_channels", "defaultvalue": 0, "type": int},
+            {"name": "out_channels", "defaultvalue": 0, "type": int},
         ]
         res_block_dict = {"Residual Block": res_params}
         self.LAYERS.update(res_block_dict)
@@ -70,7 +79,8 @@ class AutoExtraction(metaclass=Singleton):
 
                 for i in inspector:
                     if (
-                        inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
+                        inspector[i].kind
+                        == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
                         and inspector[i].name not in self.unnecessary_params
                     ):
 
@@ -106,11 +116,10 @@ class AutoExtraction(metaclass=Singleton):
 
                 for i in inspector:
                     if (
-                        inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
-                        and not
-                        isinstance(inspector[i].default, types.FunctionType)
-                        and
-                        inspector[i].name not in self.unnecessary_loss_params
+                        inspector[i].kind
+                        == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
+                        and not isinstance(inspector[i].default, types.FunctionType)
+                        and inspector[i].name not in self.unnecessary_loss_params
                     ):
                         params_list.append(
                             {
@@ -139,16 +148,15 @@ class AutoExtraction(metaclass=Singleton):
                 for i in inspector:
 
                     if (
-                        inspector[i].kind == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
-                        and
-                        inspector[i].name not in self.unnecessary_optimizer_params
-                        and not
-                        isinstance(inspector[i].default, types.FunctionType)
+                        inspector[i].kind
+                        == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
+                        and inspector[i].name not in self.unnecessary_optimizer_params
+                        and not isinstance(inspector[i].default, types.FunctionType)
                     ):
                         # print(inspector[i].annotation,
                         #       type(inspector[i].default))
                         params = None
-                        if (inspector[i].annotation == inspect._empty):
+                        if inspector[i].annotation == inspect._empty:
                             params = type(inspector[i].default)
                         else:
                             params = inspector[i].annotation
@@ -168,3 +176,61 @@ class AutoExtraction(metaclass=Singleton):
 
     def extract_pretrained_models(self):
         self.PRETRAINED_MODELS = models.list_models()
+
+    def extract_scheduler_learning(self):
+
+        scheduler_dict = dict()
+
+        scheduler_names = dir(lr_scheduler)
+
+        for scheduler_name in scheduler_names:
+            # Skip scheduler names that don't start with a letter
+            if not scheduler_name[0].isalpha():
+                continue
+
+            obj = getattr(lr_scheduler, scheduler_name)
+
+            if isinstance(obj, type) and not isinstance(obj, types.BuiltinFunctionType):
+                try:
+                    inspector = inspect.signature(obj).parameters
+                except ValueError:
+                    continue
+
+                params_list = list()
+
+                for param_name in inspector:
+                    if (
+                        inspector[param_name].kind
+                        == inspect._ParameterKind.POSITIONAL_OR_KEYWORD
+                        and inspector[param_name].name
+                        not in self.unnecessary_schedulers_params
+                        and not isinstance(
+                            inspector[param_name].default, types.FunctionType
+                        )
+                    ):
+                        param_type = None
+                        if inspector[param_name].annotation == inspect._empty:
+                            param_type = type(inspector[param_name].default)
+                        else:
+                            param_type = inspector[param_name].annotation
+
+                        # Capture the original parameter name
+                        original_param_name = param_name
+
+                        # Change the parameter name if the scheduler is CyclicLR
+                        if scheduler_name == "CyclicLR" and param_name == "mode":
+                            param_name = "mode_CyclicLR"
+
+                        params_list.append(
+                            {
+                                "name": param_name,
+                                "defaultvalue": inspector[original_param_name].default,
+                                "type": param_type,
+                            }
+                        )
+
+                if len(params_list) > 0:
+                    scheduler_dict[obj.__name__] = params_list
+
+        self.SCHEDULERS = scheduler_dict
+        print(scheduler_dict)
