@@ -47,7 +47,7 @@ class DataSubmission:
             elif type(widget) == QComboBox:
                 data = widget.currentData()
                 if isinstance(data, int):
-                    data = "CUDA " + str(data)
+                    data = "cuda:" + str(data)
                 self.architecture["misc_params"][param_name] = data
                 print(data, param_name)
 

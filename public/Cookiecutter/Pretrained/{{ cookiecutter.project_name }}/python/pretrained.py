@@ -38,7 +38,7 @@ def train(callback):
     TRAIN_SPLIT = 0.75
     VAL_SPLIT = 0.15
     TEST_SPLIT = 0.1
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("{{cookiecutter.misc_params.device}}")
     model = models.{{cookiecutter.transfer_model}}(weights='DEFAULT')
     for name, param in model.named_parameters():
         print(param.shape)
@@ -76,14 +76,19 @@ def train(callback):
     test_dataloader = DataLoader(
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True
     )
-    loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort % }
-        {{key}}={{value}},
-        {% endfor % }
+    loss_fn = nn.{{ cookiecutter.misc_params.loss_func.type }}(
+    {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
+    {{ key }}={{ value }},
+    {% endfor %}
     )
     class_names = train_dataset.classes
 
-    num_ftrs = model.named_children()[-1].in_features
+
+    # num_ftrs = model.named_children()[-1].in_features
+    # # Assuming 'model' is already defined
+    named_children_list = list(model.named_children())
+    last_layer_name, last_layer = named_children_list[-1]
+    num_ftrs = last_layer.in_features
     try:
         model.aux.logits = False
     except:
@@ -117,8 +122,14 @@ def train(callback):
 
     train_size = len(train_dataset)
 
-    # Decay LR by a factor of 0.1 every 7 epochs
-    exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+    
+        # Read lr_scheduler type and params from JSON config
+    lr_scheduler_type = "{{cookiecutter.misc_params.scheduler.type}}"
+    lr_scheduler_params = {{cookiecutter.misc_params.scheduler.params}}
+    
+    # Dynamically create the lr_scheduler
+    scheduler = getattr(lr_scheduler, lr_scheduler_type)(optimizer, **lr_scheduler_params)
+
 
     for e in range(0, EPOCHS):
 
@@ -150,6 +161,7 @@ def train(callback):
             callback(progress)
         writer.add_scalar("Train/Accuracy", trainCorrect, e)
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
+        scheduler.step()  
         model.eval()
         print(trainCorrect)
 
