@@ -39,7 +39,7 @@ def train(callback):
     VAL_SPLIT = 0.15
     TEST_SPLIT = 0.1
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    # model = models.{{cookiecutter.transfer_model}}(weights='DEFAULT')
+    model = models.{{cookiecutter.transfer_model}}(weights='DEFAULT')
     for name, param in model.named_parameters():
         print(param.shape)
         batch = param.shape[0]
