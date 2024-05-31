@@ -63,7 +63,7 @@ class TensorView:
         self.reload_timer.setSingleShot(True)  # Set the timer to single-shot mode
         self.reload_timer.timeout.connect(self.first_reload)
         self.reload_timer.start(
-            8000
+            10000
         )  # Reload once after 3 seconds, less than that it won't work perfectly
 
     def first_reload(self):
@@ -72,6 +72,7 @@ class TensorView:
 
     def update_progress_bar(self, progress):
         self.progress_bar.setValue(progress)
+        print(progress)
         if progress == 100:
             self.progress_bar.hide()
             self.tensorWeb.show()

@@ -13,14 +13,15 @@ import datetime
 import os
 
 basedir = os.path.dirname(__file__)
-model_output = os.path.normpath(os.path.join(basedir, "../SystemC/Pt/model.pt"))
+model_output = os.path.normpath(
+    os.path.join(basedir, "../SystemC/Pt/model.pt"))
 test_output = os.path.normpath(os.path.join(basedir, "../test.txt"))
 
 
-# def get_min_size():
+def get_min_size():
 
-#     min_size = torchvision.models.get_model_weights(models.{{cookiecutter.transfer_model}}).DEFAULT.meta['min_size']
-#     return min_size
+    min_size = torchvision.models.get_model_weights(models.{{cookiecutter.transfer_model}}).DEFAULT.meta['min_size']
+    return min_size
 
 
 def train(callback):
@@ -38,7 +39,7 @@ def train(callback):
     VAL_SPLIT = 0.15
     TEST_SPLIT = 0.1
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    # model = models.{{cookiecutter.transfer_model}}(weights='DEFAULT')
+    model = models.{{cookiecutter.transfer_model}}(weights='DEFAULT')
     for name, param in model.named_parameters():
         print(param.shape)
         batch = param.shape[0]
@@ -60,34 +61,29 @@ def train(callback):
             # Convert images to PyTorch tensors
             v2.ToImage(),
             v2.ToDtype(torch.float32, scale=True),
-            v2.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            v2.Normalize(mean=[0.485, 0.456, 0.406],
+                         std=[0.229, 0.224, 0.225]),
         ]
     )
-    # KAN HENA
-    #     <<<<<<< HEAD
-    #     train_dataset = mnist.MNIST(root='C:/Users/DELL/Desktop/Project',
-    #                                 train=True, download=True, transform=transform)
-    #     test_dataset = mnist.MNIST(root='C:/Users/DELL/Desktop/Project',
-    # =======
-    #     train_dataset = mnist.MNIST(root=r"{{cookiecutter.mnist_path}}",
-    #                                 train=True, download=True, transform=transform)
-    #     test_dataset = mnist.MNIST(root=r"{{cookiecutter.mnist_path}}",
-    # >>>>>>> 8d19423ff966d255a053b84d555490f48460a7c8
-    #                                train=False, download=True, transform=transform)
+
+    train_dataset = mnist.MNIST(root=r"{{cookiecutter.mnist_path}}",
+                                train=True, download=True, transform=transform)
+    test_dataset = mnist.MNIST(root=r"{{cookiecutter.mnist_path}}",
+                               train=False, download=True, transform=transform)
     train_dataloader = DataLoader(
         train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True
     )
     test_dataloader = DataLoader(
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True
     )
-    # loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-    #     {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
-    #     {{key}}={{value}},
-    #     {% endfor %}
-    # )
+    loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
+        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort % }
+        {{key}}={{value}},
+        {% endfor % }
+    )
     class_names = train_dataset.classes
 
-    # num_ftrs = model.named_children()[-1].in_features
+    num_ftrs = model.named_children()[-1].in_features
     try:
         model.aux.logits = False
     except:
@@ -108,16 +104,16 @@ def train(callback):
     model = model.to(device)
 
     # Create the chosen optimizer with parameters from the data dictionary
-    # optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
-    #     model.parameters(),
-    #     {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
-    #     {%- if value is sequence and value is not string -%}
-    #     {{key}}=({{value|join(', ')}}),
-    #     {%- else -%}
-    #     {{key}}={{value}},
-    #     {%- endif %}
-    #     {% endfor %}
-    # )
+    optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
+        model.parameters(),
+        {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+        {%- if value is sequence and value is not string -%}
+        {{key}}=({{value | join(', ')}}),
+        {%- else -%}
+        {{key}}={{value}},
+        {%- endif %}
+        {% endfor %}
+    )
 
     train_size = len(train_dataset)
 
@@ -148,7 +144,8 @@ def train(callback):
             optimizer.step()
             # add the loss to the total training loss so far and calculate the number of correct predictions
             totalTrainLoss += loss
-            trainCorrect += (pred.argmax(1) == y).type(torch.float).sum().item()
+            trainCorrect += (pred.argmax(1) ==
+                             y).type(torch.float).sum().item()
             progress = ((e * train_size + i) / (EPOCHS * train_size)) * 100
             callback(progress)
         writer.add_scalar("Train/Accuracy", trainCorrect, e)
