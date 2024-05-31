@@ -28,6 +28,7 @@ class MainUI(QtCore.QObject, SystemPaths, Initializer):
             self.LAYERS,
             self.LOSSFUNC,
             self.OPTIMIZERS,
+            self.SCHEDULERS,
             self.PRETRAINED_MODELS,
             self.LAYERS_WITHOUT_RES,
         ) = self.AutoExtraction.extracted_data()

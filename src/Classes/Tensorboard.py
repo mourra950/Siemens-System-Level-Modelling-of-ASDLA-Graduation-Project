@@ -63,7 +63,7 @@ class TensorView:
         self.reload_timer.setSingleShot(True)  # Set the timer to single-shot mode
         self.reload_timer.timeout.connect(self.first_reload)
         self.reload_timer.start(
-            5000
+            8000
         )  # Reload once after 3 seconds, less than that it won't work perfectly
 
     def first_reload(self):

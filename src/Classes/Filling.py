@@ -20,6 +20,7 @@ class FillingQt:
         self.fill_layers(qt_layout, layers, q2_lay, self.architecture)
         self.fill_optimizers()
         self.fill_lossfunctions()
+        self.fill_schedulers()
         self.fill_pretrained_model()
 
     def fill_optimizers(self):
@@ -41,6 +42,18 @@ class FillingQt:
                 )
             )
             self.qt_lossFuncsList_QVBoxLayout.addWidget(selectLossFunc_QPushButton)
+
+    def fill_schedulers(self):
+        for scheduler in self.SCHEDULERS:
+            selectScheduler_QPushButton = QPushButton(scheduler)
+            selectScheduler_QPushButton.clicked.connect(
+                lambda i=scheduler, j=self.SCHEDULERS, k=self.on_select_scheduler_clicked: self.on_torch_func_clicked(
+                    i, j, k, None, None
+                )
+            )
+
+            self.qt_schedulersList_QVBoxLayout.addWidget(selectScheduler_QPushButton)
+            print(self.qt_schedulersList_QVBoxLayout)
 
     def fill_layers(self, qt_layout, layers, q2_layout, arch_dict):
         for layer in layers:
@@ -65,17 +78,16 @@ class FillingQt:
             self.pretrained_model_combobox.addItem(i)
 
     def fill_cuda_devices(self, combo_box):
-        cuda_versions = []
+        device_names = []
         if torch.cuda.is_available():
             cuda_devices = torch.cuda.device_count()
             for i in range(cuda_devices):
                 properties = torch.cuda.get_device_properties(i)
-                major_version = properties.major
-                minor_version = properties.minor
-                cuda_versions.append(
-                    (i, f"CUDA device {i}: version {major_version}.{minor_version}")
-                )
+                device_name = properties.name
+                device_names.append((i, device_name))
+
         combo_box.clear()
-        for device_index, device_info in cuda_versions:
-            print("Nada")
+        for device_index, device_info in device_names:
             combo_box.addItem(device_info, device_index)
+
+        combo_box.addItem("CPU", "CPU")

@@ -95,3 +95,23 @@ class Controller:
         self.architecture["misc_params"]["optimizer"] = self.selected_optimizer
 
         paramsWindow_QDialog.close()
+
+    def on_select_scheduler_clicked(
+        self,
+        scheduler_type,
+        params_names,
+        params_value_widgets,
+        paramsWindow_QDialog,
+        *args,
+    ):
+        self.selected_scheduler = {"type": scheduler_type, "params": dict()}
+        for i in range(len(params_value_widgets)):
+            param_value = self.get_widget_data(params_value_widgets[i])
+
+            if param_value != "":
+                self.selected_scheduler["params"][params_names[i]] = param_value
+
+        self.qt_selectedScheduler_QLineEdit.setText(scheduler_type)
+        self.architecture["misc_params"]["scheduler"] = self.selected_scheduler
+
+        paramsWindow_QDialog.close()

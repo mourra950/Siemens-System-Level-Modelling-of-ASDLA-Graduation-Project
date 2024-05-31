@@ -35,6 +35,9 @@ class Children:
         self.qt_selectedLossFunc_QLineEdit = self.ui.findChild(
             QLineEdit, "selectedLossFunc_QLineEdit"
         )
+        self.qt_selectedScheduler_QLineEdit = self.ui.findChild(
+            QLineEdit, "selectedScheduler_QLineEdit"
+        )
         self.qt_selectedDevice_QComboBox = self.ui.findChild(
             QComboBox, "deviceComboBox"
         )
@@ -51,6 +54,10 @@ class Children:
         self.qt_lossFuncsList_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, "lossFuncsList_QVBoxLayout"
         )
+        self.qt_schedulersList_QVBoxLayout = self.ui.findChild(
+            QVBoxLayout, "schedulersList_QVBoxLayout"
+        )
+
         self.qt_submitParams_QPushButton = self.ui.findChild(
             QPushButton, "submitParams_QPushButton"
         )
