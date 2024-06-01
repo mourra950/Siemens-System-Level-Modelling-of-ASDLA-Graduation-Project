@@ -3,17 +3,17 @@
   "project_name": "Pretrained_Output",
   
     "misc_params": {
-        "width": 1,
-        "height": 1,
+        "width": 224,
+        "height": 224,
         "channels": 1,
-        "num_epochs": 2,
+        "num_epochs": 1,
         "batch_size": 64,
-        "device": "cpu",
+        "device": "cuda:0",
         "scheduler": {
-            "type": "ConstantLR",
+            "type": "StepLR",
             "params": {
-                "factor": 0.33333333,
-                "total_iters": 5,
+                "step_size": 5,
+                "gamma": 0.1,
                 "last_epoch": 1
             }
         },
@@ -39,7 +39,7 @@
             }
         }
     },
-    "transfer_model": "alexnet",
+    "transfer_model": "vgg11",
     "mnist_path": "d:\\nada\\nada\\GP\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
     "log_dir": "d:\\nada\\nada\\GP\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 
