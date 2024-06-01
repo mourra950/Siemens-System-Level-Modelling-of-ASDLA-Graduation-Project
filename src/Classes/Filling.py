@@ -1,6 +1,4 @@
-from PySide6.QtWidgets import (
-    QPushButton
-)
+from PySide6.QtWidgets import QPushButton
 import torch
 
 
@@ -90,4 +88,4 @@ class FillingQt:
         for device_index, device_info in device_names:
             combo_box.addItem(device_info, device_index)
 
-        combo_box.addItem("CPU", "CPU")
+        combo_box.addItem("cpu", "cpu")

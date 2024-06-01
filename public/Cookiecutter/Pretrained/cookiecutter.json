@@ -6,8 +6,17 @@
         "width": 1,
         "height": 1,
         "channels": 1,
-        "num_epochs": 1,
-        "batch_size": 32,
+        "num_epochs": 2,
+        "batch_size": 64,
+        "device": "cpu",
+        "scheduler": {
+            "type": "ConstantLR",
+            "params": {
+                "factor": 0.33333333,
+                "total_iters": 5,
+                "last_epoch": 1
+            }
+        },
         "optimizer": {
             "type": "Adam",
             "params": {
@@ -30,7 +39,7 @@
             }
         }
     },
-    "transfer_model": "resnet18",
+    "transfer_model": "alexnet",
     "mnist_path": "d:\\nada\\nada\\GP\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
     "log_dir": "d:\\nada\\nada\\GP\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 

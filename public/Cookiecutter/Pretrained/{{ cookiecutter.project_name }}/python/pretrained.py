@@ -6,6 +6,7 @@ from torchvision.datasets import mnist
 from torchvision import models, transforms
 from torchvision.transforms import v2
 from torch.optim import lr_scheduler
+from torch.optim.lr_scheduler import *
 from torch.utils.tensorboard import SummaryWriter
 import torchvision
 import re
@@ -38,7 +39,7 @@ def train(callback):
     TRAIN_SPLIT = 0.75
     VAL_SPLIT = 0.15
     TEST_SPLIT = 0.1
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("{{cookiecutter.misc_params.device}}")
     model = models.{{cookiecutter.transfer_model}}(weights='DEFAULT')
     for name, param in model.named_parameters():
         print(param.shape)
@@ -76,49 +77,144 @@ def train(callback):
     test_dataloader = DataLoader(
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True
     )
-    loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort % }
-        {{key}}={{value}},
-        {% endfor % }
+    loss_fn = nn.{{ cookiecutter.misc_params.loss_func.type }}(
+    {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
+    {{ key }}={{ value }},
+    {% endfor %}
     )
     class_names = train_dataset.classes
 
-    num_ftrs = model.named_children()[-1].in_features
+
+    # num_ftrs = model.named_children()[-1].in_features
+    # # Assuming 'model' is already defined
+    # named_children_list = list(model.named_children())
+    # last_layer_name, last_layer = named_children_list[-1]
+    # num_ftrs = last_layer.in_features
+    # try:
+    #     model.aux.logits = False
+    # except:
+    #     pass
+    # # model.fc.in_features
+    # (name, layer) = list(model.named_children())[-1]
+    # if type(layer) == type(nn.Sequential()):
+    #     for i, j in list(layer.named_children()):
+    #         if type(j) == type(nn.Linear(in_features=15, out_features=15)):
+    #             model.__dict__[name] = nn.Linear(
+    #                 j.in_features, len(class_names), device=device
+    #             )
+    # else:
+    #     model.__dict__[name] = nn.Linear(
+    #         layer.in_features, len(class_names), device=device
+    #     )
+
+    # model = model.to(device)
+    
+    # Assuming 'model' is already defined
+    named_children_list = list(model.named_children())
+    last_layer_name, last_layer = named_children_list[-1]
+
+    # Extracting number of features from the last layer
+    if isinstance(last_layer, nn.Sequential):
+        last_layer_children = list(last_layer.children())
+        last_layer = last_layer_children[-1]
+    num_ftrs = last_layer.in_features
+
+    # Attempting to modify the model's architecture
     try:
         model.aux.logits = False
-    except:
+    except AttributeError:
         pass
-    # model.fc.in_features
-    (name, layer) = list(model.named_children())[-1]
-    if type(layer) == type(nn.Sequential()):
-        for i, j in list(layer.named_children()):
-            if type(j) == type(nn.Linear(in_features=15, out_features=15)):
-                model.__dict__[name] = nn.Linear(
-                    j.in_features, len(class_names), device=device
+
+    # Defining the number of output classes
+    num_classes = len(class_names)
+
+    # Modifying the last layer of the model
+    if isinstance(last_layer, nn.Sequential):
+        for child_name, child_layer in last_layer.named_children():
+            if isinstance(child_layer, nn.Linear):
+                model.__dict__[last_layer_name].add_module(
+                    child_name,
+                    nn.Linear(child_layer.in_features, num_classes).to(device)
                 )
     else:
-        model.__dict__[name] = nn.Linear(
-            layer.in_features, len(class_names), device=device
-        )
+        model.__dict__[last_layer_name] = nn.Linear(
+            last_layer.in_features, num_classes
+        ).to(device)
 
+    # Moving the model to the specified device
     model = model.to(device)
 
+
+    # # Create the chosen optimizer with parameters from the data dictionary
+    # optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
+    #     model.parameters(),
+    #     {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+    #     {%- if value is sequence and value is not string -%}
+    #     {{key}}=({{value | join(', ')}}),
+    #     {%- else -%}
+    #     {{key}}={{value}},
+    #     {%- endif %}
+    #     {% endfor %}
+    # )
+    
     # Create the chosen optimizer with parameters from the data dictionary
     optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
-        model.parameters(),
-        {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+        [ {"params": model.parameters(), "initial_lr": {{cookiecutter.misc_params.optimizer.params.lr}}} ]
+        {%- for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
         {%- if value is sequence and value is not string -%}
-        {{key}}=({{value | join(', ')}}),
+        , {{key}}=({{value | join(', ')}})
         {%- else -%}
-        {{key}}={{value}},
+        , {{key}}={{value}}
         {%- endif %}
-        {% endfor %}
+        {%- endfor %}
     )
+
+    
+
 
     train_size = len(train_dataset)
 
-    # Decay LR by a factor of 0.1 every 7 epochs
-    exp_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+    
+    #     # Read lr_scheduler type and params from JSON config
+    # lr_scheduler_type = "{{cookiecutter.misc_params.scheduler.type}}"
+    # lr_scheduler_params = {{cookiecutter.misc_params.scheduler.params}}
+    
+    # # Dynamically create the lr_scheduler
+    # scheduler = getattr(lr_scheduler, lr_scheduler_type)(optimizer, **lr_scheduler_params)
+    # Read lr_scheduler type and params from JSON config
+
+    # Create the scheduler directly
+
+    # # Extract scheduler type and parameters from the data dictionary
+    # scheduler_type = {{cookiecutter.misc_params.scheduler.type}}
+    # scheduler_params = {
+    #     {% for key, value in cookiecutter.misc_params.scheduler.params|dictsort %}
+    #     {%- if value is sequence and value is not string -%}
+    #     "{{key}}": ({{value | join(', ')}}),
+    #     {%- else -%}
+    #     "{{key}}": {{value}},
+    #     {%- endif %}
+    #     {% endfor %}
+    # }
+
+    # # Create the chosen scheduler with parameters
+    # scheduler = scheduler_type(optimizer, **scheduler_params)
+    
+    # Create the chosen scheduler with parameters
+    scheduler = {{cookiecutter.misc_params.scheduler.type}}(optimizer,
+        {%- for key, value in cookiecutter.misc_params.scheduler.params|dictsort %}
+            {%- if value is sequence and value is not string -%}
+            {{key}}=({{value | join(', ')}}),
+            {%- else -%}
+            {{key}}={{value}},
+            {%- endif %}
+        {%- endfor %}
+    )
+
+
+
+
+
 
     for e in range(0, EPOCHS):
 
@@ -150,6 +246,7 @@ def train(callback):
             callback(progress)
         writer.add_scalar("Train/Accuracy", trainCorrect, e)
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
+        scheduler.step()  
         model.eval()
         print(trainCorrect)
 

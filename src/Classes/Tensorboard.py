@@ -64,7 +64,7 @@ class TensorView:
         self.reload_timer.timeout.connect(self.first_reload)
         self.reload_timer.start(
             10000
-        )  # Reload once after 3 seconds, less than that it won't work perfectly
+        )  # Reload once after 10 seconds, less than 3 seconds it won't work perfectly
 
     def first_reload(self):
         self.tensorWeb.loadProgress.connect(self.update_progress_bar)
