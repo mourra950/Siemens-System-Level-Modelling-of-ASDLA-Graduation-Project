@@ -30,7 +30,6 @@ class AutoExtraction(metaclass=Singleton):
             "verbose",
             "scale_fn",
         ]
-        # verbose SO2AL
 
         self.extract_torch_layers()
         self.extract_res_block()
@@ -178,14 +177,19 @@ class AutoExtraction(metaclass=Singleton):
         self.PRETRAINED_MODELS = models.list_models()
 
     def extract_scheduler_learning(self):
-
         scheduler_dict = dict()
-
         scheduler_names = dir(lr_scheduler)
+
+        # Add a 'None' choice
+        scheduler_dict["None"] = []
 
         for scheduler_name in scheduler_names:
             # Skip scheduler names that don't start with a letter
             if not scheduler_name[0].isalpha():
+                continue
+
+            # Skip 'Optimizer' and 'LRScheduler'
+            if scheduler_name in ["Optimizer", "LRScheduler"]:
                 continue
 
             obj = getattr(lr_scheduler, scheduler_name)
