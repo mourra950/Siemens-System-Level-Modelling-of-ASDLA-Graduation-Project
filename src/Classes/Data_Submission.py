@@ -40,19 +40,23 @@ class DataSubmission:
         try:
             if type(widget) == QSpinBox:
                 self.architecture["misc_params"][param_name] = widget.value()
-                print(widget.value(), param_name)
+                if self.debug:
+                    print(widget.value(), param_name)
             elif type(widget) == QLineEdit:
                 self.architecture["misc_params"][param_name] = widget.text()
-                print(widget.text(), param_name)
+                if self.debug:
+                    print(widget.text(), param_name)
             elif type(widget) == QComboBox:
                 data = widget.currentData()
                 if isinstance(data, int):
                     data = "cuda:" + str(data)
                 self.architecture["misc_params"][param_name] = data
-                print(data, param_name)
+                if self.debug:
+                    print(data, param_name)
 
         except:
-            print(f"error in {param_name}")
+            if self.debug:
+                print(f"error in {param_name}")
 
     def on_submit_arch_clicked(self):
         self.validate_and_correct_layers(
@@ -63,11 +67,13 @@ class DataSubmission:
 
     def handle_stderr(self):
         result = bytes(self.Manual_Process.readAllStandardError()).decode("utf8")
-        print(result)
+        if self.debug:
+            print(result)
 
     def handle_stdout(self):
         result = bytes(self.Manual_Process.readAllStandardOutput()).decode("utf8")
-        print(result)
+        if self.debug:        
+            print(result)
 
     def generate_manual_project(self):
         path_output = self.Cookiecutter.render_cookiecutter_template(
@@ -78,7 +84,8 @@ class DataSubmission:
             try:
                 self.show_files(path_output)
             except:
-                print("ERRORRRRR")
+                if self.debug:
+                    print("ERRORRRRR")
             self.Manual_Process = QProcess()
             self.Manual_Process.readyReadStandardOutput.connect(self.handle_stdout)
             self.Manual_Process.readyReadStandardError.connect(self.handle_stderr)
@@ -132,6 +139,7 @@ class DataSubmission:
 
             with open(path, "w") as f:
                 f.write(json.dumps(architecture, indent=4))
-            print("JSON file saved successfully.")
+            if self.debug:
+                print("JSON file saved successfully.")
 
         return path

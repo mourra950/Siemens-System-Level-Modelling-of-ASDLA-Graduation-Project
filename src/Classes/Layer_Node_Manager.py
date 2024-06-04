@@ -15,7 +15,9 @@ class LayerNodeManager:
                 'height': 1,
                 'channels': 1,
                 'num_epochs': 1,
-                'batch_size': 0
+                'batch_size': 0,
+                'device': 'cpu',
+                
             }
         }
         self.Resarchitecture = {

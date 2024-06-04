@@ -40,7 +40,8 @@ class Initializer(
     GeneratedFilesViewer,
 ):
     def __init__(self) -> None:
-        print("Initializer")
+        if self.debug:
+            print("Initializer")
         self.Cookiecutter = Cookiecutter(self.jinja_templates, self.debug)
         Children.__init__(self)
         Controller.__init__(self)

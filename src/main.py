@@ -17,11 +17,12 @@ def main():
 
 class MainUI(QtCore.QObject, SystemPaths, Initializer):
     def __init__(self):
-        self.debug = True
+        self.debug = False
         SystemPaths.__init__(self)
 
-        self.AutoExtraction = AutoExtraction()
-        self.StaticAnalysis = StaticAnalysis(self.warning_rules_path, self.debug)
+        self.AutoExtraction = AutoExtraction(self.debug)
+        self.StaticAnalysis = StaticAnalysis(
+            self.warning_rules_path, self.debug)
 
         self.loader = QUiLoader()
         (

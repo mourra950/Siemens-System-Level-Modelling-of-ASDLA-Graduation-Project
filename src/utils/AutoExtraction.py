@@ -12,8 +12,10 @@ import copy
 
 class AutoExtraction(metaclass=Singleton):
 
-    def __init__(self) -> None:
-        print("Auto Extraction")
+    def __init__(self, debug) -> None:
+        self.debug = debug
+        if self.debug:
+            print("Auto Extraction")
         self.unnecessary_params = [
             "in_channels",
             "num_features",
@@ -136,7 +138,8 @@ class AutoExtraction(metaclass=Singleton):
     def extract_torch_optimizers(self):
         torch_optimizers_names = dir(optim)
         torch_optimizers_dict = dict()
-        # print(torch_optimizers_names)
+        if self.debug:
+            print(torch_optimizers_names)
         for optimizer_name in torch_optimizers_names:
             obj = getattr(optim, optimizer_name)
 
@@ -237,4 +240,5 @@ class AutoExtraction(metaclass=Singleton):
                     scheduler_dict[obj.__name__] = params_list
 
         self.SCHEDULERS = scheduler_dict
-        print(scheduler_dict)
+        if self.debug:
+            print(scheduler_dict)

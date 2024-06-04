@@ -40,7 +40,6 @@ class Connections:
 
     def testCreate(self):
         global message
-        print("hamada")
         t = threading.Thread(target=self.run_systemc)
         t.start()
         t.join()

@@ -29,7 +29,8 @@ class FillingQt:
                     i, j, k, None, None
                 )
             )
-            self.qt_optimizersList_QVBoxLayout.addWidget(selectOptimizer_QPushButton)
+            self.qt_optimizersList_QVBoxLayout.addWidget(
+                selectOptimizer_QPushButton)
 
     def fill_lossfunctions(self):
         for lossfunc in self.LOSSFUNC:
@@ -39,7 +40,8 @@ class FillingQt:
                     i, j, k, None, None
                 )
             )
-            self.qt_lossFuncsList_QVBoxLayout.addWidget(selectLossFunc_QPushButton)
+            self.qt_lossFuncsList_QVBoxLayout.addWidget(
+                selectLossFunc_QPushButton)
 
     def fill_schedulers(self):
         for scheduler in self.SCHEDULERS:
@@ -50,8 +52,8 @@ class FillingQt:
                 )
             )
 
-            self.qt_schedulersList_QVBoxLayout.addWidget(selectScheduler_QPushButton)
-            print(self.qt_schedulersList_QVBoxLayout)
+            self.qt_schedulersList_QVBoxLayout.addWidget(
+                selectScheduler_QPushButton)
 
     def fill_layers(self, qt_layout, layers, q2_layout, arch_dict):
         for layer in layers:
