@@ -116,7 +116,8 @@ def train(callback):
     )
 
     train_size = len(train_dataset)
-
+    
+    {% if cookiecutter.misc_params.scheduler.type != "None" %}
     # Create the chosen scheduler with parameters
     scheduler = {{cookiecutter.misc_params.scheduler.type}}(optimizer,
         {%- for key, value in cookiecutter.misc_params.scheduler.params|dictsort %}
@@ -127,7 +128,8 @@ def train(callback):
             {%- endif %}
         {%- endfor %}
     )
-
+    {% endif %}
+        
     for e in range(0, EPOCHS):
         model.train()
         totalTrainLoss = 0

@@ -45,10 +45,11 @@ class DataOfTransfer:
             ###########################
             # Mourra uncomment and test
             ###########################
-            # try:
-            #     self.show_files(path_output)
-            # except:
-            #     print("ERRORRRRR")
+            try:
+                self.show_files(path_output)
+            except:
+                if self.debug:
+                    print("ERRORRRRR")
             self.Pretrained_Process = QProcess()
             self.Pretrained_Process.readyReadStandardOutput.connect(
                 self.handle_stdout_transfer_learning)

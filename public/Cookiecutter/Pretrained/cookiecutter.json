@@ -3,31 +3,28 @@
   "project_name": "Pretrained_Output",
   
     "misc_params": {
-        "width": 224,
-        "height": 224,
-        "channels": 1,
+        "width": 28,
+        "height": 28,
+        "channels": 3,
         "num_epochs": 1,
         "batch_size": 64,
         "device": "cuda:0",
         "scheduler": {
-            "type": "StepLR",
-            "params": {
-                "step_size": 5,
-                "gamma": 0.1,
-                "last_epoch": 1
-            }
+            "type": "None",
+            "params": {}
         },
         "optimizer": {
-            "type": "Adam",
+            "type": "ASGD",
             "params": {
-                "lr": 0.001,
-                "betas": [
-                    0.9,
-                    0.999
-                ],
-                "eps": 1e-08,
-                "weight_decay": 0.0,
-                "amsgrad": false
+                "lr": 0.01,
+                "lambd": 0.0001,
+                "alpha": 0.75,
+                "t0": 1000.0,
+                "weight_decay": 1,
+                "foreach": false,
+                "maximize": false,
+                "differentiable": false,
+                "capturable": false
             }
         },
         "loss_func": {
@@ -39,8 +36,8 @@
             }
         }
     },
-    "transfer_model": "vgg11",
-    "mnist_path": "d:\\nada\\nada\\GP\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
-    "log_dir": "d:\\nada\\nada\\GP\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+    "transfer_model": "resnet18",
+    "mnist_path": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
+    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 
 }
