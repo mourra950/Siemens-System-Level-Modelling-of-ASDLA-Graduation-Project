@@ -1,5 +1,6 @@
 import json
-
+import os
+import importlib
 from utils.Singleton import Singleton
 
 
@@ -8,136 +9,30 @@ class StaticAnalysis(metaclass=Singleton):
         self.debug = debug
         with open(rules_path, 'r') as f:
             self.rules = f.read().split('\n')
-        self.rule_map = {
-            # Layer1 -> Layer2
-            '->': self.after_comes_directly,
-            # Layer1 ->x Layer2
-            '->x': self.after_comes_not_directly,
-            # Layer1 --> Layer2
-            '-->': self.after_comes,
-            # Layer1 -->x Layer2
-            '-->x': self.after_comes_not,
+        self.rule_map = dict()
+        self.load()
 
-            # Layer1 <- Layer2
-            '<-': self.before_comes_directly,
-            # Layer1 <-x Layer2
-            '<-x': self.before_comes_not_directly,
-            # Layer1 <-- Layer2
-            '<--': self.before_comes,
-            # Layer1 <--x Layer2
-            '<--x': self.before_comes_not,
+    def load(self):
+        rule_dir = os.path.join(os.path.dirname(__file__), 'Rules')
+        module_files = [f for f in os.listdir(
+            rule_dir) if f.endswith('.py') and f != '__init__.py']
+        for module_file in module_files:
+            module_name = f"Tests.Rules.{module_file[:-3]}"
+            module = importlib.import_module(module_name)
+            class_name = module_file[:-3]
+            cls = getattr(module, class_name, None)
+            t = cls()
+            t, v = t.definition()
 
-            # (Layer1,Layer2) <--> Layer3
-            '<-->': self.between_comes
-        }
+            self.rule_map[t] = v
 
     def test_rule(self, rule_func, layer_idx, rule_tokens, violations_list):
-        return_val = rule_func(layer_idx, rule_tokens)
+        return_val = rule_func(self.layers, layer_idx, rule_tokens)
         if return_val == False:
             violations_list.append(
                 f'Violation of Rule ({" ".join(rule_tokens)}) at Layer "{self.layers[layer_idx]["name"]}"'
             )
         return return_val
-
-    # Layer1 -> Layer2
-
-    def after_comes_directly(self, layer_idx, rule_tokens) -> bool:
-        if self.layers[layer_idx]['type'] != rule_tokens[0]:
-            return True
-        if layer_idx >= len(self.layers)-1:
-            return True
-        if self.layers[layer_idx+1]['type'] == rule_tokens[2]:
-            return True
-        return False
-
-    # Layer1 ->x Layer2
-    def after_comes_not_directly(self, layer_idx, rule_tokens) -> bool:
-        if self.layers[layer_idx]['type'] != rule_tokens[0]:
-            return True
-        if layer_idx >= len(self.layers)-1:
-            return True
-        if self.layers[layer_idx+1]['type'] != rule_tokens[2]:
-            return True
-        return False
-
-    # Layer1 --> Layer2
-    def after_comes(self, layer_idx, rule_tokens) -> bool:
-        if self.layers[layer_idx]['type'] != rule_tokens[0]:
-            return True
-        if layer_idx >= len(self.layers)-1:
-            return True
-        for i in range(layer_idx+1, len(self.layers)):
-            if self.layers[i]['type'] == rule_tokens[2]:
-                return True
-        return False
-
-    # Layer1 -->x Layer2
-    def after_comes_not(self, layer_idx, rule_tokens) -> bool:
-        if self.layers[layer_idx]['type'] != rule_tokens[0]:
-            return True
-        if layer_idx >= len(self.layers)-1:
-            return True
-        for i in range(layer_idx+1, len(self.layers)):
-            if self.layers[i]['type'] == rule_tokens[2]:
-                return False
-        return True
-
-    # Layer1 <- Layer2
-    def before_comes_directly(self, layer_idx, rule_tokens) -> bool:
-        if self.layers[layer_idx]['type'] != rule_tokens[0]:
-            return True
-        if layer_idx <= 0:
-            return True
-        if self.layers[layer_idx-1]['type'] == rule_tokens[2]:
-            return True
-        return False
-
-    # Layer1 <-x Layer2
-    def before_comes_not_directly(self, layer_idx, rule_tokens) -> bool:
-        if self.layers[layer_idx]['type'] != rule_tokens[0]:
-            return True
-        if layer_idx <= 0:
-            return True
-        if self.layers[layer_idx-1]['type'] != rule_tokens[2]:
-            return True
-        return False
-
-    # Layer1 <-- Layer2
-    def before_comes(self, layer_idx, rule_tokens) -> bool:
-        if self.layers[layer_idx]['type'] != rule_tokens[0]:
-            return True
-        if layer_idx <= 0:
-            return True
-        for i in range(0, layer_idx):
-            if self.layers[i]['type'] == rule_tokens[2]:
-                return True
-        return False
-
-    # Layer1 <--x Layer2
-    def before_comes_not(self, layer_idx, rule_tokens) -> bool:
-        if self.layers[layer_idx]['type'] != rule_tokens[0]:
-            return True
-        if layer_idx <= 0:
-            return True
-        for i in range(0, layer_idx):
-            if self.layers[i]['type'] == rule_tokens[2]:
-                return False
-        return True
-
-    # (Layer1,Layer2) <--> Layer3
-
-    def between_comes(self, layer_idx, rule_tokens):
-        layer_1, layer_2 = rule_tokens[0][1:-1].split(',')
-        if self.layers[layer_idx]['type'] != layer_1:
-            return True
-        if layer_idx >= len(self.layers):
-            return True
-        for i in range(layer_idx+1, len(self.layers)):
-            if self.layers[i]['type'] == layer_2:
-                return False
-            if self.layers[i]['type'] == rule_tokens[2]:
-                return True
-        return True
 
     def analyze(self, layers):
         self.layers = layers
@@ -148,7 +43,7 @@ class StaticAnalysis(metaclass=Singleton):
                 if rule.startswith('//') or rule.strip() == '':
                     continue
                 rule_tokens = rule.split()
-
+                print(rule)
                 self.test_rule(
                     self.rule_map[rule_tokens[1]],
                     layer_idx,
@@ -159,6 +54,8 @@ class StaticAnalysis(metaclass=Singleton):
         if self.debug:
             for violation in violations_list:
                 print(violation)
+                print("analyze")
+
         return violations_list
 
 
