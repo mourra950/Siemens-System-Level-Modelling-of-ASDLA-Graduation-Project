@@ -42,9 +42,6 @@ class DataOfTransfer:
         )
 
         if path_output:
-            ###########################
-            # Mourra uncomment and test
-            ###########################
             try:
                 self.show_files(path_output)
             except:

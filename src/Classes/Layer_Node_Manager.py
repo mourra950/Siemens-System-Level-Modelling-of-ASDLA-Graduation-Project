@@ -17,7 +17,6 @@ class LayerNodeManager:
                 'num_epochs': 1,
                 'batch_size': 0,
                 'device': 'cpu',
-                
             }
         }
         self.Resarchitecture = {
