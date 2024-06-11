@@ -20,19 +20,30 @@ class Cookiecutter(metaclass=Singleton):
         self.jinja_template_filename = "cookiecutter.json.jinja"
 
     def render_cookiecutter_template(self, src_cookie_json_path, output_cookie_json_path, template_dir):
-        path_json, _ = QFileDialog.getOpenFileName(
-            None, "Load JSON file", basedir, "JSON Files (*.json)"
+        path_arch_json, _ = QFileDialog.getOpenFileName(
+            None, "Load Architecture JSON file", basedir, "JSON Files (*.json)"
         )
         path_output = None
-        if path_json:
+        if path_arch_json:
             data = None
-            with open(path_json, "r") as json_file:
+            with open(path_arch_json, "r") as json_file:
                 data = json.load(json_file)
+
+            for layer in data['layers']['list']:
+                if layer['type'] == 'Residual_Block':
+                    path_residual_json, _ = QFileDialog.getOpenFileName(
+                        None, "Load Residual Block JSON file", basedir, "JSON Files (*.json)"
+                    )
+                    with open(path_residual_json, "r") as json_file:
+                        data['residual'] = json.load(json_file)
+                    break
+
             path_output = QFileDialog.getExistingDirectory(
                 None, "Pick a folder to save the output", basedir
             )
             self.cookicutterpreproccess(
-                data, src_cookie_json_path, output_cookie_json_path)
+                data, src_cookie_json_path, output_cookie_json_path
+            )
             self.generate_project(
                 template_dir, path_output
             )

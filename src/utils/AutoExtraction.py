@@ -55,10 +55,10 @@ class AutoExtraction(metaclass=Singleton):
             {"name": "in_channels", "defaultvalue": 0, "type": int},
             {"name": "out_channels", "defaultvalue": 0, "type": int},
         ]
-        res_block_dict = {"Residual Block": res_params}
+        res_block_dict = {"Residual_Block": res_params}
         self.LAYERS.update(res_block_dict)
         self.LAYERS_WITHOUT_RES = copy.deepcopy(self.LAYERS)
-        self.LAYERS_WITHOUT_RES.pop("Residual Block")
+        self.LAYERS_WITHOUT_RES.pop("Residual_Block")
 
     def extract_torch_layers(self) -> dict:
         torch_layers_names = dir(nn)
