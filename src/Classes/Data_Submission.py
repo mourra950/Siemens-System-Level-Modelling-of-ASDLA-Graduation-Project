@@ -128,7 +128,7 @@ class DataSubmission:
     # save json for manual arch
     def save_json(self):
         path, _ = QFileDialog.getSaveFileName(
-            None, "Save JSON File", self.basedir, "JSON Files (*.json)"
+            None, "Save Architecture JSON File", self.basedir, "JSON Files (*.json)"
         )
         if path:
             self.architecture["mnist_path"] = self.mnist_path
