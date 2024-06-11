@@ -5,7 +5,7 @@
     "misc_params": {
         "width": 28,
         "height": 28,
-        "channels": 3,
+        "channels": 1,
         "num_epochs": 1,
         "batch_size": 64,
         "device": "cuda:0",

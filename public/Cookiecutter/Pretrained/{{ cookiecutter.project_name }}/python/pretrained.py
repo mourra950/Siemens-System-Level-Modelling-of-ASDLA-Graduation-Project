@@ -154,8 +154,9 @@ def train(callback):
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
         
         # Skip scheduler step if {{cookiecutter.misc_params.scheduler.type}} is None
-        if {{cookiecutter.misc_params.scheduler.type}} != 'None':
+        {% if cookiecutter.misc_params.scheduler.type != "None" %}
             scheduler.step() 
+        {% endif %}
         
         
         model.eval()
