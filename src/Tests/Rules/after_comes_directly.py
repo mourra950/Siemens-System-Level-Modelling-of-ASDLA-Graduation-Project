@@ -10,7 +10,7 @@ class after_comes_directly:
         if layers[layer_idx]['type'] != rule_tokens[0]:
             return True
         if layer_idx >= len(layers)-1:
-            return True
+            return False
         if layers[layer_idx+1]['type'] == rule_tokens[2]:
             return True
         return False
