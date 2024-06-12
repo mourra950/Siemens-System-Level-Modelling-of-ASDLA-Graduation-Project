@@ -21,10 +21,10 @@ class StaticAnalysis(metaclass=Singleton):
             module = importlib.import_module(module_name)
             class_name = module_file[:-3]
             cls = getattr(module, class_name, None)
-            t = cls()
-            t, v = t.definition()
+            class_instance = cls()
+            sign, callback_function = class_instance.definition()
 
-            self.rule_map[t] = v
+            self.rule_map[sign] = callback_function
 
     def test_rule(self, rule_func, layer_idx, rule_tokens, violations_list):
         return_val = rule_func(self.layers, layer_idx, rule_tokens)
