@@ -6,6 +6,7 @@ from PySide6.QtWidgets import (
     QSpinBox,
     QTreeWidget,
     QTextBrowser,
+    QTextEdit
 )
 
 
@@ -115,3 +116,7 @@ class Children:
         self.qt_output_tree_viewer = self.ui.findChild(QTreeWidget, "files_tree")
 
         self.qt_output_file_viewer = self.ui.findChild(QTextBrowser, "codeSample")
+        
+        #Violation Layer List
+        self.qt_violations_text_edit = self.ui.findChild(QTextEdit, "Violation_QTextEdit")
+        

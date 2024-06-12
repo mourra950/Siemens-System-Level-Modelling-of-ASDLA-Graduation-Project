@@ -1,6 +1,6 @@
 import json
 import os
-from PySide6.QtWidgets import QMessageBox, QLineEdit, QSpinBox, QFileDialog, QComboBox
+from PySide6.QtWidgets import QMessageBox, QLineEdit, QSpinBox, QFileDialog, QComboBox, QTextEdit
 from PySide6.QtCore import QProcess
 from jinja2 import Environment, FileSystemLoader
 from cookiecutter.main import cookiecutter
@@ -16,6 +16,8 @@ class DataSubmission:
         self.set_data_onChange("channels", self.qt_inputType_QSpinBox)
         self.set_data_onChange("batch_size", self.qt_batchSize_QSpinBox)
         self.set_data_onChange("num_epochs", self.qt_numEpochs_QSpinBox)
+        self.violations_list = []
+
         # self.qt_manual_generate.clicked.connect(self.manual_generate)
 
     def set_data_onChange(self, param_name, widget):
@@ -63,16 +65,24 @@ class DataSubmission:
             self.qt_addedLayers_QVBoxLayout, self.architecture
         )
         arch_json_file_path = self.save_json()
-        self.StaticAnalysis.analyze(self.architecture["layers"])
+        self.violations_list = self.StaticAnalysis.analyze(
+            self.architecture["layers"])
+        for i in self.violations_list:
+            print(fr'<span style="color:#ff0000">{i}</span>')
+            escaped_text = i.replace('<', '&lt;').replace('>', '&gt;')
+            self.qt_violations_text_edit.append(
+                fr'<span style="color:#ff0000">{escaped_text}</span>')
 
     def handle_stderr(self):
-        result = bytes(self.Manual_Process.readAllStandardError()).decode("utf8")
+        result = bytes(
+            self.Manual_Process.readAllStandardError()).decode("utf8")
         if self.debug:
             print(result)
 
     def handle_stdout(self):
-        result = bytes(self.Manual_Process.readAllStandardOutput()).decode("utf8")
-        if self.debug:        
+        result = bytes(
+            self.Manual_Process.readAllStandardOutput()).decode("utf8")
+        if self.debug:
             print(result)
 
     def generate_manual_project(self):
@@ -87,8 +97,10 @@ class DataSubmission:
                 if self.debug:
                     print("ERRORRRRR")
             self.Manual_Process = QProcess()
-            self.Manual_Process.readyReadStandardOutput.connect(self.handle_stdout)
-            self.Manual_Process.readyReadStandardError.connect(self.handle_stderr)
+            self.Manual_Process.readyReadStandardOutput.connect(
+                self.handle_stdout)
+            self.Manual_Process.readyReadStandardError.connect(
+                self.handle_stderr)
             self.Manual_Process.start(
                 "python", [path_output + "/Manual_Output/main.py"]
             )
