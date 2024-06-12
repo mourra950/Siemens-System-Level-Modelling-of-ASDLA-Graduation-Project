@@ -67,8 +67,8 @@ class DataSubmission:
         arch_json_file_path = self.save_json()
         self.violations_list = self.StaticAnalysis.analyze(
             self.architecture["layers"])
+        self.qt_violations_text_edit.clear()
         for i in self.violations_list:
-            print(fr'<span style="color:#ff0000">{i}</span>')
             escaped_text = i.replace('<', '&lt;').replace('>', '&gt;')
             self.qt_violations_text_edit.append(
                 fr'<span style="color:#ff0000">{escaped_text}</span>')
