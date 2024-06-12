@@ -1,7 +1,7 @@
 # import the necessary packages
 import torch
 from torch import nn
-from residual import ResidualBlock
+from python.residual import ResidualBlock
 
 class CNN(nn.Module):
     def __init__(self):     
