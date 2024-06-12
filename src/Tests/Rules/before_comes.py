@@ -10,7 +10,7 @@ class before_comes:
         if layers[layer_idx]['type'] != rule_tokens[0]:
             return True
         if layer_idx <= 0:
-            return True
+            return False
         for i in range(0, layer_idx):
             if layers[i]['type'] == rule_tokens[2]:
                 return True

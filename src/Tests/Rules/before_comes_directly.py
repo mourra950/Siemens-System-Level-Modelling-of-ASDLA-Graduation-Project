@@ -10,7 +10,7 @@ class before_comes_directly:
         if layers[layer_idx]['type'] != rule_tokens[0]:
             return True
         if layer_idx <= 0:
-            return True
+            return False
         if layers[layer_idx-1]['type'] == rule_tokens[2]:
             return True
         return False
