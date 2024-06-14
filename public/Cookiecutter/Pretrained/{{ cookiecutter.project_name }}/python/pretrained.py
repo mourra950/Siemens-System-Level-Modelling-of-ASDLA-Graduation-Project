@@ -120,13 +120,13 @@ def train(callback):
     {% if cookiecutter.misc_params.scheduler.type != "None" %}
     # Create the chosen scheduler with parameters
     scheduler = {{cookiecutter.misc_params.scheduler.type}}(optimizer,
-        {%- for key, value in cookiecutter.misc_params.scheduler.params|dictsort %}
-            {%- if value is sequence and value is not string -%}
-            {{key}}=({{value | join(', ')}}),
-            {%- else -%}
-            {{key}}={{value}},
-            {%- endif %}
-        {%- endfor %}
+    {%- for key, value in cookiecutter.misc_params.scheduler.params|dictsort %}
+        {%- if value is sequence and value is not string -%}
+        {{key}}=({{value | join(', ')}}),
+        {%- else -%}
+        {{key}}={{value}},
+        {%- endif %}
+    {%- endfor %}
     )
     {% endif %}
         
@@ -155,7 +155,7 @@ def train(callback):
         
         # Skip scheduler step if {{cookiecutter.misc_params.scheduler.type}} is None
         {% if cookiecutter.misc_params.scheduler.type != "None" %}
-            scheduler.step() 
+        scheduler.step() 
         {% endif %}
         
         
