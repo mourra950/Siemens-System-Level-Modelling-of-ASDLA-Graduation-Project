@@ -10,6 +10,11 @@ class GeneratedFilesViewer():
         self.qt_output_tree_viewer.itemClicked.connect(self.on_file_clicked)
 
     def show_files(self, project_path):
+        for i in range(self.qt_output_tree_viewer.topLevelItemCount()):
+            top_level_item = self.qt_output_tree_viewer.topLevelItem(i)
+            if top_level_item.data(0, Qt.ItemDataRole.UserRole) == project_path:
+                self.qt_output_tree_viewer.takeTopLevelItem(i)
+                break
         root = QTreeWidgetItem([os.path.basename(project_path)])
         root.setData(0, Qt.ItemDataRole.UserRole, project_path)
         self.qt_output_tree_viewer.addTopLevelItem(root)
