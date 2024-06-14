@@ -15,10 +15,11 @@ def main():
     app.exec()
 
 
-class MainUI(QtCore.QObject, SystemPaths, Initializer):
+class MainUI(QtCore.QObject, Initializer):
     def __init__(self):
+
         self.debug = False
-        SystemPaths.__init__(self)
+        self.SysPath = SystemPaths()
 
         self.AutoExtraction = AutoExtraction(self.debug)
         self.StaticAnalysis = StaticAnalysis(
