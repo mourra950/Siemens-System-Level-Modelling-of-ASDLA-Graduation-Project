@@ -5,6 +5,8 @@ from python.residual import ResidualBlock
 
 class CNN(nn.Module):
     def __init__(self):     
+        device =torch.device("{{cookiecutter.misc_params.device}}" if torch.cuda.is_available() else "cpu")
+ 
         super(CNN,self).__init__()
         {%- for layer in cookiecutter.layers.list %}
         {%- if layer.type == 'Residual_Block' %}
@@ -14,7 +16,11 @@ class CNN(nn.Module):
         )
         {%- else %}
         self.{{layer.name}} = nn.{{layer.type}}( {% for param in layer.params %}
-            {{param}} = {{layer.params[param]}},
+        {%- if param == "device" %}
+            {{param}}=device,
+            {%- else -%}
+            {{param}}={{layer.params[param]}},
+        {%- endif %}
         {%- endfor %}
         )
         {% endif %}

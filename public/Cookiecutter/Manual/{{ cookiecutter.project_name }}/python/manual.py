@@ -49,7 +49,11 @@ def train(callback):
         train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
         {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
-        {{key}}={{value}},
+        {%- if key == "device" -%}
+            {{key}}=device,
+            {%- else -%}
+            {{key}}={{value}},
+        {%- endif %}
         {% endfor %}
     )
     optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
@@ -58,7 +62,11 @@ def train(callback):
         {%- if value is sequence and value is not string -%}
         {{key}}=({{value | join(', ')}}),
         {%- else -%}
-        {{key}}={{value}},
+            {%- if key == "device" -%}
+            {{key}}=device,
+            {%- else -%}
+            {{key}}={{value}},
+            {%- endif %}
         {%- endif %}
         {% endfor %}
     )
