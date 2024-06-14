@@ -9,3 +9,4 @@ examples/SystemC_Ctorch/Pt/model2.pt
 *.pt
 public/json_files/arch.json
 /src/test
+public/Cookiecutter/Manual/cookiecutter.json
