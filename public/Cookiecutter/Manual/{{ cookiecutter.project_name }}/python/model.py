@@ -8,8 +8,8 @@ class CNN(nn.Module):
         device =torch.device("{{cookiecutter.misc_params.device}}" if torch.cuda.is_available() else "cpu")
  
         super(CNN,self).__init__()
-        {%- for layer in cookiecutter.layers.list %}
-        {%- if layer.type == 'Residual_Block' %}
+        {%- for layer in cookiecutter.layers.list -%}
+        {%- if layer.type == 'Residual_Block' -%}
         self.{{layer.name}} = ResidualBlock( {% for param in layer.params %}
             {{param}} = {{layer.params[param]}},
         {%- endfor %}
@@ -18,7 +18,7 @@ class CNN(nn.Module):
         self.{{layer.name}} = nn.{{layer.type}}( {% for param in layer.params %}
         {%- if param == "device" %}
             {{param}}=device,
-            {%- else -%}
+            {%- else %}
             {{param}}={{layer.params[param]}},
         {%- endif %}
         {%- endfor %}
