@@ -31,15 +31,16 @@ class Cookiecutter(metaclass=Singleton):
             with open(path_arch_json, "r") as json_file:
                 data = json.load(json_file)
 
-            data['residual'] = {'layers': {'list': []}}
-            for layer in data['layers']['list']:
-                if layer['type'] == 'Residual_Block':
-                    path_residual_json, _ = QFileDialog.getOpenFileName(
-                        None, "Load Residual Block JSON file", self.SysPath.jsondir, "JSON Files (*.json)"
-                    )
-                    with open(path_residual_json, "r") as json_file:
-                        data['residual'] = json.load(json_file)
-                    break
+            if 'list' in data['layers']:
+                data['residual'] = {'layers': {'list': []}}
+                for layer in data['layers']['list']:
+                    if layer['type'] == 'Residual_Block':
+                        path_residual_json, _ = QFileDialog.getOpenFileName(
+                            None, "Load Residual Block JSON file", self.SysPath.jsondir, "JSON Files (*.json)"
+                        )
+                        with open(path_residual_json, "r") as json_file:
+                            data['residual'] = json.load(json_file)
+                        break
 
             path_output = QFileDialog.getExistingDirectory(
                 None, "Pick a folder to save the output", self.SysPath.jsondir
