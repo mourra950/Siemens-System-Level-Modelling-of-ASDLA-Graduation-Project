@@ -19,7 +19,7 @@ class ResBuildWindow():
 
     def save_residual_json(self):
         path, _ = QFileDialog.getSaveFileName(
-            None, "Save Residual Block JSON File", self.basedir, "JSON Files (*.json)"
+            None, "Save Residual Block JSON File", self.SysPath.basedir, "JSON Files (*.json)"
         )
         self.Resarchitecture["layers"] = {"list": self.Resarchitecture["layers"]}
         with open(path, "w") as f:
@@ -32,7 +32,7 @@ class ResBuildWindow():
 
     def res_on_submit_residual_block_clicked(self):
         self.add_layers_names(self.Resarchitecture)
-        with open(self.ResJson, 'w') as f:
+        with open(self.SysPath.ResJson, 'w') as f:
             # f.write(json.dumps(self.Resarchitecture, indent=2))
             self.save_residual_json()
         self.ResCreation.close()

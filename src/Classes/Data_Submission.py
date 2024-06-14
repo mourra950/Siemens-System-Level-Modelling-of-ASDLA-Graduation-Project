@@ -87,7 +87,7 @@ class DataSubmission:
 
     def generate_manual_project(self):
         path_output = self.Cookiecutter.render_cookiecutter_template(
-            self.manual_jinja_json, self.manual_cookie_json, self.manual_template_dir
+            self.SysPath.manual_jinja_json, self.SysPath.manual_cookie_json, self.SysPath.manual_template_dir
         )
 
         if path_output:
@@ -119,12 +119,9 @@ class DataSubmission:
         dlg.setWindowTitle("error!")
         dlg.setStandardButtons(QMessageBox.Yes)
         dlg.setIcon(QMessageBox.Critical)
-        # mourra look at that
-        # self.count+=1
         layer = {
             "type": layer_type,
             "params": dict(),
-            # 'name':self.count
         }
 
         for i in range(len(params_value_widgets)):
@@ -140,11 +137,12 @@ class DataSubmission:
     # save json for manual arch
     def save_json(self):
         path, _ = QFileDialog.getSaveFileName(
-            None, "Save Architecture JSON File", self.basedir, "JSON Files (*.json)"
+            None, "Save Architecture JSON File", self.SysPath.jsondir, "JSON Files (*.json)"
         )
         if path:
-            self.architecture["mnist_path"] = self.mnist_path
-            self.architecture["log_dir"] = self.log_path
+            self.SysPath.jsondir = path
+            self.architecture["mnist_path"] = self.SysPath.mnist_path
+            self.architecture["log_dir"] = self.SysPath.log_path
             # test for deep and shallow to avoid errors
             architecture = self.architecture.copy()
             architecture["layers"] = {"list": self.architecture["layers"]}

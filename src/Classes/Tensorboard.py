@@ -6,7 +6,7 @@ from PySide6.QtCore import QUrl, QProcess, QTimer
 class TensorView:
     def __init__(self) -> None:
         self.Tensorboard_Process = QProcess()
-        self.Tensorboard_Process.start("tensorboard", ["--logdir", self.log_path])
+        self.Tensorboard_Process.start("tensorboard", ["--logdir", self.SysPath.log_path])
 
         self.reload_timer = QTimer()
         self.progress_timer = QTimer()

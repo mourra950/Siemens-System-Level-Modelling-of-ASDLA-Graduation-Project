@@ -12,8 +12,9 @@ from PySide6.QtWidgets import (
 
 class Children:
     def __init__(self) -> None:
-        self.ResCreation = self.loader.load(self.res_build_ui_path, None)
-        self.ui = self.loader.load(self.GUI_path, None)
+        self.ResCreation = self.loader.load(
+            self.SysPath.res_build_ui_path, None)
+        self.ui = self.loader.load(self.SysPath.GUI_path, None)
         self.find_children()
 
     def find_children(self) -> None:
@@ -22,11 +23,13 @@ class Children:
         self.qt_layersList_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, "layersList_QVBoxLayout"
         )
-        self.qt_inputWidth_QSpinBox = self.ui.findChild(QSpinBox, "inputWidth_QSpinBox")
+        self.qt_inputWidth_QSpinBox = self.ui.findChild(
+            QSpinBox, "inputWidth_QSpinBox")
         self.qt_inputHeight_QSpinBox = self.ui.findChild(
             QSpinBox, "inputHeight_QSpinBox"
         )
-        self.qt_batchSize_QSpinBox = self.ui.findChild(QSpinBox, "batchSize_QSpinBox")
+        self.qt_batchSize_QSpinBox = self.ui.findChild(
+            QSpinBox, "batchSize_QSpinBox")
         self.qt_numEpochs_QSpinBox = self.ui.findChild(
             QSpinBox, "numberEpochs_QSpinBox"
         )
@@ -45,7 +48,8 @@ class Children:
 
         # replacment
 
-        self.qt_inputType_QSpinBox = self.ui.findChild(QSpinBox, "inputChannelsSpinBox")
+        self.qt_inputType_QSpinBox = self.ui.findChild(
+            QSpinBox, "inputChannelsSpinBox")
         self.qt_addedLayers_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, "addedLayers_QVBoxLayout"
         )
@@ -113,10 +117,12 @@ class Children:
             QPushButton, "Generate_manual_QPushButton"
         )
 
-        self.qt_output_tree_viewer = self.ui.findChild(QTreeWidget, "files_tree")
+        self.qt_output_tree_viewer = self.ui.findChild(
+            QTreeWidget, "files_tree")
 
-        self.qt_output_file_viewer = self.ui.findChild(QTextBrowser, "codeSample")
-        
-        #Violation Layer List
-        self.qt_violations_text_edit = self.ui.findChild(QTextEdit, "Violation_QTextEdit")
-        
+        self.qt_output_file_viewer = self.ui.findChild(
+            QTextBrowser, "codeSample")
+
+        # Violation Layer List
+        self.qt_violations_text_edit = self.ui.findChild(
+            QTextEdit, "Violation_QTextEdit")

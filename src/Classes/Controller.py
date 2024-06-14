@@ -43,15 +43,15 @@ class Controller:
         ##############################
         submitLayer_QPushButton.clicked.connect(
             lambda submit_func=on_submit_func,
-                   i=func_name,
-                   j=params_names,
-                   k=params_value_widgets,
-                   l=paramsWindow_QDialog,
-                   q_layout=args[0],
-                   arch=args[1]:
-                submit_func(
-                    i, j, k, l, q_layout, arch
-                )
+            i=func_name,
+            j=params_names,
+            k=params_value_widgets,
+            l=paramsWindow_QDialog,
+            q_layout=args[0],
+            arch=args[1]:
+            submit_func(
+                i, j, k, l, q_layout, arch
+            )
         )
 
         allParamsColumn_QVBoxLayout.addWidget(submitLayer_QPushButton)
@@ -91,7 +91,8 @@ class Controller:
             param_value = self.get_widget_data(params_value_widgets[i])
 
             if param_value != "":
-                self.selected_optimizer["params"][params_names[i]] = param_value
+                self.selected_optimizer["params"][params_names[i]
+                                                  ] = param_value
 
             self.qt_selectedOptimizer_QLineEdit.setText(optimizer_type)
         self.architecture["misc_params"]["optimizer"] = self.selected_optimizer
@@ -111,7 +112,8 @@ class Controller:
             param_value = self.get_widget_data(params_value_widgets[i])
 
             if param_value != "":
-                self.selected_scheduler["params"][params_names[i]] = param_value
+                self.selected_scheduler["params"][params_names[i]
+                                                  ] = param_value
 
         self.qt_selectedScheduler_QLineEdit.setText(scheduler_type)
         self.architecture["misc_params"]["scheduler"] = self.selected_scheduler

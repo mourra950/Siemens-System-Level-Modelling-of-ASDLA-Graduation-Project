@@ -22,14 +22,15 @@ class DataOfTransfer:
 
     def save_json_transfer(self):
         path, _ = QFileDialog.getSaveFileName(
-            None, "Save JSON file", basedir, "JSON Files (*.json)"
+            None, "Save JSON file", self.SysPath.jsondir, "JSON Files (*.json)"
         )
         print("tata")
         self.architecture["transfer_model"] = self.selected_pretrained_model
-        self.architecture["mnist_path"] = self.mnist_path
-        self.architecture["log_dir"] = self.log_path
+        self.architecture["mnist_path"] = self.SysPath.mnist_path
+        self.architecture["log_dir"] = self.SysPath.log_path
 
         if path:
+            self.SysPath.jsondir = path
             with open(path, 'w') as f:
                 f.write(json.dumps(self.architecture, indent=4))
             print("JSON file saved successfully.")
@@ -38,7 +39,7 @@ class DataOfTransfer:
 
     def render_transfer_learning(self):
         path_output = self.Cookiecutter.render_cookiecutter_template(
-            self.transfer_jinja_json, self.transfer_cookie_json, self.transfer_template_dir
+            self.SysPath.transfer_jinja_json, self.SysPath.transfer_cookie_json, self.SysPath.transfer_template_dir
         )
 
         if path_output:

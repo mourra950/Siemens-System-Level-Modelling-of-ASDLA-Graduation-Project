@@ -39,11 +39,11 @@ class LayerNodeManager:
             }
         ''')
         delete_QPushButton = self.qbutton_layer_manager(
-            self.delete_icon_path, qt_layout, border_QFrame, self.on_delete_layer_clicked, arch_dict)
+            self.SysPath.delete_icon_path, qt_layout, border_QFrame, self.on_delete_layer_clicked, arch_dict)
         up_QPushButton = self.qbutton_layer_manager(
-            self.up_icon_path, qt_layout, border_QFrame, self.on_move_buttons_clicked, "up", arch_dict)
+            self.SysPath.up_icon_path, qt_layout, border_QFrame, self.on_move_buttons_clicked, "up", arch_dict)
         down_QPushButton = self.qbutton_layer_manager(
-            self.down_icon_path, qt_layout, border_QFrame, self.on_move_buttons_clicked, "down", arch_dict)
+            self.SysPath.down_icon_path, qt_layout, border_QFrame, self.on_move_buttons_clicked, "down", arch_dict)
 
         moveableArrows_QVBoxLayout = QVBoxLayout()
         moveableArrows_QVBoxLayout.addWidget(up_QPushButton)

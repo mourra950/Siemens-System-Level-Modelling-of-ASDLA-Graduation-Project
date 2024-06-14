@@ -61,23 +61,23 @@ class FillingQt:
             if layer == "Residual_Block":
                 selectLayer_QPushButton.clicked.connect(
                     lambda i=layer,
-                           j=self.LAYERS,
-                           k=self.on_submit_layer_clicked,
-                           q_layout=q2_layout:
-                        self.on_res_block_clicked(
-                            i, j, k, q_layout, arch_dict
-                        )
+                    j=self.LAYERS,
+                    k=self.on_submit_layer_clicked,
+                    q_layout=q2_layout:
+                    self.on_res_block_clicked(
+                        i, j, k, q_layout, arch_dict
+                    )
                 )
                 qt_layout.addWidget(selectLayer_QPushButton)
             else:
                 selectLayer_QPushButton.clicked.connect(
                     lambda i=layer,
-                           j=self.LAYERS,
-                           k=self.on_submit_layer_clicked,
-                           q_layout=q2_layout, dic=arch_dict:
-                        self.on_torch_func_clicked(
-                            i, j, k, q_layout, dic
-                        )
+                    j=self.LAYERS,
+                    k=self.on_submit_layer_clicked,
+                    q_layout=q2_layout, dic=arch_dict:
+                    self.on_torch_func_clicked(
+                        i, j, k, q_layout, dic
+                    )
                 )
                 qt_layout.addWidget(selectLayer_QPushButton)
 
@@ -95,7 +95,6 @@ class FillingQt:
                 device_names.append((i, device_name))
 
         combo_box.clear()
+        combo_box.addItem("cpu", "cpu")
         for device_index, device_info in device_names:
             combo_box.addItem(device_info, device_index)
-
-        combo_box.addItem("cpu", "cpu")

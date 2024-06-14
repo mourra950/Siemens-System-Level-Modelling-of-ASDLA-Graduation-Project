@@ -42,7 +42,7 @@ class Initializer(
     def __init__(self) -> None:
         if self.debug:
             print("Initializer")
-        self.Cookiecutter = Cookiecutter(self.jinja_templates, self.debug)
+        self.Cookiecutter = Cookiecutter(self.SysPath.jinja_templates, self.debug)
         Children.__init__(self)
         Controller.__init__(self)
         LayerNodeManager.__init__(self)
