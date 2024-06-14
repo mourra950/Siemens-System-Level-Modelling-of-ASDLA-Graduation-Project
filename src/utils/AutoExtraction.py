@@ -21,6 +21,8 @@ class AutoExtraction(metaclass=Singleton):
             "num_features",
             "in_features",
             "dilation",
+            "divisor_override",
+            "approximate"
         ]
         self.unnecessary_optimizer_params = ["params"]
         self.unnecessary_loss_params = ["reduce", "size_average", "weight"]
