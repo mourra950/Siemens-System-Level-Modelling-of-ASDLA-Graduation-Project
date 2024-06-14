@@ -16,7 +16,7 @@ loader = QUiLoader()
 class Cookiecutter(metaclass=Singleton):
     def __init__(self, jinja_templates, debug) -> None:
         self.debug = debug
-        self.jinja_templates_path = jinja_templates
+        self.SysPath.jinja_templates_path = jinja_templates
         self.jinja_template_filename = "cookiecutter.json.jinja"
 
     def render_cookiecutter_template(self, src_cookie_json_path, output_cookie_json_path, template_dir):
@@ -57,7 +57,7 @@ class Cookiecutter(metaclass=Singleton):
         env = Environment(loader=FileSystemLoader(src_cookie_json_path))
         if self.debug:
             print(src_cookie_json_path, output_cookie_json_path,
-                  self.jinja_templates_path)
+                  self.SysPath.jinja_templates_path)
         template = env.get_template(self.jinja_template_filename)
 
         data = self.remove_empty_arrays(data)

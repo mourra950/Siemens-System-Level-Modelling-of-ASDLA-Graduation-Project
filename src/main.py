@@ -22,7 +22,7 @@ class MainUI(QtCore.QObject, SystemPaths, Initializer):
 
         self.AutoExtraction = AutoExtraction(self.debug)
         self.StaticAnalysis = StaticAnalysis(
-            self.warning_rules_path, self.debug)
+            self.SysPath.warning_rules_path, self.debug)
 
         self.loader = QUiLoader()
         (
