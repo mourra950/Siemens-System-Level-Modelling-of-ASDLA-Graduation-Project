@@ -165,7 +165,7 @@ if __name__ == "__main__":
     window = TransferLearningGUI()
     window.show()
     app.exec()
-
+    
 
 """
 def modify_resnet_model(num_classes):
