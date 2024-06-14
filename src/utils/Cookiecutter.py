@@ -7,6 +7,7 @@ from PySide6.QtUiTools import QUiLoader
 import cookiecutter.main
 import cookiecutter.prompt
 from jinja2 import Environment, FileSystemLoader
+from paths.SystemPaths import SystemPaths
 import json
 from cookiecutter.main import cookiecutter
 basedir = os.path.dirname(__file__)
@@ -15,13 +16,14 @@ loader = QUiLoader()
 
 class Cookiecutter(metaclass=Singleton):
     def __init__(self, jinja_templates, debug) -> None:
+        self.SysPath = SystemPaths()
         self.debug = debug
         self.SysPath.jinja_templates_path = jinja_templates
         self.jinja_template_filename = "cookiecutter.json.jinja"
 
     def render_cookiecutter_template(self, src_cookie_json_path, output_cookie_json_path, template_dir):
         path_arch_json, _ = QFileDialog.getOpenFileName(
-            None, "Load Architecture JSON file", basedir, "JSON Files (*.json)"
+            None, "Load Architecture JSON file",  self.SysPath.jsondir, "JSON Files (*.json)"
         )
         path_output = None
         if path_arch_json:
@@ -32,15 +34,16 @@ class Cookiecutter(metaclass=Singleton):
             for layer in data['layers']['list']:
                 if layer['type'] == 'Residual_Block':
                     path_residual_json, _ = QFileDialog.getOpenFileName(
-                        None, "Load Residual Block JSON file", basedir, "JSON Files (*.json)"
+                        None, "Load Residual Block JSON file", self.SysPath.jsondir, "JSON Files (*.json)"
                     )
                     with open(path_residual_json, "r") as json_file:
                         data['residual'] = json.load(json_file)
                     break
 
             path_output = QFileDialog.getExistingDirectory(
-                None, "Pick a folder to save the output", basedir
+                None, "Pick a folder to save the output", self.SysPath.jsondir
             )
+            self.SysPath.jsondir = path_output
             self.cookicutterpreproccess(
                 data, src_cookie_json_path, output_cookie_json_path
             )

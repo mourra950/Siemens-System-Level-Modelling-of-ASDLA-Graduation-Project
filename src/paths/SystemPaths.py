@@ -1,12 +1,14 @@
 import os
+from utils.Singleton import Singleton
 
-class SystemPaths:
+
+class SystemPaths(metaclass=Singleton):
     def __init__(self) -> None:
         print("System paths Class")
-        
+
         # base directories
         self.basedir = os.path.dirname(__file__)
-        self.jsondir=self.basedir
+        self.jsondir = self.basedir
         self.publicdir = os.path.normpath(
             os.path.join(self.basedir, '../../public/'))
         self.srcdir = os.path.normpath(os.path.join(self.basedir, './../'))
