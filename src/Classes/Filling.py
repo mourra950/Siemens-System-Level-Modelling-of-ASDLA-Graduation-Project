@@ -20,6 +20,7 @@ class FillingQt:
         self.fill_lossfunctions()
         self.fill_schedulers()
         self.fill_pretrained_model()
+        self.fill_datasets()
 
     def fill_optimizers(self):
         for optimizer in self.OPTIMIZERS:
@@ -84,6 +85,10 @@ class FillingQt:
     def fill_pretrained_model(self):
         for i in self.PRETRAINED_MODELS:
             self.pretrained_model_combobox.addItem(i)
+
+    def fill_datasets(self):
+        for i in self.DATASETS:
+            self.qt_selectedDataset_QComboBox.addItem(i)
 
     def fill_cuda_devices(self, combo_box):
         device_names = []

@@ -33,6 +33,7 @@ class MainUI(QtCore.QObject, Initializer):
             self.SCHEDULERS,
             self.PRETRAINED_MODELS,
             self.LAYERS_WITHOUT_RES,
+            self.DATASETS,
         ) = self.AutoExtraction.extracted_data()
 
         Initializer.__init__(self)

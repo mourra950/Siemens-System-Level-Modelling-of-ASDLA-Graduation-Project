@@ -45,6 +45,9 @@ class Children:
         self.qt_selectedDevice_QComboBox = self.ui.findChild(
             QComboBox, "deviceComboBox"
         )
+        self.qt_selectedDataset_QComboBox = self.ui.findChild(
+            QComboBox, "datasetComboBox"
+        )
 
         # replacment
 

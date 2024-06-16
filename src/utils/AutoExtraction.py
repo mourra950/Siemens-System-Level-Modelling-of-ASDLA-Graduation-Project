@@ -2,6 +2,7 @@ from ast import List
 import inspect
 import torch.nn.modules as nn
 import torchvision.models as models
+import torchvision.datasets as datasets
 from utils.Singleton import Singleton
 
 import torch.optim as optim
@@ -16,6 +17,10 @@ class AutoExtraction(metaclass=Singleton):
         self.debug = debug
         if self.debug:
             print("Auto Extraction")
+        self.unnecessary_datasets = [
+            'FakeData',
+            'wrap_dataset_for_transforms_v2',
+        ]
         self.unnecessary_params = [
             "in_channels",
             "num_features",
@@ -41,6 +46,7 @@ class AutoExtraction(metaclass=Singleton):
         self.extract_torch_optimizers()
         self.extract_scheduler_learning()
         self.extract_pretrained_models()
+        self.extract_Datasets()
 
     def extracted_data(self):
         return (
@@ -50,6 +56,7 @@ class AutoExtraction(metaclass=Singleton):
             self.SCHEDULERS,
             self.PRETRAINED_MODELS,
             self.LAYERS_WITHOUT_RES,
+            self.DATASETS,
         )
 
     def extract_res_block(self):
@@ -180,6 +187,10 @@ class AutoExtraction(metaclass=Singleton):
 
     def extract_pretrained_models(self):
         self.PRETRAINED_MODELS = models.list_models()
+
+    def extract_Datasets(self):
+        self.DATASETS = sorted(
+            [dataset for dataset in datasets.__all__ if dataset not in self.unnecessary_datasets])
 
     def extract_scheduler_learning(self):
         scheduler_dict = dict()
