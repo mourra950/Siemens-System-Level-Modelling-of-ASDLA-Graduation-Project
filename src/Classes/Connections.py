@@ -1,7 +1,7 @@
 import subprocess
 import threading
 from PySide6.QtWidgets import QMessageBox, QSpinBox
-
+from PySide6.QtWidgets import QFileDialog
 message = ""
 
 
@@ -31,6 +31,15 @@ class Connections:
         self.qt_selectedDevice_QComboBox.currentIndexChanged.connect(
             self.fill_cuda_devices(self.qt_selectedDevice_QComboBox)
         )
+        self.qt_dataset_path_QPushButton.clicked.connect(
+            self.on_dataset_path_clicked
+        )
+
+    def on_dataset_path_clicked(self):
+        path = QFileDialog.getExistingDirectory(
+            None, "Select a Directory")
+        if path:
+            self.qt_dataset_path_QLineEdit.setText(path)
 
     def testCreate(self):
         global message

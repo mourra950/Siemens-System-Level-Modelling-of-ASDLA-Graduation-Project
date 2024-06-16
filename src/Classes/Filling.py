@@ -88,7 +88,7 @@ class FillingQt:
 
     def fill_datasets(self):
         for i in self.DATASETS:
-            self.qt_selectedDataset_QComboBox.addItem(i)
+            self.qt_selectedDataset_QComboBox.addItem(i, i)
 
     def fill_cuda_devices(self, combo_box):
         device_names = []

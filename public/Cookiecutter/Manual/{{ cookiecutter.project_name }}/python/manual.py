@@ -42,7 +42,7 @@ def train(callback):
     transform = v2.Compose(
         [v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
 
-    train_dataset = datasets.MNIST(root=r"{{cookiecutter.mnist_path}}",
+    train_dataset = datasets.{{cookiecutter.dataset}}(root=r"{{cookiecutter.dataset_path}}",
                                    train=True, download=True, transform=transform)
 
     train_dataloader = DataLoader(

@@ -66,6 +66,12 @@ class Children:
             QVBoxLayout, "schedulersList_QVBoxLayout"
         )
 
+        self.qt_dataset_path_QPushButton = self.ui.findChild(
+            QPushButton, "dataset_path_QPushButton"
+        )
+        self.qt_dataset_path_QLineEdit = self.ui.findChild(
+            QLineEdit, "dataset_path_QLineEdit"
+        )
         self.qt_submitParams_QPushButton = self.ui.findChild(
             QPushButton, "submitParams_QPushButton"
         )

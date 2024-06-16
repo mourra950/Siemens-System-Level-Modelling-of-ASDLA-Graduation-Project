@@ -59,8 +59,8 @@ class SystemPaths(metaclass=Singleton):
             os.path.join(self.publicdir, "./Cookiecutter/Pretrained/cookiecutter.json"))
 
         # Dataset paths
-        self.mnist_path = os.path.normpath(
-            os.path.join(self.datadir, "./mnist"))
+        self.dataset_path = os.path.normpath(
+            os.path.join(self.datadir, "./dataset"))
         # Log Path
         self.log_path = os.path.normpath(
             os.path.join(self.datadir, "./tensorboardlogs"))

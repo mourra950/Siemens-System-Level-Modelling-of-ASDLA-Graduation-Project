@@ -2,8 +2,7 @@
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader
-from torchvision.datasets import mnist
-from torchvision import models, transforms
+from torchvision import models, transforms,datasets
 from torchvision.transforms import v2
 from torch.optim import lr_scheduler
 from torch.optim.lr_scheduler import *
@@ -65,9 +64,9 @@ def train(callback):
         ]
     )
 
-    train_dataset = mnist.MNIST(root=r"{{cookiecutter.mnist_path}}",
+    train_dataset = datasets.{{cookiecutter.misc_params.dataset}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
                                 train=True, download=True, transform=transform)
-    test_dataset = mnist.MNIST(root=r"{{cookiecutter.mnist_path}}",
+    test_dataset = datasets.{{cookiecutter.misc_params.dataset}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
                                train=False, download=True, transform=transform)
                                
     train_dataloader = DataLoader(

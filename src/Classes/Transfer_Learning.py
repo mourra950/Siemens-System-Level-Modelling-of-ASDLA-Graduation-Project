@@ -26,7 +26,6 @@ class DataOfTransfer:
         )
         print("tata")
         self.architecture["transfer_model"] = self.selected_pretrained_model
-        self.architecture["mnist_path"] = self.SysPath.mnist_path
         self.architecture["log_dir"] = self.SysPath.log_path
 
         if path:

@@ -16,9 +16,11 @@ class DataSubmission:
         self.set_data_onChange("channels", self.qt_inputType_QSpinBox)
         self.set_data_onChange("batch_size", self.qt_batchSize_QSpinBox)
         self.set_data_onChange("num_epochs", self.qt_numEpochs_QSpinBox)
+        self.set_data_onChange("dataset", self.qt_selectedDataset_QComboBox)
+        self.set_data_onChange("dataset_path", self.qt_dataset_path_QLineEdit)
+
         self.violations_list = []
 
-        # self.qt_manual_generate.clicked.connect(self.manual_generate)
 
     def set_data_onChange(self, param_name, widget):
         if type(widget) == QSpinBox:
@@ -141,7 +143,6 @@ class DataSubmission:
         )
         if path:
             self.SysPath.jsondir = path
-            self.architecture["mnist_path"] = self.SysPath.mnist_path
             self.architecture["log_dir"] = self.SysPath.log_path
             # test for deep and shallow to avoid errors
             architecture = self.architecture.copy()
