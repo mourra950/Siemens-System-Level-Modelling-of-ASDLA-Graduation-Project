@@ -27,9 +27,11 @@ loader = QUiLoader()
 class Worker(QThread):
 
     progressChanged = Signal(int)
+    def __init__(self, logdir):
+        self.logdir = logdir
 
-    def run(self, logdir):
-        train(callback=self.update_progress, logdir=logdir)
+    def run(self):
+        train(callback=self.update_progress, logdir=self.logdir)
 
     def update_progress(self, value):
         self.progressChanged.emit(value)
@@ -38,7 +40,7 @@ class Worker(QThread):
 class MainUI(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-        self.logdir = None
+        self.logdir = r'{{cookiecutter.log_dir}}'
         self.window = loader.load(os.path.join(basedir, "wrapper.ui"), None)
 
         self.window.setWindowTitle("Train & Wrap")
@@ -53,9 +55,7 @@ class MainUI(QMainWindow):
         self.train_btn.clicked.connect(self.train)
         self.wrap_btn.clicked.connect(self.cmake_wrap)
 
-        self.worker = Worker()
-        self.worker.progressChanged.connect(self.update_progress)
-        self.worker.finished.connect(self.on_train_finished)
+        
 
         self.window.show()
 
@@ -77,6 +77,9 @@ class MainUI(QMainWindow):
         self.wrap_btn.setEnabled(True)
 
     def train(self):
+        self.worker = Worker(self.logdir)
+        self.worker.progressChanged.connect(self.update_progress)
+        self.worker.finished.connect(self.on_train_finished)
         try:
             self.worker.start()
         except:

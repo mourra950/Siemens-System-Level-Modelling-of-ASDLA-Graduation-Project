@@ -21,9 +21,9 @@ model_output = os.path.normpath(
 test_output = os.path.normpath(os.path.join(basedir, '../test.txt'))
 
 
-def train(callback):
+def train(callback, logdir):
     unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    base_log_dir = r'{{cookiecutter.log_dir}}'
+    base_log_dir = logdir #r'{{cookiecutter.log_dir}}'
     log_dir = os.path.join(base_log_dir, unique_name)
 
     writer = SummaryWriter(log_dir=log_dir)

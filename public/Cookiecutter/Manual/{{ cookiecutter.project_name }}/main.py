@@ -1,4 +1,4 @@
-from python.manual import train
+from python.pretrained import train
 import os
 import sys
 import shutil
@@ -8,10 +8,10 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QApplication,
     QPushButton,
-    QProgressBar
+    QProgressBar, QLineEdit
 )
 from PySide6.QtWidgets import QFileDialog
-from PySide6.QtCore import QProcess,QThread,Signal
+from PySide6.QtCore import QProcess, QThread, Signal
 from PySide6.QtUiTools import QUiLoader
 from PySide6 import QtCore
 
@@ -23,37 +23,50 @@ source_output = os.path.normpath(os.path.join(basedir, './SystemC'))
 
 loader = QUiLoader()
 
+
 class Worker(QThread):
- 
+
     progressChanged = Signal(int)
-    
+
+    def __init__(self, logdir):
+        self.logdir = logdir
+
     def run(self):
-        train(callback=self.update_progress)
+        train(callback=self.update_progress, logdir=self.logdir)
 
     def update_progress(self, value):
         self.progressChanged.emit(value)
+
+
 class MainUI(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
-
+        self.logdir = r'{{cookiecutter.log_dir}}'
         self.window = loader.load(os.path.join(basedir, "wrapper.ui"), None)
 
         self.window.setWindowTitle("Train & Wrap")
-
         self.train_btn = self.window.findChild(QPushButton, "Train")
         self.wrap_btn = self.window.findChild(QPushButton, "Wrap")
         self.progress_bar = self.window.findChild(QProgressBar, "progressBar")
-
+        self.lineEdit = self.window.findChild(QLineEdit, "lineEdit")
+        self.pushButton = self.window.findChild(QPushButton, "pushButton")
+        self.pushButton.clicked.connect(self.log_dir)
+        self.lineEdit.textChanged.connect(self.line_dir)
         self.wrap_btn.setEnabled(False)
         self.train_btn.clicked.connect(self.train)
         self.wrap_btn.clicked.connect(self.cmake_wrap)
 
-        self.worker = Worker()
-        self.worker.progressChanged.connect(self.update_progress)
-        self.worker.finished.connect(self.on_train_finished)
-
         self.window.show()
-        
+
+    def line_dir(self):
+        self.logdir = self.lineEdit.text()
+
+    def log_dir(self):
+        path_output = QFileDialog.getExistingDirectory(
+            None, "Pick a folder to save the output"
+        )
+        if path_output:
+            self.lineEdit.setText(path_output)
 
     def update_progress(self, value):
         self.progress_bar.setValue(value)
@@ -62,16 +75,17 @@ class MainUI(QMainWindow):
         self.progress_bar.setValue(100)
         self.wrap_btn.setEnabled(True)
 
-
     def train(self):
+        self.worker = Worker(self.logdir)
+        self.worker.progressChanged.connect(self.update_progress)
+        self.worker.finished.connect(self.on_train_finished)
         try:
             self.worker.start()
         except:
             pass
 
-
     def cmake_wrap(self):
-        self.count=0
+        self.count = 0
         path = os.path.isfile(model_output)
         if path == False:
             self.wrap_btn.setEnabled(False)
@@ -80,7 +94,7 @@ class MainUI(QMainWindow):
             self.test.readyReadStandardOutput.connect(self.handle_stdout)
             self.test.readyReadStandardError.connect(self.handle_stderr)
             self.test.stateChanged.connect(self.handle_state)
-            
+
             if os.path.exists(build_output):
                 shutil.rmtree(build_output)
             # print( build_output)
@@ -93,11 +107,12 @@ class MainUI(QMainWindow):
     def handle_stdout(self):
         result = bytes(self.test.readAllStandardOutput()).decode("utf8")
         print(result)
+
     def handle_state(self, state):
         self.count += 1
         if self.count == 1:
             self.test.start(
-                "cmake", ["--build", build_output,"--clean-first"])
+                "cmake", ["--build", build_output, "--clean-first"])
         else:
             print("done")
 
