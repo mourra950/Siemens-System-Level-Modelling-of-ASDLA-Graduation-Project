@@ -16,7 +16,7 @@ model_output = os.path.normpath(
     os.path.join(basedir, "../SystemC/Pt/model.pt"))
 
 
-def train(callback):
+def train(callback,logdir):
     # initialization
     unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     base_log_dir = r"{{cookiecutter.log_dir}}"

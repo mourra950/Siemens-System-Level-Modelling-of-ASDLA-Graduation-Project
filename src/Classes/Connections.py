@@ -14,7 +14,7 @@ class Connections:
             self.on_submit_arch_clicked)
 
         self.qt_manual_generate.clicked.connect(self.generate_manual_project)
-        
+
         self.submitRes_QPushButton.clicked.connect(
             self.res_on_submit_residual_block_clicked
         )
@@ -32,6 +32,13 @@ class Connections:
         self.qt_dataset_path_QPushButton.clicked.connect(
             self.on_dataset_path_clicked
         )
+        self.Log_Directory_btn.clicked.connect(self.on_log_dir_clicked)
+
+    def on_log_dir_clicked(self):
+        path = QFileDialog.getExistingDirectory(
+            None, "Select a Directory")
+        if path:
+            self.logdirlineedit.setText(path)
 
     def on_dataset_path_clicked(self):
         path = QFileDialog.getExistingDirectory(
