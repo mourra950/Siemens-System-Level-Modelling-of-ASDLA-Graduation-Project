@@ -43,13 +43,13 @@ class MainUI(QMainWindow):
         QMainWindow.__init__(self)
         self.logdir = r'{{cookiecutter.log_dir}}'
         self.window = loader.load(os.path.join(basedir, "wrapper.ui"), None)
-
         self.window.setWindowTitle("Train & Wrap")
         self.train_btn = self.window.findChild(QPushButton, "Train")
         self.wrap_btn = self.window.findChild(QPushButton, "Wrap")
         self.progress_bar = self.window.findChild(QProgressBar, "progressBar")
         self.lineEdit = self.window.findChild(QLineEdit, "lineEdit")
         self.pushButton = self.window.findChild(QPushButton, "pushButton")
+        self.lineEdit.setText(self.logdir)
         self.pushButton.clicked.connect(self.log_dir)
         self.lineEdit.textChanged.connect(self.line_dir)
         self.wrap_btn.setEnabled(False)

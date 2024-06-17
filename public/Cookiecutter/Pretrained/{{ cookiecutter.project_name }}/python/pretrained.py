@@ -19,7 +19,7 @@ model_output = os.path.normpath(
 def train(callback, logdir):
     # initialization
     unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    base_log_dir = logdir  # r"{{cookiecutter.log_dir}}"
+    base_log_dir = logdir
     log_dir = os.path.join(base_log_dir, unique_name)
 
     writer = SummaryWriter(log_dir=log_dir)
@@ -68,9 +68,9 @@ def train(callback, logdir):
     )
 
     loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-    {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort % }
+    {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
         {{key}}={{value}},
-    {% endfor % }
+    {% endfor %}
     )
 
     class_names = train_dataset.classes
@@ -83,10 +83,10 @@ def train(callback, logdir):
     (name, layer) = list(model.named_children())[-1]
     if type(layer) == type(nn.Sequential()):
         (i, j) = list(layer.named_children())[0]
-        model.__dict__[name] = nn.Linear(
+        model.__dict__['_modules'][name].__dict__['_modules'][i] = nn.Linear(
             j.in_features, len(class_names), device=device)
     else:
-        model.__dict__[name] = nn.Linear(
+        model.__dict__['_modules'][name] = nn.Linear(
             layer.in_features, len(class_names), device=device
         )
 
@@ -94,29 +94,30 @@ def train(callback, logdir):
 
     # Create the chosen optimizer with parameters from the data dictionary
     optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
-        [{"params": model.parameters(), "initial_lr": {
-            {cookiecutter.misc_params.optimizer.params.lr}}}]
-        {%- for key, value in cookiecutter.misc_params.optimizer.params|dictsort % }
-        { % - if value is sequence and value is not string - %}, {{key}}=({{value | join(', ')}})
-        {% - else -%}, {{key}}={{value}}
-        {%- endif % }
-        {%- endfor % }
+        [{"params": model.parameters(), "initial_lr": {{cookiecutter.misc_params.optimizer.params.lr}}}]
+        {%- for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+        {%- if value is sequence and value is not string -%}
+        , {{key}}=({{value | join(', ')}})
+        {%- else -%}
+        , {{key}}={{value}}
+        {%- endif %}
+        {%- endfor %}
     )
 
     train_size = len(train_dataset)
 
-    {% if cookiecutter.misc_params.scheduler.type != "None" % }
+    {% if cookiecutter.misc_params.scheduler.type != "None" %}
     # Create the chosen scheduler with parameters
     scheduler = {{cookiecutter.misc_params.scheduler.type}}(optimizer,
-                                                            {%- for key, value in cookiecutter.misc_params.scheduler.params|dictsort %}
-        { % - if value is sequence and value is not string - %}
+        {%- for key, value in cookiecutter.misc_params.scheduler.params|dictsort %}
+        {%- if value is sequence and value is not string -%}
         {{key}}=({{value | join(', ')}}),
-        {% - else -%}
+        {%- else -%}
         {{key}}={{value}},
-        {%- endif % }
+        {%- endif %}
         {%- endfor %}
     )
-    {% endif % }
+    {% endif %}
 
     for e in range(0, EPOCHS):
         model.train()
@@ -146,9 +147,9 @@ def train(callback, logdir):
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
 
         # Skip scheduler step if {{cookiecutter.misc_params.scheduler.type}} is None
-        {% if cookiecutter.misc_params.scheduler.type != "None" % }
+        {% if cookiecutter.misc_params.scheduler.type != "None" %}
         scheduler.step()
-        {% endif % }
+        {% endif %}
 
         model.eval()
         print(
@@ -172,9 +173,11 @@ def train(callback, logdir):
     print("Train Accuracy:", trainAccuracy)
     print("Test Accuracy:", testAccuracy)
 
-    tensors = torch.jit.script(model)
-
-    tensors.save(model_output)
+    scripted = torch.jit.script(model)
+    try:
+        torch.jit.save(scripted, model_output)
+    except e:
+        print(e)
     writer.close()
 
 
