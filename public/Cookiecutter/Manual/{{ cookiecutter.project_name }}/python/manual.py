@@ -34,7 +34,7 @@ def train(callback):
     TRAIN_SPLIT = 0.75
     VAL_SPLIT = 0.15
     TEST_SPLIT = 0.1
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("{{cookiecutter.misc_params.device}}")
 
     model = CNN()
     model = model.to(device)

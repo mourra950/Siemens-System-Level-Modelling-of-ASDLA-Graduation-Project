@@ -15,9 +15,6 @@ basedir = os.path.dirname(__file__)
 model_output = os.path.normpath(
     os.path.join(basedir, "../SystemC/Pt/model.pt"))
 
-def get_min_size():
-    min_size = torchvision.models.get_model_weights(models.{{cookiecutter.transfer_model}}).DEFAULT.meta['min_size']
-    return min_size
 
 def train(callback):
     # initialization
@@ -42,11 +39,6 @@ def train(callback):
         channels = param.shape[1]
         break
 
-    height, width = get_min_size()
-    if height < HEIGHT:
-        height = HEIGHT
-    if width < WIDTH:
-        width = WIDTH
 
     for param in model.parameters():
         param.requires_grad = False
@@ -54,7 +46,7 @@ def train(callback):
     
     transform = transforms.Compose(
         [
-            v2.Resize((height, width)),
+            v2.Resize((HEIGHT, WIDTH)),
             # Convert images to RGB format
             v2.Grayscale(num_output_channels=channels),
             # Convert images to PyTorch tensors
@@ -92,8 +84,6 @@ def train(callback):
     (name, layer) = list(model.named_children())[-1]
     if type(layer) == type(nn.Sequential()):
         (i, j) = list(layer.named_children())[0]
-        print(i, j)
-        print(model)
         model.__dict__[name] = nn.Linear(j.in_features, len(class_names), device=device)
     else:
         model.__dict__[name] = nn.Linear(
@@ -180,7 +170,6 @@ def train(callback):
     print("Test Accuracy:", testAccuracy)
     
     tensors = torch.jit.script(model)
-    tensors
 
     tensors.save(model_output)
     writer.close()

@@ -5,14 +5,6 @@ from PySide6.QtCore import QUrl, QProcess, QTimer
 
 class TensorView:
     def __init__(self) -> None:
-        self.Tensorboard_Process = QProcess()
-        self.Tensorboard_Process.start(
-            "tensorboard", ["--logdir", self.SysPath.log_path])
-
-        self.reload_timer = QTimer()
-        self.progress_timer = QTimer()
-        self.setup_timers()
-
         # get the tensorboard object from the ui
         self.tensorQt = self.ui.findChild(QVBoxLayout, "TensorView")
         # create and add the webview object qt
@@ -20,7 +12,10 @@ class TensorView:
         self.tensorQt.addWidget(self.tensorWeb)
         self.tensorWeb.setUrl(QUrl("http://localhost:6006/"))
         self.tensorWeb.hide()
-
+        self.logdirlineedit.textChanged.connect(self.Tensorboard_run)
+        self.reload_timer = QTimer()
+        self.progress_timer = QTimer()
+        self.setup_timers()
         # Initialize progress bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setRange(0, 100)
@@ -40,6 +35,16 @@ class TensorView:
         """
         )
         self.tensorQt.addWidget(self.progress_bar)
+        self.logdirlineedit.setText(self.SysPath.log_path)
+
+    def Tensorboard_run(self):
+        self.progress_bar.show()
+        self.progress_bar.setValue(0)
+        self.Tensorboard_Process = QProcess()
+        if self.logdirlineedit.text() != "":
+            self.Tensorboard_Process.start(
+                "tensorboard", ["--logdir", self.logdirlineedit.text()])
+            self.progress_timer.start()
 
     def setup_timers(self):
         self.reload_timer.setSingleShot(True)
@@ -49,7 +54,6 @@ class TensorView:
             250
         )  # Set interval to 500 milliseconds (0.5 seconds)
         self.progress_timer.timeout.connect(self.increment_progress_bar)
-        self.progress_timer.start()
 
     def increment_progress_bar(self):
         current_value = self.progress_bar.value()

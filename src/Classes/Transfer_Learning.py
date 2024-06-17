@@ -5,6 +5,8 @@ from PySide6.QtCore import QProcess
 from PySide6.QtUiTools import QUiLoader
 import cookiecutter.main
 import cookiecutter.prompt
+import torchvision
+from torchvision import models
 from jinja2 import Environment, FileSystemLoader
 import json
 import collections
@@ -20,14 +22,28 @@ class DataOfTransfer:
     def on_combobox_change(self):
         self.selected_pretrained_model = self.pretrained_model_combobox.currentText()
 
+    def get_min_size(self, model_name):
+        min_size = torchvision.models.get_model_weights(
+            models.__dict__[model_name]).DEFAULT.meta['min_size']
+        return min_size
+
     def save_json_transfer(self):
         path, _ = QFileDialog.getSaveFileName(
             None, "Save JSON file", self.SysPath.jsondir, "JSON Files (*.json)"
         )
-        print("tata")
-        self.architecture["transfer_model"] = self.selected_pretrained_model
-        self.architecture["log_dir"] = self.SysPath.log_path
 
+        self.architecture["transfer_model"] = self.selected_pretrained_model
+        Height, Width = self.get_min_size(self.selected_pretrained_model)
+        if Height > self.architecture["misc_params"]["height"]:
+            self.architecture["misc_params"]["height"] = Height
+        if Width > self.architecture["misc_params"]["width"]:
+            self.architecture["misc_params"]["width"] = Width
+        self.architecture["log_dir"] = self.SysPath.log_path
+        try:
+            self.architecture["misc_params"]["device_index"] = int(self.architecture["misc_params"]["device"].split(":")[
+                1])
+        except:
+            print('cpu')
         if path:
             self.SysPath.jsondir = path
             with open(path, 'w') as f:

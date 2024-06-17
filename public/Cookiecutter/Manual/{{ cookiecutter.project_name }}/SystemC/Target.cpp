@@ -38,10 +38,10 @@ void Target::b_transport(tlm::tlm_generic_payload &trans, sc_core::sc_time &t) {
   tensor_image = tensor_image.toType(at::kFloat);
   tensor_image = tensor_image.div_(255);
 
-  torch::Device device =
-      torch::cuda::is_available() ? torch::kCUDA : torch::kCPU;
+  torch::Device device = torch::cuda::is_available()
+      ? torch::Device(torch::kCUDA, {{cookiecutter.misc_params.device_index}})
 
-  tensor_image = tensor_image.to(device);
+            tensor_image = tensor_image.to(device);
   module.to(device);
 
   auto result = module.forward({tensor_image}).toTensor();

@@ -14,9 +14,7 @@ class Connections:
             self.on_submit_arch_clicked)
 
         self.qt_manual_generate.clicked.connect(self.generate_manual_project)
-        self.qt_generateFiles_QPushButton.clicked.connect(
-            self.on_generate_files_clicked
-        )
+        
         self.submitRes_QPushButton.clicked.connect(
             self.res_on_submit_residual_block_clicked
         )

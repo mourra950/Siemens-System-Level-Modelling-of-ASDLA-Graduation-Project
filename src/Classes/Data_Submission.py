@@ -146,6 +146,7 @@ class DataSubmission:
             self.architecture["log_dir"] = self.SysPath.log_path
             # test for deep and shallow to avoid errors
             architecture = self.architecture.copy()
+            
             architecture["layers"] = {"list": self.architecture["layers"]}
 
             with open(path, "w") as f:

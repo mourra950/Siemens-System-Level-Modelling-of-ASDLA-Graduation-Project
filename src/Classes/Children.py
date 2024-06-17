@@ -39,6 +39,10 @@ class Children:
         self.qt_selectedLossFunc_QLineEdit = self.ui.findChild(
             QLineEdit, "selectedLossFunc_QLineEdit"
         )
+        self.logdirlineedit = self.ui.findChild(
+            QLineEdit, "logdirlineedit"
+        )
+
         self.qt_selectedScheduler_QLineEdit = self.ui.findChild(
             QLineEdit, "selectedScheduler_QLineEdit"
         )
@@ -84,6 +88,10 @@ class Children:
         self.qt_trainModel_QPushButton = self.ui.findChild(
             QPushButton, "trainPyModel_btn"
         )
+        self.Log_Directory_btn = self.ui.findChild(
+            QPushButton, "Log_Directory_btn"
+        )
+
         # self.omar_generate_btn = self.ui.findChild(
         #     QPushButton, 'omar_generate_btn'
         # )
