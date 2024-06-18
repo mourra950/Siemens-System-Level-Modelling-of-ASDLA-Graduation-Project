@@ -22,7 +22,7 @@ def train(callback, logdir):
     base_log_dir = logdir
     log_dir = os.path.join(base_log_dir, unique_name)
 
-    writer = SummaryWriter(log_dir=log_dir)
+    writer = SummaryWriter(log_dir=log_dir,comment="Pretrained_Model")
     HEIGHT = {{cookiecutter.misc_params.height}}
     WIDTH = {{cookiecutter.misc_params.width}}
     BATCH_SIZE = {{cookiecutter.misc_params.batch_size}}
@@ -123,7 +123,10 @@ def train(callback, logdir):
         model.train()
         totalTrainLoss = 0
         trainCorrect = 0
-
+        data_iter = iter(train_dataloader)
+        images, labels = next(data_iter)
+        grid = torchvision.utils.make_grid(images)
+        writer.add_image("Input Images", grid, e)
         for i, (x, y) in enumerate(train_dataloader):
             (x, y) = (x.to(device), y.to(device))
             pred = model(x)
@@ -155,11 +158,14 @@ def train(callback, logdir):
         print(
             f"Epoch {e+1}, Train Accuracy: {trainCorrect / len(train_dataloader.dataset)}")
 
+    dummy_input = torch.randn(3, channels, HEIGHT, WIDTH).to(device)  # Example input tensor
+    writer.add_graph(model, dummy_input)
+
     with torch.no_grad():
         model.eval()
         preds = []
         testCorrect = 0
-
+        
         for x, y in test_dataloader:
             x = x.to(device)
             y = y.to(device)

@@ -29,6 +29,7 @@ def train(callback, logdir):
     writer = SummaryWriter(log_dir=log_dir)
     HEIGHT = {{cookiecutter.misc_params.height}}
     WIDTH = {{cookiecutter.misc_params.width}}
+    CHANNELS = {{cookiecutter.misc_params.channels}}
     BATCH_SIZE = {{cookiecutter.misc_params.batch_size}}
     EPOCHS = {{cookiecutter.misc_params.num_epochs}}
     TRAIN_SPLIT = 0.75
@@ -48,27 +49,27 @@ def train(callback, logdir):
     train_dataloader = DataLoader(
         train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort % }
-        { % - if key == "device" - %}
+        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
+        {%- if key == "device" -%}
         {{key}}=device,
-            {% - else -%}
+            {%- else -%}
         {{key}}={{value}},
-        {%- endif % }
-        {% endfor % }
+        {%- endif %}
+        {% endfor %}
     )
     optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
         model.parameters(),
-        {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort % }
-        { % - if value is sequence and value is not string - %}
+        {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+        {%- if value is sequence and value is not string -%}
         {{key}}=({{value | join(', ')}}),
-        {% - else -%}
-        {% - if key == "device" - %}
+        {%- else -%}
+        {%- if key == "device" -%}
         {{key}}=device,
-            {% - else -%}
+            {%- else -%}
         {{key}}={{value}},
         {%- endif %}
-        {%- endif % }
-        {% endfor % }
+        {%- endif %}
+        {% endfor %}
     )
     train_size = len(train_dataset)
     for e in range(0, EPOCHS):
@@ -76,7 +77,10 @@ def train(callback, logdir):
 
         totalTrainLoss = 0
         trainCorrect = 0
-
+        data_iter = iter(train_dataloader)
+        images, labels = next(data_iter)
+        grid = torchvision.utils.make_grid(images)
+        writer.add_image("Input Images", grid, e)
         for i, (x, y) in enumerate(train_dataloader):
             (x, y) = (x.to(device), y.to(device))
 
@@ -98,6 +102,9 @@ def train(callback, logdir):
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
         model.eval()
         print(trainCorrect)
+    dummy_input = torch.randn(BATCH_SIZE, CHANNELS, HEIGHT, WIDTH).to(
+        device)  # Example input tensor
+    writer.add_graph(model, dummy_input)
     scripted = torch.jit.script(model)
     try:
         torch.jit.save(scripted, model_output)
