@@ -2,7 +2,7 @@
 # import the necessary packages
 import torch
 from torch import nn, optim
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader,Dataset
 from torchvision.datasets import mnist
 from torchvision import models, transforms
 from torch.optim import lr_scheduler
@@ -14,12 +14,41 @@ from torchvision import datasets, transforms
 from python.model import CNN
 import datetime
 import os
+from PIL import Image
+import json
+import glob
 
 basedir = os.path.dirname(__file__)
 model_output = os.path.normpath(
     os.path.join(basedir, '../SystemC/Pt/model.pt'))
 test_output = os.path.normpath(os.path.join(basedir, '../test.txt'))
 
+{% if cookiecutter.misc_params.dataset.value == "CustomDataset" %}
+class CustomDataset(Dataset):
+    def __init__(self, root, transform=None, download=None, train=None):
+        self.root = root
+        self.transform = transform
+        self.data = self.load_data()
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        img_name = os.path.join(self.root, self.data[idx]['filename'])
+        image = Image.open(img_name).convert('RGB')
+        label = int(self.data[idx]['label'])
+
+        if self.transform:
+            image = self.transform(image)
+
+        return image, label
+
+    def load_data(self):
+        json_file = glob.glob(os.path.join(self.root,"*.json"))[0]
+        with open(json_file, 'r') as f:
+            data = json.load(f)
+        return data
+{%- endif %}
 
 def train(callback, logdir):
     unique_name = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -43,9 +72,13 @@ def train(callback, logdir):
     transform = v2.Compose(
         [v2.Resize((HEIGHT, WIDTH)), v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
 
+    {% if cookiecutter.misc_params.dataset.value == "CustomDataset" %}
+    train_dataset = {{cookiecutter.misc_params.dataset.value}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
+                                                      train=True, download=True, transform=transform)
+    {% else %}
     train_dataset = datasets.{{cookiecutter.misc_params.dataset.value}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
                                                       train=True, download=True, transform=transform)
-
+    {%- endif %}
     train_dataloader = DataLoader(
         train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     loss_fn = nn.{{cookiecutter.loss_func.type}}(

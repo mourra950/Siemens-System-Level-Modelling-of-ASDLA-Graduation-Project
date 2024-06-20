@@ -191,6 +191,7 @@ class AutoExtraction(metaclass=Singleton):
     def extract_Datasets(self):
         self.DATASETS = sorted(
             [dataset for dataset in datasets.__all__ if dataset not in self.unnecessary_datasets])
+        self.DATASETS.insert(0,"CustomDataset")
 
     def extract_scheduler_learning(self):
         scheduler_dict = dict()
