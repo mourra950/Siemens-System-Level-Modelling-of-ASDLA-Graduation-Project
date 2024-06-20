@@ -6,6 +6,7 @@ from PySide6 import QtCore
 import sys
 from PySide6.QtWidgets import QApplication
 from Tests.StaticAnalysis import StaticAnalysis
+from PySide6.QtGui import QIcon,QPixmap
 
 
 def main():
@@ -35,8 +36,11 @@ class MainUI(QtCore.QObject, Initializer):
             self.LAYERS_WITHOUT_RES,
             self.DATASETS,
         ) = self.AutoExtraction.extracted_data()
-
+        
         Initializer.__init__(self)
+        
+        self.ui.setWindowIcon(QIcon(self.SysPath.siemens_icon))
+        self.Children.Logo_placeholder.setPixmap(QPixmap(self.SysPath.siemens_logo))
         self.ui.show()
 
 

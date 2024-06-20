@@ -33,6 +33,10 @@ class SystemPaths(metaclass=Singleton):
             os.path.join(self.publicdir, "./icons/up.png"))
         self.down_icon_path = os.path.normpath(
             os.path.join(self.publicdir, "./icons/down.png"))
+        self.siemens_logo = os.path.normpath(
+            os.path.join(self.publicdir, "./icons/siemens_logo.png"))
+        self.siemens_icon = os.path.normpath(
+            os.path.join(self.publicdir, "./icons/siemens_icon.png"))
 
         # JSON paths
         self.ResJson = os.path.normpath(

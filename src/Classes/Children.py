@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
     QSpinBox,
     QTreeWidget,
     QTextBrowser, QFileDialog,
-    QTextEdit, QWidgetAction
+    QTextEdit, QWidgetAction,QLabel
 )
 from PySide6.QtGui import QAction
 from utils.Singleton import Singleton
@@ -27,6 +27,9 @@ class Children(metaclass=Singleton):
 
     def find_children(self) -> None:
         """Locate all qt elements"""
+        self.Logo_placeholder = self.ui.findChild(
+            QLabel, "Logo_placeholder"
+        )
         self.qt_layers_scroll_box = self.ui.findChild(
             QVBoxLayout, "Scrollbox"
         )

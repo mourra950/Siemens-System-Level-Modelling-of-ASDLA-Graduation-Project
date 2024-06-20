@@ -64,7 +64,7 @@ class Initializer(
         GeneratedFilesViewer.__init__(self)
         self.Parameters = Parameters()
 
-        self.ui.setWindowTitle("The Awesome Project")
+        self.ui.setWindowTitle("Application Specific Deep Learning Accelerator")
 
     def get_widget_data(self, widget):
         if isinstance(widget, QCheckBox):
