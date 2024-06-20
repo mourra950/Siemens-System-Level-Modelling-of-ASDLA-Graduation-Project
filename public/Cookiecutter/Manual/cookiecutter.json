@@ -7,49 +7,74 @@
             {
                 "type": "Conv2d",
                 "params": {
-                    "out_channels": 1,
-                    "kernel_size": 1,
+                    "out_channels": 8,
+                    "kernel_size": 3,
                     "stride": 1,
-                    "padding": 0,
+                    "padding": 1,
                     "groups": 1,
                     "bias": true,
                     "padding_mode": "'zeros'",
                     "device": "In miscelleneous params",
                     "dtype": "torch.float32",
-                    "in_channels": 1
+                    "in_channels": 3
                 },
                 "name": "conv2d_1"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_1"
+            },
+            {
+                "type": "Flatten",
+                "params": {
+                    "start_dim": 1,
+                    "end_dim": -1
+                },
+                "name": "flatten_1"
+            },
+            {
+                "type": "Linear",
+                "params": {
+                    "out_features": 8,
+                    "bias": true,
+                    "device": "In miscelleneous params",
+                    "dtype": "torch.float32",
+                    "in_features": 6272
+                },
+                "name": "linear_1"
             }
         ]
     },
     "misc_params": {
         "device": {
-            "value": "cuda:0",
-            "index": 1
+            "value": "cpu",
+            "index": 0
         },
         "width": 28,
         "height": 28,
-        "channels": 1,
-        "num_epochs": 1,
-        "batch_size": 64,
+        "channels": 3,
+        "num_epochs": 50,
+        "batch_size": 1,
         "dataset": {
-            "value": "MNIST",
-            "index": 45
+            "value": "CustomDataset",
+            "index": 0
         },
-        "dataset_path": "C:/Users/mourr/Downloads/Donwloada"
+        "dataset_path": "D:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/src/test/testjson/data"
     },
     "optimizer": {
-        "type": "ASGD",
+        "type": "Adam",
         "params": {
-            "lr": 0.01,
-            "lambd": 0.0001,
-            "alpha": 0.75,
-            "t0": 1000.0,
-            "weight_decay": 1,
-            "foreach": false,
-            "maximize": false,
-            "differentiable": false,
-            "capturable": false
+            "lr": 0.001,
+            "betas": [
+                0.9,
+                0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0.0,
+            "amsgrad": false
         }
     },
     "loss_func": {
@@ -64,7 +89,11 @@
         "type": "None",
         "params": {}
     },
-    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
+    "pretrained": {
+        "value": "alexnet",
+        "index": 0
+    },
+    "log_dir": "D:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
     "residual": {
         "layers": {
             "list": []
