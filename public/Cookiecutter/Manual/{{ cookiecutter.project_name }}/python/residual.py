@@ -38,12 +38,10 @@ class ResidualBlock(nn.Module):
             {%- endif -%}
 
             {% for param in layer.params -%}
-            {%- if param != 'out_channels' %}
-            {{ param }}={{ layer.params[param] }},
-            {%- elif param == "device" -%}
+            {%- if param == "device" -%}
             {{param}}=device,
-            {%- else -%}
-            {{param}}={{layer.params[param]}},
+            {%- elif param != 'out_channels' %}
+            {{ param }}={{ layer.params[param] }},
             {%- endif %}
             {%- endfor %}
         )
