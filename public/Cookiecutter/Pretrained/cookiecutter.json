@@ -2,9 +2,6 @@
   "test_num": 5,
   "project_name": "Pretrained_Output",
   
-    "layers": {
-        "list": []
-    },
     "misc_params": {
         "device": {
             "value": "cuda:0",
@@ -16,8 +13,8 @@
         "num_epochs": 1,
         "batch_size": 64,
         "dataset": {
-            "value": "MNIST",
-            "index": 45
+            "value": "SEMEION",
+            "index": 56
         },
         "dataset_path": "C:/Users/mourr/Downloads/Donwloada"
     },
@@ -51,11 +48,6 @@
         "value": "alexnet",
         "index": 0
     },
-    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
-    "residual": {
-        "layers": {
-            "list": []
-        }
-    }
+    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 
 }

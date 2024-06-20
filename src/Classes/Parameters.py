@@ -80,10 +80,14 @@ class Parameters:
             architecture["misc_params"]["height"] = Height
         if Width > architecture["misc_params"]["width"]:
             architecture["misc_params"]["width"] = Width
-        try:
-            int(self.architecture["misc_params"]["device"].split(":")[1])
-        except:
-            architecture["misc_params"]["device"] = "cpu"
+        architecture["log_dir"] = self.SysPath.log_path
+        # try:
+        #     int(self.architecture["misc_params"]["device"].split(":")[1])
+        # except:
+        #     architecture["misc_params"]["device"] = {
+        #         "value": "cpu",
+        #         "index": 0
+        # }
         print(architecture["misc_params"])
         if path:
             self.SysPath.jsondir = path
