@@ -63,10 +63,9 @@ class Miscellaneous(metaclass=Singleton):
             elif type(widget) == QComboBox:
                 data = widget.currentData()
                 index = widget.currentIndex()
-                if param_name == 'device':
-                    data = "cuda:" + str(data)
                 self.miscellaneous[param_name] = {
-                    'value': data, 'index': index}
+                    'value': data, 'index': index
+                }
 
                 if self.debug:
                     print(data, param_name)

@@ -17,9 +17,7 @@ class Connections:
         self.Children.qt_manual_generate.clicked.connect(
             self.generate_manual_project)
 
-        self.Children.qt_Create_transfer_Model_QPushButton.clicked.connect(
-            self.on_submit_params_clicked
-        )
+        
         self.Children.qt_Create_transfer_learning_model_QPushButton.clicked.connect(
             self.render_transfer_learning
         )

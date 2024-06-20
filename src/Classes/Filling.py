@@ -28,7 +28,7 @@ class FillingQt:
             for i in range(cuda_devices):
                 properties = torch.cuda.get_device_properties(i)
                 device_name = properties.name
-                device_names.append((i, device_name))
+                device_names.append((f"cuda:{i}", device_name))
 
         combo_box.clear()
         combo_box.addItem("cpu", "cpu")

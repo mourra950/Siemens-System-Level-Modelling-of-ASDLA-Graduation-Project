@@ -22,10 +22,6 @@ class DataOfTransfer:
     def on_combobox_change(self):
         self.selected_pretrained_model = self.Children.qt_pretrained_model_combobox.currentText()
 
-    def get_min_size(self, model_name):
-        min_size = torchvision.models.get_model_weights(
-            models.__dict__[model_name]).DEFAULT.meta['min_size']
-        return min_size
 
     def save_json_transfer(self):
         path, _ = QFileDialog.getSaveFileName(
