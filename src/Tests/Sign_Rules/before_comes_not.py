@@ -6,7 +6,7 @@ class before_comes_not:
         return "<--x", self.test
 
     def test(self, layers, layer_idx, rule_tokens) -> bool:
-        print("before_comes_not")
+        # print("before_comes_not")
         if layers[layer_idx]['type'] != rule_tokens[0]:
             return True
         if layer_idx <= 0:

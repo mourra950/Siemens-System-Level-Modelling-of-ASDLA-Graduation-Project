@@ -12,7 +12,7 @@ class TensorView:
         self.tensorQt.addWidget(self.tensorWeb)
         self.tensorWeb.setUrl(QUrl("http://localhost:6006/"))
         self.tensorWeb.hide()
-        self.logdirlineedit.textChanged.connect(self.Tensorboard_run)
+        self.Children.qt_logdirlineedit.textChanged.connect(self.Tensorboard_run)
         self.reload_timer = QTimer()
         self.progress_timer = QTimer()
         self.setup_timers()
@@ -35,15 +35,15 @@ class TensorView:
         """
         )
         self.tensorQt.addWidget(self.progress_bar)
-        self.logdirlineedit.setText(self.SysPath.log_path)
+        self.Children.qt_logdirlineedit.setText(self.SysPath.log_path)
 
     def Tensorboard_run(self):
         self.progress_bar.show()
         self.progress_bar.setValue(0)
         self.Tensorboard_Process = QProcess()
-        if self.logdirlineedit.text() != "":
+        if self.Children.qt_logdirlineedit.text() != "":
             self.Tensorboard_Process.start(
-                "tensorboard", ["--logdir", self.logdirlineedit.text()])
+                "tensorboard", ["--logdir", self.Children.qt_logdirlineedit.text()])
             self.progress_timer.start()
 
     def setup_timers(self):

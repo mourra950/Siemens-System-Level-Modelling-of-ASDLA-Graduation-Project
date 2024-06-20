@@ -35,7 +35,7 @@ def train(callback, logdir):
     TRAIN_SPLIT = 0.75
     VAL_SPLIT = 0.15
     TEST_SPLIT = 0.1
-    device = torch.device("{{cookiecutter.misc_params.device}}")
+    device = torch.device("{{cookiecutter.misc_params.device.value}}")
 
     model = CNN()
     model = model.to(device)
@@ -43,13 +43,13 @@ def train(callback, logdir):
     transform = v2.Compose(
         [v2.Resize((HEIGHT, WIDTH)), v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
 
-    train_dataset = datasets.{{cookiecutter.dataset}}(root=r"{{cookiecutter.dataset_path}}",
+    train_dataset = datasets.{{cookiecutter.misc_params.dataset.value}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
                                                       train=True, download=True, transform=transform)
 
     train_dataloader = DataLoader(
         train_dataset, batch_size=BATCH_SIZE, shuffle=True)
-    loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-        {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
+    loss_fn = nn.{{cookiecutter.loss_func.type}}(
+        {% for key, value in cookiecutter.loss_func.params|dictsort %}
         {%- if key == "device" -%}
         {{key}}=device,
             {%- else -%}
@@ -57,9 +57,9 @@ def train(callback, logdir):
         {%- endif %}
         {% endfor %}
     )
-    optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
+    optimizer = optim.{{cookiecutter.optimizer.type}}(
         model.parameters(),
-        {% for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
+        {% for key, value in cookiecutter.optimizer.params|dictsort %}
         {%- if value is sequence and value is not string -%}
         {{key}}=({{value | join(', ')}}),
         {%- else -%}

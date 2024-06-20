@@ -25,7 +25,7 @@ class ResBuildWindow(QMainWindow):
         self.layersList_QVBoxLayout = self.findChild(QVBoxLayout, 'layersList_QVBoxLayout')
         self.addedLayers_QVBoxLayout = self.findChild(QVBoxLayout, 'addedLayers_QVBoxLayout')
 
-        self.submitRes_QPushButton = self.findChild(QPushButton, 'submitRes_QPushButton')
+        self.Children.qt_submitRes_QPushButton = self.findChild(QPushButton, 'submitRes_QPushButton')
 
         self.torch_layers = extract_torch_layers()
 
@@ -41,7 +41,7 @@ class ResBuildWindow(QMainWindow):
         
 
     
-        self.submitRes_QPushButton.clicked.connect(self.on_submit_residual_block_clicked)
+        self.Children.qt_submitRes_QPushButton.clicked.connect(self.on_submit_residual_block_clicked)
 
 
     def on_torch_func_clicked(self, func_name, torch_funcs, on_submit_func):

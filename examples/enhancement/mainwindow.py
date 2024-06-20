@@ -27,28 +27,44 @@ class MainWindow(QMainWindow):
         }
         self.selected_optimizer = dict()
         self.selected_lossfunc = dict()
-        
+
         self.res_first_time = True
 
-        self.inputWidth_QLineEdit = self.findChild(QLineEdit, 'inputWidth_QLineEdit')
-        self.inputHeight_QLineEdit = self.findChild(QLineEdit, 'inputHeight_QLineEdit')
-        self.batchSize_QLineEdit = self.findChild(QLineEdit, 'batchSize_QLineEdit')
-        self.learningRate_QLineEdit = self.findChild(QLineEdit, 'learningRate_QLineEdit')
-        self.numEpochs_QLineEdit = self.findChild(QLineEdit, 'numEpochs_QLineEdit')
-        self.selectedOptimizer_QLineEdit = self.findChild(QLineEdit, 'selectedOptimizer_QLineEdit')
-        self.selectedLossFunc_QLineEdit = self.findChild(QLineEdit, 'selectedLossFunc_QLineEdit')
+        self.inputWidth_QLineEdit = self.findChild(
+            QLineEdit, 'inputWidth_QLineEdit')
+        self.inputHeight_QLineEdit = self.findChild(
+            QLineEdit, 'inputHeight_QLineEdit')
+        self.batchSize_QLineEdit = self.findChild(
+            QLineEdit, 'batchSize_QLineEdit')
+        self.learningRate_QLineEdit = self.findChild(
+            QLineEdit, 'learningRate_QLineEdit')
+        self.numEpochs_QLineEdit = self.findChild(
+            QLineEdit, 'numEpochs_QLineEdit')
+        self.selectedOptimizer_QLineEdit = self.findChild(
+            QLineEdit, 'selectedOptimizer_QLineEdit')
+        self.selectedLossFunc_QLineEdit = self.findChild(
+            QLineEdit, 'selectedLossFunc_QLineEdit')
 
-        self.inputType_RGB_QRadioButton = self.findChild(QRadioButton, 'inputType_RGB_QRadioButton')
-        self.inputType_grayScale_QRadioButton = self.findChild(QRadioButton, 'inputType_grayScale_QRadioButton')
+        self.inputType_RGB_QRadioButton = self.findChild(
+            QRadioButton, 'inputType_RGB_QRadioButton')
+        self.inputType_grayScale_QRadioButton = self.findChild(
+            QRadioButton, 'inputType_grayScale_QRadioButton')
 
-        self.layersList_QVBoxLayout = self.findChild(QVBoxLayout, 'layersList_QVBoxLayout')
-        self.addedLayers_QVBoxLayout = self.findChild(QVBoxLayout, 'addedLayers_QVBoxLayout')
-        self.optimizersList_QVBoxLayout = self.findChild(QVBoxLayout, 'optimizersList_QVBoxLayout')
-        self.lossFuncsList_QVBoxLayout = self.findChild(QVBoxLayout, 'lossFuncsList_QVBoxLayout')
+        self.layersList_QVBoxLayout = self.findChild(
+            QVBoxLayout, 'layersList_QVBoxLayout')
+        self.addedLayers_QVBoxLayout = self.findChild(
+            QVBoxLayout, 'addedLayers_QVBoxLayout')
+        self.optimizersList_QVBoxLayout = self.findChild(
+            QVBoxLayout, 'optimizersList_QVBoxLayout')
+        self.lossFuncsList_QVBoxLayout = self.findChild(
+            QVBoxLayout, 'lossFuncsList_QVBoxLayout')
 
-        self.submitParams_QPushButton = self.findChild(QPushButton, 'submitParams_QPushButton')
-        self.submitArch_QPushButton = self.findChild(QPushButton, 'submitArch_QPushButton')
-        self.generateFiles_QPushButton = self.findChild(QPushButton, 'generateFiles_QPushButton')
+        self.submitParams_QPushButton = self.findChild(
+            QPushButton, 'submitParams_QPushButton')
+        self.submitArch_QPushButton = self.findChild(
+            QPushButton, 'submitArch_QPushButton')
+        self.generateFiles_QPushButton = self.findChild(
+            QPushButton, 'generateFiles_QPushButton')
 
         self.torch_layers = extract_torch_layers()
         self.torch_layers.update(extract_res_block())
@@ -124,8 +140,8 @@ class MainWindow(QMainWindow):
             allParamsColumn_QVBoxLayout.addWidget(QLabel())
             submitLayer_QPushButton = QPushButton('Submit Layer')
             submitLayer_QPushButton.clicked.connect(
-                lambda ch, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog \
-                    : on_submit_func(i,j,k,l)
+                lambda ch, i=func_name, j=params_names, k=params_value_widgets, l=paramsWindow_QDialog: on_submit_func(
+                    i, j, k, l)
             )
             allParamsColumn_QVBoxLayout.addWidget(submitLayer_QPushButton)
             paramsWindow_QDialog.setLayout(allParamsColumn_QVBoxLayout)
@@ -146,7 +162,12 @@ class MainWindow(QMainWindow):
         self.create_layer_node(layer, -1)
         paramsWindow_QDialog.close()
 
-    def on_select_optimizer_clicked(self, optimizer_type, params_names, params_value_widgets, paramsWindow_QDialog):
+    def on_select_optimizer_clicked(self,
+                                    optimizer_type,
+                                    params_names,
+                                    params_value_widgets,
+                                    paramsWindow_QDialog
+                                    ):
         self.selected_optimizer = {
             'type': optimizer_type,
             'params': dict()
@@ -155,8 +176,7 @@ class MainWindow(QMainWindow):
             param_value = self.get_widget_data(params_value_widgets[i])
 
             if param_value != '':
-                self.selected_optimizer['params'][params_names[i]
-                                                  ] = param_value
+                self.selected_optimizer['params'][params_names[i]] = param_value
 
         self.selectedOptimizer_QLineEdit.setText(optimizer_type)
         paramsWindow_QDialog.close()
@@ -343,6 +363,7 @@ class MainWindow(QMainWindow):
         return param_value
 
     def on_submit_params_clicked(self):
+        print("Submited Params")
         self.architecture['misc_params']['width'] = int(
             self.inputWidth_QLineEdit.text())
         self.architecture['misc_params']['height'] = int(

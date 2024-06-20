@@ -5,7 +5,7 @@ import torch.nn as nn
 class ResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels):
         super(ResidualBlock, self).__init__()
-        device =torch.device("{{cookiecutter.misc_params.device}}" if torch.cuda.is_available() else "cpu")
+        device =torch.device("{{cookiecutter.misc_params.device.value}}" if torch.cuda.is_available() else "cpu")
         {%- set conv_idxs = [] -%}
         {%- set batch_norm_idxs = [] -%}
         {%- for layer in cookiecutter.residual.layers.list -%}

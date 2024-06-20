@@ -13,11 +13,11 @@ class StaticAnalysis(metaclass=Singleton):
         self.load()
 
     def load(self):
-        rule_dir = os.path.join(os.path.dirname(__file__), 'Rules')
+        rule_dir = os.path.join(os.path.dirname(__file__), 'Sign_Rules')
         module_files = [f for f in os.listdir(
             rule_dir) if f.endswith('.py') and f != '__init__.py']
         for module_file in module_files:
-            module_name = f"Tests.Rules.{module_file[:-3]}"
+            module_name = f"Tests.Sign_Rules.{module_file[:-3]}"
             module = importlib.import_module(module_name)
             class_name = module_file[:-3]
             cls = getattr(module, class_name, None)
@@ -30,7 +30,7 @@ class StaticAnalysis(metaclass=Singleton):
         return_val = rule_func(self.layers, layer_idx, rule_tokens)
         if return_val == False:
             violations_list.append(
-                f'Violation of Rule ({" ".join(rule_tokens)}) at Layer "{self.layers[layer_idx]["name"]}"'
+                f'Violation of Rule ({" ".join(rule_tokens)}) at Layer index "{layer_idx}"'
             )
         return return_val
 
@@ -43,7 +43,6 @@ class StaticAnalysis(metaclass=Singleton):
                 if rule.startswith('//') or rule.strip() == '':
                     continue
                 rule_tokens = rule.split()
-                print(rule)
                 self.test_rule(
                     self.rule_map[rule_tokens[1]],
                     layer_idx,
@@ -53,8 +52,7 @@ class StaticAnalysis(metaclass=Singleton):
 
         if self.debug:
             for violation in violations_list:
-                print(violation)
-                print("analyze")
+                pass
 
         return violations_list
 

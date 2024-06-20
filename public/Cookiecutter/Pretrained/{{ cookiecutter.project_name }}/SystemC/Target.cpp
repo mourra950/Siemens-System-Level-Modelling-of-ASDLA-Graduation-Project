@@ -41,7 +41,7 @@ void Target::b_transport(tlm::tlm_generic_payload &trans, sc_core::sc_time &t) {
   torch::Device device =
       torch::cuda::is_available()
           ? torch::Device(torch::kCUDA,
-                          {{cookiecutter.misc_params.device_index}})
+                          {{cookiecutter.misc_params.device.index}})
           : torch::kCPU;
 
   tensor_image = tensor_image.to(device);

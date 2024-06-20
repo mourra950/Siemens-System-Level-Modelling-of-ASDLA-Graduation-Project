@@ -5,21 +5,31 @@ from PySide6.QtWidgets import (
     QComboBox,
     QSpinBox,
     QTreeWidget,
-    QTextBrowser,
-    QTextEdit
+    QTextBrowser, QFileDialog,
+    QTextEdit, QWidgetAction
 )
+from PySide6.QtGui import QAction
+from utils.Singleton import Singleton
+import json
 
 
-class Children:
-    def __init__(self) -> None:
+class Children(metaclass=Singleton):
+    def __init__(self, ResPath, GUIPath, loader) -> None:
+        self.loader = loader
         self.ResCreation = self.loader.load(
-            self.SysPath.res_build_ui_path, None)
-        self.ui = self.loader.load(self.SysPath.GUI_path, None)
+            ResPath, None
+        )
+        self.ui = self.loader.load(
+            GUIPath, None
+        )
+
         self.find_children()
 
     def find_children(self) -> None:
         """Locate all qt elements"""
-        self.qt_layers_scroll_box = self.ui.findChild(QVBoxLayout, "Scrollbox")
+        self.qt_layers_scroll_box = self.ui.findChild(
+            QVBoxLayout, "Scrollbox"
+        )
         self.qt_layersList_QVBoxLayout = self.ui.findChild(
             QVBoxLayout, "layersList_QVBoxLayout"
         )
@@ -39,7 +49,7 @@ class Children:
         self.qt_selectedLossFunc_QLineEdit = self.ui.findChild(
             QLineEdit, "selectedLossFunc_QLineEdit"
         )
-        self.logdirlineedit = self.ui.findChild(
+        self.qt_logdirlineedit = self.ui.findChild(
             QLineEdit, "logdirlineedit"
         )
 
@@ -88,45 +98,31 @@ class Children:
         self.qt_trainModel_QPushButton = self.ui.findChild(
             QPushButton, "trainPyModel_btn"
         )
-        self.Log_Directory_btn = self.ui.findChild(
+        self.qt_Log_Directory_btn = self.ui.findChild(
             QPushButton, "Log_Directory_btn"
         )
 
-        # self.omar_generate_btn = self.ui.findChild(
-        #     QPushButton, 'omar_generate_btn'
-        # )
-
         ####################################################
-        self.res_layersList_QVBoxLayout = self.ResCreation.findChild(
+        self.qt_res_layersList_QVBoxLayout = self.ResCreation.findChild(
             QVBoxLayout, "res_layersList_QVBoxLayout"
         )
-        self.res_addedLayers_QVBoxLayout = self.ResCreation.findChild(
+        self.qt_res_addedLayers_QVBoxLayout = self.ResCreation.findChild(
             QVBoxLayout, "res_addedLayers_QVBoxLayout"
         )
-        self.submitRes_QPushButton = self.ResCreation.findChild(
+        self.qt_submitRes_QPushButton = self.ResCreation.findChild(
             QPushButton, "submitRes_QPushButton"
         )
         ##########################################################
-        # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
-        #     QPushButton, "Create_transfer_Model_QPushButton"
-        # )
-
-        # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
-        #     QPushButton, 'Train_transfer_Model_QPushButton')
-        # self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
-        #     QPushButton, 'Run_transfer_Model_QPushButton')
-        # self.Pretrained_model_ComboBox = self.ui.findChild(
-        #     QComboBox, 'Pretrained_model_ComboBox')
-        self.pretrained_model_combobox = self.ui.findChild(
+        self.qt_pretrained_model_combobox = self.ui.findChild(
             QComboBox, "Pretrained_model_ComboBox"
         )
-        self.Create_transfer_learning_model_QPushButton = self.ui.findChild(
+        self.qt_Create_transfer_learning_model_QPushButton = self.ui.findChild(
             QPushButton, "Train_transfer_Model_QPushButton"
         )
-        self.Create_transfer_Model_QPushButton = self.ui.findChild(
+        self.qt_Create_transfer_Model_QPushButton = self.ui.findChild(
             QPushButton, "Create_transfer_Model_QPushButton"
         )
-        self.Run_transfer_Model_QPushButton = self.ui.findChild(
+        self.qt_Run_transfer_Model_QPushButton = self.ui.findChild(
             QPushButton, "Run_transfer_Model_QPushButton"
         )
         # testing generating manual
@@ -135,11 +131,19 @@ class Children:
         )
 
         self.qt_output_tree_viewer = self.ui.findChild(
-            QTreeWidget, "files_tree")
+            QTreeWidget, "files_tree"
+        )
 
         self.qt_output_file_viewer = self.ui.findChild(
-            QTextBrowser, "codeSample")
+            QTextBrowser, "codeSample"
+        )
 
         # Violation Layer List
         self.qt_violations_text_edit = self.ui.findChild(
-            QTextEdit, "Violation_QTextEdit")
+            QTextEdit, "Violation_QTextEdit"
+        )
+        # Actions
+        self.qt_actionLoad = self.ui.findChild(
+            QAction, "actionLoad"
+        )
+        

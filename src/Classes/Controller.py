@@ -28,7 +28,7 @@ class Controller:
         params_value_widgets = []
         params_names = []
 
-        self.create_dialogue_controller(
+        self.LayerDialog.create_dialogue_controller(
             torch_funcs,
             func_name,
             params_names,
@@ -58,64 +58,3 @@ class Controller:
         paramsWindow_QDialog.setLayout(allParamsColumn_QVBoxLayout)
         paramsWindow_QDialog.setWindowTitle(f"{func_name}")
         paramsWindow_QDialog.exec()
-
-    def on_select_lossfunc_clicked(
-        self,
-        lossfunc_type,
-        params_names,
-        params_value_widgets,
-        paramsWindow_QDialog,
-        *args,
-    ):
-        self.selected_lossfunc = {"type": lossfunc_type, "params": dict()}
-        for i in range(len(params_value_widgets)):
-            param_value = self.get_widget_data(params_value_widgets[i])
-
-            if param_value != "":
-                self.selected_lossfunc["params"][params_names[i]] = param_value
-        self.architecture["misc_params"]["loss_func"] = self.selected_lossfunc
-
-        self.qt_selectedLossFunc_QLineEdit.setText(lossfunc_type)
-        paramsWindow_QDialog.close()
-
-    def on_select_optimizer_clicked(
-        self,
-        optimizer_type,
-        params_names,
-        params_value_widgets,
-        paramsWindow_QDialog,
-        *args,
-    ):
-        self.selected_optimizer = {"type": optimizer_type, "params": dict()}
-        for i in range(len(params_value_widgets)):
-            param_value = self.get_widget_data(params_value_widgets[i])
-
-            if param_value != "":
-                self.selected_optimizer["params"][params_names[i]
-                                                  ] = param_value
-
-            self.qt_selectedOptimizer_QLineEdit.setText(optimizer_type)
-        self.architecture["misc_params"]["optimizer"] = self.selected_optimizer
-
-        paramsWindow_QDialog.close()
-
-    def on_select_scheduler_clicked(
-        self,
-        scheduler_type,
-        params_names,
-        params_value_widgets,
-        paramsWindow_QDialog,
-        *args,
-    ):
-        self.selected_scheduler = {"type": scheduler_type, "params": dict()}
-        for i in range(len(params_value_widgets)):
-            param_value = self.get_widget_data(params_value_widgets[i])
-
-            if param_value != "":
-                self.selected_scheduler["params"][params_names[i]
-                                                  ] = param_value
-
-        self.qt_selectedScheduler_QLineEdit.setText(scheduler_type)
-        self.architecture["misc_params"]["scheduler"] = self.selected_scheduler
-
-        paramsWindow_QDialog.close()

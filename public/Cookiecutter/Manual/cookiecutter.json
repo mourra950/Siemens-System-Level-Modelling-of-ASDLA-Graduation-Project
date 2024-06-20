@@ -7,66 +7,68 @@
             {
                 "type": "Conv2d",
                 "params": {
-                    "out_channels": 8,
-                    "kernel_size": 3,
+                    "out_channels": 1,
+                    "kernel_size": 1,
                     "stride": 1,
-                    "padding": 1,
+                    "padding": 0,
                     "groups": 1,
                     "bias": true,
                     "padding_mode": "'zeros'",
-                    "device": "'cpu'",
+                    "device": "In miscelleneous params",
                     "dtype": "torch.float32",
                     "in_channels": 1
                 },
                 "name": "conv2d_1"
-            },
-            {
-                "type": "Conv2d",
-                "params": {
-                    "out_channels": 8,
-                    "kernel_size": 3,
-                    "stride": 1,
-                    "padding": 1,
-                    "groups": 1,
-                    "bias": true,
-                    "padding_mode": "'zeros'",
-                    "device": "'cpu'",
-                    "dtype": "torch.float32",
-                    "in_channels": 8
-                },
-                "name": "conv2d_2"
             }
         ]
     },
     "misc_params": {
+        "device": {
+            "value": "cuda:0",
+            "index": 1
+        },
         "width": 28,
         "height": 28,
         "channels": 1,
         "num_epochs": 1,
-        "batch_size": 1,
-        "optimizer": {
-            "type": "Adam",
-            "params": {
-                "lr": 0.001,
-                "betas": [
-                    0.9,
-                    0.999
-                ],
-                "eps": 1e-08,
-                "weight_decay": 1,
-                "amsgrad": false
-            }
+        "batch_size": 64,
+        "dataset": {
+            "value": "MNIST",
+            "index": 45
         },
-        "loss_func": {
-            "type": "CrossEntropyLoss",
-            "params": {
-                "ignore_index": 1,
-                "reduction": "'mean'",
-                "label_smoothing": 0.0
-            }
+        "dataset_path": "C:/Users/mourr/Downloads/Donwloada"
+    },
+    "optimizer": {
+        "type": "ASGD",
+        "params": {
+            "lr": 0.01,
+            "lambd": 0.0001,
+            "alpha": 0.75,
+            "t0": 1000.0,
+            "weight_decay": 1,
+            "foreach": false,
+            "maximize": false,
+            "differentiable": false,
+            "capturable": false
         }
     },
-    "mnist_path": "d:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
-    "log_dir": "d:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+    "loss_func": {
+        "type": "CrossEntropyLoss",
+        "params": {
+            "ignore_index": 1,
+            "reduction": "'mean'",
+            "label_smoothing": 0.0
+        }
+    },
+    "scheduler": {
+        "type": "None",
+        "params": {}
+    },
+    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
+    "residual": {
+        "layers": {
+            "list": []
+        }
+    }
 
 }

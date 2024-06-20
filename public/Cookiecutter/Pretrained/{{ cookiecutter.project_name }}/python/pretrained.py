@@ -22,7 +22,7 @@ def train(callback, logdir):
     base_log_dir = logdir
     log_dir = os.path.join(base_log_dir, unique_name)
 
-    writer = SummaryWriter(log_dir=log_dir,comment="Pretrained_Model")
+    writer = SummaryWriter(log_dir=log_dir, comment="Pretrained_Model")
     HEIGHT = {{cookiecutter.misc_params.height}}
     WIDTH = {{cookiecutter.misc_params.width}}
     BATCH_SIZE = {{cookiecutter.misc_params.batch_size}}
@@ -30,8 +30,8 @@ def train(callback, logdir):
     TRAIN_SPLIT = 0.75
     VAL_SPLIT = 0.15
     TEST_SPLIT = 0.1
-    device = torch.device("{{cookiecutter.misc_params.device}}")
-    model = models.{{cookiecutter.transfer_model}}(weights='DEFAULT')
+    device = torch.device("{{cookiecutter.misc_params.device.value}}")
+    model = models.{{cookiecutter.pretrained.value}}(weights='DEFAULT')
 
     for name, param in model.named_parameters():
         print(param.shape)
@@ -55,10 +55,10 @@ def train(callback, logdir):
         ]
     )
 
-    train_dataset = datasets.{{cookiecutter.misc_params.dataset}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
-                                                                  train=True, download=True, transform=transform)
-    test_dataset = datasets.{{cookiecutter.misc_params.dataset}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
-                                                                 train=False, download=True, transform=transform)
+    train_dataset = datasets.{{cookiecutter.misc_params.dataset.value}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
+                                                                        train=True, download=True, transform=transform)
+    test_dataset = datasets.{{cookiecutter.misc_params.dataset.value}}(root=r"{{cookiecutter.misc_params.dataset_path}}",
+                                                                       train=False, download=True, transform=transform)
 
     train_dataloader = DataLoader(
         train_dataset, batch_size=BATCH_SIZE, shuffle=True, pin_memory=True
@@ -67,8 +67,8 @@ def train(callback, logdir):
         test_dataset, batch_size=BATCH_SIZE, shuffle=False, pin_memory=True
     )
 
-    loss_fn = nn.{{cookiecutter.misc_params.loss_func.type}}(
-    {% for key, value in cookiecutter.misc_params.loss_func.params|dictsort %}
+    loss_fn = nn.{{cookiecutter.loss_func.type}}(
+    {% for key, value in cookiecutter.loss_func.params|dictsort %}
         {{key}}={{value}},
     {% endfor %}
     )
@@ -82,7 +82,7 @@ def train(callback, logdir):
     # model.fc.in_features
     (name, layer) = list(model.named_children())[-1]
     if type(layer) == type(nn.Sequential()):
-        (i, j) = list(layer.named_children())[0]
+        (i, j) = list(layer.named_children())[-1]
         model.__dict__['_modules'][name].__dict__['_modules'][i] = nn.Linear(
             j.in_features, len(class_names), device=device)
     else:
@@ -93,23 +93,21 @@ def train(callback, logdir):
     model = model.to(device)
 
     # Create the chosen optimizer with parameters from the data dictionary
-    optimizer = optim.{{cookiecutter.misc_params.optimizer.type}}(
-        [{"params": model.parameters(), "initial_lr": {{cookiecutter.misc_params.optimizer.params.lr}}}]
-        {%- for key, value in cookiecutter.misc_params.optimizer.params|dictsort %}
-        {%- if value is sequence and value is not string -%}
-        , {{key}}=({{value | join(', ')}})
-        {%- else -%}
-        , {{key}}={{value}}
+    optimizer = optim.{{cookiecutter.optimizer.type}}(
+        [{"params": model.parameters(), "initial_lr": {{cookiecutter.optimizer.params.lr}}}]
+        {%- for key, value in cookiecutter.optimizer.params|dictsort %}
+        {%- if value is sequence and value is not string -%}, {{key}}=({{value | join(', ')}})
+        {%- else -%}, {{key}}={{value}}
         {%- endif %}
         {%- endfor %}
     )
 
     train_size = len(train_dataset)
 
-    {% if cookiecutter.misc_params.scheduler.type != "None" %}
+    {% if cookiecutter.scheduler.type != "None" %}
     # Create the chosen scheduler with parameters
-    scheduler = {{cookiecutter.misc_params.scheduler.type}}(optimizer,
-        {%- for key, value in cookiecutter.misc_params.scheduler.params|dictsort %}
+    scheduler = {{cookiecutter.scheduler.type}}(optimizer,
+                                                {%- for key, value in cookiecutter.scheduler.params|dictsort %}
         {%- if value is sequence and value is not string -%}
         {{key}}=({{value | join(', ')}}),
         {%- else -%}
@@ -149,8 +147,8 @@ def train(callback, logdir):
                           len(train_dataloader.dataset), e)
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
 
-        # Skip scheduler step if {{cookiecutter.misc_params.scheduler.type}} is None
-        {% if cookiecutter.misc_params.scheduler.type != "None" %}
+        # Skip scheduler step if {{cookiecutter.scheduler.type}} is None
+        {% if cookiecutter.scheduler.type != "None" %}
         scheduler.step()
         {% endif %}
 
@@ -158,14 +156,15 @@ def train(callback, logdir):
         print(
             f"Epoch {e+1}, Train Accuracy: {trainCorrect / len(train_dataloader.dataset)}")
 
-    dummy_input = torch.randn(3, channels, HEIGHT, WIDTH).to(device)  # Example input tensor
+    dummy_input = torch.randn(3, channels, HEIGHT, WIDTH).to(
+        device)  # Example input tensor
     writer.add_graph(model, dummy_input)
 
     with torch.no_grad():
         model.eval()
         preds = []
         testCorrect = 0
-        
+
         for x, y in test_dataloader:
             x = x.to(device)
             y = y.to(device)

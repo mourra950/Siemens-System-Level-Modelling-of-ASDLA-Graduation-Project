@@ -5,90 +5,21 @@ import torch
 class FillingQt:
     def __init__(self) -> None:
         self.fill_placeholders(
-            self.qt_layersList_QVBoxLayout, self.LAYERS, self.qt_addedLayers_QVBoxLayout
-        )
-        self.fill_layers(
-            self.res_layersList_QVBoxLayout,
-            self.LAYERS_WITHOUT_RES,
-            self.res_addedLayers_QVBoxLayout,
-            self.Resarchitecture,
+            self.Children.qt_layersList_QVBoxLayout, self.LAYERS, self.Children.qt_addedLayers_QVBoxLayout
         )
 
     def fill_placeholders(self, qt_layout, layers, q2_lay):
-        self.fill_layers(qt_layout, layers, q2_lay, self.architecture)
-        self.fill_optimizers()
-        self.fill_lossfunctions()
-        self.fill_schedulers()
+        # self.fill_layers(qt_layout, layers, q2_lay, self.architecture)
         self.fill_pretrained_model()
         self.fill_datasets()
 
-    def fill_optimizers(self):
-        for optimizer in self.OPTIMIZERS:
-            selectOptimizer_QPushButton = QPushButton(optimizer)
-            selectOptimizer_QPushButton.clicked.connect(
-                lambda i=optimizer, j=self.OPTIMIZERS, k=self.on_select_optimizer_clicked: self.on_torch_func_clicked(
-                    i, j, k, None, None
-                )
-            )
-            self.qt_optimizersList_QVBoxLayout.addWidget(
-                selectOptimizer_QPushButton)
-
-    def fill_lossfunctions(self):
-        for lossfunc in self.LOSSFUNC:
-            selectLossFunc_QPushButton = QPushButton(lossfunc)
-            selectLossFunc_QPushButton.clicked.connect(
-                lambda i=lossfunc, j=self.LOSSFUNC, k=self.on_select_lossfunc_clicked: self.on_torch_func_clicked(
-                    i, j, k, None, None
-                )
-            )
-            self.qt_lossFuncsList_QVBoxLayout.addWidget(
-                selectLossFunc_QPushButton)
-
-    def fill_schedulers(self):
-        for scheduler in self.SCHEDULERS:
-            selectScheduler_QPushButton = QPushButton(scheduler)
-            selectScheduler_QPushButton.clicked.connect(
-                lambda i=scheduler, j=self.SCHEDULERS, k=self.on_select_scheduler_clicked: self.on_torch_func_clicked(
-                    i, j, k, None, None
-                )
-            )
-
-            self.qt_schedulersList_QVBoxLayout.addWidget(
-                selectScheduler_QPushButton)
-
-    def fill_layers(self, qt_layout, layers, q2_layout, arch_dict):
-        for layer in layers:
-            selectLayer_QPushButton = QPushButton(layer)
-            if layer == "Residual_Block":
-                selectLayer_QPushButton.clicked.connect(
-                    lambda i=layer,
-                    j=self.LAYERS,
-                    k=self.on_submit_layer_clicked,
-                    q_layout=q2_layout:
-                    self.on_res_block_clicked(
-                        i, j, k, q_layout, arch_dict
-                    )
-                )
-                qt_layout.addWidget(selectLayer_QPushButton)
-            else:
-                selectLayer_QPushButton.clicked.connect(
-                    lambda i=layer,
-                    j=self.LAYERS,
-                    k=self.on_submit_layer_clicked,
-                    q_layout=q2_layout, dic=arch_dict:
-                    self.on_torch_func_clicked(
-                        i, j, k, q_layout, dic
-                    )
-                )
-                qt_layout.addWidget(selectLayer_QPushButton)
-
     def fill_pretrained_model(self):
         for i in self.PRETRAINED_MODELS:
-            self.pretrained_model_combobox.addItem(i)
+            self.Children.qt_pretrained_model_combobox.addItem(i)
 
     def fill_datasets(self):
         for i in self.DATASETS:
-            self.qt_selectedDataset_QComboBox.addItem(i, i)
+            self.Children.qt_selectedDataset_QComboBox.addItem(i, i)
 
     def fill_cuda_devices(self, combo_box):
         device_names = []

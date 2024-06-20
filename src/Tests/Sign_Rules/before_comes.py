@@ -1,16 +1,17 @@
-class before_comes_not_directly:
+class before_comes:
     def __init__(self):
         pass
 
     def definition(self):
-        return "<-x", self.test
+        return "<--", self.test
 
     def test(self, layers, layer_idx, rule_tokens) -> bool:
-        print("before_comes_not_directly")
+        # print("before_comes")
         if layers[layer_idx]['type'] != rule_tokens[0]:
             return True
         if layer_idx <= 0:
-            return True
-        if layers[layer_idx-1]['type'] != rule_tokens[2]:
-            return True
+            return False
+        for i in range(0, layer_idx):
+            if layers[i]['type'] == rule_tokens[2]:
+                return True
         return False

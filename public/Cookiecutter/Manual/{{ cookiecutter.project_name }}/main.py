@@ -8,7 +8,8 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QApplication,
     QPushButton,
-    QProgressBar, QLineEdit
+    QProgressBar,
+    QLineEdit
 )
 from PySide6.QtWidgets import QFileDialog
 from PySide6.QtCore import QProcess, QThread, Signal
@@ -27,9 +28,6 @@ loader = QUiLoader()
 class Worker(QThread):
 
     progressChanged = Signal(int)
-
-    def __init__(self, logdir):
-        self.logdir = logdir
 
     def run(self):
         train(callback=self.update_progress, logdir=self.logdir)
@@ -55,7 +53,9 @@ class MainUI(QMainWindow):
         self.wrap_btn.setEnabled(False)
         self.train_btn.clicked.connect(self.train)
         self.wrap_btn.clicked.connect(self.cmake_wrap)
-
+        self.worker = Worker()
+        self.worker.progressChanged.connect(self.update_progress)
+        self.worker.finished.connect(self.on_train_finished)
         self.window.show()
 
     def line_dir(self):
@@ -76,9 +76,7 @@ class MainUI(QMainWindow):
         self.wrap_btn.setEnabled(True)
 
     def train(self):
-        self.worker = Worker(self.logdir)
-        self.worker.progressChanged.connect(self.update_progress)
-        self.worker.finished.connect(self.on_train_finished)
+        self.worker.logdir = self.logdir
         try:
             self.worker.start()
         except:

@@ -17,10 +17,10 @@ loader = QUiLoader()
 
 class DataOfTransfer:
     def __init__(self):
-        self.selected_pretrained_model = self.pretrained_model_combobox.currentText()
+        self.selected_pretrained_model = self.Children.qt_pretrained_model_combobox.currentText()
 
     def on_combobox_change(self):
-        self.selected_pretrained_model = self.pretrained_model_combobox.currentText()
+        self.selected_pretrained_model = self.Children.qt_pretrained_model_combobox.currentText()
 
     def get_min_size(self, model_name):
         min_size = torchvision.models.get_model_weights(

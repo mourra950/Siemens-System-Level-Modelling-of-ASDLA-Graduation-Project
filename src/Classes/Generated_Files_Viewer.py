@@ -7,17 +7,17 @@ import os
 
 class GeneratedFilesViewer():
     def __init__(self) -> None:
-        self.qt_output_tree_viewer.itemClicked.connect(self.on_file_clicked)
+        self.Children.qt_output_tree_viewer.itemClicked.connect(self.on_file_clicked)
 
     def show_files(self, project_path):
-        for i in range(self.qt_output_tree_viewer.topLevelItemCount()):
-            top_level_item = self.qt_output_tree_viewer.topLevelItem(i)
+        for i in range(self.Children.qt_output_tree_viewer.topLevelItemCount()):
+            top_level_item = self.Children.qt_output_tree_viewer.topLevelItem(i)
             if top_level_item.data(0, Qt.ItemDataRole.UserRole) == project_path:
-                self.qt_output_tree_viewer.takeTopLevelItem(i)
+                self.Children.qt_output_tree_viewer.takeTopLevelItem(i)
                 break
         root = QTreeWidgetItem([os.path.basename(project_path)])
         root.setData(0, Qt.ItemDataRole.UserRole, project_path)
-        self.qt_output_tree_viewer.addTopLevelItem(root)
+        self.Children.qt_output_tree_viewer.addTopLevelItem(root)
         self.create_children(root, project_path)
 
     def create_children(self, root, project_path):
@@ -35,6 +35,6 @@ class GeneratedFilesViewer():
             try:
                 with open(file_path, 'r') as file:
                     content = file.read()
-                    self.qt_output_file_viewer.setPlainText(content)
+                    self.Children.qt_output_file_viewer.setPlainText(content)
             except:
                 pass

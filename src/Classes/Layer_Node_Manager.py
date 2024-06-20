@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
 
 class LayerNodeManager:
     def __init__(self) -> None:
+        self.misc_params = dict()
         self.architecture = {
             'layers': [],
             'misc_params': {
@@ -38,11 +39,11 @@ class LayerNodeManager:
                 font-size: 15px;
             }
         ''')
-        delete_QPushButton = self.qbutton_layer_manager(
+        delete_QPushButton = self.Qtbtn.qbutton_layer_manager(
             self.SysPath.delete_icon_path, qt_layout, border_QFrame, self.on_delete_layer_clicked, arch_dict)
-        up_QPushButton = self.qbutton_layer_manager(
+        up_QPushButton = self.Qtbtn.qbutton_layer_manager(
             self.SysPath.up_icon_path, qt_layout, border_QFrame, self.on_move_buttons_clicked, "up", arch_dict)
-        down_QPushButton = self.qbutton_layer_manager(
+        down_QPushButton = self.Qtbtn.qbutton_layer_manager(
             self.SysPath.down_icon_path, qt_layout, border_QFrame, self.on_move_buttons_clicked, "down", arch_dict)
 
         moveableArrows_QVBoxLayout = QVBoxLayout()

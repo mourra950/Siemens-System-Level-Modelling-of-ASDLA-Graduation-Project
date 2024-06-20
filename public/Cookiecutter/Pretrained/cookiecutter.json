@@ -2,42 +2,60 @@
   "test_num": 5,
   "project_name": "Pretrained_Output",
   
+    "layers": {
+        "list": []
+    },
     "misc_params": {
-        "width": 28,
-        "height": 28,
+        "device": {
+            "value": "cuda:0",
+            "index": 1
+        },
+        "width": 63,
+        "height": 63,
         "channels": 1,
         "num_epochs": 1,
         "batch_size": 64,
-        "device": "cuda:0",
-        "scheduler": {
-            "type": "None",
-            "params": {}
+        "dataset": {
+            "value": "MNIST",
+            "index": 45
         },
-        "optimizer": {
-            "type": "ASGD",
-            "params": {
-                "lr": 0.01,
-                "lambd": 0.0001,
-                "alpha": 0.75,
-                "t0": 1000.0,
-                "weight_decay": 1,
-                "foreach": false,
-                "maximize": false,
-                "differentiable": false,
-                "capturable": false
-            }
-        },
-        "loss_func": {
-            "type": "CrossEntropyLoss",
-            "params": {
-                "ignore_index": 1,
-                "reduction": "'mean'",
-                "label_smoothing": 0.0
-            }
+        "dataset_path": "C:/Users/mourr/Downloads/Donwloada"
+    },
+    "optimizer": {
+        "type": "ASGD",
+        "params": {
+            "lr": 0.01,
+            "lambd": 0.0001,
+            "alpha": 0.75,
+            "t0": 1000.0,
+            "weight_decay": 1,
+            "foreach": false,
+            "maximize": false,
+            "differentiable": false,
+            "capturable": false
         }
     },
-    "transfer_model": "resnet18",
-    "mnist_path": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\mnist",
-    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+    "loss_func": {
+        "type": "CrossEntropyLoss",
+        "params": {
+            "ignore_index": 1,
+            "reduction": "'mean'",
+            "label_smoothing": 0.0
+        }
+    },
+    "scheduler": {
+        "type": "None",
+        "params": {}
+    },
+    "pretrained": {
+        "value": "alexnet",
+        "index": 0
+    },
+    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
+    "residual": {
+        "layers": {
+            "list": []
+        }
+    }
 
 }

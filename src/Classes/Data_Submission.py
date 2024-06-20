@@ -10,69 +10,26 @@ basedir = os.path.dirname(__file__)
 
 class DataSubmission:
     def __init__(self) -> None:
-        self.set_data_onChange("device", self.qt_selectedDevice_QComboBox)
-        self.set_data_onChange("width", self.qt_inputWidth_QSpinBox)
-        self.set_data_onChange("height", self.qt_inputHeight_QSpinBox)
-        self.set_data_onChange("channels", self.qt_inputType_QSpinBox)
-        self.set_data_onChange("batch_size", self.qt_batchSize_QSpinBox)
-        self.set_data_onChange("num_epochs", self.qt_numEpochs_QSpinBox)
-        self.set_data_onChange("dataset", self.qt_selectedDataset_QComboBox)
-        self.set_data_onChange("dataset_path", self.qt_dataset_path_QLineEdit)
-
+        self.connections = dict()
         self.violations_list = []
 
-
-    def set_data_onChange(self, param_name, widget):
-        if type(widget) == QSpinBox:
-            widget.valueChanged.connect(
-                lambda: self.fetch_data_params(param_name, widget)
-            )
-        elif type(widget) == QLineEdit:
-            widget.textChanged.connect(
-                lambda: self.fetch_data_params(param_name, widget)
-            )
-
-        elif type(widget) == QComboBox:
-            widget.currentIndexChanged.connect(
-                lambda: self.fetch_data_params(param_name, widget)
-            )
-
     def on_submit_params_clicked(self):
+        print("submit params clicked")
+        self.architecture = self.Parameters.create_architecture()
+        print(self.architecture)
         self.save_json()
-
-    def fetch_data_params(self, param_name, widget):
-        try:
-            if type(widget) == QSpinBox:
-                self.architecture["misc_params"][param_name] = widget.value()
-                if self.debug:
-                    print(widget.value(), param_name)
-            elif type(widget) == QLineEdit:
-                self.architecture["misc_params"][param_name] = widget.text()
-                if self.debug:
-                    print(widget.text(), param_name)
-            elif type(widget) == QComboBox:
-                data = widget.currentData()
-                if isinstance(data, int):
-                    data = "cuda:" + str(data)
-                self.architecture["misc_params"][param_name] = data
-                if self.debug:
-                    print(data, param_name)
-
-        except:
-            if self.debug:
-                print(f"error in {param_name}")
 
     def on_submit_arch_clicked(self):
         self.validate_and_correct_layers(
-            self.qt_addedLayers_QVBoxLayout, self.architecture
+            self.Children.qt_addedLayers_QVBoxLayout, self.architecture
         )
         arch_json_file_path = self.save_json()
         self.violations_list = self.StaticAnalysis.analyze(
             self.architecture["layers"])
-        self.qt_violations_text_edit.clear()
+        self.Children.qt_violations_text_edit.clear()
         for i in self.violations_list:
             escaped_text = i.replace('<', '&lt;').replace('>', '&gt;')
-            self.qt_violations_text_edit.append(
+            self.Children.qt_violations_text_edit.append(
                 fr'<span style="color:#ff0000">{escaped_text}</span>')
 
     def handle_stderr(self):
@@ -146,7 +103,7 @@ class DataSubmission:
             self.architecture["log_dir"] = self.SysPath.log_path
             # test for deep and shallow to avoid errors
             architecture = self.architecture.copy()
-            
+
             architecture["layers"] = {"list": self.architecture["layers"]}
 
             with open(path, "w") as f:

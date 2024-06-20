@@ -13,7 +13,7 @@ from Classes.ResNet.resbuild import ResBuildWindow
 from Classes.Transfer_Learning import DataOfTransfer
 from Tests.Layer_Testing import LayerTesting
 from Classes.Generated_Files_Viewer import GeneratedFilesViewer
-
+from Classes.Parameters import Parameters
 from Qt.Buttons import QTButtons
 from Qt.Dialogue import LayerDialog
 
@@ -23,7 +23,6 @@ sys.path.append("./")
 
 
 class Initializer(
-    Children,
     DataSubmission,
     FillingQt,
     Validator,
@@ -33,8 +32,6 @@ class Initializer(
     Connections,
     TensorView,
     ResBuildWindow,
-    QTButtons,
-    LayerDialog,
     DataOfTransfer,
     LayerTesting,
     GeneratedFilesViewer,
@@ -42,8 +39,19 @@ class Initializer(
     def __init__(self) -> None:
         if self.debug:
             print("Initializer")
-        self.Cookiecutter = Cookiecutter(self.SysPath.jinja_templates, self.debug)
-        Children.__init__(self)
+        self.Cookiecutter = Cookiecutter(
+            self.SysPath.jinja_templates,
+            self.debug
+        )
+        self.Children = Children(
+            self.SysPath.res_build_ui_path,
+            self.SysPath.GUI_path,
+            self.loader
+        )
+        self.ui = self.Children.ui
+        self.ResCreation = self.Children.ResCreation
+        self.LayerDialog = LayerDialog()
+        self.Qtbtn = QTButtons()
         Controller.__init__(self)
         LayerNodeManager.__init__(self)
         FillingQt.__init__(self)
@@ -54,6 +62,8 @@ class Initializer(
         DataSubmission.__init__(self)
         LayerTesting.__init__(self)
         GeneratedFilesViewer.__init__(self)
+        self.Parameters = Parameters()
+
         self.ui.setWindowTitle("The Awesome Project")
 
     def get_widget_data(self, widget):
