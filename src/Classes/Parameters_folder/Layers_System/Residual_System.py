@@ -199,7 +199,7 @@ class Residual_System:
         self.add_layers_names(self.res_layers)
         with open(self.SysPath.ResJson, 'w') as f:
             self.save_residual_json()
-        self.ResCreation.close()
+        self.Children.ResCreation.close()
 
     def save_residual_json(self):
         path, _ = QFileDialog.getSaveFileName(

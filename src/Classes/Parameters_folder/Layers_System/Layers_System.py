@@ -137,13 +137,15 @@ class Layers_System:
         addedLayerRow_QHBoxLayout.addWidget(QLabel(layer['type']))
         addedLayerRow_QHBoxLayout.addLayout(moveableArrows_QVBoxLayout)
         addedLayerRow_QHBoxLayout.addWidget(delete_QPushButton)
-
+        
         if index == -1:
             qt_layout.addWidget(border_QFrame)
-            self.layers.append(layer)
+            if validate == True:
+                self.layers.append(layer)
         else:
             qt_layout.insertWidget(index, border_QFrame)
-            self.layers.insert(index, layer)
+            if validate == True:
+                self.layers.insert(index, layer)
         self.Analyze()
         temp_length = len(self.layers)
         print(validate)
@@ -160,6 +162,10 @@ class Layers_System:
                     }
                 }
                 self.load_from_config(temp_dict, validate=False)
+        else:
+            self.Layer_Validation.layer_naming(
+                self.layers
+            )
 
     def Analyze(self):
         self.violations_list = self.StaticAnalysis.analyze(

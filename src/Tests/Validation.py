@@ -39,7 +39,6 @@ class Validation(metaclass=Singleton):
         flattened = False
         index = 0
         while index < len(layers):
-            print("aywa ", layers)
             self.layer_naming(layers)
             layer = layers[index]
             params = layer['params']
@@ -61,7 +60,6 @@ class Validation(metaclass=Singleton):
         return layers
 
     def layer_naming(self, layers):
-        print("aywa2 ", layers)
         layer_freqs = dict()
         for layer in layers:
             self.add_layer_name(layer, layer_freqs)
