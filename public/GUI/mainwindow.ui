@@ -39,7 +39,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -309,6 +309,9 @@
               </item>
               <item row="15" column="1">
                <widget class="QSpinBox" name="inputChannelsSpinBox">
+                <property name="toolTip">
+                 <string>Input channels for the images 1: grayscale 3:RGB</string>
+                </property>
                 <property name="minimum">
                  <number>1</number>
                 </property>
@@ -770,6 +773,9 @@
                       <bold>true</bold>
                      </font>
                     </property>
+                    <property name="toolTip">
+                     <string>Create configuration file</string>
+                    </property>
                     <property name="text">
                      <string>Submit Architecture</string>
                     </property>
@@ -777,6 +783,9 @@
                   </item>
                   <item>
                    <widget class="QPushButton" name="Generate_manual_QPushButton">
+                    <property name="toolTip">
+                     <string>Render the Manual Model Template with a configuration file</string>
+                    </property>
                     <property name="text">
                      <string>Load Architecture and Generate Project</string>
                     </property>
@@ -836,7 +845,7 @@
                   <item>
                    <widget class="QPushButton" name="Create_transfer_Model_QPushButton">
                     <property name="toolTip">
-                     <string>Create json configuration file for a pretrained model</string>
+                     <string>Create json configuration file for a Transfer Learning model</string>
                     </property>
                     <property name="text">
                      <string>Create Transfer Learning Model Config file</string>
@@ -846,7 +855,7 @@
                   <item>
                    <widget class="QPushButton" name="Train_transfer_Model_QPushButton">
                     <property name="toolTip">
-                     <string>Render the Pretrained Template</string>
+                     <string>Render the Transfer Learning Model Template with a configuration file</string>
                     </property>
                     <property name="text">
                      <string>Generate Transfer Learning Model</string>
