@@ -32,8 +32,8 @@ void Target::b_transport(tlm::tlm_generic_payload &trans, sc_core::sc_time &t) {
   auto tensor_image = torch::from_blob(image.data,
                                        {1,
                                         {{cookiecutter.misc_params.channels}},
-                                        {{cookiecutter.misc_params.width}},
-                                        {{cookiecutter.misc_params.height}}},
+                                        {{cookiecutter.misc_params.height}},
+                                        {{cookiecutter.misc_params.width}}},
                                        torch::kByte);
   tensor_image = tensor_image.toType(at::kFloat);
   tensor_image = tensor_image.div_(255);
