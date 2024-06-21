@@ -18,8 +18,8 @@ export default function project() {
   return (
     <>
       <h1>
-        Project Title System Level Modelling of Application Specific Deep
-        Learning Accelerators{" "}
+        System Level Modelling of Application Specific Deep Learning
+        Accelerators{" "}
       </h1>
       <Image
         style={{ padding: "20px 0 20px 0" }}
