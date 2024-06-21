@@ -137,7 +137,7 @@ class Layers_System:
         addedLayerRow_QHBoxLayout.addWidget(QLabel(layer['type']))
         addedLayerRow_QHBoxLayout.addLayout(moveableArrows_QVBoxLayout)
         addedLayerRow_QHBoxLayout.addWidget(delete_QPushButton)
-        
+
         if index == -1:
             qt_layout.addWidget(border_QFrame)
             if validate == True:
@@ -147,25 +147,28 @@ class Layers_System:
             if validate == True:
                 self.layers.insert(index, layer)
         self.Analyze()
-        temp_length = len(self.layers)
-        print(validate)
 
         if validate == True:
-            temp_dict = self.Layer_Validation.validate_and_correct_layers(
-                self.layers
-            )
-
-            if temp_length != len(temp_dict):
-                temp_dict = {
-                    "layers": {
-                        "list": self.layers
-                    }
-                }
-                self.load_from_config(temp_dict, validate=False)
+            self.Validate_func()
         else:
             self.Layer_Validation.layer_naming(
                 self.layers
             )
+
+    def Validate_func(self):
+        temp_length = len(self.layers)
+
+        temp_dict = self.Layer_Validation.validate_and_correct_layers(
+            self.layers
+        )
+
+        if temp_length != len(temp_dict):
+            temp_dict = {
+                "layers": {
+                    "list": self.layers
+                }
+            }
+            self.load_from_config(temp_dict, validate=False)
 
     def Analyze(self):
         self.violations_list = self.StaticAnalysis.analyze(
@@ -187,6 +190,7 @@ class Layers_System:
                 qt_layout.removeWidget(layer_widget)
                 break
         self.Analyze()
+        self.Validate_func()
 
     def on_move_buttons_clicked(self, border_QFrame,  qt_layout, direction):
         size = len(self.layers)
@@ -213,6 +217,7 @@ class Layers_System:
                     new_idx, layer_widget)
                 break
         self.Analyze()
+        self.Validate_func()
 
     def on_res_block_clicked(self, func_name, torch_funcs, on_submit_func, qt_layout):
         if len(self.Resarchitecture['layers']) > 0:
