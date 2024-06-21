@@ -27,20 +27,22 @@ class ResidualBlock(nn.Module):
             {%- elif layer.type == 'Conv2d' and loop.index == conv_idxs[-1] and conv_idxs|length > 1 %}
             in_channels=out_channels,
             out_channels=in_channels,
-            {% elif layer.type == 'Conv2d' %}
+            {%- elif layer.type == 'Conv2d' %}
             in_channels=out_channels,
             out_channels=out_channels,
 
-            {%- elif layer.type == 'BatchNorm2d' and loop.index < batch_norm_idxs[-1] %}
-            num_features=out_channels, 
-            {%- elif layer.type == 'BatchNorm2d' and loop.index > batch_norm_idxs[-1] %}
-            num_features=in_channels, 
+            {%- elif layer.type == 'BatchNorm2d' and batch_norm_idxs[0] < conv_idxs[0] %}
+            num_features=in_channels,
+            {%- elif layer.type == 'BatchNorm2d' and loop.index == batch_norm_idxs[-1] and conv_idxs[-1] < batch_norm_idxs[-1] %}
+            num_features=in_channels,
+            {%- elif layer.type == 'BatchNorm2d' %}
+            num_features=out_channels,  
             {%- endif -%}
 
             {% for param in layer.params -%}
             {%- if param == "device" -%}
             {{param}}=device,
-            {%- elif param != 'out_channels' %}
+            {%- elif param != 'out_channels' and param != 'num_features' %}
             {{ param }}={{ layer.params[param] }},
             {%- endif %}
             {%- endfor %}
