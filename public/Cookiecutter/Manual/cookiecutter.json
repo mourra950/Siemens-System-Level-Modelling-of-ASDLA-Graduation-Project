@@ -7,18 +7,37 @@
             {
                 "type": "Conv2d",
                 "params": {
-                    "out_channels": 8,
-                    "kernel_size": 3,
+                    "out_channels": 64,
+                    "kernel_size": 7,
                     "stride": 1,
-                    "padding": 1,
+                    "padding": 3,
                     "groups": 1,
                     "bias": true,
                     "padding_mode": "'zeros'",
                     "device": "In miscelleneous params",
                     "dtype": "torch.float32",
-                    "in_channels": 3
+                    "in_channels": 1
                 },
                 "name": "conv2d_1"
+            },
+            {
+                "type": "MaxPool2d",
+                "params": {
+                    "kernel_size": 3,
+                    "stride": 1,
+                    "padding": 1,
+                    "return_indices": false,
+                    "ceil_mode": false
+                },
+                "name": "maxpool2d_1"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 64
+                },
+                "name": "residual_block_1"
             },
             {
                 "type": "ReLU",
@@ -26,6 +45,242 @@
                     "inplace": false
                 },
                 "name": "relu_1"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 64
+                },
+                "name": "residual_block_2"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_2"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 64
+                },
+                "name": "residual_block_3"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_3"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 128
+                },
+                "name": "residual_block_4"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_4"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 128
+                },
+                "name": "residual_block_5"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_5"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 128
+                },
+                "name": "residual_block_6"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_6"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 128
+                },
+                "name": "residual_block_7"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_7"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 256
+                },
+                "name": "residual_block_8"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_8"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 256
+                },
+                "name": "residual_block_9"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_9"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 256
+                },
+                "name": "residual_block_10"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_10"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 256
+                },
+                "name": "residual_block_11"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_11"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 256
+                },
+                "name": "residual_block_12"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_12"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 256
+                },
+                "name": "residual_block_13"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_13"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 512
+                },
+                "name": "residual_block_14"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_14"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 512
+                },
+                "name": "residual_block_15"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_15"
+            },
+            {
+                "type": "Residual_Block",
+                "params": {
+                    "in_channels": 64,
+                    "out_channels": 512
+                },
+                "name": "residual_block_16"
+            },
+            {
+                "type": "ReLU",
+                "params": {
+                    "inplace": false
+                },
+                "name": "relu_16"
+            },
+            {
+                "type": "AvgPool2d",
+                "params": {
+                    "kernel_size": 7,
+                    "stride": 1,
+                    "padding": 3,
+                    "ceil_mode": false,
+                    "count_include_pad": true
+                },
+                "name": "avgpool2d_1"
             },
             {
                 "type": "Flatten",
@@ -38,11 +293,11 @@
             {
                 "type": "Linear",
                 "params": {
-                    "out_features": 8,
+                    "out_features": 10,
                     "bias": true,
                     "device": "In miscelleneous params",
                     "dtype": "torch.float32",
-                    "in_features": 6272
+                    "in_features": 50176
                 },
                 "name": "linear_1"
             }
@@ -55,14 +310,14 @@
         },
         "width": 28,
         "height": 28,
-        "channels": 3,
-        "num_epochs": 50,
+        "channels": 1,
+        "num_epochs": 1,
         "batch_size": 1,
         "dataset": {
-            "value": "CustomDataset",
-            "index": 0
+            "value": "MNIST",
+            "index": 46
         },
-        "dataset_path": "D:/Github/Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project/src/test/testjson/data"
+        "dataset_path": "C:/Users/mourr/Downloads/gradtest/dataset"
     },
     "optimizer": {
         "type": "Adam",
@@ -93,10 +348,72 @@
         "value": "alexnet",
         "index": 0
     },
-    "log_dir": "D:\\Github\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
+    "log_dir": "d:\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs",
     "residual": {
         "layers": {
-            "list": []
+            "list": [
+                {
+                    "type": "Conv2d",
+                    "params": {
+                        "out_channels": 1,
+                        "kernel_size": 3,
+                        "stride": 1,
+                        "padding": 1,
+                        "groups": 1,
+                        "bias": true,
+                        "padding_mode": "'zeros'",
+                        "device": "In miscelleneous params",
+                        "dtype": "torch.float32"
+                    },
+                    "name": "conv2d_1"
+                },
+                {
+                    "type": "BatchNorm2d",
+                    "params": {
+                        "eps": 1e-05,
+                        "momentum": 0.1,
+                        "affine": true,
+                        "track_running_stats": true,
+                        "device": "In miscelleneous params",
+                        "dtype": "torch.float32"
+                    },
+                    "name": "batchnorm2d_1"
+                },
+                {
+                    "type": "ReLU",
+                    "params": {
+                        "inplace": false
+                    },
+                    "name": "relu_1"
+                },
+                {
+                    "type": "Conv2d",
+                    "params": {
+                        "out_channels": 1,
+                        "kernel_size": 3,
+                        "stride": 1,
+                        "padding": 1,
+                        "groups": 1,
+                        "bias": true,
+                        "padding_mode": "'zeros'",
+                        "device": "In miscelleneous params",
+                        "dtype": "torch.float32"
+                    },
+                    "name": "conv2d_2"
+                },
+                {
+                    "type": "BatchNorm2d",
+                    "params": {
+                        "eps": 1e-05,
+                        "momentum": 0.1,
+                        "affine": true,
+                        "track_running_stats": true,
+                        "device": "In miscelleneous params",
+                        "dtype": "torch.float32"
+                    },
+                    "name": "batchnorm2d_2"
+                }
+            ]
         }
     }
 

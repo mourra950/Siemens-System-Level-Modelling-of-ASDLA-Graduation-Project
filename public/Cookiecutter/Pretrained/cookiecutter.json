@@ -13,10 +13,10 @@
         "num_epochs": 1,
         "batch_size": 64,
         "dataset": {
-            "value": "SEMEION",
-            "index": 56
+            "value": "MNIST",
+            "index": 46
         },
-        "dataset_path": "C:/Users/mourr/Downloads/Donwloada"
+        "dataset_path": "C:/Users/mourr/OneDrive/Desktop/TestJson/Dataset path"
     },
     "optimizer": {
         "type": "ASGD",
@@ -48,6 +48,6 @@
         "value": "alexnet",
         "index": 0
     },
-    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+    "log_dir": "C:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 
 }

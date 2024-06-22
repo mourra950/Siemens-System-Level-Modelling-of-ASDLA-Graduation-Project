@@ -119,7 +119,8 @@ def train(callback, logdir):
 
             pred = model(x)
             loss = loss_fn(pred, y)
-            writer.add_scalar("Loss/train", loss, e)
+            writer.add_scalar("Loss/train",loss.item(),
+                              e * len(train_dataloader) + i)
 
             optimizer.zero_grad()
             loss.backward()

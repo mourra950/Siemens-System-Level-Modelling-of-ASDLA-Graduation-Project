@@ -146,7 +146,6 @@ def train(callback, logdir):
         {%- endfor %}
     )
     {% endif %}
-
     for e in range(0, EPOCHS):
         model.train()
         totalTrainLoss = 0

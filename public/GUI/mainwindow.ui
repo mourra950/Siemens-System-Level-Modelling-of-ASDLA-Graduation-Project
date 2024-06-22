@@ -30,7 +30,7 @@
        </font>
       </property>
       <property name="toolTip">
-       <string>Miscellaneous Paramaters</string>
+       <string/>
       </property>
       <property name="autoFillBackground">
        <bool>false</bool>
@@ -39,7 +39,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Dashboard">
        <attribute name="title">
@@ -186,6 +186,9 @@
                 <property name="toolTip">
                  <string>All the predefined datasets in pytorch </string>
                 </property>
+                <property name="statusTip">
+                 <string>Pick a dataset to render the template with</string>
+                </property>
                </widget>
               </item>
               <item row="3" column="0">
@@ -203,7 +206,11 @@
                </widget>
               </item>
               <item row="5" column="1">
-               <widget class="QComboBox" name="deviceComboBox"/>
+               <widget class="QComboBox" name="deviceComboBox">
+                <property name="statusTip">
+                 <string>Pick a device in case of having a cuda device its automaticly </string>
+                </property>
+               </widget>
               </item>
               <item row="17" column="0">
                <layout class="QGridLayout" name="gridLayout"/>
@@ -217,6 +224,9 @@
                  <widget class="QLineEdit" name="dataset_path_QLineEdit">
                   <property name="enabled">
                    <bool>false</bool>
+                  </property>
+                  <property name="statusTip">
+                   <string>Select the location of the dataset</string>
                   </property>
                  </widget>
                 </item>
@@ -310,6 +320,9 @@
               <item row="15" column="1">
                <widget class="QSpinBox" name="inputChannelsSpinBox">
                 <property name="toolTip">
+                 <string>Input channels for the images 1: grayscale 3:RGB</string>
+                </property>
+                <property name="statusTip">
                  <string>Input channels for the images 1: grayscale 3:RGB</string>
                 </property>
                 <property name="minimum">
@@ -484,8 +497,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>481</width>
-                       <height>119</height>
+                       <width>98</width>
+                       <height>28</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -532,8 +545,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>481</width>
-                       <height>120</height>
+                       <width>98</width>
+                       <height>28</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_22">
@@ -606,8 +619,8 @@
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>479</width>
-                         <height>88</height>
+                         <width>98</width>
+                         <height>28</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -712,8 +725,8 @@
                         <rect>
                          <x>0</x>
                          <y>0</y>
-                         <width>473</width>
-                         <height>195</height>
+                         <width>98</width>
+                         <height>28</height>
                         </rect>
                        </property>
                        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -736,8 +749,8 @@
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>474</width>
-                       <height>197</height>
+                       <width>98</width>
+                       <height>28</height>
                       </rect>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -776,6 +789,9 @@
                     <property name="toolTip">
                      <string>Create configuration file</string>
                     </property>
+                    <property name="statusTip">
+                     <string>Create configuration file</string>
+                    </property>
                     <property name="text">
                      <string>Submit Architecture</string>
                     </property>
@@ -784,6 +800,9 @@
                   <item>
                    <widget class="QPushButton" name="Generate_manual_QPushButton">
                     <property name="toolTip">
+                     <string>Render the Manual Model Template with a configuration file</string>
+                    </property>
+                    <property name="statusTip">
                      <string>Render the Manual Model Template with a configuration file</string>
                     </property>
                     <property name="text">
@@ -823,7 +842,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="Pretrained_model_ComboBox"/>
+                   <widget class="QComboBox" name="Pretrained_model_ComboBox">
+                    <property name="statusTip">
+                     <string>Pick a pretrained model to render the template with</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -847,6 +870,9 @@
                     <property name="toolTip">
                      <string>Create json configuration file for a Transfer Learning model</string>
                     </property>
+                    <property name="statusTip">
+                     <string>Create json configuration file for a Transfer Learning model</string>
+                    </property>
                     <property name="text">
                      <string>Create Transfer Learning Model Config file</string>
                     </property>
@@ -855,6 +881,9 @@
                   <item>
                    <widget class="QPushButton" name="Train_transfer_Model_QPushButton">
                     <property name="toolTip">
+                     <string>Render the Transfer Learning Model Template with a configuration file</string>
+                    </property>
+                    <property name="statusTip">
                      <string>Render the Transfer Learning Model Template with a configuration file</string>
                     </property>
                     <property name="text">

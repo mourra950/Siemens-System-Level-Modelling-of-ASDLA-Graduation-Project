@@ -59,7 +59,7 @@ void Target::b_transport(tlm::tlm_generic_payload &trans, sc_core::sc_time &t) {
   tlm::tlm_command cmd = trans.get_command();
   my_extension *test_extension_transaction;
   trans.get_extension(test_extension_transaction);
-  cout << test_extension_transaction->id << endl;
+  // cout << test_extension_transaction->id << endl;
 
   if (cmd != tlm::TLM_IGNORE_COMMAND) {
     trans.set_response_status(tlm::TLM_GENERIC_ERROR_RESPONSE);
