@@ -37,8 +37,8 @@ class Parameters:
     def connections(self):
         self.Children.qt_actionLoad.triggered.connect(self.load_configs)
         self.Children.qt_Create_transfer_Model_QPushButton.clicked.connect(
-            lambda submit_func=self.save_json_transfer:
-            submit_func("Transfer Model")
+            lambda submit_func=self.save_json_transfer, Template="Transfer Model":
+            submit_func(Template)
         )
 
     def create_architecture(self):
@@ -72,8 +72,9 @@ class Parameters:
                 self.Layers_System.load_from_config(temp)
 
     def save_json_transfer(self, Template=None):
-        architecture = copy(self.create_architecture()).deepcopy()
-
+        temp_arch = self.create_architecture()
+        architecture = copy.deepcopy(temp_arch)
+        print(architecture["misc_params"])
         path, _ = QFileDialog.getSaveFileName(
             None, "Save JSON file", self.SysPath.jsondir, "JSON Files (*.json)"
         )
@@ -95,7 +96,7 @@ class Parameters:
         if path:
             self.SysPath.jsondir = path
             with open(path, 'w') as f:
-                f.write(json.dumps(self.architecture, indent=4))
+                f.write(json.dumps(architecture, indent=4))
             print("JSON file saved successfully.")
 
     def get_min_size(self, model_name):
