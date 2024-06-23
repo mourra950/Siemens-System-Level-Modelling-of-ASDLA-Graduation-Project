@@ -30,9 +30,10 @@ class Layers_System:
         self.Layer_Validation = Validation()
         self.fill_layers()
 
-    def load_from_config(self, json_data: dict, validate=True):
+    def load_from_config(self, json_data: dict):
         if len(json_data['layers']['list']) != 0:
             temp_layers = copy.deepcopy(json_data['layers']['list'])
+            self.layers = []
             layout = self.Children.qt_addedLayers_QVBoxLayout
             while layout.count():
                 child = layout.takeAt(0)
@@ -40,7 +41,7 @@ class Layers_System:
                     child.widget().deleteLater()
             for layer in temp_layers:
                 self.create_layer_node(
-                    layer, -1, self.Children.qt_addedLayers_QVBoxLayout, validate=validate)
+                    layer, -1, self.Children.qt_addedLayers_QVBoxLayout)
 
     def fill_layers(self):
         for layer in self.LAYERS:
@@ -85,10 +86,10 @@ class Layers_System:
                 layer["params"][params_names[i]] = param_value
         cond = True
         if cond:
-            self.create_layer_node(layer, -1, qt_layout, validate=True)
+            self.create_layer_node(layer, -1, qt_layout)
             paramsWindow_QDialog.close()
 
-    def create_layer_node(self, layer, index, qt_layout, validate=True):
+    def create_layer_node(self, layer, index, qt_layout):
         print(layer)
         addedLayerRow_QHBoxLayout = QHBoxLayout()
 
@@ -140,20 +141,12 @@ class Layers_System:
 
         if index == -1:
             qt_layout.addWidget(border_QFrame)
-            if validate == True:
-                self.layers.append(layer)
+            self.layers.append(layer)
         else:
             qt_layout.insertWidget(index, border_QFrame)
-            if validate == True:
-                self.layers.insert(index, layer)
+            self.layers.insert(index, layer)
         self.Analyze()
 
-        if validate == True:
-            self.Validate_func()
-        else:
-            self.Layer_Validation.layer_naming(
-                self.layers
-            )
 
     def Validate_func(self):
         temp_length = len(self.layers)
@@ -168,7 +161,10 @@ class Layers_System:
                     "list": self.layers
                 }
             }
-            self.load_from_config(temp_dict, validate=False)
+            self.load_from_config(temp_dict)
+            self.Layer_Validation.layer_naming(
+                self.layers
+            )
 
     def Analyze(self):
         self.violations_list = self.StaticAnalysis.analyze(
@@ -190,7 +186,6 @@ class Layers_System:
                 qt_layout.removeWidget(layer_widget)
                 break
         self.Analyze()
-        self.Validate_func()
 
     def on_move_buttons_clicked(self, border_QFrame,  qt_layout, direction):
         size = len(self.layers)
@@ -217,7 +212,6 @@ class Layers_System:
                     new_idx, layer_widget)
                 break
         self.Analyze()
-        self.Validate_func()
 
     def on_res_block_clicked(self, func_name, torch_funcs, on_submit_func, qt_layout):
         if len(self.Resarchitecture['layers']) > 0:

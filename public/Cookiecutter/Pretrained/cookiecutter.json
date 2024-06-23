@@ -7,9 +7,9 @@
             "value": "cuda:0",
             "index": 1
         },
-        "width": 63,
-        "height": 63,
-        "channels": 1,
+        "width": 28,
+        "height": 28,
+        "channels": 3,
         "num_epochs": 1,
         "batch_size": 64,
         "dataset": {
@@ -19,17 +19,16 @@
         "dataset_path": "C:/Users/mourr/OneDrive/Desktop/TestJson/Dataset path"
     },
     "optimizer": {
-        "type": "ASGD",
+        "type": "Adam",
         "params": {
-            "lr": 0.01,
-            "lambd": 0.0001,
-            "alpha": 0.75,
-            "t0": 1000.0,
-            "weight_decay": 1,
-            "foreach": false,
-            "maximize": false,
-            "differentiable": false,
-            "capturable": false
+            "lr": 0.001,
+            "betas": [
+                0.9,
+                0.999
+            ],
+            "eps": 1e-08,
+            "weight_decay": 0.0,
+            "amsgrad": false
         }
     },
     "loss_func": {
@@ -45,9 +44,9 @@
         "params": {}
     },
     "pretrained": {
-        "value": "alexnet",
-        "index": 0
+        "value": "resnet152",
+        "index": 79
     },
-    "log_dir": "C:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
+    "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 
 }

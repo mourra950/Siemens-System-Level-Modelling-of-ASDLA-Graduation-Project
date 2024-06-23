@@ -1,6 +1,6 @@
 import json
 import os
-from PySide6.QtWidgets import QMessageBox, QSpinBox, QFileDialog, QLineEdit, QComboBox
+from PySide6.QtWidgets import QFileDialog
 from Classes.Parameters_folder.Miscellaneous import Miscellaneous
 from Classes.Parameters_folder.Optimizer import Optimizer
 from Classes.Parameters_folder.LossFunction import LossFunction
@@ -8,7 +8,9 @@ from Classes.Parameters_folder.Scheduler import Scheduler
 from Classes.Parameters_folder.Pretrained import Pretrained
 import torchvision
 from Classes.Parameters_folder.Layers_System.Layers_System import Layers_System
+from torchvision import models
 
+import copy
 from Classes.Children import Children
 from paths.SystemPaths import SystemPaths
 
@@ -35,10 +37,12 @@ class Parameters:
     def connections(self):
         self.Children.qt_actionLoad.triggered.connect(self.load_configs)
         self.Children.qt_Create_transfer_Model_QPushButton.clicked.connect(
-            self.save_json_transfer
+            lambda submit_func=self.save_json_transfer:
+            submit_func("Transfer Model")
         )
 
     def create_architecture(self):
+        self.Layers_System.Validate_func()
         self.architecture = {
             'layers': self.Layers_System.layers,
             'misc_params': self.Misc_params.miscellaneous,
@@ -67,27 +71,26 @@ class Parameters:
                 # layers
                 self.Layers_System.load_from_config(temp)
 
-    def save_json_transfer(self):
-        architecture = self.create_architecture()
+    def save_json_transfer(self, Template=None):
+        architecture = copy(self.create_architecture()).deepcopy()
 
         path, _ = QFileDialog.getSaveFileName(
             None, "Save JSON file", self.SysPath.jsondir, "JSON Files (*.json)"
         )
 
-        Height, Width = self.get_min_size(architecture["pretrained"]["value"])
+        if Template == "Transfer Model":
+            Height, Width = self.get_min_size(
+                architecture["pretrained"]["value"])
+            if Height > architecture["misc_params"]["height"]:
+                architecture["misc_params"]["height"] = Height
+            if Width > architecture["misc_params"]["width"]:
+                architecture["misc_params"]["width"] = Width
+            architecture["log_dir"] = self.SysPath.log_path
+            m = models.__dict__[architecture["pretrained"]
+                                ["value"]](weights='DEFAULT')
+            (name, param) = list(m.named_parameters())[0]
+            architecture["misc_params"]["channels"] = param.shape[1]
 
-        if Height > architecture["misc_params"]["height"]:
-            architecture["misc_params"]["height"] = Height
-        if Width > architecture["misc_params"]["width"]:
-            architecture["misc_params"]["width"] = Width
-        architecture["log_dir"] = self.SysPath.log_path
-        # try:
-        #     int(self.architecture["misc_params"]["device"].split(":")[1])
-        # except:
-        #     architecture["misc_params"]["device"] = {
-        #         "value": "cpu",
-        #         "index": 0
-        # }
         print(architecture["misc_params"])
         if path:
             self.SysPath.jsondir = path

@@ -52,17 +52,10 @@ def train(callback, logdir):
     WIDTH = {{cookiecutter.misc_params.width}}
     BATCH_SIZE = {{cookiecutter.misc_params.batch_size}}
     EPOCHS = {{cookiecutter.misc_params.num_epochs}}
-    TRAIN_SPLIT = 0.75
-    VAL_SPLIT = 0.15
-    TEST_SPLIT = 0.1
+    CHANNELS = {{cookiecutter.misc_params.channels}}
     device = torch.device("{{cookiecutter.misc_params.device.value}}")
     model = models.{{cookiecutter.pretrained.value}}(weights='DEFAULT')
 
-    for name, param in model.named_parameters():
-        print(param.shape)
-        batch = param.shape[0]
-        channels = param.shape[1]
-        break
 
     for param in model.parameters():
         param.requires_grad = False
@@ -71,7 +64,7 @@ def train(callback, logdir):
         [
             v2.Resize((HEIGHT, WIDTH)),
             # Convert images to RGB format
-            v2.Grayscale(num_output_channels=channels),
+            v2.Grayscale(num_output_channels=CHANNELS),
             # Convert images to PyTorch tensors
             v2.ToImage(),
             v2.ToDtype(torch.float32, scale=True),
@@ -133,7 +126,8 @@ def train(callback, logdir):
     )
 
     train_size = len(train_dataset)
-
+    for param in model.parameters():
+        param.requires_grad = True
     {% if cookiecutter.scheduler.type != "None" %}
     # Create the chosen scheduler with parameters
     scheduler = {{cookiecutter.scheduler.type}}(optimizer,
