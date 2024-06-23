@@ -125,11 +125,11 @@ class LayerDialog(metaclass=Singleton):
                                 param["defaultvalue"])
                         elif int == param["type"]:
                             paramValue_QWidget = QSpinBox(
-                                minimum=1, maximum=1000)
+                                minimum=1, maximum=100000)
                             paramValue_QWidget.setValue(param["defaultvalue"])
                         elif float == param["type"]:
                             paramValue_QWidget = QDoubleSpinBox(
-                                minimum=0, maximum=1000)
+                                minimum=0, maximum=100000)
                             paramValue_QWidget.setSingleStep(0.000000001)
                             paramValue_QWidget.setDecimals(8)
                             paramValue_QWidget.setValue(param["defaultvalue"])

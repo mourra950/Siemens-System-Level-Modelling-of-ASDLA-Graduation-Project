@@ -2,13 +2,186 @@
   "test_num": 5,
   "project_name": "Pretrained_Output",
   
+    "layers": [
+        {
+            "type": "Conv2d",
+            "params": {
+                "out_channels": 3,
+                "kernel_size": 64,
+                "stride": 11,
+                "padding": 4,
+                "groups": 2,
+                "bias": true,
+                "padding_mode": "'zeros'",
+                "device": "In miscelleneous params",
+                "dtype": "torch.float32",
+                "in_channels": 3
+            },
+            "name": "conv2d_1"
+        },
+        {
+            "type": "ReLU",
+            "params": {
+                "inplace": true
+            },
+            "name": "relu_1"
+        },
+        {
+            "type": "MaxPool2d",
+            "params": {
+                "kernel_size": 3,
+                "stride": 2,
+                "padding": 0,
+                "return_indices": false,
+                "ceil_mode": false
+            },
+            "name": "maxpool2d_1"
+        },
+        {
+            "type": "Conv2d",
+            "params": {
+                "out_channels": 192,
+                "kernel_size": 5,
+                "stride": 1,
+                "padding": 2,
+                "groups": 1,
+                "bias": true,
+                "padding_mode": "'zeros'",
+                "device": "In miscelleneous params",
+                "dtype": "torch.float32",
+                "in_channels": 3
+            },
+            "name": "conv2d_2"
+        },
+        {
+            "type": "ReLU",
+            "params": {
+                "inplace": true
+            },
+            "name": "relu_2"
+        },
+        {
+            "type": "Conv2d",
+            "params": {
+                "out_channels": 384,
+                "kernel_size": 3,
+                "stride": 1,
+                "padding": 1,
+                "groups": 1,
+                "bias": true,
+                "padding_mode": "'zeros'",
+                "device": "In miscelleneous params",
+                "dtype": "torch.float32",
+                "in_channels": 192
+            },
+            "name": "conv2d_3"
+        },
+        {
+            "type": "ReLU",
+            "params": {
+                "inplace": true
+            },
+            "name": "relu_3"
+        },
+        {
+            "type": "Conv2d",
+            "params": {
+                "out_channels": 256,
+                "kernel_size": 3,
+                "stride": 1,
+                "padding": 1,
+                "groups": 1,
+                "bias": true,
+                "padding_mode": "'zeros'",
+                "device": "In miscelleneous params",
+                "dtype": "torch.float32",
+                "in_channels": 384
+            },
+            "name": "conv2d_4"
+        },
+        {
+            "type": "ReLU",
+            "params": {
+                "inplace": true
+            },
+            "name": "relu_4"
+        },
+        {
+            "type": "Conv2d",
+            "params": {
+                "out_channels": 256,
+                "kernel_size": 3,
+                "stride": 1,
+                "padding": 1,
+                "groups": 1,
+                "bias": true,
+                "padding_mode": "'zeros'",
+                "device": "In miscelleneous params",
+                "dtype": "torch.float32",
+                "in_channels": 256
+            },
+            "name": "conv2d_5"
+        },
+        {
+            "type": "ReLU",
+            "params": {
+                "inplace": true
+            },
+            "name": "relu_5"
+        },
+        {
+            "type": "MaxPool2d",
+            "params": {
+                "kernel_size": 3,
+                "stride": 2,
+                "padding": 0,
+                "return_indices": false,
+                "ceil_mode": false
+            },
+            "name": "maxpool2d_2"
+        },
+        {
+            "type": "AdaptiveAvgPool2d",
+            "params": {
+                "output_size": 6
+            },
+            "name": "adaptiveavgpool2d_1"
+        },
+        {
+            "type": "Dropout",
+            "params": {
+                "p": 0.5,
+                "inplace": false
+            },
+            "name": "dropout_1"
+        },
+        {
+            "type": "Flatten",
+            "params": {
+                "start_dim": 1,
+                "end_dim": -1
+            },
+            "name": "flatten_1"
+        },
+        {
+            "type": "Linear",
+            "params": {
+                "out_features": 4096,
+                "bias": true,
+                "device": "In miscelleneous params",
+                "dtype": "torch.float32",
+                "in_features": 256
+            },
+            "name": "linear_1"
+        }
+    ],
     "misc_params": {
         "device": {
             "value": "cuda:0",
             "index": 1
         },
-        "width": 28,
-        "height": 28,
+        "width": 63,
+        "height": 63,
         "channels": 3,
         "num_epochs": 1,
         "batch_size": 64,
@@ -19,16 +192,17 @@
         "dataset_path": "C:/Users/mourr/OneDrive/Desktop/TestJson/Dataset path"
     },
     "optimizer": {
-        "type": "Adam",
+        "type": "ASGD",
         "params": {
-            "lr": 0.001,
-            "betas": [
-                0.9,
-                0.999
-            ],
-            "eps": 1e-08,
-            "weight_decay": 0.0,
-            "amsgrad": false
+            "lr": 0.01,
+            "lambd": 0.0001,
+            "alpha": 0.75,
+            "t0": 10000.0,
+            "weight_decay": 1,
+            "foreach": false,
+            "maximize": false,
+            "differentiable": false,
+            "capturable": false
         }
     },
     "loss_func": {
@@ -44,8 +218,8 @@
         "params": {}
     },
     "pretrained": {
-        "value": "resnet152",
-        "index": 79
+        "value": "alexnet",
+        "index": 0
     },
     "log_dir": "c:\\Grad\\Siemens-System-Level-Modelling-of-ASDLA-Graduation-Project\\data\\tensorboardlogs"
 

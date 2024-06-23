@@ -135,7 +135,8 @@ def train(callback, logdir):
         writer.add_scalar("Train/Accuracy", trainCorrect, e)
         writer.add_scalar("Train/Loss", totalTrainLoss, e)
         model.eval()
-        print(trainCorrect)
+        print(
+            f"Epoch {e+1}, Train Accuracy: {trainCorrect / len(train_dataloader.dataset)}")
     dummy_input = torch.randn(BATCH_SIZE, CHANNELS, HEIGHT, WIDTH).to(
         device)  # Example input tensor
     writer.add_graph(model, dummy_input)

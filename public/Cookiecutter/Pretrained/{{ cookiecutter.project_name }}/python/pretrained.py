@@ -179,7 +179,7 @@ def train(callback, logdir):
         print(
             f"Epoch {e+1}, Train Accuracy: {trainCorrect / len(train_dataloader.dataset)}")
 
-    dummy_input = torch.randn(3, channels, HEIGHT, WIDTH).to(
+    dummy_input = torch.randn(3, CHANNELS, HEIGHT, WIDTH).to(
         device)  # Example input tensor
     writer.add_graph(model, dummy_input)
 
