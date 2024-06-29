@@ -12,27 +12,19 @@ git clone https://github.com/mourra950/Siemens-System-Level-Modelling-of-ASDLA-G
 ```
 
 
-\subsection{Python Setup}
-\begin{enumerate}
-    \item Download and install python from the following link: \href{https://www.python.org/downloads/}{https://www.python.org/downloads/}
-    \newline
-    \textbf{Note that} the code has been tested on Python versions 3.9, 3.10, 3.11
-
-    \item Open the environment variables and add the paths \textbf{"C:/Python3.X/"} \newline and \textbf{"C:/Python3.X/Scripts/"} to the user or system paths
-
-    \item Check if Python is installed correctly by opening any terminal and type the following command:
-    \newline
-    \textbf{\emph{[python \space\space- -version]}}
-    \newline
-    If the python version is displayed, then it has been installed correctly. If the python is not recognized as an internal or external command, then it has not been installed correctly.
-
-    \item Open the folder containing the project and open a terminal
-
-    \item Install the Python dependencies using the following command:
-    \newline
-    \textbf{\emph{[pip install -r requirements.txt]}}
-\end{enumerate}
-
+### Python Setup
+1. Download and install python from the following link: [Python Download Page](https://www.python.org/downloads/) **Note that** the code has been tested on Python versions 3.9, 3.10, 3.11
+2. Check if Python is installed correctly by opening any terminal and type the following command:
+    ```bash
+    python --version
+    #If the python version is displayed, then it has been installed correctly.
+    #If the python is not recognized as an internal or external command, then it has not been installed correctly.
+    ```
+4. Open the folder containing the project and open a terminal
+5. Install the Python dependencies using the following command:
+```bash
+pip install -r requirements.txt
+```
 
 \subsection{Torch C++ Setup}
 \begin{enumerate}
