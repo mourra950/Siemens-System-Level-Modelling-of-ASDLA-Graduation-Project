@@ -1,6 +1,8 @@
 # Graduation Project Siemens
 
-Hello World this is our project of Siemens System Level Modelling of ASDLA Graduation Project
+Hello World this is our project sponsored by Siemens its started with creating a pytorch architecture generator using then Graphical User Interface to be trained then wrapped with SystemC.
+Though the idea is unique I saw potential in the tool that can evolve iteratively that someday it can create ML code for mutliple framework for various purposes all from the same interface.
+As for now the tool works with Pytorch in the torchvision domain only.
 ## Setup
 ### GitHub Setup
 1. Download git from the following link: [Git Download Page](https://git-scm.com/downloads)
